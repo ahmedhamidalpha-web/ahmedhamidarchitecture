@@ -1,303 +1,248 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أحمد حميد للهندسة المعمارية | Ahmed Hamid Architecture</title>
-    <!-- استيراد خطوط Google Fonts للفخامة والوضوح -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <style>
-        /* إعدادات المتصفح الأساسية */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif; /* الخط الافتراضي للنصوص الكبيرة */
-        }
-
-        body {
-            background-color: #0b224e; /* لون خلفية داكن بديل */
-            color: #ffffff;
-            line-height: 1.6;
-            overflow-x: hidden; /* منع التمرير الأفقي */
-        }
-
-        /* تنسيق الهيدر (الشريط العلوي) */
-        header {
-            background-color: rgb(255, 255, 255); /* خلفية بيضاء نقية للهيدر */
-            padding: 15px 8%; /* مسافة داخلية (Padding) متوازنة */
-            display: flex;
-            justify-content: space-between; /* توزيع العناصر على الأطراف */
-            align-items: center; /* محاذاة عمودية في المنتصف */
-            position: fixed; /* تثبيت الهيدر في الأعلى */
-            top: 0;
-            width: 100%;
-            z-index: 1000; /* ضمان ظهوره فوق باقي العناصر */
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* ظل خفيف */
-        }
-
-        .logo-container img {
-            height: 50px; /* ارتفاع الشعار المناسب */
-            object-fit: contain;
-        }
-
-        /* الأزرار (Buttons) */
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border-radius: 50px; /* زوايا دائرية بالكامل */
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease; /* تأثير حركي ناعم */
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background-color: #0b3c95; /* لون أزرق غني */
-            color: #ffffff;
-            border: 2px solid #0b3c95;
-        }
-
-        .btn-primary:hover {
-            background-color: #ffffff;
-            color: #0b3c95;
-            transform: translateY(-2px); /* تأثير ارتفاع بسيط */
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: #0b3c95;
-            border: 2px solid #0b3c95;
-        }
-
-        .btn-secondary:hover {
-            background-color: #0b3c95;
-            color: #ffffff;
-            transform: translateY(-2px);
-        }
-
-        /* تنسيق قسم الـ Hero (المحتوى الرئيسي) */
-        .hero-section {
-            min-height: 100vh; /* طول الشاشة بالكامل */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative; /* ضروري لتحديد موضع الخلفية */
-            padding: 120px 20px 60px 20px; /* مسافة للأسفل بسبب الهيدر المثبت */
-            text-align: center;
-        }
-
-        /* خلفية الـ Hero (صورة معمارية ورندر مدمج) */
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* ضع رابط صورتك المعمارية الفخمة هنا. */
-            /* لقد استخدمت رندراً معمارياً حديثاً مدمجاً بشكل خفيف على اليمين */
-            background-image: url('https://i.imgur.com/8QG3tZ4.jpeg'); 
-            background-repeat: no-repeat;
-            background-position: right center; /* وضع الصورة على اليمين */
-            background-size: contain; /* جعل الصورة تتناسب مع الطول */
-            opacity: 0.15; /* جعلها خفيفة جداً حتى لا تشوش على النص */
-            z-index: -1; /* وضعها خلف المحتوى */
-        }
-
-        .hero-content {
-            max-width: 800px;
-            width: 100%;
-        }
-
-        .subtitle {
-            display: block;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            color: #8da4cf; /* لون أزرق فاتح مائل للرمادي */
-            margin-bottom: 25px;
-            text-transform: uppercase;
-        }
-
-        .main-title {
-            font-family: 'Playfair Display', serif; /* خط كلاسيكي فخم للعناوين */
-            font-size: 56px;
-            font-weight: 700;
-            color: #ffffff;
-            line-height: 1.2;
-            margin-bottom: 30px;
-        }
-
-        .description {
-            font-size: 16px;
-            color: #d1d9e6; /* لون نص فاتح */
-            line-height: 1.8;
-            margin-bottom: 50px;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* حاوية الأزرار لتوزيعها */
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px; /* مسافة متساوية بين الأزرار */
-        }
-
-        /* التجاوب مع الشاشات الصغيرة (الجوال) */
-        @media (max-width: 768px) {
-            header {
-                padding: 12px 5%;
-            }
-            .logo-container img {
-                height: 40px;
-            }
-            .main-title {
-                font-size: 38px;
-            }
-            .description {
-                font-size: 14px;
-            }
-            .hero-buttons {
-                flex-direction: column; /* ترتيب عمودي على الجوال */
-                gap: 15px;
-            }
-            .hero-section::before {
-                background-position: bottom center; /* الصورة المعمارية في الأسفل */
-                background-size: 100%; /* ملء العرض */
-                opacity: 0.1; /* أخف على الجوال */
-            }
-        }
-    </style>
+    <title>Ahmed Hamid Architecture | Modern Design & Innovative Space</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- هيدر واحد نظيف ومحاذاة احترافية -->
-    <header>
-        <div class="logo-container">
-            <!-- استبدل your-logo.png برابط شعارك (تأكد أن خلفيته شفافة PNG) -->
-            <img src="your-logo.png" alt="شعار أحمد حميد للهندسة المعمارية">
+    <header class="main-header">
+        <div class="logo">
+            <img src="logo.png" alt="Ahmed Hamid Architecture">
         </div>
-        <div class="nav-actions">
-            <a href="#contact" class="btn btn-primary">Let's Talk</a>
+        <nav class="navbar">
+            <a href="index.html" class="nav-link active">HOME</a>
+            <a href="about.html" class="nav-link">ABOUT US</a>
+            <a href="services.html" class="nav-link">SERVICES</a>
+            <a href="projects.html" class="nav-link">PROJECTS</a>
+            <a href="blog.html" class="nav-link">BLOG</a>
+            <a href="contact.html" class="nav-link">CONTACT</a>
+        </nav>
+        <div class="header-actions">
+            <a href="contact.html" class="btn-talk">LET'S TALK</a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </header>
 
-    <!-- قسم Hero واحد متماسك (منع التكرار) -->
     <section class="hero-section">
-        <div class="hero-content">
-            <span class="subtitle">MODERN DESIGN | INNOVATIVE SPACE</span>
-            <h1 class="main-title">Designing Spaces<br>That Inspire</h1>
-            <p class="description">
-                Ahmed Hamid Architecture creates timeless architectural solutions through innovative design, engineering precision, and functional planning.
-            </p>
-            <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">View Projects</a>
-                <a href="#contact" class="btn btn-secondary">Contact Us</a>
-            </div>
+        <div class="hero-left-indicator">
+            <span>01</span>
+            <div class="line"></div>
+            <span>05</span>
         </div>
-    </section>
-
-</body>
-</html>
-    </header>
-
-    <!--================ HERO ================-->
-
-    <section id="home" class="hero">
-
-        <div class="container hero-content">
-
-            <div class="hero-text">
-
-                <span class="hero-subtitle">
-
-                    MODERN DESIGN | INNOVATIVE SPACE
-
-                </span>
-
-                <h1>
-
-                    Designing Spaces <br>
-
-                    That Inspire
-
-                </h1>
-
-                <p>
-
-                    Ahmed Hamid Architecture creates timeless architectural
-                    solutions through innovative design, engineering precision,
-                    and functional planning.
-
-                </p>
-
-                <div class="hero-buttons">
-
-                    <a href="#projects" class="primary-btn">
-
-                        View Projects
-
-                    </a>
-
-                    <a href="#contact" class="secondary-btn">
-
-                        Contact Us
-
-                    </a>
-
+        
+        <div class="hero-container">
+            <div class="hero-text-content">
+                <span class="hero-subtitle">WE DESIGN</span>
+                <h1 class="hero-title">MODERN<br>SPACES</h1>
+                <p class="hero-tags">ARCHITECTURE  •  INTERIOR  •  PLANNING  •  VISUALIZATION</p>
+                <div class="hero-cta-buttons">
+                    <a href="projects.html" class="btn-view-projects">VIEW PROJECTS <span class="arrow">→</span></a>
+                    <a href="contact.html" class="btn-contact-outline">CONTACT US</a>
                 </div>
-
             </div>
-
-            <div class="hero-image">
-
-                <img src="assets/hero.jpg" alt="Modern Architecture">
-
-            </div>
-
+            
+            <div class="hero-sketch-bg"></div>
         </div>
 
+        <div class="scroll-down">
+            <span>SCROLL DOWN</span>
+            <div class="scroll-arrow">↓</div>
+        </div>
     </section>
 
-    <!--================ ABOUT ================-->
+    <section class="featured-section">
+        <div class="section-header">
+            <div class="title-area">
+                <span class="section-tag">OUR WORK</span>
+                <h2 class="section-title">FEATURED PROJECTS</h2>
+            </div>
+            <a href="projects.html" class="view-all-link">VIEW ALL PROJECTS →</a>
+        </div>
 
-    <section id="about">
-
+        <div class="projects-grid">
+            <div class="project-card" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80');">
+                <div class="project-info">
+                    <h3>MODERN VILLA</h3>
+                    <p>New Cairo, Egypt<br><span>2023</span></p>
+                </div>
+                <a href="project-details-1.html" class="project-arrow-btn">→</a>
+            </div>
+            <div class="project-card" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80');">
+                <div class="project-info">
+                    <h3>CORPORATE HEADQUARTERS</h3>
+                    <p>Dubai, UAE<br><span>2022</span></p>
+                </div>
+                <a href="project-details-2.html" class="project-arrow-btn">→</a>
+            </div>
+            <div class="project-card" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80');">
+                <div class="project-info">
+                    <h3>RESIDENTIAL COMPLEX</h3>
+                    <p>Riyadh, KSA<br><span>2023</span></p>
+                </div>
+                <a href="project-details-3.html" class="project-arrow-btn">→</a>
+            </div>
+            <div class="project-card" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80');">
+                <div class="project-info">
+                    <h3>INTERIOR DESIGN</h3>
+                    <p>Jeddah, KSA<br><span>2022</span></p>
+                </div>
+                <a href="project-details-4.html" class="project-arrow-btn">→</a>
+            </div>
+        </div>
     </section>
 
-    <!--================ SERVICES ================-->
-
-    <section id="services">
-
+    <section class="services-section">
+        <div class="services-container">
+            <span class="section-tag text-muted">OUR SERVICES</span>
+            <h2 class="section-title text-white">WHAT WE DO</h2>
+            
+            <div class="services-grid">
+                <div class="service-box">
+                    <div class="service-icon">📐</div>
+                    <h3>ARCHITECTURAL DESIGN</h3>
+                    <p>Creative and functional design solutions that reflect your vision.</p>
+                </div>
+                <div class="service-box">
+                    <div class="service-icon">🛋️</div>
+                    <h3>INTERIOR DESIGN</h3>
+                    <p>Modern interior spaces tailored to your lifestyle and needs.</p>
+                </div>
+                <div class="service-box">
+                    <div class="service-icon">📜</div>
+                    <h3>CONSTRUCTION DRAWINGS</h3>
+                    <p>Detailed and accurate drawings for smooth construction.</p>
+                </div>
+                <div class="service-box">
+                    <div class="service-icon">🏢</div>
+                    <h3>PROJECT MANAGEMENT</h3>
+                    <p>From concept to completion, we manage every detail with precision.</p>
+                </div>
+                <div class="service-box">
+                    <div class="service-icon">🌳</div>
+                    <h3>LANDSCAPE DESIGN</h3>
+                    <p>Beautiful outdoor spaces that enhance the environment.</p>
+                </div>
+                <div class="service-box">
+                    <div class="service-icon">💻</div>
+                    <h3>3D VISUALIZATION</h3>
+                    <p>High quality 3D renders and walkthroughs before construction.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!--================ PROJECTS ================-->
-
-    <section id="projects">
-
+    <section class="stats-section">
+        <div class="stat-item">
+            <div class="stat-icon">🏢</div>
+            <div class="stat-meta">
+                <span class="stat-number">15+</span>
+                <span class="stat-label">YEARS EXPERIENCE</span>
+            </div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">📊</div>
+            <div class="stat-meta">
+                <span class="stat-number">120+</span>
+                <span class="stat-label">PROJECTS COMPLETED</span>
+            </div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">🤝</div>
+            <div class="stat-meta">
+                <span class="stat-number">35+</span>
+                <span class="stat-label">HAPPY CLIENTS</span>
+            </div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">🌍</div>
+            <div class="stat-meta">
+                <span class="stat-number">8+</span>
+                <span class="stat-label">COUNTRIES SERVED</span>
+            </div>
+        </div>
     </section>
 
-    <!--================ CONTACT ================-->
+    <section class="gallery-section">
+        <div class="gallery-header">
+            <div class="title-area">
+                <span class="section-tag">OUR PROJECTS</span>
+                <h2 class="section-title">PROJECT GALLERY</h2>
+            </div>
+            <div class="gallery-filters">
+                <span class="filter-btn active" data-filter="all">ALL</span>
+                <span class="filter-btn" data-filter="residential">RESIDENTIAL</span>
+                <span class="filter-btn" data-filter="commercial">COMMERCIAL</span>
+                <span class="filter-btn" data-filter="interior">INTERIOR</span>
+                <span class="filter-btn" data-filter="landscape">LANDSCAPE</span>
+            </div>
+        </div>
 
-    <section id="contact">
-
+        <div class="gallery-masonry">
+            <div class="gallery-item residential"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=500&q=80" alt="G1"></div>
+            <div class="gallery-item interior"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=500&q=80" alt="G2"></div>
+            <div class="gallery-item commercial"><img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?auto=format&fit=crop&w=500&q=80" alt="G3"></div>
+            <div class="gallery-item residential"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=500&q=80" alt="G4"></div>
+            <div class="gallery-item landscape"><img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=500&q=80" alt="G5"></div>
+        </div>
     </section>
 
-    <!--================ FOOTER ================-->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-contact-info">
+                <span class="footer-tag">GET IN TOUCH</span>
+                <h2 class="footer-heading">LET'S BUILD<br>SOMETHING GREAT</h2>
+                <p class="footer-desc">We would love to hear about your project. Let's create something amazing together.</p>
+                
+                <div class="contact-details">
+                    <p>📞 +20 123 456 7890</p>
+                    <p>✉️ info@ahmedhamidarch.com</p>
+                    <p>📍 42 Street, New Cairo, Egypt</p>
+                </div>
+            </div>
 
-    <footer>
+            <div class="footer-form-area">
+                <form id="contactForm" class="contact-form">
+                    <div class="form-row">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <input type="text" placeholder="Subject" required>
+                    <textarea rows="5" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn-submit">SEND MESSAGE →</button>
+                </form>
+            </div>
 
+            <div class="footer-map-overlay">
+                <div class="map-blueprint-vector">
+                    <div class="map-pin">📍</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-logo">
+                <img src="logo.png" alt="Ahmed Hamid">
+            </div>
+            <p class="copyright">© 2026 Ahmed Hamid Architecture. All Rights Reserved.</p>
+            <div class="social-links">
+                <a href="#">FB</a>
+                <a href="#">IG</a>
+                <a href="#">LN</a>
+            </div>
+            <button class="scroll-to-top" id="scrollTopBtn">▲</button>
+        </div>
     </footer>
 
-    <!-- JavaScript -->
-
     <script src="script.js"></script>
-
 </body>
-
 </html>
