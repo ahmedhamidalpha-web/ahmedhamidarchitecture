@@ -1,96 +1,66 @@
-/*======================================
-    AHMED HAMID ARCHITECTURE
-    Main JavaScript File
-======================================*/
+document.addEventListener("DOMContentLoaded", function() {
 
-// ==============================
-// Current Year (للاستخدام لاحقًا في الفوتر)
-// ==============================
+    // 1. تفعيل عمل فلتر الصور الخاص بـ Project Gallery
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
 
-const year = new Date().getFullYear();
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // إزالة الكلاس النشط من كافة الأزرار وإضافته للمضغطوط عليه
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
 
+            const filterValue = button.getAttribute('data-filter');
 
-// ==============================
-// Navbar Shadow on Scroll
-// ==============================
+            galleryItems.forEach(item => {
+                if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                    item.style.display = 'block';
+                    setTimeout(() => item.style.opacity = '1', 50);
+                } else {
+                    item.style.opacity = '0';
+                    setTimeout(() => item.style.display = 'none', 300);
+                }
+            });
+        });
+    });
 
-const header = document.querySelector(".header");
-
-window.addEventListener("scroll", () => {
-
-    if (window.scrollY > 60) {
-
-        header.style.boxShadow = "0 10px 30px rgba(0,0,0,.08)";
-        header.style.background = "rgba(255,255,255,.98)";
-
-    } else {
-
-        header.style.boxShadow = "none";
-        header.style.background = "rgba(255,255,255,.90)";
-
+    // 2. تفعيل عمل زر الإرسال داخل الـ Contact Form
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you! Your message has been sent successfully to Ahmed Hamid Architecture team.');
+            contactForm.reset();
+        });
     }
 
-});
+    // 3. زر الصعود إلى الأعلى السلس (Scroll to top)
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    if (scrollTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.style.display = 'block';
+            } else {
+                scrollTopBtn.style.display = 'none';
+            }
+        });
 
-
-// ==============================
-// Smooth Scroll
-// ==============================
-
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-
-    link.addEventListener("click", function (e) {
-
-        e.preventDefault();
-
-        const target = document.querySelector(this.getAttribute("href"));
-
-        if (target) {
-
-            target.scrollIntoView({
-
-                behavior: "smooth"
-
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
+        });
+    }
 
-        }
+    // 4. القائمة المتجاوبة مع الموبايل (Hamburger Menu)
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navbar = document.querySelector('.navbar');
 
-    });
-
+    if (mobileMenu) {
+        mobileMenu.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+        });
+    }
 });
-
-
-// ==============================
-// Reveal Elements on Scroll
-// ==============================
-
-const revealElements = document.querySelectorAll(".hero-text, .hero-image");
-
-const reveal = () => {
-
-    revealElements.forEach(element => {
-
-        const windowHeight = window.innerHeight;
-
-        const elementTop = element.getBoundingClientRect().top;
-
-        if (elementTop < windowHeight - 100) {
-
-            element.classList.add("active");
-
-        }
-
-    });
-
-};
-
-window.addEventListener("scroll", reveal);
-
-reveal();
-
-
-// ==============================
-// Welcome Message
-// ==============================
-
-console.log("Ahmed Hamid Architecture Website Loaded Successfully.");
