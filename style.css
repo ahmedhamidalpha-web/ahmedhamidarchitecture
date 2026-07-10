@@ -353,3 +353,26 @@ font-size:15px;
 }
 
 }
+/*==============================
+   Reveal Animation
+==============================*/
+
+.hero-text,
+.hero-image{
+
+opacity:0;
+
+transform:translateY(50px);
+
+transition:all 1s ease;
+
+}
+
+.hero-text.active,
+.hero-image.active{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
