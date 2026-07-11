@@ -3,104 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light">
-    <title>AHMED HAMID ARCHITECTURE | Home</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2=family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <title>AHMED HAMID ARCHITECTURE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- شريط التنقل العلوي -->
     <header class="main-header">
-        <div class="logo">
-            <img src="assets/logo.png" alt="Ahmed Hamid Architecture">
-        </div>
+        <div class="logo"><img src="assets/logo.png" alt="Logo"></div>
         <nav class="navbar">
             <a href="index.html" class="nav-link active">HOME</a>
-            <a href="projects.html" class="nav-link">PROJECTS</a>
-            <a href="careers.html" class="nav-link">CAREERS</a>
-            <a href="team.html" class="nav-link">TEAM</a>
-            <a href="contact.html" class="nav-link">CONTACT</a>
+            <a href="#about" class="nav-link">ABOUT</a>
+            <a href="#feed" class="nav-link">FEED</a>
+            <a href="#contact" class="nav-link">CONTACT</a>
         </nav>
-        <div class="header-actions">
-            <a href="contact.html" class="btn-talk">LET'S TALK</a>
-            <div class="menu-toggle" id="mobile-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+        <div>
+            <button class="btn-talk" id="adminLoginBtn">ADMIN LOGIN</button>
         </div>
     </header>
 
-    <section class="hero-section">
-        <div class="hero-left-indicator">
-            <span>01</span>
-            <div class="line"></div>
-            <span>05</span>
+    <!-- لوحة تحكم الأدمن (مخفية وتظهر عند تسجيل الدخول بنجاح) -->
+    <div id="adminPanelSection" style="display: none; background: #f4f4f4; padding: 30px; border-bottom: 2px solid #000;">
+        <h3 style="margin-bottom: 15px;">🔧 لوحة تحكم المهندس أحمد (الأدمن)</h3>
+        <div style="display: flex; flex-direction: column; gap: 10px; max-width: 500px;">
+            <input type="text" id="postTitle" placeholder="عنوان المنشور أو المشروع">
+            <textarea id="postContent" placeholder="اكتب تفاصيل المشروع أو المنشور هنا..." rows="3"></textarea>
+            <input type="text" id="postImgUrl" placeholder="رابط صورة المشروع (أو اتركها فارغة)">
+            <button onclick="publishAdminPost()" style="background: #000; color: #fff; padding: 10px; border: none; cursor: pointer;">نشر المشروع الآن 🚀</button>
+            <button onclick="logoutAdmin()" style="background: #cc0000; color: #fff; padding: 5px; border: none; cursor: pointer; margin-top: 10px;">تسجيل خروج</button>
         </div>
-        
-        <div class="hero-container">
-            <div class="hero-text-content">
-                <span class="hero-subtitle">WELCOME TO THE FUTURE OF SPACE</span>
-                <h1 class="hero-title">MODERN<br>SPACES</h1>
-                <p class="hero-tags">ARCHITECTURE  •  INTERIOR  •  PLANNING  •  VISUALIZATION</p>
-                <div class="hero-cta-buttons">
-                    <a href="projects.html" class="btn-view-projects">VIEW PROJECTS <span class="arrow">→</span></a>
-                    <a href="contact.html" class="btn-contact-outline">GET A QUOTE</a>
-                </div>
-            </div>
-            <div class="hero-sketch-bg"></div>
-        </div>
+    </div>
 
-        <div class="scroll-down">
-            <span>SCROLL DOWN</span>
-            <div class="scroll-arrow">↓</div>
+    <!-- واجهة الهيرو الرئيسية -->
+    <section class="hero-section">
+        <div class="hero-text-content">
+            <span class="hero-subtitle">WELCOME TO THE FUTURE OF SPACE</span>
+            <h1 class="hero-title">MODERN<br>SPACES</h1>
+            <p class="hero-tags">ARCHITECTURE • INTERIOR • PLANNING</p>
+            <a href="#contact" class="btn-view-projects">START YOUR PROJECT →</a>
         </div>
+        <div class="hero-sketch-bg"></div>
     </section>
 
-    <section class="about-brief-section">
+    <!-- قسم النبذة التعريفية -->
+    <section class="about-brief-section" id="about">
         <div class="brief-container">
             <div class="brief-title-area">
                 <span class="section-tag">WHO WE ARE</span>
                 <h2 class="section-title">INNOVATIVE DESIGN,<br>ENGINEERING PRECISION.</h2>
             </div>
             <div class="brief-text-area">
-                <p>We are a premium architectural firm dedicated to transforming conceptual ideas into functional, breathtaking physical realities. Our philosophy balances structural integrity with forward-thinking aesthetic design, ensuring every project stands as a timeless landmark.</p>
-                <p class="highlight-text">From comprehensive master planning to intricate interior details, we manage the entire lifecycle of architectural creation with leadership and precision.</p>
+                <p>We are a premium architectural firm dedicated to transforming conceptual ideas into functional, breathtaking physical realities. Our philosophy balances structural integrity with forward-thinking aesthetic design.</p>
             </div>
         </div>
     </section>
 
-    <section class="feed-section">
+    <!-- قسم التغذية الإخبارية والمشاريع -->
+    <section class="feed-section" id="feed">
         <div class="feed-header">
-            <span class="section-tag">LATEST NEWS</span>
-            <h2 class="section-title">COMPANY FEED & UPDATES</h2>
-            <p class="feed-subtitle">Follow our daily updates, site logs, and architectural insights.</p>
+            <span class="section-tag">PORTFOLIO & UPDATES</span>
+            <h2 class="section-title">المشاريع والمنشورات الحالية</h2>
         </div>
-
-        <div class="feed-container" id="posts-feed-container">
-            <div class="no-posts-message" id="no-posts-alert">
-                <p>No updates published yet. New posts will appear here once published by the administrator.</p>
-            </div>
-        </div>
+        <!-- هنا تظهر المنشورات ديناميكياً -->
+        <div class="feed-container" id="posts-feed-container"></div>
     </section>
 
+    <!-- نموذج طلبات العملاء -->
+    <section class="application-form-section" id="contact">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 30px;">ARCHITECTURAL DESIGN INTAKE FORM</h2>
+        <form id="projectIntakeForm" class="architect-dynamic-form">
+            <div class="form-grid-row">
+                <div class="form-field-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="clientName" required placeholder="eg. Ahmed Hamid">
+                </div>
+                <div class="form-field-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" id="clientPhone" required placeholder="+249...">
+                </div>
+            </div>
+            <div class="form-field-group">
+                <label>Total Plot Area (Sqm) *</label>
+                <input type="number" id="plotArea" required placeholder="eg. 400">
+            </div>
+            <div class="form-field-group">
+                <label>Detailed Spatial Requirements *</label>
+                <textarea id="clientRequirements" required placeholder="عدد الغرف، الطوابق، التفضيلات..." rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn-submit-application">SUBMIT DESIGN BRIEF →</button>
+        </form>
+    </section>
+
+    <!-- الفوتر مع الحسابات الرسمية -->
     <footer class="footer-section">
         <div class="footer-bottom">
-            <div class="footer-logo">
-                <img src="assets/logo.png" alt="Ahmed Hamid Architecture">
-            </div>
-            <p class="copyright">© 2026 Ahmed Hamid Architecture. All Rights Reserved.</p>
+            <p class="copyright">© 2026 Ahmed Hamid Architecture.</p>
             <div class="social-links">
-                <a href="#" target="_blank">FB</a>
-                <a href="#" target="_blank">IG</a>
-                <a href="#" target="_blank">TT</a>
-                <a href="#" target="_blank">LN</a>
+                <a href="#" id="link-fb" target="_blank">FB</a> | 
+                <a href="#" id="link-ig" target="_blank">IG</a> | 
+                <a href="#" id="link-tt" target="_blank">TT</a> | 
+                <a href="#" id="link-ln" target="_blank">LN</a>
             </div>
-            <button class="scroll-to-top" id="scrollTopBtn">▲</button>
         </div>
     </footer>
 
