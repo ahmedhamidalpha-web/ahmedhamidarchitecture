@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- إجبار المتصفحات وأنظمة الجوال على إيقاف الوضع المظلم التلقائي وضمان الخلفية البيضاء -->
+    <meta name="color-scheme" content="light">
+    <title>AHMED HAMID ARCHITECTURE | Contact Us</title>
+    
+    <!-- استيراد الخطوط الهندسية الفخمة -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ربط ملف التنسيق الموحد للموقع -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. شريط التنقل العلوي الموحد لمنع أخطاء الـ 404 -->
+    <header class="main-header">
+        <div class="logo">
+            <img src="assets/logo.png" alt="Ahmed Hamid Architecture">
+        </div>
+        <nav class="navbar">
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="projects.html" class="nav-link">PROJECTS</a>
+            <a href="careers.html" class="nav-link">CAREERS</a>
+            <a href="team.html" class="nav-link">TEAM</a>
+            <a href="contact.html" class="nav-link active">CONTACT</a>
+        </nav>
+        <div class="header-actions">
+            <a href="contact.html" class="btn-talk">LET'S TALK</a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. هيدر الصفحة (Page Header) -->
+    <section class="page-title-section">
+        <div class="title-container">
+            <span class="section-tag">GET IN TOUCH</span>
+            <h1 class="architecture-page-title">START YOUR<br>PROJECT</h1>
+            <p class="page-subtitle">Connect with our corporate social channels or submit your plot blueprints and requirements directly to our engineering desk.</p>
+        </div>
+    </section>
+
+    <!-- 3. قسم قنوات التواصل الاجتماعي الرسمية (Corporate Channels) -->
+    <section class="social-channels-section">
+        <div class="social-channels-container">
+            <span class="section-tag">OFFICIAL NETWORKS</span>
+            <h2 class="section-title">CONNECT WITH US</h2>
+            
+            <div class="channels-grid">
+                <!-- رابط فيسبوك -->
+                <a href="https://facebook.com" target="_blank" class="channel-card">
+                    <span class="channel-icon">🌐</span>
+                    <h3>Facebook</h3>
+                    <p>Follow our news, project launches, and community updates.</p>
+                </a>
+                <!-- رابط انستغرام -->
+                <a href="https://instagram.com" target="_blank" class="channel-card">
+                    <span class="channel-icon">📸</span>
+                    <h3>Instagram</h3>
+                    <p>View high-resolution renders, conceptual design sketches, and aesthetic vibes.</p>
+                </a>
+                <!-- رابط تيك توك -->
+                <a href="https://tiktok.com" target="_blank" class="channel-card">
+                    <span class="channel-icon">🎥</span>
+                    <h3>TikTok</h3>
+                    <p>Watch short architectural breakdowns, site progress logs, and behind-the-scenes video feed.</p>
+                </a>
+                <!-- رابط لينكدان -->
+                <a href="https://linkedin.com" target="_blank" class="channel-card">
+                    <span class="channel-icon">💼</span>
+                    <h3>LinkedIn</h3>
+                    <p>Connect with our engineering professionals and track b2b enterprise ventures.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. قسم نموذج العميل المحتمل المعماري الشامل (Comprehensive Briefing Form) -->
+    <section class="client-brief-form-section">
+        <div class="brief-form-container">
+            <span class="section-tag">PROJECT BRIEFING</span>
+            <h2 class="section-title text-dark">ARCHITECTURAL DESIGN INTAKE FORM</h2>
+            <p class="form-intro-text">Please input your specific land dimensions and requirements below. This entire design brief will be routed instantly to our lead architect's corporate email inbox.</p>
+            
+            <!-- نموذج البيانات: مجهز بالكامل لربطه بملف script.js لإرسال البيانات مباشرة للإيميل -->
+            <form id="projectIntakeForm" class="architect-dynamic-form">
+                
+                <!-- المجموعة الأولى: بيانات العميل الأساسية -->
+                <h3 class="form-sub-heading">1. Personal & Contact Information</h3>
+                <div class="form-grid-row">
+                    <div class="form-field-group">
+                        <label for="clientName">Full Name *</label>
+                        <input type="text" id="clientName" placeholder="e.g., Ahmed Hamid" required>
+                    </div>
+                    <div class="form-field-group">
+                        <label for="clientEmail">Email Address *</label>
+                        <input type="email" id="clientEmail" placeholder="e.g., info@company.com" required>
+                    </div>
+                </div>
+                <div class="form-grid-row">
+                    <div class="form-field-group">
+                        <label for="clientPhone">Phone Number *</label>
+                        <input type="tel" id="clientPhone" placeholder="e.g., +20 1xx xxxx xxx" required>
+                    </div>
+                    <div class="form-field-group">
+                        <label for="buildingType">Building Type *</label>
+                        <select id="buildingType" required>
+                            <option value="" disabled selected>Select building type...</option>
+                            <option value="residential_villa">Residential Villa</option>
+                            <option value="commercial_complex">Commercial Complex</option>
+                            <option value="residential_apartment">Residential Apartment Building</option>
+                            <option value="interior_fitout">Interior Fit-out Only</option>
+                            <option value="other">Other / Custom Structure</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- المجموعة الثانية: تفاصيل الأرض والموقع الجغرافي -->
+                <h3 class="form-sub-heading">2. Plot & Site Technical Specifications</h3>
+                <div class="form-grid-row">
+                    <div class="form-field-group">
+                        <label for="plotLocation">Project / Plot Location *</label>
+                        <input type="text" id="plotLocation" placeholder="City, District, or Coordinates" required>
+                    </div>
+                    <div class="form-field-group">
+                        <label for="plotArea">Total Plot Area (Sqm) *</label>
+                        <input type="number" id="plotArea" min="1" placeholder="e.g., 400" required>
+                    </div>
+                </div>
+                <div class="form-grid-row">
+                    <div class="form-field-group">
+                        <label for="plotDimensions">Plot Dimensions (Width x Length in meters) *</label>
+                        <input type="text" id="plotDimensions" placeholder="e.g., 20m x 20m" required>
+                    </div>
+                    <div class="form-field-group">
+                        <label for="surroundingStreets">Surrounding Streets & Orientations *</label>
+                        <input type="text" id="surroundingStreets" placeholder="e.g., 15m North street, Neighboring South plot" required>
+                    </div>
+                </div>
+
+                <!-- المجموعة الثالثة: رفع الكروكي والمتطلبات الداخلية -->
+                <h3 class="form-sub-heading">3. Space Programming & Attachments</h3>
+                <div class="form-field-group">
+                    <label for="sketchUpload">Upload Plot Sketch / Survey Plan (الكروكي) *</label>
+                    <p class="field-instruction">Attach an image or PDF of your official survey paper/blueprint.</p>
+                    <input type="file" id="sketchUpload" accept="image/*, application/pdf" required>
+                </div>
+                
+                <div class="form-field-group">
+                    <label for="clientRequirements">Detailed Spatial Requirements (عدد الغرف والطلبات الخاصة) *</label>
+                    <textarea id="clientRequirements" rows="6" placeholder="e.g., Ground floor: 3 Bedrooms, 2 Bathrooms, 1 Majlis, Open Kitchen layout. First Floor: Master suite with dressing room, Family lounge..." required></textarea>
+                </div>
+
+                <div class="form-submit-wrapper">
+                    <button type="submit" class="btn-submit-application">SUBMIT DESIGN BRIEF →</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- 5. الفوتر الاحترافي الموحد -->
+    <footer class="footer-section">
+        <div class="footer-bottom">
+            <div class="footer-logo">
+                <img src="assets/logo.png" alt="Ahmed Hamid Architecture">
+            </div>
+            <p class="copyright">© 2026 Ahmed Hamid Architecture. All Rights Reserved.</p>
+            <div class="social-links">
+                <a href="#" target="_blank">FB</a>
+                <a href="#" target="_blank">IG</a>
+                <a href="#" target="_blank">TT</a>
+                <a href="#" target="_blank">LN</a>
+            </div>
+            <button class="scroll-to-top" id="scrollTopBtn">▲</button>
+        </div>
+    </footer>
+
+    <!-- ربط ملف البرمجة التفاعلية والتكامل السحابي -->
+    <script src="script.js"></script>
+</body>
+</html>
