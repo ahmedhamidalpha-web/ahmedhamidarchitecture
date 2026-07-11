@@ -23,12 +23,25 @@ async function supabaseFetch(endpoint, options = {}) {
 document.addEventListener("DOMContentLoaded", () => {
     loadProjects();
 
-    // تشغيل لوحة التحكم للأدمن
+    // تشغيل لوحة التحكم للأدمن لو مسجل دخول
     if (localStorage.getItem("isAdmin") === "true") {
         document.getElementById("adminPanelSection").style.display = "block";
     }
 
+    // إصلاح الخروج: ربط زرار تسجيل الخروج بحذف الجلسة وإعادة التحميل
+    const logoutBtn = document.querySelector("#adminPanelSection button");
+    if (logoutBtn && logoutBtn.textContent.includes("تسجيل خروج")) {
+        logoutBtn.addEventListener("click", () => {
+            localStorage.removeItem("isAdmin");
+            window.location.reload();
+        });
+    }
+
     document.getElementById("adminLoginBtn").addEventListener("click", () => {
+        if (localStorage.getItem("isAdmin") === "true") {
+            alert("أنت مسجل الدخول بالفعل كأدمن يا هندسة!");
+            return;
+        }
         const userPass = prompt("أدخل كلمة المرور السرية للإدارة:");
         if (userPass === "AhmedHamid2026") {
             localStorage.setItem("isAdmin", "true");
@@ -92,15 +105,24 @@ async function loadProjects() {
             const commentsHtml = project.comments.map(c => `<p><strong>${c.username}:</strong> ${c.comment_text}</p>`).join('');
             
             return `
-                <div class="post-card">
-                    <h2>${project.title}</h2>
-                    <p>📍 ${project.location}</p>
-                    <p>${project.design_concept}</p>
-                    <div id="comments-list">${commentsHtml}</div>
-                    <input type="text" id="user-${project.id}" placeholder="اسمك">
-                    <input type="text" id="text-${project.id}" placeholder="تعليقك">
-                    <button onclick="submitComment(${project.id})">إرسال تعليق</button>
-                    ${isAdmin ? `<button onclick="deleteProject(${project.id})" style="background:red; color:white;">حذف المشروع</button>` : ''}
+                <div class="post-card" style="border:1px solid #eee; padding:20px; margin-bottom:20px; background:#fff;">
+                    <h2>📋 اسم المشروع: ${project.title}</h2>
+                    <p>📍 موقع المشروع: ${project.location}</p>
+                    <p>📐 مساحة الأرض: ${project.plot_area}</p>
+                    <p>🧱 مكونات المشروع: ${project.components}</p>
+                    <p>💡 الفكرة التصميمية: ${project.design_concept}</p>
+                    <p>⚠️ التحديات: ${project.challenges}</p>
+                    <p>🏆 النتيجة: ${project.result}</p>
+                    <div class="comments-section" style="margin-top:15px; background:#f9f9f9; padding:10px;">
+                        <h4>💬 التعليقات:</h4>
+                        <div id="comments-list-${project.id}">${commentsHtml}</div>
+                    </div>
+                    <div style="margin-top:10px; display:flex; gap:10px;">
+                        <input type="text" id="user-${project.id}" placeholder="اسم المستخدم" style="padding:5px;">
+                        <input type="text" id="text-${project.id}" placeholder="اكتب تعليقاً..." style="padding:5px; flex:1;">
+                        <button onclick="submitComment(${project.id})" style="padding:5px 15px; background:#000; color:#fff; border:none; cursor:pointer;">تعليق</button>
+                    </div>
+                    ${isAdmin ? `<button onclick="deleteProject(${project.id})" style="background:red; color:white; border:none; padding:8px 15px; margin-top:15px; cursor:pointer;">حذف المشروع 🗑️</button>` : ''}
                 </div>
             `;
         }).join('');
@@ -110,6 +132,8 @@ async function loadProjects() {
 async function submitComment(projectId) {
     const username = document.getElementById(`user-${projectId}`).value;
     const text = document.getElementById(`text-${projectId}`).value;
+    if(!username || !text) return alert("املا الخانات أولاً");
+    
     await fetch(`${SUPABASE_URL}/rest/v1/comments`, {
         method: "POST",
         headers: { "apikey": SUPABASE_ANON_KEY, "Authorization": `Bearer ${SUPABASE_ANON_KEY}`, "Content-Type": "application/json" },
@@ -119,9 +143,11 @@ async function submitComment(projectId) {
 }
 
 async function deleteProject(id) {
-    await fetch(`${SUPABASE_URL}/rest/v1/projects?id=eq.${id}`, {
-        method: "DELETE",
-        headers: { "apikey": SUPABASE_ANON_KEY, "Authorization": `Bearer ${SUPABASE_ANON_KEY}` }
-    });
-    loadProjects();
+    if(confirm("هل متأكد من حذف المشروع نهائياً؟")) {
+        await fetch(`${SUPABASE_URL}/rest/v1/projects?id=eq.${id}`, {
+            method: "DELETE",
+            headers: { "apikey": SUPABASE_ANON_KEY, "Authorization": `Bearer ${SUPABASE_ANON_KEY}` }
+        });
+        loadProjects();
+    }
 }
