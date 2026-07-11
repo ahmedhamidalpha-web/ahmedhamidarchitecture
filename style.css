@@ -1,300 +1,331 @@
-/* ==========================================================================
-   AHMED HAMID ARCHITECTURE - PREMIUM CLEAN FRAMEWORK (ANTI-JEKYLL RESET)
-   ========================================================================== */
+/* إعدادات الخطوط والألوان الأساسية */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
 
-/* إلغاء أي تنسيقات أو ثيمات افتراضية من جيت هاب وفرض نظام ألوان أبيض نظيف */
+:root {
+    --primary-color: #0b0b0b;
+    --accent-color: #1a1a1a;
+    --text-color: #2b2b2b;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --border-color: #eaeaea;
+}
+
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box !important;
-    font-family: 'Montserrat', sans-serif !important;
-    -webkit-font-smoothing: antialiased;
+    font-family: 'Cairo', sans-serif;
 }
 
-html, body {
-    width: 100% !important;
-    min-height: 100vh !important;
-    background-color: #ffffff !important;
-    color: #111111 !important;
-    overflow-x: hidden !important;
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    direction: rtl;
 }
 
-/* تحجيم صارم للوجو لمنع التمدد والظهور الضخم */
-.logo img, .footer-logo img {
-    width: 160px !important;
-    height: auto !important;
-    max-width: 100% !important;
-    object-fit: contain !important;
-    display: block !important;
+/* الهيدر (رأس الموقع) */
+header {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    position: relative;
 }
 
-/* 2. شريط التنقل العلوي (Main Header) */
-.main-header {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 20px 5% !important;
-    border-bottom: 1px solid #e5e5e5 !important;
-    background: #ffffff !important;
-    position: sticky !important;
-    top: 0;
-    z-index: 1000 !important;
+header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
 }
 
-.navbar {
-    display: flex !important;
-    gap: 35px !important;
+header p {
+    font-size: 1rem;
+    color: #aaa;
+    font-weight: 300;
 }
 
-.nav-link {
-    text-decoration: none !important;
-    color: #777777 !important;
-    font-size: 13px !important;
-    font-weight: 500 !important;
-    letter-spacing: 2px !important;
-    transition: color 0.3s ease !important;
+/* زر دخول الإدارة */
+.admin-login-wrapper {
+    position: absolute;
+    top: 30px;
+    left: 20px;
 }
 
-.nav-link:hover, .nav-link.active {
-    color: #111111 !important;
-    border-bottom: 1px solid #000000 !important;
+.btn-secondary {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
 }
 
-.btn-talk {
-    text-decoration: none !important;
-    color: #ffffff !important;
-    background: #000000 !important;
-    padding: 10px 25px !important;
-    font-size: 12px !important;
-    font-weight: 600 !important;
-    letter-spacing: 1px !important;
+.btn-secondary:hover {
+    background: #fff;
+    color: var(--primary-color);
+    border-color: #fff;
 }
 
-/* 3. واجهة الهيرو الرئيسية (Hero Section) */
-.hero-section {
-    width: 100% !important;
-    min-height: calc(100vh - 81px) !important;
-    display: flex !important;
-    align-items: center !important;
-    padding: 60px 5% !important;
-    position: relative !important;
-    background: #ffffff !important;
+/* الحاوية الرئيسية */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
-.hero-text-content {
-    max-width: 650px !important;
-    z-index: 2 !important;
+/* لوحة تحكم الأدمن (الفورم) */
+#adminPanelSection {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
 }
 
-.hero-subtitle {
-    font-size: 12px !important;
-    letter-spacing: 4px !important;
-    color: #777777 !important;
-    display: block !important;
-    margin-bottom: 15px !important;
+#adminPanelSection h3 {
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    font-size: 1.4rem;
 }
 
-.hero-title {
-    font-size: 65px !important;
-    font-weight: 800 !important;
-    line-height: 1.0 !important;
-    letter-spacing: -2px !important;
-    margin-bottom: 25px !important;
-    color: #111111 !important;
+.form-group {
+    margin-bottom: 20px;
 }
 
-.hero-tags {
-    font-size: 11px !important;
-    letter-spacing: 2px !important;
-    color: #777777 !important;
-    margin-bottom: 40px !important;
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
 }
 
-.hero-cta-buttons {
-    display: flex !important;
-    gap: 20px !important;
+.form-control {
+    width: 100px;
+    min-width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    background: #fafafa;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
 }
 
-.btn-view-projects {
-    text-decoration: none !important;
-    color: #ffffff !important;
-    background: #000000 !important;
-    padding: 15px 35px !important;
-    font-size: 13px !important;
-    font-weight: 600 !important;
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.03);
 }
 
-.btn-contact-outline {
-    text-decoration: none !important;
-    color: #111111 !important;
-    border: 1px solid #111111 !important;
-    padding: 15px 35px !important;
-    font-size: 13px !important;
-    font-weight: 600 !important;
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
 }
 
-/* محاكاة شبكة الاسكتش المعماري الفخم في الخلفية */
-.hero-sketch-bg {
-    position: absolute !important;
-    right: 5% !important;
-    top: 15% !important;
-    width: 45% !important;
-    height: 70% !important;
-    border: 1px dashed #dddddd !important;
-    opacity: 0.3 !important;
-    background: linear-gradient(rgba(200,200,200,0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(200,200,200,0.1) 1px, transparent 1px) !important;
-    background-size: 20px 20px !important;
+.btn-primary {
+    background: var(--primary-color);
+    color: #fff;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+    transition: background 0.3s ease;
 }
 
-/* 4. قسم النبذة والتعريف (About Brief) */
-.about-brief-section {
-    width: 100% !important;
-    padding: 100px 5% !important;
-    background: #fdfdfd !important;
-    border-bottom: 1px solid #e5e5e5 !important;
+.btn-primary:hover {
+    background: #333;
 }
 
-.brief-container {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 50px !important;
+/* تايم لاين التغذية البصرية للمشاريع (Feed Container) */
+#posts-feed-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 35px;
 }
 
-.section-tag {
-    font-size: 11px !important;
-    letter-spacing: 3px !important;
-    color: #777777 !important;
-    display: block !important;
-    margin-bottom: 10px !important;
+/* كارت المشروع الاحترافي */
+.post-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.01);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.section-title {
-    font-size: 32px !important;
-    font-weight: 700 !important;
-    line-height: 1.2 !important;
-    color: #111111 !important;
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
 }
 
-.brief-text-area p {
-    font-size: 15px !important;
-    color: #777777 !important;
-    line-height: 1.8 !important;
-    margin-bottom: 20px !important;
+.post-card h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.highlight-text {
-    color: #111111 !important;
-    font-weight: 500 !important;
+/* تفاصيل المشروع الهندسي */
+.project-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+    background: #fafafa;
+    padding: 15px;
+    border-radius: 8px;
 }
 
-/* 5. قسم التغذية الإخبارية وحالات الانتظار (Feed & Alerts) */
-.feed-section, .portfolio-grid-section, .application-form-section, .client-brief-form-section {
-    width: 100% !important;
-    padding: 80px 5% !important;
-    background: #ffffff !important;
+.detail-item {
+    font-size: 0.95rem;
 }
 
-.feed-header {
-    text-align: center !important;
-    margin-bottom: 60px !important;
+.detail-item strong {
+    color: #000;
 }
 
-.no-posts-message, .empty-portfolio-alert, .empty-jobs-alert, .empty-honor-alert, .empty-team-alert {
-    text-align: center !important;
-    padding: 60px 20px !important;
-    border: 1px dashed #e5e5e5 !important;
-    background: #fdfdfd !important;
-    color: #777777 !important;
+.project-text-block {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    text-align: justify;
 }
 
-/* 6. النماذج الديناميكية (Forms) */
-.architect-dynamic-form {
-    max-width: 900px !important;
-    margin: 40px auto 0 auto !important;
+.project-text-block strong {
+    display: block;
+    color: var(--primary-color);
+    margin-bottom: 4px;
+    font-size: 1.05rem;
 }
 
-.form-grid-row {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 20px !important;
+/* معرض الصور الفخم */
+.project-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+    margin: 25px 0;
 }
 
-.form-field-group {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 8px !important;
-    margin-bottom: 20px !important;
+.project-gallery img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.04);
+    transition: transform 0.4s ease;
+    cursor: pointer;
 }
 
-.form-field-group input, .form-field-group select, .form-field-group textarea {
-    padding: 15px !important;
-    border: 1px solid #e5e5e5 !important;
-    background: #fdfdfd !important;
-    font-size: 14px !important;
-    color: #111111 !important;
-    outline: none !important;
+.project-gallery img:hover {
+    transform: scale(1.03);
 }
 
-.form-sub-heading {
-    font-size: 16px !important;
-    font-weight: 700 !important;
-    margin: 30px 0 15px 0 !important;
-    border-left: 3px solid #000000 !important;
-    padding-left: 10px !important;
+/* قسم التعليقات والمناقشات */
+.comments-section {
+    margin-top: 30px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
 }
 
-.btn-submit-application {
-    background: #000000 !important;
-    color: #ffffff !important;
-    border: none !important;
-    padding: 18px 40px !important;
-    font-size: 13px !important;
-    font-weight: 600 !important;
-    width: 100% !important;
-    cursor: pointer !important;
+.comments-section h4 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
 }
 
-/* 7. الفوتر الاحترافي (Footer) */
-.footer-section {
-    width: 100% !important;
-    border-top: 1px solid #e5e5e5 !important;
-    padding: 40px 5% !important;
-    background: #ffffff !important;
+.comments-list {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    background: #fdfdfd;
+    padding: 10px;
+    border-radius: 6px;
 }
 
-.footer-bottom {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
+.comment-item {
+    padding: 10px;
+    border-bottom: 1px dashed var(--border-color);
+    font-size: 0.9rem;
 }
 
-.copyright {
-    font-size: 12px !important;
-    color: #777777 !important;
+.comment-item:last-child {
+    border-bottom: none;
 }
 
-.social-links a {
-    text-decoration: none !important;
-    color: #777777 !important;
-    font-size: 12px !important;
-    font-weight: 600 !important;
-    margin-left: 20px !important;
+/* فورم التعليق الجديد */
+.comment-form {
+    display: flex;
+    gap: 10px;
 }
 
-.scroll-to-top {
-    background: none !important;
-    border: 1px solid #e5e5e5 !important;
-    padding: 8px 12px !important;
-    cursor: pointer !important;
+.comment-form input {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.9rem;
 }
 
-/* دعم الهواتف الذكية */
-@media (max-width: 768px) {
-    .navbar { display: none !important; }
-    .hero-title { font-size: 40px !important; }
-    .brief-container, .form-grid-row { grid-template-columns: 1fr !important; }
-    .hero-sketch-bg { display: none !important; }
-    .footer-bottom { flex-direction: column !important; gap: 20px !important; text-align: center !important; }
+.comment-form .input-name {
+    width: 150px;
+}
+
+.comment-form .input-text {
+    flex: 1;
+}
+
+.btn-comment {
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 0 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.btn-comment:hover {
+    background: #333;
+}
+
+/* زر الحذف */
+.btn-delete {
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    margin-top: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.btn-delete:hover {
+    background: #bd2130;
+}
+
+/* متجاوب مع الموبايل */
+@media (max-width: 600px) {
+    .comment-form {
+        flex-direction: column;
+    }
+    .comment-form .input-name {
+        width: 100%;
+    }
+    header h1 {
+        font-size: 1.7rem;
+    }
 }
