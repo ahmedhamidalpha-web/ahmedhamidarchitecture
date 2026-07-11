@@ -1,7 +1,6 @@
-// 1. إعدادات الربط الموثقة بقاعدة بيانات Supabase الخاصة بك
+// 1. إعدادات المفاتيح والربط بقاعدة البيانات
 const SUPABASE_URL = "https://fzlpqsvcicuvldaxgvcz.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6bHBxc3ZjaWN1dmxkYXhndmN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3OTM1NjksImV4cCI6MjA5OTM2OTU2OX0.4YTOUuAv9RP5yGz_OF0Sh6ocZLMJa86HrVgAor97Lq8";
-const GOOGLE_DRIVE_FOLDER_ID = "10ENiX9zYi3LGUwE_716WAP_rqGLReDUr";
 
 // دالة جلب البيانات العامة من السحاب
 async function supabaseFetch(endpoint, options = {}) {
@@ -15,10 +14,10 @@ async function supabaseFetch(endpoint, options = {}) {
     return response.ok ? response.json() : Promise.reject(response.statusText);
 }
 
-// دالة تسجيل الخروج الصريحة (تشتغل لو الـ HTML فيه onclick="logoutAdmin()")
+// دالة تسجيل الخروج الصريحة (تُستدعى من أي مكان)
 window.logoutAdmin = function() {
     localStorage.removeItem("isAdmin");
-    alert("تم تسجيل الخروج بنجاح!");
+    alert("تم تسجيل الخروج بنجاح يا باشمهندس!");
     window.location.reload();
 }
 
@@ -31,12 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
         adminSection.style.display = "block";
     }
 
-    // طريقة إضافية لربط زرار الخروج لو ضغط عليه داخل لوحة التحكم
+    // ربط أزرار الخروج بشكل مرن جداً داخل اللوحة
     if (adminSection) {
         const logoutButtons = adminSection.querySelectorAll("button");
         logoutButtons.forEach(btn => {
             if (btn.textContent.includes("خروج") || btn.getAttribute("onclick")?.includes("logoutAdmin")) {
-                btn.removeAttribute("onclick"); // إزالة أي تضارب
+                btn.removeAttribute("onclick");
                 btn.addEventListener("click", (e) => {
                     e.preventDefault();
                     window.logoutAdmin();
@@ -45,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // زرار الدخول الافتراضي
+    // زرار تسجيل الدخول
     const loginBtn = document.getElementById("adminLoginBtn");
     if (loginBtn) {
         loginBtn.addEventListener("click", () => {
@@ -59,31 +58,30 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // نشر المشروع من الأدمن (مع حماية الخانات لو كانت فارغة أو الـ IDs مش متطابقة تماماً)
+    // فورم رفع المنشورات المعمارية
     const adminForm = document.getElementById("adminPublishForm");
     if (adminForm) {
         adminForm.addEventListener("submit", async (e) => {
             e.preventDefault();
             const submitBtn = adminForm.querySelector('button[type="submit"]') || adminForm.querySelector('button');
-            const originalText = submitBtn ? submitBtn.textContent : "نشر";
-            if (submitBtn) submitBtn.textContent = "جاري النشر وتأمين البيانات...";
-            
-            // قراءة الملفات المرفوعة بأمان
+            if (submitBtn) submitBtn.disabled = true;
+
+            // توليد الـ IDs للصور المرفوعة كملفات للربط مع درايف لاحقاً
             const fileInput = document.getElementById("postFiles");
             let driveImageIds = [];
             if (fileInput && fileInput.files.length > 0) {
                 driveImageIds = Array.from(fileInput.files).map(() => "1" + Math.random().toString(36).substring(2, 10));
             }
 
-            // تجميع البيانات مع وضع قيم افتراضية لو الـ ID في الـ HTML مختلف شوية
+            // 📋 التوليف البرمجي الصارم لمطابقة أعمدة الـ Database بالظبط (Snake_Case)
             const projectPayload = {
-                title: document.getElementById("postTitle")?.value || document.querySelector("input[placeholder*='العنوان']")?.value || "مشروع معماري غير مسمى",
-                location: document.getElementById("postLocation")?.value || document.querySelector("input[placeholder*='الموقع']")?.value || "",
-                plot_area: document.getElementById("postArea")?.value || document.querySelector("input[placeholder*='المساحة']")?.value || "",
-                components: document.getElementById("postComponents")?.value || document.querySelector("textarea[placeholder*='مكونات']")?.value || "",
-                design_concept: document.getElementById("postConcept")?.value || document.querySelector("textarea[placeholder*='الفكرة']")?.value || "",
-                challenges: document.getElementById("postChallenges")?.value || document.querySelector("textarea[placeholder*='التحديات']")?.value || "",
-                result: document.getElementById("postResult")?.value || document.querySelector("textarea[placeholder*='النتيجة']")?.value || "",
+                title: document.getElementById("postTitle")?.value || "مشروع معماري جديد",
+                location: document.getElementById("postLocation")?.value || "",
+                plot_area: document.getElementById("postArea")?.value || "",
+                components: document.getElementById("postComponents")?.value || "",
+                design_concept: document.getElementById("postConcept")?.value || "",
+                challenges: document.getElementById("postChallenges")?.value || "",
+                result: document.getElementById("postResult")?.value || "",
                 drive_image_ids: driveImageIds
             };
 
@@ -100,23 +98,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
                 
                 if (res.ok) {
-                    alert("تم رفع ونشر المشروع المعماري بنجاح! 🎉");
+                    alert("تم رفع ونشر المشروع بنجاح! 🎉");
                     adminForm.reset();
                     loadProjects();
                 } else {
-                    const errText = await res.text();
-                    throw new Error(errText);
+                    const errDetails = await res.text();
+                    throw new Error(errDetails);
                 }
             } catch (err) { 
-                alert("فشل الرفع، تأكد من مطابقة الجداول في Supabase: " + err.message); 
+                alert("خطأ في الرفع: " + err.message); 
             } finally { 
-                if (submitBtn) submitBtn.textContent = originalText; 
+                if (submitBtn) submitBtn.disabled = false; 
             }
         });
     }
 });
 
-// عرض المشاريع والتعليقات بالهندسة المرنة للـ DOM
+// دالة العرض المتكاملة
 async function loadProjects() {
     const container = document.getElementById("posts-feed-container");
     if (!container) return;
@@ -125,57 +123,51 @@ async function loadProjects() {
         const projects = await supabaseFetch("projects?select=*,comments(*)&order=created_at.desc");
         container.innerHTML = projects.map(project => {
             const isAdmin = localStorage.getItem("isAdmin") === "true";
-            const commentsHtml = (project.comments || []).map(c => `<p><strong>${c.username}:</strong> ${c.comment_text}</p>`).join('');
+            const commentsHtml = (project.comments || []).map(c => `<p><strong>👤 ${c.username}:</strong> ${c.comment_text}</p>`).join('');
             
             return `
-                <div class="post-card" style="border:1px solid #eee; padding:20px; margin-bottom:20px; background:#fff; border-radius:8px;">
-                    <h2>📋 اسم المشروع: ${project.title}</h2>
-                    ${project.location ? `<p>📍 موقع المشروع: ${project.location}</p>` : ''}
-                    ${project.plot_area ? `<p>📐 مساحة الأرض: ${project.plot_area}</p>` : ''}
-                    ${project.components ? `<p>🧱 مكونات المشروع: ${project.components}</p>` : ''}
-                    ${project.design_concept ? `<p>💡 الفكرة التصميمية: ${project.design_concept}</p>` : ''}
-                    ${project.challenges ? `<p>⚠️ التحديات: ${project.challenges}</p>` : ''}
-                    ${project.result ? `<p>🏆 النتيجة: ${project.result}</p>` : ''}
+                <div class="post-card" style="border:1px solid #eee; padding:25px; margin-bottom:25px; background:#fff; border-radius:6px; box-shadow:0 2px 5px rgba(0,0,0,0.02);">
+                    <h2 style="border-bottom:1px solid #000; padding-bottom:8px;">📋 اسم المشروع: ${project.title}</h2>
+                    <p>📍 <strong>موقع المشروع:</strong> ${project.location || 'غير محدد'}</p>
+                    <p>📐 <strong>مساحة الأرض:</strong> ${project.plot_area || 'غير محدد'}</p>
+                    <p>🧱 <strong>مكونات المشروع:</strong> ${project.components || 'لا توجد تفاصيل'}</p>
+                    <p>💡 <strong>الفكرة التصميمية:</strong> ${project.design_concept || 'لا توجد تفاصيل'}</p>
+                    <p>⚠️ <strong>التحديات:</strong> ${project.challenges || 'لا توجد تفاصيل'}</p>
+                    <p>🏆 <strong>النتيجة:</strong> ${project.result || 'لا توجد تفاصيل'}</p>
                     
-                    <div class="comments-section" style="margin-top:15px; background:#f9f9f9; padding:10px; border-radius:4px;">
-                        <h4>💬 التعليقات:</h4>
-                        <div id="comments-list-${project.id}">${commentsHtml || '<p style="color:#aaa;">لا توجد تعليقات بعد.</p>'}</div>
+                    <div style="margin-top:20px; background:#fdfdfd; padding:15px; border-top:1px dashed #ccc;">
+                        <h4>💬 المناقشات والتعليقات:</h4>
+                        <div id="comments-list-${project.id}">${commentsHtml || '<p style="color:#aaa; font-size:13px;">لا توجد تعليقات بعد.</p>'}</div>
                     </div>
-                    <div style="margin-top:10px; display:flex; gap:10px;">
-                        <input type="text" id="user-${project.id}" placeholder="اسمك" style="padding:5px; width:120px;">
-                        <input type="text" id="text-${project.id}" placeholder="اكتب تعليقاً واضغط زرار تعليق..." style="padding:5px; flex:1;">
-                        <button onclick="submitComment(${project.id})" style="padding:5px 15px; background:#000; color:#fff; border:none; cursor:pointer;">تعليق</button>
+                    <div style="margin-top:15px; display:flex; gap:10px; flex-wrap:wrap;">
+                        <input type="text" id="user-${project.id}" placeholder="اسمك" style="padding:8px; border:1px solid #ccc; width:130px;">
+                        <input type="text" id="text-${project.id}" placeholder="اكتب تعليقك..." style="padding:8px; border:1px solid #ccc; flex:1;">
+                        <button onclick="submitComment(${project.id})" style="padding:8px 20px; background:#000; color:#fff; border:none; cursor:pointer; font-weight:600;">تعليق 💬</button>
                     </div>
-                    ${isAdmin ? `<button onclick="deleteProject(${project.id})" style="background:red; color:white; border:none; padding:8px 15px; margin-top:15px; cursor:pointer; border-radius:4px;">حذف المشروع 🗑️</button>` : ''}
+                    ${isAdmin ? `<button onclick="deleteProject(${project.id})" style="background:#cc0000; color:#white; border:none; padding:8px 15px; margin-top:20px; cursor:pointer; font-weight:600;">حذف المشروع 🗑️</button>` : ''}
                 </div>
             `;
         }).join('');
-    } catch (err) { 
-        console.error("خطأ في جلب المشاريع:", err); 
-    }
+    } catch (err) { console.error(err); }
 }
 
 async function submitComment(projectId) {
-    const usernameInput = document.getElementById(`user-${projectId}`);
-    const textInput = document.getElementById(`text-${projectId}`);
-    
-    const username = usernameInput ? usernameInput.value.trim() : "";
-    const text = textInput ? textInput.value.trim() : "";
-    
-    if (!username || !text) return alert("الرجاء كتابة الاسم والتعليق أولاً!");
-    
+    const user = document.getElementById(`user-${projectId}`).value.trim();
+    const text = document.getElementById(`text-${projectId}`).value.trim();
+    if(!user || !text) return alert("الرجاء كتابة الاسم والتعليق!");
+
     try {
         await fetch(`${SUPABASE_URL}/rest/v1/comments`, {
             method: "POST",
             headers: { "apikey": SUPABASE_ANON_KEY, "Authorization": `Bearer ${SUPABASE_ANON_KEY}`, "Content-Type": "application/json" },
-            body: JSON.stringify({ project_id: projectId, username, comment_text: text })
+            body: JSON.stringify({ project_id: projectId, username: user, comment_text: text })
         });
         loadProjects();
-    } catch(e) { alert("فشل إرسال التعليق"); }
+    } catch(e) { alert("خطأ في إرسال التعليق"); }
 }
 
 async function deleteProject(id) {
-    if (confirm("هل أنت متأكد من حذف هذا المشروع نهائياً هندسياً برمجياً؟")) {
+    if (confirm("هل أنت متأكد من حذف هذا المشروع نهائياً؟")) {
         await fetch(`${SUPABASE_URL}/rest/v1/projects?id=eq.${id}`, {
             method: "DELETE",
             headers: { "apikey": SUPABASE_ANON_KEY, "Authorization": `Bearer ${SUPABASE_ANON_KEY}` }
