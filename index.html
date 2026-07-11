@@ -1,110 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AHMED HAMID ARCHITECTURE | Premium Portal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>منصة المشاريع المعمارية | أحمد حامد</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- شريط التنقل العلوي -->
-    <header class="main-header">
-        <div class="logo"><img src="assets/logo.png" alt="Logo"></div>
-        <nav class="navbar">
-            <a href="index.html" class="nav-link active">HOME</a>
-            <a href="#feed" class="nav-link">PORTFOLIO</a>
-            <a href="#contact" class="nav-link">CONTACT</a>
-        </nav>
-        <div>
-            <button class="btn-talk" id="adminLoginBtn">ADMIN LOGIN</button>
+    <header>
+        <h1>أَحْمَدْ حَامِدْ | ARCHITECTURE</h1>
+        <p>المعرض الهندسي التفاعلي وإدارة المشاريع المعمارية</p>
+        <div class="admin-login-wrapper">
+            <button id="adminLoginBtn" class="btn-secondary">لوحة التحكم ⚙️</button>
         </div>
     </header>
 
-    <!-- لوحة تحكم الأدمن لرفع المنشورات بالخانات الهندسية المحددة -->
-    <div id="adminPanelSection" style="display: none; background: #f9f9f9; padding: 40px; border-bottom: 3px solid #000;">
-        <h3 style="margin-bottom: 20px; font-weight: 800; letter-spacing: 1px;">🔧 لوحة تحكم المهندس أحمد الإدارية</h3>
-        <form id="adminPublishForm" style="display: flex; flex-direction: column; gap: 15px; max-width: 700px;">
-            <input type="text" id="postTitle" placeholder="اسم المشروع *" required style="padding:12px; border:1px solid #ccc;">
-            <input type="text" id="postLocation" placeholder="موقع المشروع" style="padding:12px; border:1px solid #ccc;">
-            <input type="text" id="postArea" placeholder="مساحة الأرض (مثلاً: 400 متر مربع)" style="padding:12px; border:1px solid #ccc;">
-            
-            <textarea id="postComponents" placeholder="مكونات المشروع (عدد الغرف، الطوابق...)" rows="3" style="padding:12px; border:1px solid #ccc; font-family:inherit;"></textarea>
-            <textarea id="postConcept" placeholder="الفكرة التصميمية المعمارية..." rows="3" style="padding:12px; border:1px solid #ccc; font-family:inherit;"></textarea>
-            <textarea id="postChallenges" placeholder="التحديات التي واجهتك في التصميم..." rows="2" style="padding:12px; border:1px solid #ccc; font-family:inherit;"></textarea>
-            <textarea id="postResult" placeholder="النتيجة والتشطيب النهائي..." rows="2" style="padding:12px; border:1px solid #ccc; font-family:inherit;"></textarea>
-            
-            <!-- خانة رفع أكثر من صورة كملفات مباشرة -->
-            <div style="background:#fff; padding:15px; border:1px dashed #999;">
-                <label style="display:block; margin-bottom:8px; font-weight:600; font-size:13px;">رفع صور المشروع كملفات (يمكنك تحديد أكثر من صورة) *</label>
-                <input type="file" id="postFiles" accept="image/*" multiple required>
-            </div>
-            
-            <button type="submit" style="background: #000; color: #fff; padding: 15px; border: none; font-weight:600; cursor: pointer; letter-spacing:1px;">نشر المشروع الاحترافي 🚀</button>
-            <button type="button" onclick="logoutAdmin()" style="background: #cc0000; color: #fff; padding: 8px; border: none; cursor: pointer; max-width: 150px; margin-top:10px;">تسجيل خروج</button>
-        </form>
+    <div class="container">
+        
+        <section id="adminPanelSection" style="display: none;">
+            <h3>📐 نشر وثيقة مشروع معماري جديد</h3>
+            <form id="adminPublishForm">
+                <div class="form-group">
+                    <label>📋 اسم المشروع المعماري:</label>
+                    <input type="text" id="postTitle" class="form-control" placeholder="مثال: فيلا سكنية مودرن - الخرطوم" required>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                    <div class="form-group">
+                        <label>📍 الموقع الجغرافي:</label>
+                        <input type="text" id="postLocation" class="form-control" placeholder="الموقع">
+                    </div>
+                    <div class="form-group">
+                        <label>📐 مساحة الأرض / المسطح:</label>
+                        <input type="text" id="postArea" class="form-control" placeholder="مثال: 400 متر مربع">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>🧱 مكونات وعناصر المشروع:</label>
+                    <input type="text" id="postComponents" class="form-control" placeholder="طوابق، غرف، ملحقات...">
+                </div>
+                <div class="form-group">
+                    <label>💡 الفكرة التصميمية (Concept):</label>
+                    <textarea id="postConcept" class="form-control" placeholder="شرح لكتل المشروع والتوجه المعماري..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>⚠️ التحديات المعمارية والإنشائية:</label>
+                    <textarea id="postChallenges" class="form-control" placeholder="التحديات التي واجهت التصميم وكيف تم حلها..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>🏆 النتيجة المرفقة والحل:</label>
+                    <textarea id="postResult" class="form-control" placeholder="وصف المخرج النهائي للمشروع..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>📸 إرفاق الصور والمخططات المباشرة (Google Drive):</label>
+                    <input type="file" id="postFiles" class="form-control" multiple accept="image/*" style="padding: 8px;">
+                </div>
+                
+                <div style="display: flex; gap: 15px;">
+                    <button type="submit" class="btn-primary">نشر المشروع الآن 🚀</button>
+                    <button type="button" class="btn-secondary" onclick="logoutAdmin()" style="background:#444; width:150px; border:none;">خروج 🚪</button>
+                </div>
+            </form>
+        </section>
+
+        <main id="posts-feed-container">
+            </main>
     </div>
-
-    <!-- واجهة الهيرو -->
-    <section class="hero-section">
-        <div class="hero-text-content">
-            <span class="hero-subtitle">WELCOME TO THE FUTURE OF SPACE</span>
-            <h1 class="hero-title">MODERN<br>SPACES</h1>
-            <p class="hero-tags">ARCHITECTURE • INTERIOR • PLANNING</p>
-            <a href="#feed" class="btn-view-projects">EXPLORE PORTFOLIO ↓</a>
-        </div>
-        <div class="hero-sketch-bg"></div>
-    </section>
-
-    <!-- ساحة عرض البوستات والتعليقات -->
-    <section class="feed-section" id="feed">
-        <div class="feed-header">
-            <span class="section-tag">ARCHITECTURAL FEED</span>
-            <h2 class="section-title">المشاريع الحالية والتحديثات</h2>
-        </div>
-        <!-- هنا تنزل البوستات المنسقة ديناميكياً من Supabase وجوجل درايف -->
-        <div class="feed-container" id="posts-feed-container"></div>
-    </section>
-
-    <!-- نموذج استقبال طلبات التصاميم من العملاء للإيميل -->
-    <section class="application-form-section" id="contact">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 30px;">ARCHITECTURAL DESIGN INTAKE FORM</h2>
-        <form id="projectIntakeForm" class="architect-dynamic-form">
-            <div class="form-grid-row">
-                <div class="form-field-group">
-                    <label>Full Name *</label>
-                    <input type="text" id="clientName" required placeholder="eg. Ahmed Hamid">
-                </div>
-                <div class="form-field-group">
-                    <label>Phone/WhatsApp *</label>
-                    <input type="tel" id="clientPhone" required placeholder="+249...">
-                </div>
-            </div>
-            <div class="form-field-group">
-                <label>Total Plot Area (Sqm) *</label>
-                <input type="number" id="plotArea" required placeholder="eg. 400">
-            </div>
-            <div class="form-field-group">
-                <label>Detailed Spatial Requirements *</label>
-                <textarea id="clientRequirements" required placeholder="اكتب متطلباتك هنا..." rows="4"></textarea>
-            </div>
-            <button type="submit" class="btn-submit-application">SUBMIT DESIGN BRIEF →</button>
-        </form>
-    </section>
-
-    <!-- الفوتر -->
-    <footer class="footer-section">
-        <div class="footer-bottom">
-            <p class="copyright">© 2026 Ahmed Hamid Architecture.</p>
-            <div class="social-links">
-                <a href="#" id="link-fb" target="_blank">FB</a> | 
-                <a href="#" id="link-ig" target="_blank">IG</a> | 
-                <a href="#" id="link-tt" target="_blank">TT</a> | 
-                <a href="#" id="link-ln" target="_blank">LN</a>
-            </div>
-        </div>
-    </footer>
 
     <script src="script.js"></script>
 </body>
