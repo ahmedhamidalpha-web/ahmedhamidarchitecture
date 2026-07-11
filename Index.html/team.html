@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- إجبار المتصفحات وأنظمة الجوال على إيقاف الوضع المظلم التلقائي وضمان الخلفية البيضاء -->
+    <meta name="color-scheme" content="light">
+    <title>AHMED HAMID ARCHITECTURE | Our Team</title>
+    
+    <!-- استيراد الخطوط الهندسية الفخمة -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ربط ملف التنسيق الموحد للموقع -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. شريط التنقل العلوي -->
+    <header class="main-header">
+        <div class="logo">
+            <img src="assets/logo.png" alt="Ahmed Hamid Architecture">
+        </div>
+        <nav class="navbar">
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="projects.html" class="nav-link">PROJECTS</a>
+            <a href="careers.html" class="nav-link">CAREERS</a>
+            <a href="team.html" class="nav-link active">TEAM</a>
+            <a href="contact.html" class="nav-link">CONTACT</a>
+        </nav>
+        <div class="header-actions">
+            <a href="contact.html" class="btn-talk">LET'S TALK</a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. هيدر الصفحة (Page Header) -->
+    <section class="page-title-section">
+        <div class="title-container">
+            <span class="section-tag">LEADERSHIP & TALENT</span>
+            <h1 class="architecture-page-title">THE<br>TEAM</h1>
+            <p class="page-subtitle">Meet the creative minds, structural strategists, and innovators shaping tomorrow's spaces.</p>
+        </div>
+    </section>
+
+    <!-- 3. قسم مميز: موظف الشهر / العام (Employee of the Month - Dynamic) -->
+    <section class="employee-honor-section">
+        <div class="honor-container">
+            <span class="section-tag premium-tag">✨ RECOGNITION</span>
+            <h2 class="section-title">EMPLOYEE OF THE MONTH</h2>
+            
+            <!-- الحاوية الديناميكية لموظف الشهر: يتم سحبها بالكامل من قاعدة البيانات عبر الـ JS -->
+            <div class="honor-card-wrapper" id="featured-employee-container">
+                
+                <!-- حالة الانتظار الافتراضية الراقي حتى يتم رفع الموظف المميز -->
+                <div class="empty-honor-alert" id="empty-honor-message">
+                    <p>No featured employee selected for this period. The administration will announce the employee of the month shortly.</p>
+                </div>
+
+                <!-- 💡 تصور لهيكل كرت "موظف الشهر" عندما يتم حقنه ديناميكياً (الـ JS سيقوم ببنائه):
+                <div class="featured-employee-card">
+                    <div class="employee-image-side">
+                        <img src="رابط_الصورة_من_درايف" alt="Employee of the Month">
+                    </div>
+                    <div class="employee-info-side">
+                        <h3 class="emp-name">اسم الموظف هنا</h3>
+                        <span class="emp-role">Senior Interior Designer</span>
+                        <p class="emp-bio">نبذة تعريفية عن الموظف، إنجازاته خلال هذا الشهر، واللمسات المعمارية التي أضافها للمشاريع الأخيرة...</p>
+                        <div class="emp-skills-tags">
+                            <span>Revit</span>
+                            <span>Spatial Planning</span>
+                            <span>Lumion</span>
+                        </div>
+                    </div>
+                </div>
+                -->
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. قسم استعراض كامل فريق العمل (All Company Employees) -->
+    <section class="team-directory-section">
+        <div class="section-inner-header">
+            <span class="section-tag">DIRECTORY</span>
+            <h2 class="section-title">OUR PROFESSIONALS</h2>
+            <p class="feed-subtitle">Our interdisciplinary experts working collaboratively on your design packages.</p>
+        </div>
+
+        <!-- حاوية الموظفين الذكية: الـ JavaScript سيقوم بحقن كروت كل الموظفين هنا تلقائياً فور جلبهم من الـ DB -->
+        <!-- مجهزة بربط ذكي لتقرأ تخصص كل موظف (مجاله) وترسل له الإشعارات والطلبات تلقائياً على بريده أو حساباته -->
+        <div class="team-grid-wrapper" id="team-render-container">
+            
+            <!-- رسالة حالة الانتظار البيضاء النظيفة -->
+            <div class="empty-team-alert" id="empty-team-message">
+                <div class="blueprint-icon">👥</div>
+                <h3>Team Directory Loading...</h3>
+                <p>The company staff directory will automatically appear here once loaded securely from the enterprise system database.</p>
+            </div>
+
+            <!-- 💡 تصور لشكل كرت الموظف العادي داخل الشبكة (الـ JS سيقوم بإنشائه لكل موظف):
+            <div class="standard-member-card">
+                <div class="member-avatar">
+                    <img src="رابط_الصورة" alt="Member Name">
+                </div>
+                <div class="member-meta">
+                    <h4>اسم الموظف</h4>
+                    <span class="member-title">Architectural Engineer</span>
+                    <div class="member-social-routes">
+                        <a href="رابط_لينكدان" target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            -->
+
+        </div>
+    </section>
+
+    <!-- 5. الفوتر الاحترافي الموحد -->
+    <footer class="footer-section">
+        <div class="footer-bottom">
+            <div class="footer-logo">
+                <img src="assets/logo.png" alt="Ahmed Hamid Architecture">
+            </div>
+            <p class="copyright">© 2026 Ahmed Hamid Architecture. All Rights Reserved.</p>
+            <div class="social-links">
+                <a href="#" target="_blank">FB</a>
+                <a href="#" target="_blank">IG</a>
+                <a href="#" target="_blank">TT</a>
+                <a href="#" target="_blank">LN</a>
+            </div>
+            <button class="scroll-to-top" id="scrollTopBtn">▲</button>
+        </div>
+    </footer>
+
+    <!-- ربط ملف البرمجة التفاعلية والتكامل السحابي -->
+    <script src="script.js"></script>
+</body>
+</html>
