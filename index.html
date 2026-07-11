@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AHMED HAMID ARCHITECTURE</title>
+    <title>AHMED HAMID ARCHITECTURE | Premium Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -14,8 +14,7 @@
         <div class="logo"><img src="assets/logo.png" alt="Logo"></div>
         <nav class="navbar">
             <a href="index.html" class="nav-link active">HOME</a>
-            <a href="#about" class="nav-link">ABOUT</a>
-            <a href="#feed" class="nav-link">FEED</a>
+            <a href="#feed" class="nav-link">PORTFOLIO</a>
             <a href="#contact" class="nav-link">CONTACT</a>
         </nav>
         <div>
@@ -23,53 +22,52 @@
         </div>
     </header>
 
-    <!-- لوحة تحكم الأدمن (مخفية وتظهر عند تسجيل الدخول بنجاح) -->
-    <div id="adminPanelSection" style="display: none; background: #f4f4f4; padding: 30px; border-bottom: 2px solid #000;">
-        <h3 style="margin-bottom: 15px;">🔧 لوحة تحكم المهندس أحمد (الأدمن)</h3>
-        <div style="display: flex; flex-direction: column; gap: 10px; max-width: 500px;">
-            <input type="text" id="postTitle" placeholder="عنوان المنشور أو المشروع">
-            <textarea id="postContent" placeholder="اكتب تفاصيل المشروع أو المنشور هنا..." rows="3"></textarea>
-            <input type="text" id="postImgUrl" placeholder="رابط صورة المشروع (أو اتركها فارغة)">
-            <button onclick="publishAdminPost()" style="background: #000; color: #fff; padding: 10px; border: none; cursor: pointer;">نشر المشروع الآن 🚀</button>
-            <button onclick="logoutAdmin()" style="background: #cc0000; color: #fff; padding: 5px; border: none; cursor: pointer; margin-top: 10px;">تسجيل خروج</button>
-        </div>
+    <!-- لوحة تحكم الأدمن لرفع المنشورات بالخانات الهندسية المحددة -->
+    <div id="adminPanelSection" style="display: none; background: #f9f9f9; padding: 40px; border-bottom: 3px solid #000;">
+        <h3 style="margin-bottom: 20px; font-weight: 800; letter-spacing: 1px;">🔧 لوحة تحكم المهندس أحمد الإدارية</h3>
+        <form id="adminPublishForm" style="display: flex; flex-direction: column; gap: 15px; max-width: 700px;">
+            <input type="text" id="postTitle" placeholder="اسم المشروع *" required style="padding:12px; border:1px solid #ccc;">
+            <input type="text" id="postLocation" placeholder="موقع المشروع" style="padding:12px; border:1px solid #ccc;">
+            <input type="text" id="postArea" placeholder="مساحة الأرض (مثلاً: 400 متر مربع)" style="padding:12px; border:1px solid #ccc;">
+            
+            <textarea id="postComponents" placeholder="مكونات المشروع (عدد الغرف، الطوابق...)" rows="3" style="padding:12px; border:1px solid #ccc; font-family:inherit;"></textarea>
+            <textarea id="postConcept" placeholder="الفكرة التصميمية المعمارية..." rows="3" style="padding:12px; border:1px solid #ccc; font-family:inherit;"></textarea>
+            <textarea id="postChallenges" placeholder="التحديات التي واجهتك في التصميم..." rows="2" style="padding:12px; border:1px solid #ccc; font-family:inherit;"></textarea>
+            <textarea id="postResult" placeholder="النتيجة والتشطيب النهائي..." rows="2" style="padding:12px; border:1px solid #ccc; font-family:inherit;"></textarea>
+            
+            <!-- خانة رفع أكثر من صورة كملفات مباشرة -->
+            <div style="background:#fff; padding:15px; border:1px dashed #999;">
+                <label style="display:block; margin-bottom:8px; font-weight:600; font-size:13px;">رفع صور المشروع كملفات (يمكنك تحديد أكثر من صورة) *</label>
+                <input type="file" id="postFiles" accept="image/*" multiple required>
+            </div>
+            
+            <button type="submit" style="background: #000; color: #fff; padding: 15px; border: none; font-weight:600; cursor: pointer; letter-spacing:1px;">نشر المشروع الاحترافي 🚀</button>
+            <button type="button" onclick="logoutAdmin()" style="background: #cc0000; color: #fff; padding: 8px; border: none; cursor: pointer; max-width: 150px; margin-top:10px;">تسجيل خروج</button>
+        </form>
     </div>
 
-    <!-- واجهة الهيرو الرئيسية -->
+    <!-- واجهة الهيرو -->
     <section class="hero-section">
         <div class="hero-text-content">
             <span class="hero-subtitle">WELCOME TO THE FUTURE OF SPACE</span>
             <h1 class="hero-title">MODERN<br>SPACES</h1>
             <p class="hero-tags">ARCHITECTURE • INTERIOR • PLANNING</p>
-            <a href="#contact" class="btn-view-projects">START YOUR PROJECT →</a>
+            <a href="#feed" class="btn-view-projects">EXPLORE PORTFOLIO ↓</a>
         </div>
         <div class="hero-sketch-bg"></div>
     </section>
 
-    <!-- قسم النبذة التعريفية -->
-    <section class="about-brief-section" id="about">
-        <div class="brief-container">
-            <div class="brief-title-area">
-                <span class="section-tag">WHO WE ARE</span>
-                <h2 class="section-title">INNOVATIVE DESIGN,<br>ENGINEERING PRECISION.</h2>
-            </div>
-            <div class="brief-text-area">
-                <p>We are a premium architectural firm dedicated to transforming conceptual ideas into functional, breathtaking physical realities. Our philosophy balances structural integrity with forward-thinking aesthetic design.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- قسم التغذية الإخبارية والمشاريع -->
+    <!-- ساحة عرض البوستات والتعليقات -->
     <section class="feed-section" id="feed">
         <div class="feed-header">
-            <span class="section-tag">PORTFOLIO & UPDATES</span>
-            <h2 class="section-title">المشاريع والمنشورات الحالية</h2>
+            <span class="section-tag">ARCHITECTURAL FEED</span>
+            <h2 class="section-title">المشاريع الحالية والتحديثات</h2>
         </div>
-        <!-- هنا تظهر المنشورات ديناميكياً -->
+        <!-- هنا تنزل البوستات المنسقة ديناميكياً من Supabase وجوجل درايف -->
         <div class="feed-container" id="posts-feed-container"></div>
     </section>
 
-    <!-- نموذج طلبات العملاء -->
+    <!-- نموذج استقبال طلبات التصاميم من العملاء للإيميل -->
     <section class="application-form-section" id="contact">
         <h2 class="section-title" style="text-align: center; margin-bottom: 30px;">ARCHITECTURAL DESIGN INTAKE FORM</h2>
         <form id="projectIntakeForm" class="architect-dynamic-form">
@@ -79,7 +77,7 @@
                     <input type="text" id="clientName" required placeholder="eg. Ahmed Hamid">
                 </div>
                 <div class="form-field-group">
-                    <label>Phone Number *</label>
+                    <label>Phone/WhatsApp *</label>
                     <input type="tel" id="clientPhone" required placeholder="+249...">
                 </div>
             </div>
@@ -89,13 +87,13 @@
             </div>
             <div class="form-field-group">
                 <label>Detailed Spatial Requirements *</label>
-                <textarea id="clientRequirements" required placeholder="عدد الغرف، الطوابق، التفضيلات..." rows="4"></textarea>
+                <textarea id="clientRequirements" required placeholder="اكتب متطلباتك هنا..." rows="4"></textarea>
             </div>
             <button type="submit" class="btn-submit-application">SUBMIT DESIGN BRIEF →</button>
         </form>
     </section>
 
-    <!-- الفوتر مع الحسابات الرسمية -->
+    <!-- الفوتر -->
     <footer class="footer-section">
         <div class="footer-bottom">
             <p class="copyright">© 2026 Ahmed Hamid Architecture.</p>
