@@ -1,19 +1,46 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head> ... نفس الهيدر ... </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المشاريع | Ahmed Hamid Architecture</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
 <body>
-    <nav> ... نفس الناف بار ... </nav>
-    
+
+    <nav class="main-navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo-wrapper">
+                <img src="assets/logo.png" alt="AHA" class="company-logo-img">
+            </a>
+            <div class="nav-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="projects.html" class="active">المشاريع</a>
+                <a href="services.html">الخدمات</a>
+                <a href="team.html">فريقنا</a>
+                <a href="jobs.html">الوظائف</a>
+                <a href="contact.html">تواصل</a>
+            </div>
+        </div>
+    </nav>
+
     <header class="page-header">
         <h1>مشاريعنا</h1>
         <p>مجموعة من اعمالنا التي نفخر بها</p>
     </header>
 
     <main class="container">
-        <div id="posts-feed-container" class="projects-grid-3cols"></div>
+        <div id="posts-feed-container" class="projects-grid-3cols">
+            جاري تحميل المشاريع...
+        </div>
     </main>
 
-    <footer> ... نفس الفوتر ... </footer>
+    <footer class="main-footer">
+        <img src="assets/logo.png" class="footer-logo-img">
+        <p>© 2026 Ahmed Hamid Architecture. All Rights Reserved.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js"></script>
 </body>
 </html>
