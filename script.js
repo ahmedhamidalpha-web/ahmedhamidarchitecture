@@ -1,162 +1,49 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const adminLoginBtn = document.getElementById('adminLoginBtn');
-    const loginFormSection = document.getElementById('loginFormSection');
-    const adminPanelSection = document.getElementById('adminPanelSection');
-    const adminPublishForm = document.getElementById('adminPublishForm');
-    const postsFeedContainer = document.getElementById('posts-feed-container');
-    const btnLogout = document.getElementById('logoutBtn');
-    const submitLoginBtn = document.getElementById('submitLoginBtn');
+const SUPABASE_URL = "https://fzlpqsvcicuvldaxgvcz.supabase.co"
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6bHBxc3ZjaWN1dmxkYXhndmN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3OTM1NjksImV4cCI6MjA5OTM2OTU2OX0.4YTOUuAv9RP5yGz_OF0Sh6ocZLMJa86HrVgAor97Lq8"
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFd_q0GcRNc4qEI1NBlHAJxE_cLlmNzdTRXKJkO1wiPt6TUj05aSUWL76uM1YeD3hJ/exec";
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    const ADMIN_USERNAME = "ahmed";
-    const ADMIN_PASSWORD = "123"; 
+// 1. جلب وعرض المشاريع + القلب + التعليقات
+async function renderProjects() {
+  const { data } = await supabase.from('projects').select('*').order('created_at', { ascending: false });
+  const container = document.getElementById('posts-feed-container');
+  container.innerHTML = data.map(p => `
+    <div class="post-card">
+      <h3>${p.title}</h3>
+      <div class="project-gallery">${p.images ? p.images.map(img => `<img src="${img}">`).join('') : ''}</div>
+      <div class="project-details-grid">
+        <div><strong>📍 الموقع:</strong> ${p.location}</div>
+        <div><strong>📐 المساحة:</strong> ${p.area}</div>
+      </div>
+      <p><strong>الفكرة:</strong> ${p.concept}</p>
+      <button onclick="likeProject(${p.id}, ${p.likes})" class="btn-like">❤️ ${p.likes}</button>
+      <div class="comments-section">
+        <input type="text" id="comment-${p.id}" placeholder="اضف تعليق...">
+        <button onclick="addComment(${p.id})">ارسال</button>
+      </div>
+    </div>
+  `).join('');
+}
 
-    let projectsList = JSON.parse(localStorage.getItem('architect_projects')) || [];
-
-    // اظهار حالة الدخول
-    if (sessionStorage.getItem('isAdminLoggedIn') === 'true') {
-        if (adminPanelSection) adminPanelSection.style.display = 'block';
-        if (adminLoginBtn) adminLoginBtn.textContent = 'لوحة التحكم مفتوحة ⚙️';
-    }
-
-    // فتح / قفل فورم تسجيل الدخول
-    if (adminLoginBtn && loginFormSection) {
-        adminLoginBtn.addEventListener('click', () => {
-            if (sessionStorage.getItem('isAdminLoggedIn') === 'true') {
-                adminPanelSection.style.display = adminPanelSection.style.display === 'none' ? 'block' : 'none';
-                adminPanelSection.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                loginFormSection.style.display = loginFormSection.style.display === 'none' ? 'block' : 'none';
-                loginFormSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    }
-
-    // التحقق من تسجيل الدخول
-    if (submitLoginBtn) {
-        submitLoginBtn.addEventListener('click', () => {
-            const inputUser = document.getElementById('loginUsername').value;
-            const inputPass = document.getElementById('loginPassword').value;
-            if (inputUser.trim() === ADMIN_USERNAME && inputPass === ADMIN_PASSWORD) {
-                alert("تم تسجيل الدخول بنجاح يا باشمهندس! 📐");
-                sessionStorage.setItem('isAdminLoggedIn', 'true');
-                loginFormSection.style.display = 'none';
-                adminPanelSection.style.display = 'block';
-                adminLoginBtn.textContent = 'لوحة التحكم مفتوحة ⚙️';
-                adminPanelSection.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                alert("عذراً! البيانات غير صحيحة ❌");
-            }
-        });
-    }
-
-    // تسجيل الخروج
-    if (btnLogout && adminPanelSection) {
-        btnLogout.addEventListener('click', () => {
-            sessionStorage.removeItem('isAdminLoggedIn');
-            adminPanelSection.style.display = 'none';
-            adminLoginBtn.textContent = 'لوحة التحكم ⚙️';
-            alert("تم تسجيل الخروج بنجاح.");
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    }
-
-    // دالة الحذف الجديدة
-    function deleteProject(id) {
-        if (!confirm("متأكد انك عايز تحذف المشروع دا؟")) return;
-        
-        projectsList = projectsList.filter(project => project.id !== id);
-        localStorage.setItem('architect_projects', JSON.stringify(projectsList));
-        renderProjects();
-        alert("تم حذف المشروع بنجاح 🗑️");
-    }
-
-    function renderProjects() {
-        if (!postsFeedContainer) return;
-        postsFeedContainer.innerHTML = '';
-
-        if (projectsList.length === 0) {
-            postsFeedContainer.innerHTML = `<div style="text-align: center; padding: 40px; color: #64748b; background: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0;"><p style="font-size: 1.1rem; font-weight: 600;">مرحباً بك في المعرض الهندسي</p><p style="font-size: 0.85rem; margin-top: 5px;">لم يتم نشر أي مشاريع معمارية حتى الآن.</p></div>`;
-            return;
-        }
-
-        projectsList.forEach((project) => {
-            const card = document.createElement('article');
-            card.className = 'post-card';
-            
-            // زر الحذف بيظهر للادمن بس
-            const deleteBtn = sessionStorage.getItem('isAdminLoggedIn') === 'true' 
-            ? `<button class="btn-delete" onclick="deleteProject(${project.id})">🗑️ حذف المشروع</button>` 
-            : '';
-
-            card.innerHTML = `
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <h2>${project.title}</h2>
-                    ${deleteBtn}
-                </div>
-                <div class="project-details-grid">
-                    <div class="detail-item"><strong>📍 الموقع:</strong> ${project.location || 'غير محدد'}</div>
-                    <div class="detail-item"><strong>📐 المساحة:</strong> ${project.area || 'غير محدد'}</div>
-                    <div class="detail-item"><strong>🧱 المكونات:</strong> ${project.components || 'غير محدد'}</div>
-                </div>
-                <div class="project-text-block"><strong>💡 الفكرة التصميمية:</strong><p>${project.concept || 'لا يوجد'}</p></div>
-                <div class="project-text-block"><strong>⚠️ التحديات والحلول:</strong><p>${project.challenges || 'لا توجد'}</p></div>
-                <div class="project-text-block"><strong>🏆 المخرج النهائي:</strong><p>${project.result || 'لا يوجد'}</p></div>
-                <div class="project-gallery" id="gallery-${project.id}"></div>
-            `;
-            postsFeedContainer.appendChild(card);
-
-            const galleryDiv = document.getElementById(`gallery-${project.id}`);
-            if (galleryDiv && project.images && project.images.length > 0) {
-                project.images.forEach(imgData => {
-                    const img = document.createElement('img');
-                    img.src = imgData;
-                    img.alt = project.title;
-                    galleryDiv.appendChild(img);
-                });
-            } else if (galleryDiv) {
-                galleryDiv.style.display = 'none';
-            }
-        });
-    }
-    
-    // عشان onclick يشتغل لازم نخليها global
-    window.deleteProject = deleteProject;
-
-    if (adminPublishForm) {
-        adminPublishForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (sessionStorage.getItem('isAdminLoggedIn') !== 'true') {
-                alert("خطأ: يجب تسجيل الدخول أولاً!");
-                return;
-            }
-            const title = document.getElementById('postTitle').value;
-            const location = document.getElementById('postLocation').value;
-            const area = document.getElementById('postArea').value;
-            const components = document.getElementById('postComponents').value;
-            const concept = document.getElementById('postConcept').value;
-            const challenges = document.getElementById('postChallenges').value;
-            const result = document.getElementById('postResult').value;
-            const fileInput = document.getElementById('postFiles');
-            const images = [];
-
-            if (fileInput && fileInput.files.length > 0) {
-                const readFilesPromises = Array.from(fileInput.files).map(file => {
-                    return new Promise((resolve) => {
-                        const reader = new FileReader();
-                        reader.onload = (event) => { images.push(event.target.result); resolve(); };
-                        reader.readAsDataURL(file);
-                    });
-                });
-                await Promise.all(readFilesPromises);
-            }
-
-            const newProject = { id: Date.now(), title, location, area, components, concept, challenges, result, images };
-            projectsList.unshift(newProject);
-            localStorage.setItem('architect_projects', JSON.stringify(projectsList));
-            adminPublishForm.reset();
-            renderProjects();
-            window.scrollTo({ top: postsFeedContainer.offsetTop - 100, behavior: 'smooth' });
-        });
-    }
-    renderProjects();
+// 2. ارسال طلب العميل للايميل عبر Apps Script
+document.getElementById('clientRequestForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = {
+    name: clientName.value, phone: clientPhone.value, email: clientEmail.value,
+    location: projectLocation.value, area: projectArea.value, details: clientDetails.value, type: 'client_request'
+  };
+  await fetch(APPS_SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) });
+  alert("تم استلام طلبك. سنتواصل معك قريبا");
+  e.target.reset();
 });
+
+// 3. تسجيل الدخول للادمن
+document.getElementById('submitLoginBtn').addEventListener('click', () => {
+    if(loginUsername.value === "ahmed" && loginPassword.value === "123"){
+        sessionStorage.setItem('isAdminLoggedIn', 'true');
+        document.getElementById('adminPanelSection').style.display = 'block';
+        document.getElementById('loginFormSection').style.display = 'none';
+    }
+});
+
+renderProjects();
