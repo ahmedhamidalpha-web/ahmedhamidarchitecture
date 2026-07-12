@@ -1,11 +1,11 @@
 /* -------------------------------------------------------------
-   🎨 Ahmed Hamid Architecture - Official Stylesheet (V2.2)
+   🎨 Ahmed Hamid Architecture - Official Stylesheet V3.0
    ------------------------------------------------------------- */
 
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-    --primary-blue: #0a192f;       
+    --primary-blue: #0A2342;       
     --accent-blue: #172a45;        
     --bg-light: #f8fafc;           
     --card-bg: #ffffff;            
@@ -22,34 +22,42 @@
     font-family: 'Cairo', sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: var(--bg-light);
     color: var(--text-dark);
-    line-height: 1.6;
-    direction: ltr; /* لضمان قراءة اسم الشركة الإنجليزي واللوقو من اليسار لليمين بشكل صحيح في الهيدر */
+    line-height: 1.7;
+    direction: rtl; /* كلو عربي */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* محاذاة كتل المحتوى الداخلي لتكون باللغة العربية */
-.hero-header, .container, .main-footer {
-    direction: rtl;
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-/* شريط الخانات العلوي (Navbar) */
+/* 1. شريط التنقل NAVBAR */
 .main-navbar {
-    background-color: var(--primary-blue);
-    padding: 12px 20px;
+    background-color: var(--card-bg);
+    padding: 15px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -59,27 +67,44 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
+    direction: ltr; /* اللوجو والاسم انجليزي */
 }
 
 .company-logo-img {
-    height: 42px; 
+    height: 45px; 
     width: auto;
     object-fit: contain;
-    display: block;
 }
 
 .company-name-text {
-    color: #ffffff;
+    color: var(--primary-blue);
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.5px;
     white-space: nowrap;
+    line-height: 1.2;
+}
+.company-name-text small { font-weight: 400; font-size: 0.7rem; color: var(--text-muted); }
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
+.nav-actions a.btn-nav-admin {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    transition: var(--transition);
+    text-decoration: none;
+}
+.nav-actions a.btn-nav-admin:hover { color: var(--primary-blue); }
+
 .btn-nav-admin {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #ffffff;
+    background: rgba(10, 35, 66, 0.08);
+    border: 1px solid rgba(10, 35, 66, 0.2);
+    color: var(--primary-blue);
     padding: 8px 16px;
     font-size: 0.85rem;
     font-weight: 600;
@@ -89,104 +114,79 @@ body {
 }
 
 .btn-nav-admin:hover {
-    background: #ffffff;
-    color: var(--primary-blue);
+    background: var(--primary-blue);
+    color: #ffffff;
 }
 
-/* الهيدر الترحيبي (Hero) */
+.btn-talk {
+    background: var(--primary-blue);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* 2. الهيدر HERO */
 .hero-header {
     background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
     color: #ffffff;
-    padding: 40px 20px;
+    padding: 100px 20px;
     text-align: center;
 }
 
-.hero-header h1 {
-    font-size: 1.6rem;
-    font-weight: 700;
-    margin-bottom: 10px;
+.hero-header h5 {
+    font-weight: 300; 
+    color: #cbd5e1; 
+    letter-spacing: 3px;
+    font-size: 0.9rem;
 }
+
+.hero-header h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin: 10px 0 15px;
+    line-height: 1.1;
+}
+
+.hero-header h1 span { color: #fff; }
 
 .hero-header p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #cbd5e1;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0 auto 30px;
 }
 
-/* الحاوية الرئيسية */
-.container {
-    width: 100%;
-    max-width: 800px;
-    margin: 25px auto;
-    padding: 0 20px;
-    flex: 1;
-}
+.hero-buttons { display: flex; gap: 15px; justify-content: center; }
 
-/* فورم لوحة التحكم */
-#adminPanelSection {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 25px;
-    margin-bottom: 35px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
-}
-
-#adminPanelSection h3 {
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-    color: var(--primary-blue);
-    border-bottom: 2px solid var(--bg-light);
-    padding-bottom: 10px;
-}
-
-.form-group {
-    margin-bottom: 18px;
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 600;
-    font-size: 0.85rem;
-}
-
-.form-control {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid var(--border-color);
-    background: #f8fafc;
-    border-radius: 8px;
-    font-size: 0.9rem;
-}
-
-textarea.form-control {
-    height: 100px;
-    resize: vertical;
-}
-
-.form-buttons {
-    display: flex;
-    gap: 10px;
-}
-
+/* 3. الازرار */
 .btn-primary {
-    flex: 1;
     background: var(--primary-blue);
     color: #ffffff;
     border: none;
-    padding: 12px;
+    padding: 12px 25px;
     font-weight: 600;
     border-radius: 8px;
     cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
 }
+.btn-primary:hover { background: var(--accent-blue); transform: translateY(-2px); }
+
+.btn-light {
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    background: transparent;
+    font-weight: 600;
+    transition: var(--transition);
+}
+.btn-light:hover { background: #fff; color: var(--primary-blue); }
 
 .btn-logout {
     background: #f1f5f9;
@@ -196,12 +196,20 @@ textarea.form-control {
     font-weight: 600;
     border-radius: 8px;
     cursor: pointer;
+    transition: var(--transition);
 }
+.btn-logout:hover { background: #fee2e2; }
 
-/* كروت عرض المشاريع */
+/* 4. الاقسام العامة */
+.section { padding: 80px 0; }
+.section-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+.section-title h2 { font-size: 2rem; color: var(--primary-blue); }
+.section-title span { font-size: 0.85rem; color: var(--text-muted); }
+
+/* 5. كروت المشاريع */
 #posts-feed-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
 }
 
@@ -210,41 +218,124 @@ textarea.form-control {
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    transition: var(--transition);
 }
+.post-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.07); }
 
 .post-card h2 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: var(--primary-blue);
     margin-bottom: 18px;
     border-right: 4px solid var(--primary-blue);
-    padding-right: 10px;
+    padding-right: 12px;
 }
 
 .project-details-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 12px;
-    background: #f8fafc;
+    background: var(--bg-light);
     padding: 15px;
     border-radius: 8px;
     border: 1px solid var(--border-color);
     margin-bottom: 20px;
 }
 
-.detail-item { font-size: 0.85rem; }
+.detail-item { font-size: 0.9rem; }
+.detail-item strong { color: var(--primary-blue); }
 
 .project-text-block { margin-bottom: 20px; font-size: 0.95rem; }
-.project-text-block strong { display: block; color: var(--primary-blue); }
+.project-text-block strong { display: block; color: var(--primary-blue); margin-bottom: 5px; }
 
-.project-gallery { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.project-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
 .project-gallery img { width: 100%; height: 220px; object-fit: cover; border-radius: 8px; }
 
-/* الفوتر */
+/* 6. الخدمات */
+#services {
+    background: var(--primary-blue); 
+    color: #fff; 
+    padding: 80px 20px; 
+    border-radius: 12px; 
+    margin: 40px 0;
+    text-align: center;
+}
+#services h2 { color: #fff; }
+#services h4 { margin-bottom: 8px; font-size: 1.1rem; }
+
+/* 7. الاحصائيات */
+.stats { 
+    display: flex; 
+    justify-content: space-around; 
+    text-align: center; 
+    padding: 50px 0; 
+    margin: 20px 0;
+    flex-wrap: wrap; 
+    gap: 30px;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+.stat h3 { font-size: 2.5rem; color: var(--primary-blue); font-weight: 800; }
+.stat p { font-size: 0.9rem; color: var(--text-muted); }
+
+/* 8. الفورم */
+#adminPanelSection, #loginFormSection {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    margin: 40px 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+}
+
+#adminPanelSection h3, #loginFormSection h3 {
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    color: var(--primary-blue);
+    border-bottom: 2px solid var(--bg-light);
+    padding-bottom: 12px;
+}
+
+.form-group { margin-bottom: 20px; }
+.form-row { display: grid; grid-template-columns: 1fr; gap: 20px; }
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-light);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+.form-control:focus { border-color: var(--primary-blue); outline: none; }
+
+textarea.form-control { height: 120px; resize: vertical; }
+.form-buttons { display: flex; gap: 15px; }
+
+/* 9. التواصل */
+#contact {
+    background: var(--primary-blue); 
+    color: #fff; 
+    padding: 80px 20px; 
+    border-radius: 12px; 
+    margin: 40px 0;
+}
+#contact h2 { color: #fff; }
+
+/* 10. الفوتر */
 .main-footer {
     background-color: var(--accent-blue);
     color: #94a3b8;
     text-align: center;
-    padding: 30px 20px;
+    padding: 40px 20px;
     margin-top: auto;
     border-top: 4px solid var(--primary-blue);
 }
@@ -254,28 +345,26 @@ textarea.form-control {
     width: auto;
     object-fit: contain;
     margin-bottom: 15px;
+    filter: brightness(0) invert(1);
 }
 
 .footer-content p {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: #e2e8f0;
     margin-bottom: 5px;
 }
 
-.footer-sub { font-size: 0.75rem; color: #64748b; display: block; }
+.footer-sub { font-size: 0.8rem; color: #64748b; display: block; }
 
-/* Responsive adjustments */
-@media (max-width: 580px) {
-    .company-name-text { font-size: 0.9rem; }
-    .btn-nav-admin { padding: 6px 10px; font-size: 0.75rem; }
-    .logo-wrapper { gap: 6px; }
-    .company-logo-img { height: 32px; }
-}
-
+/* Responsive */
 @media (min-width: 650px) {
-    .hero-header { padding: 55px 20px; }
-    .hero-header h1 { font-size: 2.2rem; }
     .form-row { grid-template-columns: 1fr 1fr; }
     .project-details-grid { grid-template-columns: repeat(3, 1fr); }
-    .project-gallery { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+}
+
+@media (max-width: 768px) {
+    .hero-header h1 { font-size: 2.5rem; }
+    .nav-actions a.btn-nav-admin { display: none; }
+    .stats { gap: 20px; }
+    .stat h3 { font-size: 2rem; }
 }
