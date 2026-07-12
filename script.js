@@ -1,5 +1,5 @@
 // -------------------------------------------------------------
-// ⚙️ Ahmed Hamid Architecture - Official Control Script (V2.2)
+// 🔒 Ahmed Hamid Architecture - Secure Control Script (V2.3)
 // -------------------------------------------------------------
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,30 +9,65 @@ document.addEventListener('DOMContentLoaded', () => {
     const postsFeedContainer = document.getElementById('posts-feed-container');
     const btnLogout = document.querySelector('.btn-logout');
 
-    // مصفوفة لتخزين المشاريع (تشتغل محلياً في المتصفح للحفظ المؤقت)
+    // 🔑 بيانات الدخول الخاصة بك (تقدر تغيرها من هنا)
+    const ADMIN_USERNAME = "ahmed";
+    const ADMIN_PASSWORD = "123"; // حط الباسورد العايزه هنا
+
+    // مصفوفة لتخزين المشاريع محلياً
     let projectsList = JSON.parse(localStorage.getItem('architect_projects')) || [];
 
-    // 1. فتح وإغلاق لوحة التحكم عند الضغط على الزر العلوي
+    // التحقق من حالة تسجيل الدخول عند فتح الصفحة
+    if (sessionStorage.getItem('isAdminLoggedIn') === 'true') {
+        if (adminPanelSection) adminPanelSection.style.display = 'block';
+        if (adminLoginBtn) adminLoginBtn.textContent = 'لوحة التحكم مفتوحة ⚙️';
+    }
+
+    // 1. زر لوحة التحكم (يطلب الإيميل والباسورد إذا لم يكن مسجلاً)
     if (adminLoginBtn && adminPanelSection) {
         adminLoginBtn.addEventListener('click', () => {
-            if (adminPanelSection.style.display === 'none') {
+            // إذا كان مسجل دخول مسبقاً، يخفي أو يظهر اللوحة طوالي
+            if (sessionStorage.getItem('isAdminLoggedIn') === 'true') {
+                if (adminPanelSection.style.display === 'none') {
+                    adminPanelSection.style.display = 'block';
+                    adminPanelSection.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    adminPanelSection.style.display = 'none';
+                }
+                return;
+            }
+
+            // إذا لم يكن مسجل دخول، يطلب البيانات عبر نافذة (Prompt)
+            const inputUser = prompt("الرجاء إدخال اسم المستخدم الخاص بالمهندس أحمد:");
+            if (inputUser === null) return; // إلغاء الأمر
+
+            const inputPass = prompt("الرجاء إدخال كلمة المرور:");
+            if (inputPass === null) return; // إلغاء الأمر
+
+            // التحقق من صحة البيانات
+            if (inputUser.trim() === ADMIN_USERNAME && inputPass === ADMIN_PASSWORD) {
+                alert("تم تسجيل الدخول بنجاح يا باشمهندس! 📐");
+                sessionStorage.setItem('isAdminLoggedIn', 'true');
                 adminPanelSection.style.display = 'block';
+                adminLoginBtn.textContent = 'لوحة التحكم مفتوحة ⚙️';
                 adminPanelSection.scrollIntoView({ behavior: 'smooth' });
             } else {
-                adminPanelSection.style.display = 'none';
+                alert("عذراً! البيانات غير صحيحة، لا تملك صلاحية الدخول. ❌");
             }
         });
     }
 
-    // 2. زر الخروج داخل لوحة التحكم لإخفائها
+    // 2. زر تسجيل الخروج (🚪) لحماية اللوحة وإغلاق الجلسة
     if (btnLogout && adminPanelSection) {
         btnLogout.addEventListener('click', () => {
+            sessionStorage.removeItem('isAdminLoggedIn');
             adminPanelSection.style.display = 'none';
+            if (adminLoginBtn) adminLoginBtn.textContent = 'لوحة التحكم ⚙️';
+            alert("تم تسجيل الخروج وقفل لوحة التحكم بنجاح.");
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
 
-    // 3. دالة لعرض كروت المشاريع ديناميكياً في الصفحة
+    // 3. دالة عرض كروت المشاريع
     function renderProjects() {
         if (!postsFeedContainer) return;
         postsFeedContainer.innerHTML = '';
@@ -63,20 +98,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>${project.concept || 'لا يوجد شرح متاح.'}</p>
                 </div>
                 <div class="project-text-block">
-                    <strong>⚠️ التحديات الحلول المعمارية:</strong>
+                    <strong>⚠️ التحديات والحلول المعمارية:</strong>
                     <p>${project.challenges || 'لا توجد تحديات مسجلة.'}</p>
                 </div>
                 <div class="project-text-block">
                     <strong>🏆 المخرج النهائي للمشروع:</strong>
                     <p>${project.result || 'لا يوجد مخرج مسجل.'}</p>
                 </div>
-                <div class="project-gallery" id="gallery-${project.id}">
-                    </div>
+                <div class="project-gallery" id="gallery-${project.id}"></div>
             `;
 
             postsFeedContainer.appendChild(card);
 
-            // عرض الصور إذا كانت مرفقة كـ Base64
             const galleryDiv = document.getElementById(`gallery-${project.id}`);
             if (galleryDiv && project.images && project.images.length > 0) {
                 project.images.forEach(imgData => {
@@ -96,6 +129,12 @@ document.addEventListener('DOMContentLoaded', () => {
         adminPublishForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            // تأمين إضافي: التحقق من الدخول قبل النشر
+            if (sessionStorage.getItem('isAdminLoggedIn') !== 'true') {
+                alert("خطأ: يجب تسجيل الدخول أولاً لنشر المشاريع!");
+                return;
+            }
+
             const title = document.getElementById('postTitle').value;
             const location = document.getElementById('postLocation').value;
             const area = document.getElementById('postArea').value;
@@ -107,7 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const images = [];
 
-            // قراءة الملفات المرفقة وتحويلها لصيغة يمكن عرضها محلياً
             if (fileInput && fileInput.files.length > 0) {
                 const readFilesPromises = Array.from(fileInput.files).map(file => {
                     return new Promise((resolve) => {
@@ -122,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 await Promise.all(readFilesPromises);
             }
 
-            // إنشاء كائن المشروع الجديد
             const newProject = {
                 id: Date.now(),
                 title,
@@ -135,20 +172,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 images
             };
 
-            // الحفظ والتحديث
             projectsList.unshift(newProject);
             localStorage.setItem('architect_projects', JSON.stringify(projectsList));
             
-            // إعادة تعيين الفورم وإخفاء اللوحة
             adminPublishForm.reset();
-            if (adminPanelSection) adminPanelSection.style.display = 'none';
             
-            // تحديث العرض المعماري فوراً
             renderProjects();
-            window.scrollTo({ top: document.getElementById('posts-feed-container').offsetTop - 100, behavior: 'smooth' });
+            window.scrollTo({ top: postsFeedContainer.offsetTop - 100, behavior: 'smooth' });
         });
     }
 
-    // تشغيل العرض الأولي للمشاريع عند فتح الصفحة
     renderProjects();
 });
