@@ -1,12 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+/* التشطيب المعماري الفاخر للمنصة - Premium Dark Theme */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;700&display=swap');
 
 :root {
-    --primary-color: #0b0b0b;
-    --accent-color: #1a1a1a;
-    --text-color: #2b2b2b;
-    --bg-color: #f8f9fa;
-    --card-bg: #ffffff;
-    --border-color: #eaeaea;
+    --bg-main: #0a0a0c;          /* أسود عميق فخم */
+    --bg-card: #121216;          /* رمادي داكن جداً للكروت */
+    --bg-input: #181820;         /* خلفية الخانات */
+    --accent: #ffffff;           /* اللون الأساسي للنصوص والعناصر */
+    --accent-muted: #8e8e93;     /* نصوص فرعية */
+    --border-color: #222228;     /* حدود نحيفة جداً وهادئة */
+    --shadow-premium: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -14,258 +16,321 @@
     margin: 0;
     padding: 0;
     font-family: 'Cairo', sans-serif;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
+    background-color: var(--bg-main);
+    color: var(--accent);
+    line-height: 1.7;
     direction: rtl;
+    padding-bottom: 60px;
 }
 
-/* هيدر مرن يمنع تداخل الكلمات */
+/* الهيدر الاحترافي الفخم */
 header {
-    background-color: var(--primary-color);
-    color: #fff;
-    padding: 25px 20px;
+    background-color: rgba(10, 10, 12, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 40px 20px;
     text-align: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-
-header .header-content {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 header h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 700;
-    letter-spacing: 0.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
 }
 
 header p {
-    font-size: 0.95rem;
-    color: #aaa;
+    font-size: 0.85rem;
+    color: var(--accent-muted);
     font-weight: 300;
+    letter-spacing: 0.5px;
 }
 
-/* زر التحكم أسفل الوصف لمنع التداخل */
+/* زر لوحة التحكم */
 .admin-login-wrapper {
-    margin-top: 5px;
+    margin-top: 15px;
 }
 
 .btn-secondary {
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    color: #fff;
-    padding: 6px 16px;
-    font-size: 0.85rem;
+    border: 1px solid var(--border-color);
+    color: var(--accent);
+    padding: 8px 24px;
+    font-size: 0.8rem;
+    font-weight: 500;
     cursor: pointer;
     border-radius: 4px;
-    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-secondary:hover {
-    background: #fff;
-    color: var(--primary-color);
+    background: var(--accent);
+    color: var(--bg-main);
+    border-color: var(--accent);
 }
 
+/* الحاوية الرئيسية */
 .container {
-    max-width: 1100px;
-    margin: 30px auto;
-    padding: 0 15px;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
-/* لوحة التحكم */
+/* فورم لوحة التحكم بتصميم زجاجي فاخر */
 #adminPanelSection {
-    background: var(--card-bg);
+    background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-premium);
 }
 
 #adminPanelSection h3 {
-    margin-bottom: 15px;
-    border-bottom: 2px solid var(--primary-color);
-    padding-bottom: 8px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    letter-spacing: 0.5px;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 22px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 6px;
-    font-weight: 600;
-    font-size: 0.9rem;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--accent-muted);
 }
 
 .form-control {
     width: 100%;
-    padding: 10px;
+    padding: 14px;
+    background-color: var(--bg-input);
     border: 1px solid var(--border-color);
-    background: #fafafa;
     border-radius: 6px;
-    font-size: 0.95rem;
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: all 0.3s ease;
 }
 
 .form-control:focus {
     outline: none;
-    border-color: var(--primary-color);
-    background: #fff;
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 textarea.form-control {
-    min-height: 90px;
+    min-height: 110px;
+    resize: vertical;
 }
 
+/* الأزرار الرئيسية */
 .btn-primary {
-    background: var(--primary-color);
-    color: #fff;
-    padding: 12px;
+    background: var(--accent);
+    color: var(--bg-main);
+    padding: 14px;
     border: none;
     border-radius: 6px;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 0.95rem;
     cursor: pointer;
-    font-size: 1rem;
     width: 100%;
+    letter-spacing: 0.5px;
+    transition: background 0.3s ease;
 }
 
-/* حاوية المشاريع */
+.btn-primary:hover {
+    background: #e4e4e7;
+}
+
+/* كروت عرض المشاريع الفخمة */
 #posts-feed-container {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 40px;
 }
 
-/* كارت المشروع */
 .post-card {
-    background: var(--card-bg);
+    background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.01);
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: var(--shadow-premium);
 }
 
 .post-card h2 {
     font-size: 1.4rem;
     font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 15px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border-color);
+    color: var(--accent);
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
 }
 
+/* شبكة تفاصيل المشروع */
 .project-details-grid {
-    background: #fafafa;
-    padding: 12px;
-    border-radius: 6px;
-    margin-bottom: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    background: var(--bg-input);
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 25px;
 }
 
 .detail-item {
-    font-size: 0.9rem;
-    margin-bottom: 5px;
+    font-size: 0.85rem;
+    color: var(--accent-muted);
+}
+
+.detail-item strong {
+    color: var(--accent);
+    font-weight: 500;
 }
 
 .project-text-block {
-    margin-bottom: 12px;
+    margin-bottom: 20px;
     font-size: 0.95rem;
+    color: #e4e4e7;
+    text-align: justify;
 }
 
 .project-text-block strong {
     display: block;
-    color: var(--primary-color);
-    margin-bottom: 2px;
+    color: var(--accent);
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
-/* المعرض */
+/* معرض الصور الاحترافي */
 .project-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 12px;
-    margin: 20px 0;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 15px;
+    margin: 30px 0;
 }
 
 .project-gallery img {
     width: 100%;
-    height: 200px;
+    height: 240px;
     object-fit: cover;
     border-radius: 6px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* التعليقات */
+.project-gallery img:hover {
+    transform: scale(1.02);
+}
+
+/* قسم التعليقات والمناقشات */
 .comments-section {
-    margin-top: 20px;
+    margin-top: 30px;
     border-top: 1px solid var(--border-color);
-    padding-top: 15px;
+    padding-top: 20px;
+}
+
+.comments-section h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--accent-muted);
+    letter-spacing: 0.5px;
 }
 
 .comments-list {
-    background: #fdfdfd;
-    padding: 8px;
-    border-radius: 6px;
-    margin-bottom: 15px;
+    max-height: 250px;
+    overflow-y: auto;
+    margin-bottom: 20px;
 }
 
 .comment-item {
-    padding: 8px;
-    border-bottom: 1px dashed var(--border-color);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
     font-size: 0.85rem;
+    color: #d1d1d6;
 }
 
+.comment-item strong {
+    color: var(--accent);
+    margin-left: 5px;
+}
+
+/* فورم التعليقات النظيف */
 .comment-form {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .comment-form input {
-    padding: 10px;
+    background-color: var(--bg-input);
     border: 1px solid var(--border-color);
+    color: var(--accent);
+    padding: 12px;
     border-radius: 6px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .btn-comment {
-    background: var(--primary-color);
-    color: #fff;
+    background: var(--accent);
+    color: var(--bg-main);
     border: none;
-    padding: 10px;
+    padding: 12px;
     border-radius: 6px;
+    font-weight: 700;
     cursor: pointer;
-    font-weight: 600;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+
+.btn-comment:hover {
+    background: #e4e4e7;
 }
 
 .btn-delete {
-    background: #dc3545;
-    color: #fff;
-    border: none;
+    background: transparent;
+    border: 1px solid #ff453a;
+    color: #ff453a;
     padding: 8px 16px;
-    margin-top: 15px;
+    margin-top: 20px;
     border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.8rem;
     cursor: pointer;
+    transition: all 0.3s;
 }
 
+.btn-delete:hover {
+    background: #ff453a;
+    color: #fff;
+}
+
+/* شاشات الكومبيوتر الكبيرة */
 @media (min-width: 600px) {
-    .comment-form {
-        flex-direction: row;
-    }
-    .comment-form .input-name {
-        width: 150px;
-    }
-    .comment-form .input-text {
-        flex: 1;
-    }
-    header h1 {
-        font-size: 2.2rem;
-    }
+    header h1 { font-size: 2rem; }
+    .comment-form { flex-direction: row; }
+    .comment-form .input-name { width: 140px; }
+    .comment-form .input-text { flex: 1; }
+    .btn-comment { padding: 0 25px; }
 }
