@@ -76,3 +76,7 @@ body {
 .footer-logo-img { height: 50px; filter: brightness(0) invert(1); margin-bottom: 15px; }
 .social-icons { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
 .social-icons a { color: #fff; text-decoration: none; border: 1px solid #fff; padding: 8px 12px; border-radius: 50%; }
+.login-container { max-width: 400px; margin: 100px auto; padding: 40px; background: #fff; border-radius: 16px; text-align: center; }
+.login-form input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border); border-radius: 8px; }
+.admin-card { background: #fff; padding: 30px; border-radius: 16px; margin-bottom: 30px; border: 1px solid var(--border); }
+.admin-card input,.admin-card textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border); border-radius: 8px; }
