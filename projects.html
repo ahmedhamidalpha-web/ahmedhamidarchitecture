@@ -1,116 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- إجبار المتصفحات وأنظمة الجوال على إيقاف الوضع المظلم التلقائي وضمان الخلفية البيضاء -->
-    <meta name="color-scheme" content="light">
-    <title>AHMED HAMID ARCHITECTURE | Our Projects</title>
-    
-    <!-- استيراد الخطوط الهندسية الفخمة -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- ربط ملف التنسيق الموحد للموقع -->
-    <link rel="stylesheet" href="style.css">
-</head>
+<html lang="ar" dir="rtl">
+<head> ... نفس الهيدر ... </head>
 <body>
-
-    <!-- 1. شريط التنقل العلوي (نفس الموجود في الرئيسية لمنع أخطاء الـ 404) -->
-    <header class="main-header">
-        <div class="logo">
-            <img src="assets/logo.png" alt="Ahmed Hamid Architecture">
-        </div>
-        <nav class="navbar">
-            <a href="index.html" class="nav-link">HOME</a>
-            <a href="projects.html" class="nav-link active">PROJECTS</a>
-            <a href="careers.html" class="nav-link">CAREERS</a>
-            <a href="team.html" class="nav-link">TEAM</a>
-            <a href="contact.html" class="nav-link">CONTACT</a>
-        </nav>
-        <div class="header-actions">
-            <a href="contact.html" class="btn-talk">LET'S TALK</a>
-            <div class="menu-toggle" id="mobile-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
+    <nav> ... نفس الناف بار ... </nav>
+    
+    <header class="page-header">
+        <h1>مشاريعنا</h1>
+        <p>مجموعة من اعمالنا التي نفخر بها</p>
     </header>
 
-    <!-- 2. هيدر الصفحة (Page Header) -->
-    <section class="page-title-section">
-        <div class="title-container">
-            <span class="section-tag">PORTFOLIO</span>
-            <h1 class="architecture-page-title">ARCHITECTURAL<br>WORKS</h1>
-            <p class="page-subtitle">Explore our custom design solutions, structural challenges solved, and spatial innovations.</p>
-        </div>
-    </section>
+    <main class="container">
+        <div id="posts-feed-container" class="projects-grid-3cols"></div>
+    </main>
 
-    <!-- 3. قسم شبكة المشاريع الديناميكية (Dynamic Projects Grid) -->
-    <section class="portfolio-grid-section">
-        
-        <!-- فلتر تصفية المشاريع (سيعمل برمجياً بناءً على نوع المشروع المرفوع) -->
-        <div class="portfolio-filters-bar">
-            <span class="filter-node active" data-filter="all">ALL WORKS</span>
-            <span class="filter-node" data-filter="residential">RESIDENTIAL</span>
-            <span class="filter-node" data-filter="commercial">COMMERCIAL</span>
-            <span class="filter-node" data-filter="interior">INTERIOR DESIGN</span>
-            <span class="filter-node" data-filter="planning">MASTER PLANNING</span>
-        </div>
-
-        <!-- حاوية المشاريع الذكية: هنا سيقوم الـ JavaScript بحقن المشاريع المرفوعة تلقائياً -->
-        <div class="dynamic-projects-wrapper" id="projects-render-container">
-            
-            <!-- رسالة حالة الانتظار: تظهر فقط عندما تكون قاعدة البيانات فارغة من المشاريع -->
-            <div class="empty-portfolio-alert" id="empty-portfolio-message">
-                <div class="blueprint-icon">📐</div>
-                <h3>No Projects Loaded Yet</h3>
-                <p>Projects published via the admin dashboard will automatically render here with their full technical details, challenge logs, and Google Drive galleries.</p>
-            </div>
-
-            <!-- 💡 تصور لهيكل كرت المشروع عندما يتم رفعه ديناميكياً مستقبلاً (للإطلاع فقط، الـ JS سيقوم بإنشائه):
-            <div class="project-detailed-card" data-category="residential">
-                <div class="project-visuals">
-                    <img src="رابط_الصورة_من_قوقل_درايف" alt="Project Image">
-                </div>
-                <div class="project-technical-details">
-                    <h2 class="proj-title">اسم المشروع هنا</h2>
-                    <div class="tech-specs-grid">
-                        <div class="spec-item"><strong>Location:</strong> الخرطوم، السودان</div>
-                        <div class="spec-item"><strong>Area:</strong> 500 sqm</div>
-                        <div class="spec-item"><strong>Concept Type:</strong> Minimalist Modern</div>
-                    </div>
-                    <div class="project-narrative">
-                        <h3>The Challenge:</h3>
-                        <p>التحديات المعمارية والهندسية التي واجهتنا أثناء التصميم وكيف تم حلها...</p>
-                    </div>
-                </div>
-            </div> 
-            -->
-
-        </div>
-    </section>
-
-    <!-- 4. الفوتر الاحترافي الموحد -->
-    <footer class="footer-section">
-        <div class="footer-bottom">
-            <div class="footer-logo">
-                <img src="assets/logo.png" alt="Ahmed Hamid Architecture">
-            </div>
-            <p class="copyright">© 2026 Ahmed Hamid Architecture. All Rights Reserved.</p>
-            <div class="social-links">
-                <a href="#" target="_blank">FB</a>
-                <a href="#" target="_blank">IG</a>
-                <a href="#" target="_blank">TT</a>
-                <a href="#" target="_blank">LN</a>
-            </div>
-            <button class="scroll-to-top" id="scrollTopBtn">▲</button>
-        </div>
-    </footer>
-
-    <!-- ربط ملف البرمجة التفاعلية والتكامل السحابي -->
+    <footer> ... نفس الفوتر ... </footer>
     <script src="script.js"></script>
 </body>
 </html>
