@@ -1,81 +1,154 @@
-// استبدل دالة loadProjects القديمة في ملف script.js بهذه النسخة
-async function loadProjects() {
-    const container = document.getElementById("posts-feed-container");
-    if (!container) return;
+// -------------------------------------------------------------
+// ⚙️ Ahmed Hamid Architecture - Official Control Script (V2.2)
+// -------------------------------------------------------------
 
-    try {
-        const projects = await supabaseFetch("projects?select=*,comments(*)&order=created_at.desc");
-        if (!projects || projects.length === 0) {
-            container.innerHTML = '<p style="text-align:center; color:#64748b; margin-top:30px; font-size:0.95rem;">لم يتم رفع أو توثيق أي مشاريع معمارية بعد.</p>';
-            return;
-        }
+document.addEventListener('DOMContentLoaded', () => {
+    const adminLoginBtn = document.getElementById('adminLoginBtn');
+    const adminPanelSection = document.getElementById('adminPanelSection');
+    const adminPublishForm = document.getElementById('adminPublishForm');
+    const postsFeedContainer = document.getElementById('posts-feed-container');
+    const btnLogout = document.querySelector('.btn-logout');
 
-        container.innerHTML = projects.map(project => {
-            const isAdmin = localStorage.getItem("isAdmin") === "true";
-            const commentsHtml = (project.comments || []).map(c => `
-                <div class="comment-item">
-                    <strong>👤 ${c.username}:</strong> ${c.comment_text}
-                </div>
-            `).join('');
-            
-            let imagesHtml = "";
-            if (project.drive_image_ids && project.drive_image_ids.length > 0) {
-                imagesHtml = `<div class="project-gallery">`;
-                project.drive_image_ids.forEach(url => {
-                    imagesHtml += `<img src="${url}" alt="مخطط ورندر المشروع" onerror="this.src='https://placehold.co/600x400?text=🖼️+Photo+In+Drive'">`;
-                });
-                imagesHtml += `</div>`;
-            }
+    // مصفوفة لتخزين المشاريع (تشتغل محلياً في المتصفح للحفظ المؤقت)
+    let projectsList = JSON.parse(localStorage.getItem('architect_projects')) || [];
 
-            return `
-                <div class="post-card">
-                    <h2>📋 ${project.title}</h2>
-                    
-                    <div class="project-details-grid">
-                        <div class="detail-item">📍 <strong>الموقع الجغرافي:</strong> ${project.location || 'غير محدد'}</div>
-                        <div class="detail-item">📐 <strong>مساحة المسطح:</strong> ${project.plot_area || 'غير محدد'}</div>
-                        <div class="detail-item">🧱 <strong>عناصر المشروع:</strong> ${project.components || 'لا توجد تفاصيل'}</div>
-                    </div>
-                    
-                    <div class="project-text-block"><strong>💡 الفكرة التصميمية (Concept):</strong> ${project.design_concept || 'لا توجد تفاصيل'}</div>
-                    <div class="project-text-block"><strong>⚠️ التحديات والحلول الإنشائية:</strong> ${project.challenges || 'لا توجد تفاصيل'}</div>
-                    <div class="project-text-block"><strong>🏆 المخرج المعماري النهائي:</strong> ${project.result || 'لا توجد تفاصيل'}</div>
-                    
-                    ${imagesHtml}
-                    
-                    <div class="comments-section">
-                        <h4>💬 المناقشات والاستفسارات على المخطط:</h4>
-                        <div class="comments-list" id="comments-list-${project.id}">
-                            ${commentsHtml || '<p style="color:#aaa; font-size:13px; padding:5px;">لا توجد مناقشات بعد.</p>'}
-                        </div>
-                        <div class="comment-form">
-                            <input type="text" id="user-${project.id}" class="input-name" placeholder="الاسم">
-                            <input type="text" id="text-${project.id}" class="input-text" placeholder="أضف استفسار أو ملحوظة هندسية...">
-                            <button onclick="submitComment(${project.id})" class="btn-comment">تعليق 💬</button>
-                        </div>
-                    </div>
-                    
-                    ${isAdmin ? `<button onclick="deleteProject(${project.id})" class="btn-delete">حذف المشروع 🗑️</button>` : ''}
-                </div>
-            `;
-        }).join('');
-    } catch (err) { 
-        container.innerHTML = '<p style="text-align:center; color:#ef4444;">حدث خطأ أثناء الاتصال بقاعدة البيانات وسحب المشاريع.</p>';
-    // تفعيل زر لوحة التحكم لإظهار وإخفاء الفورم
-document.addEventListener("DOMContentLoaded", () => {
-    const adminBtn = document.getElementById("adminLoginBtn");
-    const adminSection = document.getElementById("adminPanelSection");
-
-    if (adminBtn && adminSection) {
-        adminBtn.addEventListener("click", () => {
-            if (adminSection.style.display === "none") {
-                adminSection.style.display = "block"; // إظهار لوحة التحكم
-                adminSection.scrollIntoView({ behavior: 'smooth' }); // انتقال سلس للوحة
+    // 1. فتح وإغلاق لوحة التحكم عند الضغط على الزر العلوي
+    if (adminLoginBtn && adminPanelSection) {
+        adminLoginBtn.addEventListener('click', () => {
+            if (adminPanelSection.style.display === 'none') {
+                adminPanelSection.style.display = 'block';
+                adminPanelSection.scrollIntoView({ behavior: 'smooth' });
             } else {
-                adminSection.style.display = "none"; // إخفائها في حال الضغط مرة أخرى
+                adminPanelSection.style.display = 'none';
             }
         });
     }
-});
 
-}
+    // 2. زر الخروج داخل لوحة التحكم لإخفائها
+    if (btnLogout && adminPanelSection) {
+        btnLogout.addEventListener('click', () => {
+            adminPanelSection.style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // 3. دالة لعرض كروت المشاريع ديناميكياً في الصفحة
+    function renderProjects() {
+        if (!postsFeedContainer) return;
+        postsFeedContainer.innerHTML = '';
+
+        if (projectsList.length === 0) {
+            postsFeedContainer.innerHTML = `
+                <div style="text-align: center; padding: 40px; color: #64748b; background: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0;">
+                    <p style="font-size: 1.1rem; font-weight: 600;">مرحباً بك في المعرض الهندسي</p>
+                    <p style="font-size: 0.85rem; margin-top: 5px;">لم يتم نشر أي مشاريع معمارية حتى الآن.</p>
+                </div>
+            `;
+            return;
+        }
+
+        projectsList.forEach((project) => {
+            const card = document.createElement('article');
+            card.className = 'post-card';
+
+            card.innerHTML = `
+                <h2>${project.title}</h2>
+                <div class="project-details-grid">
+                    <div class="detail-item"><strong>📍 الموقع:</strong> ${project.location || 'غير محدد'}</div>
+                    <div class="detail-item"><strong>📐 المساحة:</strong> ${project.area || 'غير محدد'}</div>
+                    <div class="detail-item"><strong>🧱 المكونات:</strong> ${project.components || 'غير محدد'}</div>
+                </div>
+                <div class="project-text-block">
+                    <strong>💡 الفكرة التصميمية (Concept):</strong>
+                    <p>${project.concept || 'لا يوجد شرح متاح.'}</p>
+                </div>
+                <div class="project-text-block">
+                    <strong>⚠️ التحديات الحلول المعمارية:</strong>
+                    <p>${project.challenges || 'لا توجد تحديات مسجلة.'}</p>
+                </div>
+                <div class="project-text-block">
+                    <strong>🏆 المخرج النهائي للمشروع:</strong>
+                    <p>${project.result || 'لا يوجد مخرج مسجل.'}</p>
+                </div>
+                <div class="project-gallery" id="gallery-${project.id}">
+                    </div>
+            `;
+
+            postsFeedContainer.appendChild(card);
+
+            // عرض الصور إذا كانت مرفقة كـ Base64
+            const galleryDiv = document.getElementById(`gallery-${project.id}`);
+            if (galleryDiv && project.images && project.images.length > 0) {
+                project.images.forEach(imgData => {
+                    const img = document.createElement('img');
+                    img.src = imgData;
+                    img.alt = project.title;
+                    galleryDiv.appendChild(img);
+                });
+            } else if (galleryDiv) {
+                galleryDiv.style.display = 'none';
+            }
+        });
+    }
+
+    // 4. معالجة نموذج نشر مشروع جديد
+    if (adminPublishForm) {
+        adminPublishForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const title = document.getElementById('postTitle').value;
+            const location = document.getElementById('postLocation').value;
+            const area = document.getElementById('postArea').value;
+            const components = document.getElementById('postComponents').value;
+            const concept = document.getElementById('postConcept').value;
+            const challenges = document.getElementById('postChallenges').value;
+            const result = document.getElementById('postResult').value;
+            const fileInput = document.getElementById('postFiles');
+
+            const images = [];
+
+            // قراءة الملفات المرفقة وتحويلها لصيغة يمكن عرضها محلياً
+            if (fileInput && fileInput.files.length > 0) {
+                const readFilesPromises = Array.from(fileInput.files).map(file => {
+                    return new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                            images.push(event.target.result);
+                            resolve();
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                });
+                await Promise.all(readFilesPromises);
+            }
+
+            // إنشاء كائن المشروع الجديد
+            const newProject = {
+                id: Date.now(),
+                title,
+                location,
+                area,
+                components,
+                concept,
+                challenges,
+                result,
+                images
+            };
+
+            // الحفظ والتحديث
+            projectsList.unshift(newProject);
+            localStorage.setItem('architect_projects', JSON.stringify(projectsList));
+            
+            // إعادة تعيين الفورم وإخفاء اللوحة
+            adminPublishForm.reset();
+            if (adminPanelSection) adminPanelSection.style.display = 'none';
+            
+            // تحديث العرض المعماري فوراً
+            renderProjects();
+            window.scrollTo({ top: document.getElementById('posts-feed-container').offsetTop - 100, behavior: 'smooth' });
+        });
+    }
+
+    // تشغيل العرض الأولي للمشاريع عند فتح الصفحة
+    renderProjects();
+});
