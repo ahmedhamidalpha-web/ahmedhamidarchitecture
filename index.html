@@ -1,96 +1,175 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmed Hamid Architecture | المنصة الهندسية</title>
+    <title>Ahmed Hamid Architecture | مساحات حديثة</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- شريط الخانات العلوي (Navbar) -->
+    <!-- NAVBAR مطابق للموقع التاني -->
     <nav class="main-navbar">
         <div class="nav-container">
             <div class="logo-wrapper">
                 <img src="assets/logo.png" alt="Ahmed Hamid Architecture" class="company-logo-img">
-                <span class="company-name-text">Ahmed Hamid Architecture</span>
+                <span class="company-name-text">AHMED HAMID<br><small>ARCHITECTURE</small></span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="active">الرئيسية</a>
+                <a href="#about">من نحن</a>
+                <a href="#services">الخدمات</a>
+                <a href="#projects">المشاريع</a>
+                <a href="#blog">المدونة</a>
+                <a href="#contact">تواصل</a>
             </div>
             <div class="nav-actions">
                 <button id="adminLoginBtn" class="btn-nav-admin">لوحة التحكم ⚙️</button>
+                <button class="btn-talk">لنتحدث</button>
             </div>
         </div>
     </nav>
 
-    <!-- الهيدر الترحيبي (Hero Section) -->
+    <!-- HERO SECTION -->
     <header class="hero-header">
         <div class="header-content">
-            <h1>المعرض الهندسي التفاعلي</h1>
-            <p>توثيق الفكرة التصميمية، التحديات الإنتاجية، والحلول المعمارية للمشاريع</p>
+            <h5>نحن نصمم</h5>
+            <h1>مساحات <span>حديثة</span></h1>
+            <p>العمارة • التصميم الداخلي • التخطيط • التصور ثلاثي الابعاد</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn-dark">عرض المشاريع →</a>
+                <a href="#contact" class="btn-light">تواصل معنا</a>
+            </div>
+        </div>
+        <div class="hero-img">
+            <img src="assets/hero-sketch.png" alt="Modern House">
         </div>
     </header>
 
-    <!-- الحاوية الرئيسية للمحتوى -->
     <div class="container">
         
-        <!-- لوحة التحكم (مخفية افتراضياً وتظهر عند الضغط على الزر العلوي) -->
+        <!-- FEATURED PROJECTS -->
+        <section id="projects" class="section">
+            <div class="section-title">
+                <div>
+                    <span>اعمالنا</span>
+                    <h2>المشاريع المميزة</h2>
+                </div>
+                <a href="#">عرض كل المشاريع →</a>
+            </div>
+            <main id="posts-feed-container" class="projects-grid">
+                <!-- هنا بتجي المشاريع من script.js -->
+                <div class="empty-state">
+                    <h3>مرحباً بك في المعرض الهندسي</h3>
+                    <p>لم يتم نشر أي مشاريع معمارية حتى الآن</p>
+                </div>
+            </main>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services" class="section services">
+            <div class="container">
+                <span>خدماتنا</span>
+                <h2>ماذا نقدم</h2>
+                <div class="services-grid">
+                    <div class="service-item"><h4>التصميم المعماري</h4><p>حلول تصميمية ابداعية ووظيفية</p></div>
+                    <div class="service-item"><h4>التصميم الداخلي</h4><p>مساحات داخلية حديثة تناسب نمط حياتك</p></div>
+                    <div class="service-item"><h4>المخططات التنفيذية</h4><p>مخططات تفصيلية ودقيقة للتنفيذ</p></div>
+                    <div class="service-item"><h4>ادارة المشاريع</h4><p>من الفكرة حتى التسليم بدقة</p></div>
+                    <div class="service-item"><h4>تصميم اللاندسكيب</h4><p>مساحات خارجية تعزز البيئة</p></div>
+                    <div class="service-item"><h4>التصور ثلاثي الابعاد</h4><p>رندرات عالية الجودة قبل التنفيذ</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS -->
+        <div class="stats">
+            <div class="stat"><h3>15+</h3><p>سنة خبرة</p></div>
+            <div class="stat"><h3>120+</h3><p>مشروع منجز</p></div>
+            <div class="stat"><h3>35+</h3><p>عميل راضي</p></div>
+            <div class="stat"><h3>8+</h3><p>دولة نخدمها</p></div>
+        </div>
+
+        <!-- LOGIN & ADMIN PANEL - مخفيين -->
+        <section id="loginFormSection" style="display: none;">
+            <h3>🔑 تسجيل الدخول للمشرف</h3>
+            <div class="form-group">
+                <label>اسم المستخدم:</label>
+                <input type="text" id="loginUsername" class="form-control" placeholder="ادخل اسم المستخدم">
+            </div>
+            <div class="form-group">
+                <label>كلمة المرور:</label>
+                <input type="password" id="loginPassword" class="form-control" placeholder="ادخل كلمة المرور">
+            </div>
+            <button id="submitLoginBtn" type="button" class="btn-primary">دخول 🚪</button>
+        </section>
+
         <section id="adminPanelSection" style="display: none;">
             <h3>📐 نشر وثيقة مشروع معماري جديد</h3>
-            <form id="adminPublishForm">
+            <form id="adminPublishForm" onsubmit="return false;">
                 <div class="form-group">
                     <label>📋 اسم المشروع المعماري:</label>
                     <input type="text" id="postTitle" class="form-control" placeholder="مثال: فيلا سكنية مودرن" required>
                 </div>
-                
                 <div class="form-row">
                     <div class="form-group">
                         <label>📍 الموقع الجغرافي:</label>
                         <input type="text" id="postLocation" class="form-control" placeholder="الموقع">
                     </div>
                     <div class="form-group">
-                        <label>📐 مساحة الأرض / المسطح:</label>
+                        <label>📐 المساحة:</label>
                         <input type="text" id="postArea" class="form-control" placeholder="مثال: 400 متر مربع">
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <label>🧱 مكونات وعناصر المشروع:</label>
+                    <label>🧱 مكونات المشروع:</label>
                     <input type="text" id="postComponents" class="form-control" placeholder="طوابق، غرف...">
                 </div>
-                
                 <div class="form-group">
-                    <label>💡 الفكرة التصميمية (Concept):</label>
-                    <textarea id="postConcept" class="form-control" placeholder="شرح لكتل المشروع والتوجه المعماري..."></textarea>
+                    <label>💡 الفكرة التصميمية:</label>
+                    <textarea id="postConcept" class="form-control"></textarea>
                 </div>
-                
                 <div class="form-group">
-                    <label>⚠️ التحديات المعمارية والإنشائية:</label>
-                    <textarea id="postChallenges" class="form-control" placeholder="التحديات وكيف تم حلها..."></textarea>
+                    <label>⚠️ التحديات والحلول:</label>
+                    <textarea id="postChallenges" class="form-control"></textarea>
                 </div>
-                
                 <div class="form-group">
-                    <label>🏆 النتيجة المرفقة والحل:</label>
-                    <textarea id="postResult" class="form-control" placeholder="وصف المخرج النهائي للمشروع..."></textarea>
+                    <label>🏆 النتيجة النهائية:</label>
+                    <textarea id="postResult" class="form-control"></textarea>
                 </div>
-                
                 <div class="form-group">
-                    <label>📸 إرفاق الصور والمخططات المباشرة:</label>
-                    <input type="file" id="postFiles" class="form-control" multiple accept="image/*" style="padding: 8px;">
+                    <label>📸 الصور والمخططات:</label>
+                    <input type="file" id="postFiles" class="form-control" multiple accept="image/*">
                 </div>
-                
                 <div class="form-buttons">
-                    <button type="submit" class="btn-primary">نشر المشروع الآن 🚀</button>
-                    <button type="button" class="btn-logout">خروج 🚪</button>
+                    <button type="button" id="btnSubmitProject" class="btn-primary">نشر المشروع 🚀</button>
+                    <button type="button" class="btn-logout" id="logoutBtn">خروج 🚪</button>
                 </div>
             </form>
         </section>
 
-        <!-- قسم التغذية البصرية وعرض المشاريع -->
-        <main id="posts-feed-container">
-            <!-- الكروت ستظهر هنا عبر السكريبت -->
-        </main>
+        <!-- CONTACT -->
+        <section id="contact" class="contact">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <span>تواصل معنا</span>
+                    <h2>لنبني شيئاً <br>عظيماً معاً</h2>
+                    <p>نود ان نسمع عن مشروعك القادم</p>
+                    <p>📞 +249 XX XXX XXXX<br>✉️ info@ahmedhamidarch.com<br>📍 الخرطوم, السودان</p>
+                </div>
+                <form class="contact-form">
+                    <input type="text" placeholder="الاسم">
+                    <input type="email" placeholder="الايميل">
+                    <input type="text" placeholder="الموضوع" style="grid-column: span 2;">
+                    <textarea rows="4" placeholder="رسالتك" style="grid-column: span 2;"></textarea>
+                    <button>ارسال الرسالة →</button>
+                </form>
+            </div>
+        </section>
     </div>
 
-    <!-- الفوتر الأزرق في أسفل الموقع -->
+    <!-- FOOTER -->
     <footer class="main-footer">
         <div class="footer-content">
             <img src="assets/logo.png" alt="Ahmed Hamid Architecture" class="footer-logo-img">
@@ -101,4 +180,4 @@
 
     <script src="script.js"></script>
 </body>
-</html>
+    </html>
