@@ -3,120 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmed Hamid Architecture | MODERN DESIGN | INNOVATIVE SPACE</title>
+    <title>Ahmed Hamid Architecture</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
     <nav class="main-navbar">
         <div class="nav-container">
-            <div class="logo-wrapper">
+            <a href="index.html" class="logo-wrapper">
                 <img src="assets/logo.png" alt="AHA" class="company-logo-img">
-                <span>AHMED HAMID<br><small>ARCHITECTURE</small></span>
-            </div>
+            </a>
             <div class="nav-links">
-                <a href="#home">الرئيسية</a>
-                <a href="#projects">المشاريع</a>
-                <a href="#services">الخدمات</a>
-                <a href="#team">فريقنا</a>
-                <a href="#jobs">الوظائف</a>
-                <a href="#contact">تواصل</a>
-                <button id="adminLoginBtn" class="btn-nav-admin">لوحة التحكم ⚙️</button>
+                <a href="index.html" class="active">الرئيسية</a>
+                <a href="projects.html">المشاريع</a>
+                <a href="services.html">الخدمات</a>
+                <a href="team.html">فريقنا</a>
+                <a href="jobs.html">الوظائف</a>
+                <a href="contact.html">تواصل</a>
             </div>
         </div>
     </nav>
 
-    <header id="home" class="hero-header">
+    <header class="hero-header">
         <div class="hero-bg-pattern"></div>
         <div class="header-content">
             <h5>WE DESIGN</h5>
             <h1>MODERN <span>SPACES</span></h1>
             <p>ARCHITECTURE • INTERIOR • PLANNING • 3D VISUALIZATION</p>
             <div class="hero-buttons">
-                <a href="#projects" class="btn-primary">عرض المشاريع →</a>
-                <a href="#contact" class="btn-outline">اطلب مشروع</a>
+                <a href="projects.html" class="btn-primary">عرض المشاريع →</a>
+                <a href="contact.html" class="btn-outline">اطلب مشروع</a>
             </div>
         </div>
     </header>
 
     <main class="container">
-        
-        <section id="projects" class="section">
-            <div class="section-title"><span>OUR WORK</span><h2>المشاريع المميزة</h2></div>
-            <div id="posts-feed-container" class="projects-grid"><!-- المشاريع هنا --></div>
-        </section>
-
-        <section id="services" class="services-section">
-            <div class="section-title light"><span>OUR SERVICES</span><h2>ماذا نقدم</h2></div>
-            <div class="services-grid">
-                <div class="service-card"><h4>التصميم المعماري</h4><p>حلول ابداعية ووظيفية تعكس هويتك</p></div>
-                <div class="service-card"><h4>التصميم الداخلي</h4><p>مساحات داخلية عصرية تناسب نمط حياتك</p></div>
-                <div class="service-card"><h4>التصور ثلاثي الابعاد</h4><p>رندرات فوتوريالية قبل التنفيذ</p></div>
-                <div class="service-card"><h4>المخططات التنفيذية</h4><p>دقة وتفاصيل لتنفيذ خالي من الاخطاء</p></div>
-            </div>
-        </section>
-
-        <section id="team" class="section">
-            <div class="section-title"><span>OUR TEAM</span><h2>فريقنا</h2></div>
-            <div id="team-list" class="team-grid"><!-- الموظفين هنا --></div>
-        </section>
-
-        <section id="jobs" class="section jobs-section">
-            <div class="section-title"><span>CAREERS</span><h2>فرص العمل</h2></div>
-            <div id="jobs-list"><!-- الوظائف هنا --></div>
-        </section>
-
-        <section id="contact" class="contact-section">
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h2>LET'S BUILD<br>SOMETHING GREAT</h2>
-                    <p>نود ان نسمع عن مشروعك القادم</p>
-                    <div class="contact-details">
-                        <p>📧 : ahmedhamidarchitecture@gmail.com</p>
-                        <p>📱 : +249 92 437 2845</p>
-                        <div class="social-icons">
-                            <a href="https://www.facebook.com/ahmedhamidarchitecture" target="_blank">FB</a>
-                            <a href="https://www.instagram.com/ahmed_hamid_architecture" target="_blank">IG</a>
-                            <a href="https://vm.tiktok.com/ZS9MCb1KJoBdN-iZvTF/" target="_blank">TT</a>
-                            <a href="https://www.linkedin.com/in/ahmed-hamid-architecture-9b9372260" target="_blank">LI</a>
-                        </div>
-                    </div>
+        <section class="section about-section">
+            <div class="about-grid">
+                <div>
+                    <h2>من نحن</h2>
+                    <p>Ahmed Hamid Architecture مكتب متخصص في التصميم المعماري والتصور ثلاثي الأبعاد. نؤمن بأن كل مساحة تحكي قصة، ومهمتنا هي تحويل رؤيتك إلى واقع ملموس يجمع بين الابتكار والوظيفة والجودة الإنشائية.</p>
+                    <a href="services.html" class="btn-text">تعرف على خدماتنا →</a>
                 </div>
-                <form id="clientRequestForm" class="contact-form">
-                    <h3>اطلب عرض سعر لمشروعك</h3>
-                    <input type="text" id="clientName" placeholder="الاسم الكامل" required>
-                    <input type="tel" id="clientPhone" placeholder="رقم الواتساب" required>
-                    <input type="email" id="clientEmail" placeholder="الايميل">
-                    <input type="text" id="projectLocation" placeholder="موقع المشروع">
-                    <input type="text" id="projectArea" placeholder="المساحة التقريبية">
-                    <textarea id="clientDetails" rows="4" placeholder="التفاصيل: عدد الغرف, الشوارع, طلبات خاصة..." required></textarea>
-                    <button type="submit" class="btn-primary">ارسال الطلب →</button>
-                </form>
+                <img src="assets/about.jpg" alt="About">
             </div>
         </section>
 
-        <!-- لوحة الادمن -->
-        <section id="adminPanelSection" class="admin-panel" style="display:none;">
-            <h2>لوحة التحكم</h2>
-            <button id="logoutBtn" class="btn-logout">تسجيل خروج</button>
-            <!-- هنا فورم رفع مشروع + وظيفة + موظف -->
-        </section>
-
-        <section id="loginFormSection" class="login-form" style="display:none;">
-            <input type="text" id="loginUsername" placeholder="اسم المستخدم">
-            <input type="password" id="loginPassword" placeholder="كلمة السر">
-            <button id="submitLoginBtn" class="btn-primary">دخول</button>
+        <section class="section">
+            <div class="section-title"><span>LATEST PROJECTS</span><h2>احدث المشاريع</h2></div>
+            <div id="latest-projects" class="projects-grid"><!-- 3 مشاريع بس --></div>
+            <a href="projects.html" class="btn-center">عرض كل المشاريع</a>
         </section>
     </main>
 
     <footer class="main-footer">
         <img src="assets/logo.png" class="footer-logo-img">
+        <div class="social-icons">
+            <a href="https://www.facebook.com/ahmedhamidarchitecture" target="_blank">FB</a>
+            <a href="https://www.instagram.com/ahmed_hamid_architecture" target="_blank">IG</a>
+            <a href="https://vm.tiktok.com/ZS9MCb1KJoBdN-iZvTF/" target="_blank">TT</a>
+            <a href="https://www.linkedin.com/in/ahmed-hamid-architecture-9b9372260" target="_blank">LI</a>
+        </div>
         <p>© 2026 Ahmed Hamid Architecture. All Rights Reserved.</p>
-        <span>MODERN DESIGN | INNOVATIVE SPACE</span>
     </footer>
-
     <script src="script.js"></script>
 </body>
-            </html>
+                                                                                             </html>
