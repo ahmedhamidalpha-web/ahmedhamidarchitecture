@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------
-   🎨 Ahmed Hamid Architecture - Official Stylesheet (V2.1)
+   🎨 Ahmed Hamid Architecture - Official Stylesheet (V2.2)
    ------------------------------------------------------------- */
 
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap');
@@ -26,10 +26,15 @@ body {
     background-color: var(--bg-light);
     color: var(--text-dark);
     line-height: 1.6;
-    direction: rtl;
+    direction: ltr; /* لضمان قراءة اسم الشركة الإنجليزي واللوقو من اليسار لليمين بشكل صحيح في الهيدر */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+}
+
+/* محاذاة كتل المحتوى الداخلي لتكون باللغة العربية */
+.hero-header, .container, .main-footer {
+    direction: rtl;
 }
 
 /* شريط الخانات العلوي (Navbar) */
@@ -56,13 +61,11 @@ body {
     gap: 12px;
 }
 
-/* تحجيم ومنع اللوقو من الفرش في الشاشة */
 .company-logo-img {
     height: 42px; 
     width: auto;
     object-fit: contain;
     display: block;
-    transition: var(--transition);
 }
 
 .company-name-text {
@@ -73,31 +76,13 @@ body {
     white-space: nowrap;
 }
 
-.nav-links {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.nav-links a {
-    color: #94a3b8;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.nav-links a.active {
-    color: #ffffff;
-    font-weight: 600;
-}
-
 .btn-nav-admin {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #ffffff;
-    padding: 6px 14px;
+    padding: 8px 16px;
     font-size: 0.85rem;
+    font-weight: 600;
     border-radius: 6px;
     cursor: pointer;
     transition: var(--transition);
@@ -280,8 +265,11 @@ textarea.form-control {
 .footer-sub { font-size: 0.75rem; color: #64748b; display: block; }
 
 /* Responsive adjustments */
-@media (max-width: 480px) {
-    .company-name-text { font-size: 0.95rem; }
+@media (max-width: 580px) {
+    .company-name-text { font-size: 0.9rem; }
+    .btn-nav-admin { padding: 6px 10px; font-size: 0.75rem; }
+    .logo-wrapper { gap: 6px; }
+    .company-logo-img { height: 32px; }
 }
 
 @media (min-width: 650px) {
