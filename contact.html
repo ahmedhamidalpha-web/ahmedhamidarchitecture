@@ -1,123 +1,31 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تواصل معنا | Ahmed Hamid Architecture</title>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تواصل معنا</title>
     <link rel="stylesheet" href="./style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
+    <header class="header-pro"><div class="container"><a href="index.html" class="logo-pro"><img src="assets/logo.png"><div class="logo-text"><span>Ahmed Hamid</span><span>Architecture</span></div></a><nav class="nav-pro"><a href="index.html">الرئيسية</a><a href="contact.html" class="active">تواصل</a></nav></div></header>
 
-    <nav class="main-navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo-wrapper">
-                <img src="assets/logo.png" alt="Ahmed Hamid Architecture" class="company-logo-img">
-                <span>Ahmed Hamid Architecture</span>
-            </a>
-            <div class="nav-links">
-                <a href="index.html">الرئيسية</a>
-                <a href="projects.html">المشاريع</a>
-                <a href="services.html">الخدمات</a>
-                <a href="team.html">فريقنا</a>
-                <a href="jobs.html">الوظائف</a>
-                <a href="contact.html" class="active">تواصل</a>
-            </div>
+    <section class="page-head"><div class="container"><h1>تواصل معنا</h1></div></section>
+
+    <section class="section"><div class="container contact-grid">
+        <div class="card"><h3>معلوماتنا</h3><p>📧 ahmedhamidarchitecture@gmail.com</p><p>📍 امدرمان, السودان</p></div>
+        <div class="card">
+            <h3>اطلب مشروع</h3>
+            <form id="clientRequestForm">
+                <input id="clientName" type="text" placeholder="الاسم *" required>
+                <input id="clientEmail" type="email" placeholder="الايميل *" required>
+                <input id="clientPhone" type="tel" placeholder="الهاتف *" required>
+                <textarea id="clientDetails" placeholder="تفاصيل المشروع *" rows="5" required></textarea>
+                <button type="submit" class="btn-primary" id="submitBtn">ارسال</button>
+                <p id="formStatus"></p>
+            </form>
         </div>
-    </nav>
-
-    <header class="page-header">
-        <div class="container">
-            <h1>تواصل معنا</h1>
-            <p>جاهزين لتحويل فكرتك إلى واقع. ابدأ مشروعك معنا اليوم</p>
-        </div>
-    </header>
-
-    <main class="container">
-        <div class="contact-grid">
-            <div class="contact-info">
-                <h3>معلومات التواصل</h3>
-                <p>📧 البريد الالكتروني: ahmedhamidarchitecture@gmail.com</p>
-                <p>📍 الموقع: السودان - امدرمان</p>
-                <h4>تابعنا</h4>
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/ahmedhamidarchitecture" target="_blank">FB</a>
-                    <a href="https://www.instagram.com/ahmed_hamid_architecture?igsh=MXd1ZDlyaHlpdzB5NA==" target="_blank">IG</a>
-                    <a href="https://vm.tiktok.com/ZS9MCb1KJoBdN-iZvTF/" target="_blank">TT</a>
-                    <a href="https://www.linkedin.com/in/ahmed-hamid-architecture-9b9372260" target="_blank">LI</a>
-                </div>
-            </div>
-
-            <div class="contact-form-wrapper">
-                <h3>اطلب مشروعك الآن</h3>
-                <form id="clientRequestForm">
-                    <input type="text" id="clientName" placeholder="الاسم الكامل *" required>
-                    <input type="email" id="clientEmail" placeholder="البريد الالكتروني *" required>
-                    <input type="tel" id="clientPhone" placeholder="رقم الهاتف *" required>
-                    <select id="clientService" required>
-                        <option value="">اختر الخدمة</option>
-                        <option value="تصميم معماري">تصميم معماري</option>
-                        <option value="تصميم داخلي">تصميم داخلي</option>
-                        <option value="تصور 3D">تصور ثلاثي الابعاد</option>
-                        <option value="اخرى">اخرى</option>
-                    </select>
-                    <textarea id="clientDetails" placeholder="اشرح لنا تفاصيل مشروعك *" rows="5" required></textarea>
-                    <button type="submit" class="btn-primary" id="submitBtn">ارسال الطلب</button>
-                    <p id="formStatus"></p>
-                </form>
-            </div>
-        </div>
-    </main>
-
-    <footer class="main-footer">
-        <div class="footer-bottom">
-            <p>© 2026 Ahmed Hamid Architecture. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        const SUPABASE_URL = "https://fzlpqsvcicuvldaxgvcz.supabase.co";
-        const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6bHBxc3ZjaWN1dmxkYXhndmN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3OTM1NjksImV4cCI6MjA5OTM2OTU2OX0.4YTOUuAv9RP5yGz_OF0Sh6ocZLMJa86HrVgAor97Lq8";
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFd_q0GcRNc4qEI1NBlHAJxE_cLlmNzdTRXKJkO1wiPt6TUj05aSUWL76uM1YeD3hJ/exec";
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-        document.getElementById('clientRequestForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            const status = document.getElementById('formStatus');
-            btn.innerText = "جاري الارسال...";
-            btn.disabled = true;
-
-            const formData = {
-                name: clientName.value,
-                email: clientEmail.value,
-                phone: clientPhone.value,
-                service: clientService.value,
-                details: clientDetails.value,
-                to: "ahmedhamidarchitecture@gmail.com" // ايميلك
-            };
-
-            // 1. نحفظ في Supabase
-            await supabase.from('client_requests').insert([formData]);
-
-            // 2. نرسل ايميل عن طريق Apps Script حقك
-            try {
-                await fetch(APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    body: JSON.stringify(formData)
-                });
-                status.innerText = "تم ارسال طلبك بنجاح! سنتواصل معك خلال 24 ساعة";
-                status.style.color = "green";
-                e.target.reset();
-            } catch (error) {
-                status.innerText = "تم حفظ طلبك. سنتواصل معك قريبا";
-                status.style.color = "orange";
-            }
-
-            btn.innerText = "ارسال الطلب";
-            btn.disabled = false;
-        });
-    </script>
+    </div></section>
+    <script src="./script.js"></script>
 </body>
 </html>
