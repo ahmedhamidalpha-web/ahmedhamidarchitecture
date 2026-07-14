@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body>
+<body class="admin-body">
     <nav class="main-navbar">
         <div class="nav-container">
             <span>مرحبا Ahmed</span>
@@ -24,7 +24,9 @@
                 <input type="text" id="pLocation" placeholder="الموقع">
                 <input type="text" id="pArea" placeholder="المساحة">
                 <textarea id="pConcept" placeholder="فكرة المشروع" rows="3"></textarea>
-                <textarea id="pImages" placeholder="روابط الصور مفصولة بفاصلة,"></textarea>
+                <label>رفع صور المشروع:</label>
+                <input type="file" id="pImages" multiple accept="image/*" required> <!-- دا الجديد -->
+                <div id="uploadStatus"></div>
                 <button type="submit" class="btn-primary">نشر المشروع</button>
             </form>
         </section>
@@ -41,4 +43,4 @@
     </main>
     <script src="script.js"></script>
 </body>
-                  </html>
+                    </html>
