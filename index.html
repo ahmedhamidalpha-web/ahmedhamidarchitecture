@@ -6,6 +6,7 @@
     <title>Ahmed Hamid Architecture</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -21,8 +22,7 @@
                 <a href="team.html">فريقنا</a>
                 <a href="jobs.html">الوظائف</a>
                 <a href="contact.html">تواصل</a>
-                a href="admin.html" class="btn-nav-admin">⚙️</a>  <!-- دا الجديد -->
-            </div>
+                <a href="admin.html" class="btn-nav-admin">⚙️</a>  <!-- دا زر لوحة التحكم -->
             </div>
         </div>
     </nav>
@@ -33,8 +33,10 @@
             <h5>WE DESIGN</h5>
             <h1>MODERN <span>SPACES</span></h1>
             <p>ARCHITECTURE • INTERIOR • PLANNING • 3D VISUALIZATION</p>
+            <div class="hero-buttons">
+                <a href="projects.html" class="btn-primary">عرض المشاريع →</a>
+                <a href="contact.html" class="btn-outline">اطلب مشروع</a>
             </div>
-
         </div>
     </header>
 
@@ -53,7 +55,7 @@
         <section class="section">
             <div class="section-title"><span>LATEST PROJECTS</span><h2>احدث المشاريع</h2></div>
             <div id="latest-projects" class="projects-grid"><!-- 3 مشاريع بس --></div>
-            <a href="projects.html" class="btn-center">عرض كل المشاريع</a>
+            <div style="text-align:center; margin-top:30px;"><a href="projects.html" class="btn-primary">عرض كل المشاريع</a></div>
         </section>
     </main>
 
@@ -69,4 +71,4 @@
     </footer>
     <script src="script.js"></script>
 </body>
-                                                                                             </html>
+</html>
