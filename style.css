@@ -80,3 +80,17 @@ body {
 .login-form input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border); border-radius: 8px; }
 .admin-card { background: #fff; padding: 30px; border-radius: 16px; margin-bottom: 30px; border: 1px solid var(--border); }
 .admin-card input,.admin-card textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border); border-radius: 8px; }
+.btn-nav-admin {
+    background: #1E2A5E;
+    color: #fff !important;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+}
+.btn-nav-admin:hover { background: #2E3A6E; transform: scale(1.05); }
+
+.hero-buttons { display: flex; gap: 15px; justify-content: center; margin-top: 30px; }
+.btn-text { color: #1E2A5E; font-weight: 700; text-decoration: none; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.about-grid img { width: 100%; border-radius: 16px; }
