@@ -3,45 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmed Hamid Architecture</title>
+    <title>Ahmed Hamid Architecture | مكتب أحمد حامد للهندسة</title>
+    <meta name="description" content="تصميم معماري و تصور ثلاثي الابعاد و تصميم داخلي - السودان">
     <link rel="stylesheet" href="./style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
     <header class="header-pro">
-        <div class="container header-container">
+        <div class="container">
             <a href="index.html" class="logo-pro">
-                <img src="assets/logo.png" alt="AHA">
-                <div>
+                <img src="assets/logo.png" alt="AHA Logo">
+                <div class="logo-text">
                     <span>Ahmed Hamid</span>
                     <span>Architecture</span>
                 </div>
             </a>
             <nav class="nav-pro">
+                <a href="index.html">الرئيسية</a>
                 <a href="projects.html">المشاريع</a>
                 <a href="services.html">الخدمات</a>
-                <a href="about.html">عن المكتب</a>
-                <a href="contact.html" class="btn-contact">تواصل</a>
+                <a href="jobs.html">الوظائف</a>
+                <a href="contact.html" class="btn-nav">تواصل</a>
+                <a href="admin.html" class="btn-admin">⚙️</a>
             </nav>
         </div>
     </header>
 
     <section class="hero-pro">
-        <img src="assets/hero-bg.jpg" class="hero-bg-img">
-        <div class="hero-overlay"></div>
+        <img src="assets/hero.jpg" class="hero-bg">
+        <div class="overlay"></div>
         <div class="container hero-content">
             <h5>WE DESIGN THE FUTURE</h5>
-            <h1>Architecture & <br> <span>3D Visualization</span></h1>
-            <p>نحول الرؤية إلى واقع. نصمم مساحات ملهمة تجمع بين الابتكار والاستدامة والجمال الخالد.</p>
-            <div class="hero-cta">
-                <a href="projects.html" class="btn-pro-primary">استكشف أعمالنا</a>
-                <a href="contact.html" class="btn-pro-secondary">ابدأ مشروعك</a>
+            <h1>Architecture & <br><span>3D Visualization</span></h1>
+            <p>نحول الرؤية إلى واقع. نصمم مساحات ملهمة تجمع بين الابتكار والاستدامة</p>
+            <div class="hero-btns">
+                <a href="projects.html" class="btn-primary">استكشف أعمالنا</a>
+                <a href="contact.html" class="btn-outline">ابدأ مشروعك</a>
             </div>
         </div>
-        <div class="scroll-indicator">↓</div>
     </section>
 
+    <section class="section">
+        <div class="container">
+            <div class="section-head"><h2>أحدث المشاريع</h2></div>
+            <div id="latest-projects" class="grid-3"></div>
+        </div>
+    </section>
+
+    <footer class="footer-pro">
+        <div class="container footer-grid">
+            <div>
+                <img src="assets/logo.png" class="footer-logo">
+                <p>Ahmed Hamid Architecture <br> نصمم للمستقبل</p>
+            </div>
+            <div>
+                <h4>روابط</h4>
+                <a href="projects.html">المشاريع</a>
+                <a href="contact.html">تواصل</a>
+            </div>
+            <div>
+                <h4>تابعنا</h4>
+                <div class="social">
+                    <a href="https://www.facebook.com/ahmedhamidarchitecture" target="_blank">FB</a>
+                    <a href="https://www.instagram.com/ahmed_hamid_architecture?igsh=MXd1ZDlyaHlpdzB5NA==" target="_blank">IG</a>
+                    <a href="https://vm.tiktok.com/ZS9MCb1KJoBdN-iZvTF/" target="_blank">TT</a>
+                    <a href="https://www.linkedin.com/in/ahmed-hamid-architecture-9b9372260" target="_blank">LI</a>
+                    <a href="https://drive.google.com/drive/folders/10ENiX9zYi3LGUwE_716WAP_rqGLReDUr" target="_blank">DR</a>
+                </div>
+                <p style="margin-top:15px">ahmedhamidarchitecture@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2026 Ahmed Hamid Architecture. All Rights Reserved.</div>
+    </footer>
     <script src="./script.js"></script>
 </body>
 </html>
