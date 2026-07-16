@@ -7,13 +7,18 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Blog | Ahmed Hamid Architecture</title>
+
+<title>
+Blog | Ahmed Hamid Architecture
+</title>
+
 
 <meta name="description"
 content="Architecture articles, news, announcements and updates from Ahmed Hamid Architecture.">
 
 
 <link rel="icon" href="assets/logo.png">
+
 
 <link rel="stylesheet" href="style.css">
 
@@ -22,6 +27,7 @@ content="Architecture articles, news, announcements and updates from Ahmed Hamid
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
 rel="stylesheet">
 
@@ -29,7 +35,9 @@ rel="stylesheet">
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
+
 </head>
+
 
 
 <body>
@@ -40,23 +48,35 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 <header class="header">
 
-<div class="container">
+
+<div class="container nav-container">
 
 
-<div class="logo">
+<a href="index.html" class="logo">
+
 
 <img src="assets/logo.png"
 alt="Ahmed Hamid Architecture">
 
 
 <span>
-
 Ahmed Hamid Architecture
-
 </span>
 
 
-</div>
+</a>
+
+
+
+
+
+<button class="menu-toggle">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+
 
 
 
@@ -84,11 +104,6 @@ Projects
 </a>
 
 
-<a href="gallery.html">
-Gallery
-</a>
-
-
 <a href="blog.html" class="active">
 Blog
 </a>
@@ -99,19 +114,12 @@ Contact
 </a>
 
 
+
 </nav>
 
 
-
-
-<div class="menu-toggle">
-
-<i class="fa-solid fa-bars"></i>
-
 </div>
 
-
-</div>
 
 </header>
 
@@ -121,7 +129,7 @@ Contact
 
 
 
-<!-- PAGE HERO -->
+<!-- HERO -->
 
 
 <section class="page-hero">
@@ -130,34 +138,14 @@ Contact
 <div class="container">
 
 
-<div class="page-hero-content">
-
-
-<span>
-
-ARCHITECTURE INSIGHTS
-
-</span>
-
-
 <h1>
-
-Ideas, News &
-Studio Updates
-
+Architecture Blog
 </h1>
 
 
 <p>
-
-Explore architectural articles,
-design thoughts, company announcements
-and opportunities from Ahmed Hamid Architecture.
-
+Articles, news, announcements and opportunities.
 </p>
-
-
-</div>
 
 
 </div>
@@ -171,7 +159,9 @@ and opportunities from Ahmed Hamid Architecture.
 
 
 
-<!-- BLOG -->
+
+
+<!-- BLOG POSTS -->
 
 
 <section class="blog">
@@ -185,22 +175,23 @@ and opportunities from Ahmed Hamid Architecture.
 
 <span class="section-subtitle">
 
-LATEST POSTS
+INSIGHTS
 
 </span>
 
 
+
 <h2>
 
-From Our Studio
+Latest Posts
 
 </h2>
 
 
+
 <p>
 
-Articles, announcements and updates
-about architecture and design.
+Explore architectural ideas, studio updates and professional content.
 
 </p>
 
@@ -212,32 +203,11 @@ about architecture and design.
 
 
 
-<!-- POSTS FROM SUPABASE -->
-
-
-<div class="blog-grid"
-id="blog-container">
-
-
-
-<!--
-
-Posts will be loaded automatically
-from Supabase
-
-Examples:
-
-- Architecture Article
-- Office Announcement
-- Job Opportunity
-- Training Opportunity
-
--->
-
+<div id="blog-container"
+class="blog-grid">
 
 
 </div>
-
 
 
 
@@ -253,62 +223,54 @@ Examples:
 
 
 
-<!-- POST CATEGORIES -->
 
 
-<section class="why-us">
+<!-- SINGLE POST DETAILS -->
+
+
+<section class="single-post">
 
 
 <div class="container">
 
 
-<div class="section-header">
+<div class="post-wrapper">
 
 
-<span class="section-subtitle">
 
-CATEGORIES
+<div id="post-image"
+class="post-image">
+
+
+</div>
+
+
+
+
+
+<div class="post-info">
+
+
+
+<span id="post-type"
+class="post-type">
 
 </span>
 
 
-<h2>
-
-Explore Our Content
-
-</h2>
 
 
-</div>
+
+<h1 id="post-title">
+
+</h1>
 
 
 
 
 
-<div class="why-grid">
 
-
-
-<div class="why-card">
-
-
-<i class="fa-solid fa-pen-nib"></i>
-
-
-<h3>
-
-Architecture Articles
-
-</h3>
-
-
-<p>
-
-Professional articles about design,
-planning and architectural ideas.
-
-</p>
-
+<div id="post-content">
 
 </div>
 
@@ -316,164 +278,42 @@ planning and architectural ideas.
 
 
 
-<div class="why-card">
 
-
-<i class="fa-solid fa-building"></i>
-
-
-<h3>
-
-Studio News
-
-</h3>
-
-
-<p>
-
-Follow our latest projects,
-activities and achievements.
-
-</p>
-
-
-</div>
-
-
-
-
-
-<div class="why-card">
-
-
-<i class="fa-solid fa-bullhorn"></i>
-
-
-<h3>
-
-Announcements
-
-</h3>
-
-
-<p>
-
-Official announcements,
-services updates and offers.
-
-</p>
-
-
-</div>
-
-
-
-
-
-<div class="why-card">
-
-
-<i class="fa-solid fa-user-plus"></i>
-
-
-<h3>
-
-Careers
-
-</h3>
-
-
-<p>
-
-Training opportunities,
-internships and job announcements.
-
-</p>
-
-
-</div>
-
-
-
-</div>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- CTA -->
-
-
-<section class="cta">
-
-
-<div class="container">
-
-
-<div class="cta-box">
+<div class="post-meta">
 
 
 <span>
 
-FOLLOW OUR JOURNEY
+<i class="fa-regular fa-calendar"></i>
+
+
+<span id="post-date">
 
 </span>
 
 
-<h2>
-
-Stay Connected With Ahmed Hamid Architecture
-
-</h2>
-
-
-<p>
-
-Discover new ideas, projects and architectural
-updates from our studio.
-
-</p>
-
-
-
-<div class="cta-buttons">
-
-
-<a href="contact.html"
-class="btn btn-primary">
-
-Contact Us
-
-</a>
-
-
-
-<a href="projects.html"
-class="btn btn-outline">
-
-View Projects
-
-</a>
+</span>
 
 
 </div>
 
 
+
+
 </div>
+
+
+
+
+</div>
+
 
 
 </div>
 
 
 </section>
+
 
 
 
@@ -500,16 +340,12 @@ alt="Ahmed Hamid Architecture">
 
 
 <h3>
-
 Ahmed Hamid Architecture
-
 </h3>
 
 
 <p>
-
-Modern Architecture • Interior Design • Planning • Visualization
-
+Modern Architecture • Interior Design • Planning
 </p>
 
 
@@ -518,13 +354,13 @@ Modern Architecture • Interior Design • Planning • Visualization
 
 
 
+
+
 <div>
 
 
 <h4>
-
-Company
-
+Pages
 </h4>
 
 
@@ -532,15 +368,8 @@ Company
 
 
 <li>
-<a href="about.html">
-About
-</a>
-</li>
-
-
-<li>
-<a href="services.html">
-Services
+<a href="index.html">
+Home
 </a>
 </li>
 
@@ -548,35 +377,6 @@ Services
 <li>
 <a href="projects.html">
 Projects
-</a>
-</li>
-
-
-</ul>
-
-
-</div>
-
-
-
-
-
-<div>
-
-
-<h4>
-
-Resources
-
-</h4>
-
-
-<ul>
-
-
-<li>
-<a href="gallery.html">
-Gallery
 </a>
 </li>
 
@@ -596,6 +396,64 @@ Contact
 
 
 
+
+
+<div>
+
+
+<h4>
+Follow Us
+</h4>
+
+
+
+<div class="social-links">
+
+
+<a href="https://www.linkedin.com/in/ahmed-hamid-architecture-9b9372260/"
+target="_blank">
+
+<i class="fab fa-linkedin"></i>
+
+</a>
+
+
+
+<a href="https://www.instagram.com/ahmed_hamid_architecture"
+target="_blank">
+
+<i class="fab fa-instagram"></i>
+
+</a>
+
+
+
+<a href="https://www.facebook.com/ahmedhamidarchitecture"
+target="_blank">
+
+<i class="fab fa-facebook"></i>
+
+</a>
+
+
+
+<a href="https://vm.tiktok.com/ZS9MCb1KJoBdN-iZvTF/"
+target="_blank">
+
+<i class="fab fa-tiktok"></i>
+
+</a>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
 </div>
 
 
@@ -604,7 +462,10 @@ Contact
 
 <div class="footer-bottom">
 
-© 2026 Ahmed Hamid Architecture. All Rights Reserved.
+
+© 2026 Ahmed Hamid Architecture.
+All Rights Reserved.
+
 
 </div>
 
@@ -616,11 +477,17 @@ Contact
 
 
 
+
+
 <button id="backToTop">
 
 <i class="fa-solid fa-arrow-up"></i>
 
 </button>
+
+
+
+
 
 
 
