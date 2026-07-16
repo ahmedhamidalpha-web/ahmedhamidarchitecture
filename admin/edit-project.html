@@ -8,21 +8,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<title>Edit Projects | Ahmed Hamid Architecture</title>
+<title>
+Edit Project | Admin
+</title>
 
 
 <link rel="icon" href="../assets/logo.png">
 
+
 <link rel="stylesheet" href="../style.css">
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
 
 
 <link rel="stylesheet"
@@ -33,37 +27,31 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 
 
-<body class="admin-page">
-
-
+<body class="admin-body">
 
 
 
 <header class="admin-header">
 
-<div class="admin-container">
+<div class="container">
 
 
-<div class="admin-brand">
+<a href="dashboard.html"
+class="admin-logo">
 
 
 <img src="../assets/logo.png">
 
-
-<h2>
-
+<span>
 Ahmed Hamid Architecture
+</span>
 
-</h2>
 
-
-</div>
-
+</a>
 
 
 
-<a href="dashboard.html"
-class="admin-back">
+<a href="dashboard.html">
 
 <i class="fa-solid fa-arrow-left"></i>
 
@@ -84,150 +72,20 @@ Dashboard
 
 
 
-
-<main class="admin-dashboard">
-
-
-<div class="admin-container">
+<section class="admin-section">
 
 
+<div class="container">
 
 
-
-
-<div class="admin-form-box">
-
-
-
-<div class="form-title">
+<div class="admin-box">
 
 
 <h1>
 
-Manage Projects
-
-</h1>
-
-
-<p>
-
-Edit existing projects or remove them from the website.
-
-Images stored in Google Drive will not be deleted.
-
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- SEARCH -->
-
-
-<div class="form-group">
-
-
-<label>
-
-Search Project
-
-</label>
-
-
-<input
-
-type="search"
-
-id="project-search"
-
-placeholder="Search by project name...">
-
-
-</div>
-
-
-
-
-
-
-
-
-<!-- PROJECT LIST -->
-
-
-<div id="admin-projects-list"
-
-class="admin-projects-list">
-
-
-
-<!--
-
-Projects will load here from Supabase
-
-Example:
-
-
-<div class="admin-project-card">
-
-Image
-
-Title
-
-Edit button
-
-Delete button
-
-</div>
-
-
--->
-
-
-
-</div>
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<!-- EDIT AREA -->
-
-
-
-<div class="admin-form-box"
-
-id="edit-project-box"
-
-style="display:none;">
-
-
-
-<h2>
-
 Edit Project
 
-</h2>
-
-
+</h1>
 
 
 
@@ -238,9 +96,7 @@ Edit Project
 
 
 <input
-
 type="hidden"
-
 id="edit-project-id">
 
 
@@ -255,18 +111,13 @@ id="edit-project-id">
 
 
 <label>
-
 Project Title
-
 </label>
 
 
 <input
-
 type="text"
-
 id="edit-title"
-
 required>
 
 
@@ -284,9 +135,7 @@ required>
 
 
 <label>
-
 Category
-
 </label>
 
 
@@ -294,30 +143,22 @@ Category
 
 
 <option value="residential">
-
 Residential
-
 </option>
 
 
 <option value="commercial">
-
 Commercial
-
 </option>
 
 
 <option value="interior">
-
 Interior
-
 </option>
 
 
 <option value="planning">
-
 Planning
-
 </option>
 
 
@@ -338,16 +179,12 @@ Planning
 
 
 <label>
-
 Location
-
 </label>
 
 
 <input
-
 type="text"
-
 id="edit-location">
 
 
@@ -365,20 +202,17 @@ id="edit-location">
 
 
 <label>
-
-Date
-
+Plot Area
 </label>
 
 
 <input
-
-type="date"
-
-id="edit-date">
+type="text"
+id="edit-area">
 
 
 </div>
+
 
 
 
@@ -391,17 +225,14 @@ id="edit-date">
 
 
 <label>
-
-Description
-
+Components
 </label>
 
 
 <textarea
+id="edit-components">
 
-id="edit-description"
-
-rows="7"></textarea>
+</textarea>
 
 
 </div>
@@ -414,11 +245,120 @@ rows="7"></textarea>
 
 
 
+<div class="form-group">
+
+
+<label>
+Design Concept
+</label>
+
+
+<textarea
+id="edit-description"
+required>
+
+</textarea>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+Challenges
+</label>
+
+
+<textarea
+id="edit-challenges">
+
+</textarea>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+Result
+</label>
+
+
+<textarea
+id="edit-result">
+
+</textarea>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+Add New Images (Optional)
+</label>
+
+
+<input
+type="file"
+id="edit-images"
+multiple
+accept="image/*">
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div id="current-images"
+class="admin-images">
+
+</div>
+
+
+
+
+
+
+
+
+
 <button
-
-class="btn btn-primary"
-
-type="submit">
+type="submit"
+class="btn btn-primary">
 
 
 Save Changes
@@ -430,20 +370,8 @@ Save Changes
 
 
 
-<button
 
-type="button"
-
-id="cancel-edit"
-
-class="btn btn-outline">
-
-
-Cancel
-
-
-</button>
-
+<p id="edit-message"></p>
 
 
 
@@ -453,18 +381,15 @@ Cancel
 
 
 
-</div>
-
-
-
-
-
 
 
 </div>
 
 
-</main>
+</div>
+
+
+</section>
 
 
 
@@ -474,36 +399,10 @@ Cancel
 
 
 
-<script>
-
-
-// This page will be connected later
-// with Supabase database
-
-
-const editBox =
-document.getElementById("edit-project-box");
-
-
-document
-.getElementById("cancel-edit")
-.onclick=function(){
-
-
-editBox.style.display="none";
-
-
-};
-
-
-
-
-</script>
-
-
-
+<script src="../script.js"></script>
 
 
 </body>
+
 
 </html>
