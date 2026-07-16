@@ -30,8 +30,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 
 
-
-
 <div class="admin-login-box">
 
 
@@ -45,18 +43,13 @@ alt="Ahmed Hamid Architecture">
 
 
 <h1>
-
 Admin Login
-
 </h1>
 
 
 <p>
-
 Ahmed Hamid Architecture Dashboard
-
 </p>
-
 
 
 
@@ -68,15 +61,11 @@ Ahmed Hamid Architecture Dashboard
 
 
 
-
-
 <div class="form-group">
 
 
 <label>
-
 Email
-
 </label>
 
 
@@ -84,13 +73,11 @@ Email
 <input
 type="email"
 id="admin-email"
-placeholder="admin@email.com"
+placeholder="Enter admin email"
 required>
 
 
 </div>
-
-
 
 
 
@@ -102,21 +89,19 @@ required>
 
 
 <label>
-
 Password
-
 </label>
+
 
 
 <input
 type="password"
 id="admin-password"
-placeholder="Password"
+placeholder="Enter password"
 required>
 
 
 </div>
-
 
 
 
@@ -129,12 +114,12 @@ type="submit"
 class="btn btn-primary">
 
 
+<i class="fa-solid fa-right-to-bracket"></i>
+
 Login
 
 
 </button>
-
-
 
 
 
@@ -145,8 +130,8 @@ Login
 
 
 
-
 </form>
+
 
 
 
@@ -159,9 +144,98 @@ Login
 
 
 
+<script>
 
 
-<script src="../script.js"></script>
+document
+.getElementById("login-form")
+.addEventListener(
+"submit",
+function(e){
+
+
+e.preventDefault();
+
+
+
+
+let email =
+document.getElementById(
+"admin-email"
+).value;
+
+
+
+let password =
+document.getElementById(
+"admin-password"
+).value;
+
+
+
+
+
+
+if(
+email === "admin@email.com"
+&&
+password === "Password"
+){
+
+
+
+localStorage.setItem(
+"admin",
+"true"
+);
+
+
+
+document.getElementById(
+"login-message"
+).innerHTML =
+"Login Successful";
+
+
+
+
+setTimeout(
+function(){
+
+
+window.location.href =
+"dashboard.html";
+
+
+},
+700
+);
+
+
+
+
+}
+
+else{
+
+
+document.getElementById(
+"login-message"
+).innerHTML =
+"Wrong Email Or Password";
+
+
+
+}
+
+
+
+});
+
+
+
+</script>
+
 
 
 </body>
