@@ -1,46 +1,523 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المشاريع | Ahmed Hamid Architecture</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Projects | Ahmed Hamid Architecture</title>
+
+<meta name="description"
+content="Explore architectural projects by Ahmed Hamid Architecture including residential, commercial and interior design projects.">
+
+
+<link rel="icon" href="assets/logo.png">
+
+<link rel="stylesheet" href="style.css">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 </head>
+
+
 <body>
 
-    <nav class="main-navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo-wrapper">
-                <img src="assets/logo.png" alt="AHA" class="company-logo-img">
-            </a>
-            <div class="nav-links">
-                <a href="index.html">الرئيسية</a>
-                <a href="projects.html" class="active">المشاريع</a>
-                <a href="services.html">الخدمات</a>
-                <a href="team.html">فريقنا</a>
-                <a href="jobs.html">الوظائف</a>
-                <a href="contact.html">تواصل</a>
-            </div>
-        </div>
-    </nav>
 
-    <header class="page-header">
-        <h1>مشاريعنا</h1>
-        <p>مجموعة من اعمالنا التي نفخر بها</p>
-    </header>
 
-    <main class="container">
-        <div id="posts-feed-container" class="projects-grid-3cols">
-            جاري تحميل المشاريع...
-        </div>
-    </main>
+<!-- HEADER -->
 
-    <footer class="main-footer">
-        <img src="assets/logo.png" class="footer-logo-img">
-        <p>© 2026 Ahmed Hamid Architecture. All Rights Reserved.</p>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js"></script>
+<header class="header">
+
+<div class="container">
+
+
+<div class="logo">
+
+<img src="assets/logo.png">
+
+<span>
+
+Ahmed Hamid Architecture
+
+</span>
+
+</div>
+
+
+
+<nav class="nav-menu">
+
+
+<a href="index.html">
+Home
+</a>
+
+
+<a href="about.html">
+About
+</a>
+
+
+<a href="services.html">
+Services
+</a>
+
+
+<a href="projects.html" class="active">
+Projects
+</a>
+
+
+<a href="gallery.html">
+Gallery
+</a>
+
+
+<a href="blog.html">
+Blog
+</a>
+
+
+<a href="contact.html">
+Contact
+</a>
+
+
+</nav>
+
+
+
+<div class="menu-toggle">
+
+<i class="fa-solid fa-bars"></i>
+
+</div>
+
+
+</div>
+
+</header>
+
+
+
+
+
+
+
+<!-- PAGE HERO -->
+
+
+<section class="page-hero">
+
+
+<div class="container">
+
+
+<div class="page-hero-content">
+
+
+<span>
+
+OUR PORTFOLIO
+
+</span>
+
+
+<h1>
+
+Architectural Projects
+That Inspire
+
+</h1>
+
+
+<p>
+
+Discover our selected projects created with
+functional planning, modern aesthetics and
+architectural identity.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- PROJECTS -->
+
+
+<section class="projects">
+
+
+<div class="container">
+
+
+<div class="section-header">
+
+
+<span class="section-subtitle">
+
+FEATURED WORK
+
+</span>
+
+
+<h2>
+
+Selected Projects
+
+</h2>
+
+
+<p>
+
+A collection of architectural concepts,
+visualizations and design solutions.
+
+</p>
+
+
+</div>
+
+
+
+
+
+<!-- FILTER -->
+
+
+<div class="projects-filter">
+
+
+<button class="filter-btn active"
+data-filter="all">
+
+All
+
+</button>
+
+
+
+<button class="filter-btn"
+data-filter="residential">
+
+Residential
+
+</button>
+
+
+
+<button class="filter-btn"
+data-filter="commercial">
+
+Commercial
+
+</button>
+
+
+
+<button class="filter-btn"
+data-filter="interior">
+
+Interior
+
+</button>
+
+
+
+<button class="filter-btn"
+data-filter="planning">
+
+Planning
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+<!-- PROJECTS FROM SUPABASE -->
+
+
+<div id="projects-container"
+class="projects-grid">
+
+
+<!--
+
+Projects will be loaded automatically
+from Supabase database
+
+-->
+
+
+</div>
+
+
+
+
+
+<div class="projects-footer">
+
+
+<a href="contact.html"
+class="btn btn-primary">
+
+Request Your Project
+
+</a>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- CTA -->
+
+
+<section class="cta">
+
+
+<div class="container">
+
+
+<div class="cta-box">
+
+
+<span>
+
+YOUR IDEA, OUR DESIGN
+
+</span>
+
+
+<h2>
+
+Let's Create Your Next Project
+
+</h2>
+
+
+<p>
+
+Whether it is a residential building,
+commercial project or interior space,
+we can help transform your vision.
+
+</p>
+
+
+
+<div class="cta-buttons">
+
+
+<a href="contact.html"
+class="btn btn-primary">
+
+Start Project
+
+</a>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- FOOTER -->
+
+
+<footer class="footer">
+
+
+<div class="container footer-grid">
+
+
+<div>
+
+
+<img src="assets/logo.png"
+class="footer-logo">
+
+
+<h3>
+
+Ahmed Hamid Architecture
+
+</h3>
+
+
+<p>
+
+Modern Architecture • Interior Design • Planning • Visualization
+
+</p>
+
+
+</div>
+
+
+
+<div>
+
+
+<h4>
+
+Company
+
+</h4>
+
+
+<ul>
+
+
+<li>
+<a href="about.html">
+About
+</a>
+</li>
+
+
+<li>
+<a href="services.html">
+Services
+</a>
+</li>
+
+
+<li>
+<a href="gallery.html">
+Gallery
+</a>
+</li>
+
+
+</ul>
+
+
+</div>
+
+
+
+
+<div>
+
+
+<h4>
+
+Contact
+
+</h4>
+
+
+<ul>
+
+
+<li>
+<a href="contact.html">
+Contact Us
+</a>
+</li>
+
+
+<li>
+<a href="blog.html">
+Blog
+</a>
+</li>
+
+
+</ul>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+<div class="footer-bottom">
+
+© 2026 Ahmed Hamid Architecture. All Rights Reserved.
+
+</div>
+
+
+
+</footer>
+
+
+
+
+
+
+<button id="backToTop">
+
+<i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+
+
+<script src="script.js"></script>
+
+
 </body>
+
 </html>
