@@ -1,1264 +1,705 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmed Hamid Architecture — Modern Architecture Studio, Sudan</title>
+<meta name="description" content="Ahmed Hamid Architecture is an independent studio in Sudan designing modern residential, commercial and interior projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Public+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14140F;
+    --ink-2:#1B1B14;
+    --paper:#EBE7DA;
+    --paper-2:#F5F2E9;
+    --ivory:#F4F1E6;
+    --charcoal:#211F1A;
+    --gold:#B98F2C;
+    --gold-dim:#8C6C22;
+    --clay:#7C4A32;
+    --line-dark:rgba(244,241,230,0.16);
+    --line-light:rgba(33,31,26,0.14);
+    --max:1240px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--charcoal);
+    font-family:'Public Sans', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+  .mono{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase;}
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
 
-<title>Ahmed Hamid Architecture | Modern Architecture Studio</title>
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    padding:20px 0;
+    transition:background .4s ease, padding .4s ease, box-shadow .4s ease;
+  }
+  .nav.solid{
+    background:rgba(20,20,15,0.94);
+    backdrop-filter:blur(6px);
+    padding:14px 0;
+    box-shadow:0 1px 0 var(--line-dark);
+  }
+  .nav .wrap{display:flex; align-items:center; justify-content:space-between;}
+  .brand{display:flex; align-items:center; gap:12px; color:var(--ivory);}
+  .brand-mark{
+    width:38px; height:38px; border-radius:50%;
+    border:1px solid rgba(244,241,230,0.5);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces', serif; font-size:15px; color:var(--ivory);
+    flex-shrink:0;
+  }
+  .brand-name{font-family:'Fraunces', serif; font-size:16px; letter-spacing:0.01em;}
+  .brand-name span{display:block; font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.14em; color:var(--gold); text-transform:uppercase; margin-top:2px;}
+  .nav-links{display:flex; gap:34px; color:var(--ivory);}
+  .nav-links a{font-size:14px; letter-spacing:.02em; position:relative; padding:4px 0;}
+  .nav-links a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);transition:width .3s ease;}
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{border:1px solid rgba(244,241,230,0.4); padding:9px 18px; font-size:13px; border-radius:2px;}
+  .nav-cta:hover{background:var(--gold); border-color:var(--gold); color:var(--ink);}
+  .burger{display:none; background:none; border:0; color:var(--ivory); font-size:22px; cursor:pointer;}
 
-<meta
-name="description"
-content="Ahmed Hamid Architecture is an architectural design studio specializing in modern architecture, interior design, planning, visualization and project development.">
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; min-height:100vh; display:flex; align-items:flex-end;
+    background:var(--ink);
+    overflow:hidden;
+  }
+  .hero-img{
+    position:absolute; inset:0;
+    background-image:linear-gradient(180deg, rgba(20,20,15,0.35) 0%, rgba(20,20,15,0.55) 55%, rgba(20,20,15,0.92) 100%), url('https://ahmedhamidarchitecture.vercel.app/assets/hero-project.jpg');
+    background-size:cover; background-position:center;
+    filter:saturate(0.9) contrast(1.05);
+  }
+  .blueprint-layer{position:absolute; inset:0; pointer-events:none; opacity:.55;}
+  .blueprint-layer svg{width:100%; height:100%;}
+  .blueprint-layer path, .blueprint-layer line, .blueprint-layer circle{
+    fill:none; stroke:var(--ivory); stroke-width:1; opacity:.55;
+    stroke-dasharray:1400; stroke-dashoffset:1400;
+    animation:draw 2.6s ease forwards .3s;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
 
-<meta
-name="keywords"
-content="Architecture, Architect, Modern Architecture, Interior Design, Sudan, Ahmed Hamid">
+  .hero-content{position:relative; z-index:2; width:100%; padding-bottom:88px;}
+  .hero-eyebrow{color:var(--gold); margin-bottom:22px; display:flex; align-items:center; gap:12px;}
+  .hero-eyebrow .rule{width:40px; height:1px; background:var(--gold);}
+  .hero h1{
+    color:var(--ivory); font-size:clamp(38px, 6.4vw, 84px); line-height:1.03;
+    max-width:14ch; font-weight:400;
+  }
+  .hero h1 em{font-style:italic; color:var(--gold); font-weight:400;}
+  .hero-sub{color:rgba(244,241,230,0.78); max-width:46ch; margin-top:26px; font-size:16px;}
+  .hero-actions{display:flex; gap:16px; margin-top:38px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:14px 26px; font-size:14px; letter-spacing:.02em;
+    border-radius:2px; border:1px solid transparent; cursor:pointer;
+    transition:all .25s ease;
+  }
+  .btn-primary{background:var(--gold); color:var(--ink);}
+  .btn-primary:hover{background:var(--ivory);}
+  .btn-ghost{border-color:rgba(244,241,230,0.4); color:var(--ivory);}
+  .btn-ghost:hover{border-color:var(--gold); color:var(--gold);}
 
-<meta name="author"
-content="Ahmed Hamid Architecture">
+  .hero-coord{
+    position:absolute; right:28px; bottom:30px; z-index:2;
+    color:rgba(244,241,230,0.6); text-align:right;
+  }
+  .hero-coord div{margin-top:4px;}
 
-<meta
-property="og:title"
-content="Ahmed Hamid Architecture">
+  /* ---------- SHEET STRIP ---------- */
+  .sheet-strip{
+    background:var(--ink); color:var(--ivory);
+    border-top:1px solid var(--line-dark);
+    padding:22px 0;
+  }
+  .sheet-strip .wrap{display:flex; flex-wrap:wrap; gap:26px 44px; align-items:center; justify-content:space-between;}
+  .sheet-strip span{color:rgba(244,241,230,0.55);}
+  .sheet-strip strong{color:var(--gold); margin-right:8px;}
 
-<meta
-property="og:description"
-content="Modern Architecture Studio">
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:120px 0;}
+  .section-tag{color:var(--gold-dim); margin-bottom:18px; display:flex; align-items:center; gap:12px;}
+  .section-tag .rule{width:40px; height:1px; background:var(--gold-dim);}
+  .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:40px; margin-bottom:64px; flex-wrap:wrap;}
+  .section-head h2{font-size:clamp(28px,3.6vw,44px); max-width:16ch; font-weight:400;}
+  .section-head p{max-width:36ch; color:#4a473e; font-size:15px;}
 
-<meta
-property="og:image"
-content="assets/logo.png">
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
 
-<meta
-property="og:type"
-content="website">
+  /* ---------- ABOUT ---------- */
+  .about{background:var(--paper-2);}
+  .about-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:70px; align-items:center;}
+  .about-media{position:relative;}
+  .about-media img{width:100%; aspect-ratio:4/5; object-fit:cover; filter:saturate(.92);}
+  .about-badge{
+    position:absolute; left:-24px; bottom:-24px; background:var(--ink); color:var(--ivory);
+    padding:20px; width:120px; border:1px solid var(--line-dark);
+  }
+  .about-badge .num{font-family:'Fraunces', serif; font-size:34px; color:var(--gold);}
+  .about-badge .cap{margin-top:4px; color:rgba(244,241,230,0.6);}
+  .about-copy h2{font-size:clamp(26px,3.2vw,38px); margin-bottom:22px; font-weight:400;}
+  .about-copy p{color:#3d3b33; max-width:52ch; margin-bottom:16px;}
+  .checklist{list-style:none; margin:30px 0 0; padding:0; display:grid; gap:16px;}
+  .checklist li{display:flex; gap:14px; align-items:flex-start;}
+  .checklist .tick{
+    width:20px; height:20px; border:1px solid var(--gold-dim); border-radius:50%;
+    flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px;
+  }
+  .checklist .tick::after{content:''; width:6px; height:6px; background:var(--gold); border-radius:50%;}
+  .checklist b{display:block; font-family:'Fraunces', serif; font-weight:500; font-size:15px;}
+  .checklist span{color:#5a5748; font-size:14px;}
 
-<link rel="icon"
-href="assets/logo.png">
+  /* ---------- SERVICES ---------- */
+  .services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line-light); border:1px solid var(--line-light);}
+  .service-card{background:var(--paper); padding:44px 34px; position:relative;}
+  .service-card .sheet-no{color:var(--gold-dim); display:block; margin-bottom:26px;}
+  .service-card h3{font-size:19px; font-weight:500; margin-bottom:12px;}
+  .service-card p{color:#4a473e; font-size:14px; max-width:32ch;}
+  .service-card a.more{display:inline-block; margin-top:18px; font-size:13px; border-bottom:1px solid var(--gold-dim); color:var(--charcoal);}
 
-<link rel="stylesheet"
-href="style.css">
+  /* ---------- PROJECTS ---------- */
+  .projects{background:var(--ink); color:var(--ivory);}
+  .projects .section-tag{color:var(--gold);}
+  .projects .section-tag .rule{background:var(--gold);}
+  .projects .section-head p{color:rgba(244,241,230,0.62);}
+  .filters{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:44px;}
+  .filter-btn{
+    padding:9px 18px; border:1px solid var(--line-dark); background:transparent; color:rgba(244,241,230,0.7);
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+    border-radius:20px; cursor:pointer; transition:all .25s ease;
+  }
+  .filter-btn.active, .filter-btn:hover{background:var(--gold); color:var(--ink); border-color:var(--gold);}
+  .project-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  .project-card{
+    border:1px solid var(--line-dark); aspect-ratio:4/5; position:relative; overflow:hidden;
+    display:flex; flex-direction:column; justify-content:flex-end; padding:22px;
+  }
+  .project-card .plan{position:absolute; inset:0; opacity:.5;}
+  .project-card .plan svg{width:100%; height:100%;}
+  .project-card .plan path, .project-card .plan rect, .project-card .plan line{
+    stroke:rgba(244,241,230,0.5); fill:none; stroke-width:1;
+  }
+  .project-card .meta{position:relative; z-index:1;}
+  .project-card .meta .cat{color:var(--gold); display:block; margin-bottom:6px;}
+  .project-card .meta h4{font-size:19px; font-weight:500;}
+  .project-card .meta .yr{color:rgba(244,241,230,0.5); margin-top:4px; display:block;}
+  .projects-note{margin-top:40px; color:rgba(244,241,230,0.45); font-size:13px; max-width:60ch;}
 
-<link rel="preconnect"
-href="https://fonts.googleapis.com">
+  /* ---------- WHY ---------- */
+  .why-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:36px;}
+  .why-card{border-top:1px solid var(--line-light); padding-top:24px;}
+  .why-card .icon{width:44px; height:44px; margin-bottom:20px;}
+  .why-card .icon svg{width:100%; height:100%; stroke:var(--gold-dim); fill:none; stroke-width:1.2;}
+  .why-card h3{font-size:17px; font-weight:500; margin-bottom:10px;}
+  .why-card p{font-size:14px; color:#4a473e;}
 
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
+  /* ---------- PROCESS ---------- */
+  .process{background:var(--paper-2);}
+  .process-list{display:grid; gap:0;}
+  .process-row{
+    display:grid; grid-template-columns:90px 1fr 1.3fr; gap:30px; align-items:start;
+    padding:34px 0; border-bottom:1px solid var(--line-light);
+  }
+  .process-row:first-child{border-top:1px solid var(--line-light);}
+  .process-row .step-no{font-family:'Fraunces', serif; font-size:28px; color:var(--gold-dim);}
+  .process-row h3{font-size:18px; font-weight:500;}
+  .process-row p{color:#4a473e; font-size:14px; max-width:52ch;}
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
+  /* ---------- CTA BAND ---------- */
+  .cta-band{
+    background:var(--ink); color:var(--ivory); text-align:center; padding:120px 0;
+    position:relative; overflow:hidden;
+  }
+  .cta-band .compass{position:absolute; top:50%; left:50%; width:900px; height:900px; transform:translate(-50%,-50%); opacity:.05;}
+  .cta-band .compass svg{width:100%;height:100%; stroke:var(--ivory); fill:none;}
+  .cta-band h2{font-size:clamp(30px,4.6vw,54px); font-weight:400; max-width:16ch; margin:0 auto 22px;}
+  .cta-band p{color:rgba(244,241,230,0.65); max-width:48ch; margin:0 auto 40px;}
+  .cta-actions{display:flex; gap:16px; justify-content:center; flex-wrap:wrap;}
 
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:70px;}
+  .contact-copy h2{font-size:clamp(26px,3.2vw,40px); font-weight:400; margin-bottom:20px;}
+  .contact-copy p{color:#4a473e; max-width:44ch; margin-bottom:36px;}
+  .contact-detail{margin-bottom:26px;}
+  .contact-detail .mono{color:var(--gold-dim); display:block; margin-bottom:6px;}
+  .contact-detail a, .contact-detail span.val{font-family:'Fraunces', serif; font-size:19px;}
+  .social-row{display:flex; gap:16px; margin-top:30px;}
+  .social-row a{
+    width:40px; height:40px; border:1px solid var(--line-light); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:13px; transition:all .25s ease;
+  }
+  .social-row a:hover{background:var(--ink); color:var(--ivory); border-color:var(--ink);}
+  .contact-form{display:grid; gap:18px;}
+  .contact-form input, .contact-form select, .contact-form textarea{
+    width:100%; padding:14px 0; border:none; border-bottom:1px solid var(--line-light);
+    background:transparent; font-family:'Public Sans', sans-serif; font-size:15px; color:var(--charcoal);
+  }
+  .contact-form label{display:block; margin-bottom:6px;}
+  .contact-form textarea{resize:vertical; min-height:90px;}
+  .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus{outline:none; border-color:var(--gold);}
 
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink); color:rgba(244,241,230,0.62); padding:64px 0 30px;}
+  .foot-grid{display:grid; grid-template-columns:1.6fr 1fr 1fr 1.2fr; gap:40px; padding-bottom:50px; border-bottom:1px solid var(--line-dark);}
+  .foot-brand{display:flex; align-items:center; gap:12px; color:var(--ivory); margin-bottom:16px;}
+  .foot-col h5{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.1em; color:rgba(244,241,230,0.4); text-transform:uppercase; margin-bottom:18px;}
+  .foot-col ul{list-style:none; margin:0; padding:0; display:grid; gap:10px;}
+  .foot-col a:hover{color:var(--gold);}
+  .foot-bottom{display:flex; justify-content:space-between; padding-top:26px; font-size:13px; flex-wrap:wrap; gap:10px;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:960px){
+    .nav-links{display:none;}
+    .burger{display:block;}
+    .about-grid{grid-template-columns:1fr;}
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+    .project-grid{grid-template-columns:repeat(2,1fr);}
+    .why-grid{grid-template-columns:repeat(2,1fr);}
+    .contact-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .process-row{grid-template-columns:60px 1fr; }
+    .process-row p{grid-column:2/3;}
+  }
+  @media (max-width:600px){
+    section{padding:80px 0;}
+    .services-grid{grid-template-columns:1fr;}
+    .project-grid{grid-template-columns:1fr;}
+    .why-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+    .hero-coord{display:none;}
+  }
+</style>
 </head>
-
 <body>
-<!-- HERO SECTION -->
-    <section class="hero">
 
-        <div class="hero-overlay"></div>
-
-        <div class="container hero-container">
-
-            <div class="hero-content">
-
-                <span class="hero-subtitle">
-                    Architectural Design • Interior Design • Planning
-                </span>
-
-                <h1>
-                    We Design<br>
-                    Modern Spaces<br>
-                    That Inspire.
-                </h1>
-
-                <p>
-                    Ahmed Hamid Architecture is an architectural studio
-                    focused on modern residential, commercial and interior
-                    projects with functional design, elegant aesthetics and
-                    professional execution.
-                </p>
-
-                <div class="hero-buttons">
-
-                    <a href="projects.html" class="btn btn-primary">
-                        Explore Projects
-                    </a>
-
-                    <a href="contact.html" class="btn btn-outline">
-                        Start Your Project
-                    </a>
-
-                </div>
-
-            </div>
-
-            <div class="hero-image">
-
-                <img
-                    src="assets/hero-project.jpg"
-                    alt="Ahmed Hamid Architecture Project">
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- COMPANY STATS -->
-
-    <section class="stats">
-
-        <div class="container">
-
-            <div class="stat-box">
-
-                <h2>Architecture</h2>
-
-                <p>
-                    Modern architectural solutions for residential,
-                    commercial and mixed-use projects.
-                </p>
-
-            </div>
-
-            <div class="stat-box">
-
-                <h2>Interior</h2>
-
-                <p>
-                    Elegant interiors that combine beauty,
-                    functionality and comfort.
-                </p>
-
-            </div>
-
-            <div class="stat-box">
-
-                <h2>Visualization</h2>
-
-                <p>
-                    High quality 3D visualization helping clients
-                    experience their projects before construction.
-                </p>
-
-            </div>
-
-            <div class="stat-box">
-
-                <h2>Planning</h2>
-
-                <p>
-                    Smart planning with efficient circulation,
-                    sustainability and practical solutions.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-<!-- =========================
-         ABOUT SECTION
-    ========================== -->
-
-    <section class="about" id="about">
-
-        <div class="container about-grid">
-
-            <div class="about-images">
-
-                <div class="about-main-image">
-
-                    <img src="assets/about.jpg"
-                         alt="Ahmed Hamid Architecture">
-
-                </div>
-
-                <div class="experience-card">
-
-                    <span class="number">Modern</span>
-
-                    <span class="text">
-                        Architecture<br>
-                        Studio
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="about-content">
-
-                <span class="section-subtitle">
-
-                    ABOUT THE STUDIO
-
-                </span>
-
-                <h2>
-
-                    Designing timeless spaces with
-                    creativity, precision and purpose.
-
-                </h2>
-
-                <p>
-
-                    Ahmed Hamid Architecture is an independent
-                    architectural studio dedicated to creating
-                    elegant, functional and contemporary spaces.
-                    Every project is developed with attention to
-                    detail, architectural identity and client needs.
-
-                </p>
-
-                <p>
-
-                    From residential villas to commercial
-                    buildings, interiors and 3D visualization,
-                    our goal is to transform ideas into
-                    remarkable architectural experiences.
-
-                </p>
-
-
-                <div class="about-features">
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-
-                            ✓
-
-                        </div>
-
-                        <div>
-
-                            <h4>Modern Architecture</h4>
-
-                            <p>Elegant contemporary design.</p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-
-                            ✓
-
-                        </div>
-
-                        <div>
-
-                            <h4>Functional Planning</h4>
-
-                            <p>Smart circulation and efficient spaces.</p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-
-                            ✓
-
-                        </div>
-
-                        <div>
-
-                            <h4>Photorealistic Visualization</h4>
-
-                            <p>Professional architectural rendering.</p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="feature">
-
-                        <div class="feature-icon">
-
-                            ✓
-
-                        </div>
-
-                        <div>
-
-                            <h4>Interior Design</h4>
-
-                            <p>Beautiful and practical interiors.</p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <a href="about.html" class="btn btn-primary">
-
-                    Learn More
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-<!-- =========================
-         SERVICES SECTION
-    ========================== -->
-
-    <section class="services" id="services">
-
-        <div class="container">
-
-            <div class="section-header">
-
-                <span class="section-subtitle">
-
-                    OUR SERVICES
-
-                </span>
-
-                <h2>
-
-                    Architecture Beyond
-                    Expectations
-
-                </h2>
-
-                <p>
-
-                    We provide comprehensive architectural services
-                    from concept development to detailed execution,
-                    combining creativity, technology and functionality.
-
-                </p>
-
-            </div>
-
-            <div class="services-grid">
-
-                <!-- Service 1 -->
-
-                <article class="service-card">
-
-                    <div class="service-icon">
-
-                        <i class="fa-solid fa-building"></i>
-
-                    </div>
-
-                    <h3>
-
-                        Architectural Design
-
-                    </h3>
-
-                    <p>
-
-                        Modern residential and commercial architecture
-                        designed around functionality, aesthetics and
-                        sustainability.
-
-                    </p>
-
-                    <a href="services.html">
-
-                        Learn More
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </a>
-
-                </article>
-
-                <!-- Service 2 -->
-
-                <article class="service-card">
-
-                    <div class="service-icon">
-
-                        <i class="fa-solid fa-couch"></i>
-
-                    </div>
-
-                    <h3>
-
-                        Interior Design
-
-                    </h3>
-
-                    <p>
-
-                        Elegant interior environments that enhance
-                        comfort, productivity and visual identity.
-
-                    </p>
-
-                    <a href="services.html">
-
-                        Learn More
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </a>
-
-                </article>
-
-                <!-- Service 3 -->
-
-                <article class="service-card">
-
-                    <div class="service-icon">
-
-                        <i class="fa-solid fa-city"></i>
-
-                    </div>
-
-                    <h3>
-
-                        Urban Planning
-
-                    </h3>
-
-                    <p>
-
-                        Smart planning solutions for residential
-                        developments, communities and public spaces.
-
-                    </p>
-
-                    <a href="services.html">
-
-                        Learn More
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </a>
-
-                </article>
-
-                <!-- Service 4 -->
-
-                <article class="service-card">
-
-                    <div class="service-icon">
-
-                        <i class="fa-solid fa-cube"></i>
-
-                    </div>
-
-                    <h3>
-
-                        3D Visualization
-
-                    </h3>
-
-                    <p>
-
-                        High-quality architectural visualization
-                        and realistic rendering before construction.
-
-                    </p>
-
-                    <a href="services.html">
-
-                        Learn More
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </a>
-
-                </article>
-
-                <!-- Service 5 -->
-
-                <article class="service-card">
-
-                    <div class="service-icon">
-
-                        <i class="fa-solid fa-ruler-combined"></i>
-
-                    </div>
-
-                    <h3>
-
-                        Space Planning
-
-                    </h3>
-
-                    <p>
-
-                        Efficient layouts that maximize usability,
-                        movement and architectural quality.
-
-                    </p>
-
-                    <a href="services.html">
-
-                        Learn More
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </a>
-
-                </article>
-
-                <!-- Service 6 -->
-
-                <article class="service-card">
-
-                    <div class="service-icon">
-
-                        <i class="fa-solid fa-compass-drafting"></i>
-
-                    </div>
-
-                    <h3>
-
-                        Construction Drawings
-
-                    </h3>
-
-                    <p>
-
-                        Complete technical documentation prepared
-                        according to professional architectural standards.
-
-                    </p>
-
-                    <a href="services.html">
-
-                        Learn More
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </a>
-
-                </article>
-
-            </div>
-
-        </div>
-
-    </section>
-<!-- =========================
-         FEATURED PROJECTS
-    ========================== -->
-
-    <section class="projects" id="projects">
-
-        <div class="container">
-
-            <div class="section-header">
-
-                <span class="section-subtitle">
-
-                    FEATURED PROJECTS
-
-                </span>
-
-                <h2>
-
-                    Selected Architectural Projects
-
-                </h2>
-
-                <p>
-
-                    Discover a selection of residential,
-                    commercial and interior projects designed
-                    with creativity, precision and functionality.
-
-                </p>
-
-            </div>
-
-            <div class="projects-filter">
-
-                <button class="filter-btn active"
-                        data-filter="all">
-
-                    All
-
-                </button>
-
-                <button class="filter-btn"
-                        data-filter="residential">
-
-                    Residential
-
-                </button>
-
-                <button class="filter-btn"
-                        data-filter="commercial">
-
-                    Commercial
-
-                </button>
-
-                <button class="filter-btn"
-                        data-filter="interior">
-
-                    Interior
-
-                </button>
-
-                <button class="filter-btn"
-                        data-filter="planning">
-
-                    Planning
-
-                </button>
-
-            </div>
-
-            <!-- سيتم ملء المشاريع تلقائياً من JavaScript -->
-
-            <div
-                id="projects-container"
-                class="projects-grid">
-
-            </div>
-
-            <div class="projects-footer">
-
-                <a href="projects.html"
-                   class="btn btn-primary">
-
-                    View All Projects
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         WHY CHOOSE US
-    ========================== -->
-
-    <section class="why-us">
-
-        <div class="container">
-
-            <div class="section-header">
-
-                <span class="section-subtitle">
-
-                    WHY CHOOSE US
-
-                </span>
-
-                <h2>
-
-                    Excellence In Every Detail
-
-                </h2>
-
-            </div>
-
-            <div class="why-grid">
-
-                <div class="why-card">
-
-                    <i class="fa-solid fa-lightbulb"></i>
-
-                    <h3>
-
-                        Creative Ideas
-
-                    </h3>
-
-                    <p>
-
-                        Every project starts with innovative
-                        architectural thinking that transforms
-                        ideas into remarkable spaces.
-
-                    </p>
-
-                </div>
-
-                <div class="why-card">
-
-                    <i class="fa-solid fa-pen-ruler"></i>
-
-                    <h3>
-
-                        Precision
-
-                    </h3>
-
-                    <p>
-
-                        Attention to proportions,
-                        materials and technical details
-                        in every drawing.
-
-                    </p>
-
-                </div>
-
-                <div class="why-card">
-
-                    <i class="fa-solid fa-cubes"></i>
-
-                    <h3>
-
-                        3D Visualization
-
-                    </h3>
-
-                    <p>
-
-                        High quality renders allowing clients
-                        to experience projects before construction.
-
-                    </p>
-
-                </div>
-
-                <div class="why-card">
-
-                    <i class="fa-solid fa-earth-africa"></i>
-
-                    <h3>
-
-                        Sustainable Design
-
-                    </h3>
-
-                    <p>
-
-                        Solutions focused on comfort,
-                        efficiency and long-term value.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-<!-- =========================
-         ARCHITECTURE INSIGHTS
-    ========================== -->
-
-    <section class="blog" id="blog">
-
-        <div class="container">
-
-            <div class="section-header">
-
-                <span class="section-subtitle">
-
-                    ARCHITECTURE INSIGHTS
-
-                </span>
-
-                <h2>
-
-                    Latest News & Articles
-
-                </h2>
-
-                <p>
-
-                    Stay updated with our latest projects,
-                    architectural ideas, design inspiration
-                    and professional insights.
-
-                </p>
-
-            </div>
-
-            <!-- سيتم جلب المقالات تلقائياً -->
-
-            <div
-                id="blog-container"
-                class="blog-grid">
-
-            </div>
-
-            <div class="blog-footer">
-
-                <a
-                    href="blog.html"
-                    class="btn btn-primary">
-
-                    Read More Articles
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-
-
-    <!-- =========================
-         TESTIMONIALS
-    ========================== -->
-
-    <section class="testimonials">
-
-        <div class="container">
-
-            <div class="section-header">
-
-                <span class="section-subtitle">
-
-                    CLIENT TESTIMONIALS
-
-                </span>
-
-                <h2>
-
-                    What Our Clients Say
-
-                </h2>
-
-                <p>
-
-                    Every successful project begins with
-                    trust, communication and commitment
-                    to excellence.
-
-                </p>
-
-            </div>
-
-            <div class="testimonial-slider">
-
-                <div class="testimonial-card">
-
-                    <div class="quote">
-
-                        <i class="fa-solid fa-quote-left"></i>
-
-                    </div>
-
-                    <p>
-
-                        Ahmed Hamid Architecture transformed
-                        our vision into a beautiful and
-                        functional modern home.
-                        The entire process was smooth,
-                        professional and inspiring.
-
-                    </p>
-
-                    <div class="client">
-
-                        <img
-                            src="assets/client1.jpg"
-                            alt="Client">
-
-                        <div>
-
-                            <h4>
-
-                                Future Client
-
-                            </h4>
-
-                            <span>
-
-                                Residential Project
-
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="testimonial-card">
-
-                    <div class="quote">
-
-                        <i class="fa-solid fa-quote-left"></i>
-
-                    </div>
-
-                    <p>
-
-                        Outstanding architectural thinking,
-                        excellent communication and
-                        impressive visualization quality.
-
-                    </p>
-
-                    <div class="client">
-
-                        <img
-                            src="assets/client2.jpg"
-                            alt="Client">
-
-                        <div>
-
-                            <h4>
-
-                                Future Client
-
-                            </h4>
-
-                            <span>
-
-                                Commercial Project
-
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-
-
-    <!-- =========================
-         CALL TO ACTION
-    ========================== -->
-
-    <section class="cta">
-
-        <div class="container">
-
-            <div class="cta-box">
-
-                <span>
-
-                    LET'S BUILD SOMETHING AMAZING
-
-                </span>
-
-                <h2>
-
-                    Ready To Start
-                    Your Dream Project?
-
-                </h2>
-
-                <p>
-
-                    Whether you are planning a villa,
-                    commercial building or interior project,
-                    we are ready to help transform your ideas
-                    into exceptional architecture.
-
-                </p>
-
-                <div class="cta-buttons">
-
-                    <a
-                        href="contact.html"
-                        class="btn btn-primary">
-
-                        Contact Us
-
-                    </a>
-
-                    <a
-                        href="projects.html"
-                        class="btn btn-outline">
-
-                        View Portfolio
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-<!-- =========================
-     CONTACT SECTION
-========================== -->
-
-<section class="contact-preview">
-
-    <div class="container">
-
-        <div class="section-header">
-
-            <span class="section-subtitle">
-
-                CONTACT US
-
-            </span>
-
-            <h2>
-
-                Let's Discuss Your Next Project
-
-            </h2>
-
-            <p>
-
-                We are ready to transform your ideas into
-                outstanding architecture.
-
-            </p>
-
-        </div>
-
-        <div class="contact-grid">
-
-            <div class="contact-card">
-
-                <i class="fa-solid fa-envelope"></i>
-
-                <h3>Email</h3>
-
-                <p>
-
-                    ahmedhamidarchitecture@gmail.com
-
-                </p>
-
-            </div>
-
-            <div class="contact-card">
-
-                <i class="fa-solid fa-location-dot"></i>
-
-                <h3>Location</h3>
-
-                <p>
-
-                    Sudan
-
-                </p>
-
-            </div>
-
-            <div class="contact-card">
-
-                <i class="fa-solid fa-share-nodes"></i>
-
-                <h3>Follow Us</h3>
-
-                <div class="social-links">
-
-                    <a href="https://www.linkedin.com/in/ahmed-hamid-architecture-9b9372260/" target="_blank">
-
-                        <i class="fab fa-linkedin"></i>
-
-                    </a>
-
-                    <a href="https://www.instagram.com/ahmed_hamid_architecture" target="_blank">
-
-                        <i class="fab fa-instagram"></i>
-
-                    </a>
-
-                    <a href="https://www.facebook.com/ahmedhamidarchitecture" target="_blank">
-
-                        <i class="fab fa-facebook"></i>
-
-                    </a>
-
-                    <a href="https://vm.tiktok.com/ZS9MCb1KJoBdN-iZvTF/" target="_blank">
-
-                        <i class="fab fa-tiktok"></i>
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="contact-button">
-
-            <a href="contact.html" class="btn btn-primary">
-
-                Contact Now
-
-            </a>
-
-        </div>
-
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <span class="brand-mark">AH</span>
+      <span class="brand-name">Ahmed Hamid<span>Architecture Studio</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
     </div>
+    <a href="#contact" class="nav-cta" style="display:none;" id="navCta">Start a Project</a>
+    <button class="burger" id="burger" aria-label="Open menu">☰</button>
+  </div>
+</nav>
 
+<header class="hero" id="top">
+  <div class="hero-img"></div>
+  <div class="blueprint-layer" aria-hidden="true">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="none">
+      <path d="M60 700 L60 300 L300 200 L640 200 L640 700" />
+      <path d="M300 200 L300 700" />
+      <path d="M420 300 L420 700 M420 300 L560 300 L560 700" />
+      <line x1="60" y1="300" x2="20" y2="300" />
+      <line x1="60" y1="200" x2="60" y2="700" stroke-dasharray="4 6" />
+      <circle cx="900" cy="150" r="46" />
+      <path d="M900 104 L900 196 M854 150 L946 150" />
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="wrap">
+      <div class="hero-eyebrow mono"><span class="rule"></span>Architectural Design · Interior · Planning · Visualization</div>
+      <h1>We design modern spaces <em>that inspire.</em></h1>
+      <p class="hero-sub">An independent architecture studio shaping residential, commercial and interior projects — built on functional design, quiet detail and honest execution.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">Explore Projects</a>
+        <a href="#contact" class="btn btn-ghost">Start Your Project</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-coord mono">
+    <div>15.5007° N, 32.5599° E</div>
+    <div>KHARTOUM — SITE A‑01</div>
+  </div>
+</header>
+
+<div class="sheet-strip">
+  <div class="wrap mono">
+    <span><strong>A‑01</strong>Architecture</span>
+    <span><strong>A‑02</strong>Interior</span>
+    <span><strong>A‑03</strong>Planning</span>
+    <span><strong>A‑04</strong>Visualization</span>
+    <span><strong>A‑05</strong>Construction Drawings</span>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-media reveal">
+      <img src="https://ahmedhamidarchitecture.vercel.app/assets/about.jpg" alt="Ahmed Hamid Architecture studio work">
+      <div class="about-badge">
+        <div class="num">01</div>
+        <div class="cap mono">Architecture Studio</div>
+      </div>
+    </div>
+    <div class="about-copy reveal">
+      <div class="section-tag mono"><span class="rule"></span>Who We Are</div>
+      <h2>Designing timeless spaces with creativity, precision and purpose.</h2>
+      <p>Ahmed Hamid Architecture is an independent studio dedicated to elegant, functional and contemporary spaces. Every project is developed with attention to detail, architectural identity and the needs of the people who will live in it.</p>
+      <p>From residential villas to commercial buildings, interiors and 3D visualization — the goal is the same: turn an idea into a space that works, and a space worth remembering.</p>
+      <ul class="checklist">
+        <li><span class="tick"></span><div><b>Modern architecture</b><span>Contemporary design with a clear identity.</span></div></li>
+        <li><span class="tick"></span><div><b>Functional planning</b><span>Smart circulation and efficient spaces.</span></div></li>
+        <li><span class="tick"></span><div><b>Photorealistic visualization</b><span>See the project before it's built.</span></div></li>
+        <li><span class="tick"></span><div><b>Interior design</b><span>Interiors as considered as the shell around them.</span></div></li>
+      </ul>
+    </div>
+  </div>
 </section>
 
-
-
-<!-- =========================
-     FOOTER
-========================== -->
-
-<footer class="footer">
-
-    <div class="container footer-grid">
-
-        <div>
-
-            <img src="assets/logo.png"
-
-                 class="footer-logo"
-
-                 alt="Ahmed Hamid Architecture">
-
-            <h3>
-
-                Ahmed Hamid Architecture
-
-            </h3>
-
-            <p>
-
-                Modern Architecture • Interior Design • Planning • Visualization
-
-            </p>
-
-        </div>
-
-        <div>
-
-            <h4>Company</h4>
-
-            <ul>
-
-                <li><a href="about.html">About</a></li>
-
-                <li><a href="services.html">Services</a></li>
-
-                <li><a href="projects.html">Projects</a></li>
-
-                <li><a href="gallery.html">Gallery</a></li>
-
-            </ul>
-
-        </div>
-
-        <div>
-
-            <h4>Resources</h4>
-
-            <ul>
-
-                <li><a href="blog.html">Blog</a></li>
-
-                <li><a href="contact.html">Contact</a></li>
-
-                <li><a href="#">Privacy Policy</a></li>
-
-                <li><a href="#">Terms & Conditions</a></li>
-
-            </ul>
-
-        </div>
-
-        <div>
-
-            <h4>Newsletter</h4>
-
-            <p>
-
-                Subscribe for architecture news and project updates.
-
-            </p>
-
-            <form class="newsletter">
-
-                <input
-                    type="email"
-                    placeholder="Your Email">
-
-                <button>
-
-                    Subscribe
-
-                </button>
-
-            </form>
-
-        </div>
-
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-tag mono"><span class="rule"></span>Our Services</div>
+        <h2>Architecture beyond expectations</h2>
+      </div>
+      <p>Comprehensive services from concept to detailed execution — creativity, technology and function in one process.</p>
     </div>
-
-    <div class="footer-bottom">
-
-        © 2026 Ahmed Hamid Architecture.
-        All Rights Reserved.
-
+  </div>
+  <div class="wrap">
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <span class="sheet-no mono">A‑01</span>
+        <h3>Architectural Design</h3>
+        <p>Modern residential and commercial architecture built around function, aesthetics and sustainability.</p>
+        <a href="#contact" class="more">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <span class="sheet-no mono">A‑02</span>
+        <h3>Interior Design</h3>
+        <p>Interior environments that enhance comfort, productivity and a project's visual identity.</p>
+        <a href="#contact" class="more">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <span class="sheet-no mono">A‑03</span>
+        <h3>Urban Planning</h3>
+        <p>Planning solutions for residential developments, communities and public spaces.</p>
+        <a href="#contact" class="more">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <span class="sheet-no mono">A‑04</span>
+        <h3>3D Visualization</h3>
+        <p>High-quality architectural visualization and realistic rendering before construction begins.</p>
+        <a href="#contact" class="more">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <span class="sheet-no mono">A‑05</span>
+        <h3>Space Planning</h3>
+        <p>Layouts that maximize usability, movement and architectural quality.</p>
+        <a href="#contact" class="more">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <span class="sheet-no mono">A‑06</span>
+        <h3>Construction Drawings</h3>
+        <p>Complete technical documentation prepared to professional architectural standards.</p>
+        <a href="#contact" class="more">Learn more →</a>
+      </div>
     </div>
+  </div>
+</section>
 
+<section class="projects" id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-tag mono"><span class="rule"></span>Featured Projects</div>
+        <h2>Selected architectural work</h2>
+      </div>
+      <p>A growing portfolio of residential, commercial and interior projects — designed with precision and function.</p>
+    </div>
+    <div class="filters reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="residential">Residential</button>
+      <button class="filter-btn" data-filter="commercial">Commercial</button>
+      <button class="filter-btn" data-filter="interior">Interior</button>
+      <button class="filter-btn" data-filter="planning">Planning</button>
+    </div>
+    <div class="project-grid reveal" id="projectGrid">
+      <!-- Project cards render as blueprint placeholders until real project photography is added -->
+    </div>
+    <p class="projects-note mono">Placeholder sheets shown above — swap each card's plan drawing for real project photography as work is completed and delivered.</p>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-tag mono"><span class="rule"></span>Why Choose Us</div>
+        <h2>Excellence in every detail</h2>
+      </div>
+      <p>What a young studio can promise: full attention, direct communication, and work judged on its own merit.</p>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-card">
+        <div class="icon"><svg viewBox="0 0 40 40"><path d="M5 30 L20 8 L35 30 Z"/><path d="M14 22 L26 22"/></svg></div>
+        <h3>Creative Ideas</h3>
+        <p>Every project starts with an idea worth building on, not a template.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon"><svg viewBox="0 0 40 40"><rect x="6" y="6" width="28" height="28"/><line x1="6" y1="20" x2="34" y2="20"/><line x1="20" y1="6" x2="20" y2="34"/></svg></div>
+        <h3>Precision</h3>
+        <p>Careful attention to proportion, material and technical detail in every drawing.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon"><svg viewBox="0 0 40 40"><path d="M6 30 L16 16 L24 24 L34 8"/><circle cx="34" cy="8" r="2"/></svg></div>
+        <h3>3D Visualization</h3>
+        <p>Renders detailed enough for a client to walk through their project before it exists.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14"/><path d="M20 6 L20 34 M6 20 L34 20"/></svg></div>
+        <h3>Sustainable Design</h3>
+        <p>Solutions built for comfort, efficiency and long-term value — not just the render.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-tag mono"><span class="rule"></span>How We Work</div>
+        <h2>From first sketch to handover</h2>
+      </div>
+      <p>A straightforward process, so you always know what stage your project is at.</p>
+    </div>
+    <div class="process-list reveal">
+      <div class="process-row">
+        <div class="step-no">01</div>
+        <h3>Brief &amp; Site Visit</h3>
+        <p>We start by understanding the site, the budget and how you actually want to live or work in the space.</p>
+      </div>
+      <div class="process-row">
+        <div class="step-no">02</div>
+        <h3>Concept Design</h3>
+        <p>Early plans, massing and mood direction, reviewed together before anything is locked in.</p>
+      </div>
+      <div class="process-row">
+        <div class="step-no">03</div>
+        <h3>Development &amp; Visualization</h3>
+        <p>The design is refined into detailed drawings and photorealistic renders you can walk through.</p>
+      </div>
+      <div class="process-row">
+        <div class="step-no">04</div>
+        <h3>Construction Documentation</h3>
+        <p>Complete technical drawings prepared to professional standard, ready for the contractor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="compass" aria-hidden="true">
+    <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="95"/><circle cx="100" cy="100" r="70"/><path d="M100 5 L100 195 M5 100 L195 100"/></svg>
+  </div>
+  <div class="wrap reveal">
+    <div class="section-tag mono" style="justify-content:center; color:var(--gold);"><span class="rule" style="background:var(--gold)"></span>Let's Build Something Amazing<span class="rule" style="background:var(--gold)"></span></div>
+    <h2>Ready to start your dream project?</h2>
+    <p>Whether it's a villa, a commercial building or an interior fit-out — let's turn the idea into drawings, then into a place.</p>
+    <div class="cta-actions">
+      <a href="#contact" class="btn btn-primary">Contact Us</a>
+      <a href="#projects" class="btn btn-ghost">View Portfolio</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-copy reveal">
+      <div class="section-tag mono"><span class="rule"></span>Contact Us</div>
+      <h2>Let's discuss your next project</h2>
+      <p>Send a brief outline of what you're planning — site, size, timeline — and we'll follow up within a day or two.</p>
+
+      <div class="contact-detail">
+        <span class="mono">Email</span>
+        <a href="mailto:ahmedhamidarchitecture@gmail.com">ahmedhamidarchitecture@gmail.com</a>
+      </div>
+      <div class="contact-detail">
+        <span class="mono">Location</span>
+        <span class="val">Khartoum, Sudan</span>
+      </div>
+      <div class="social-row">
+        <a href="https://www.linkedin.com/in/ahmed-hamid-architecture-9b9372260/" aria-label="LinkedIn" target="_blank" rel="noopener">in</a>
+        <a href="https://www.instagram.com/ahmed_hamid_architecture" aria-label="Instagram" target="_blank" rel="noopener">IG</a>
+        <a href="https://www.facebook.com/ahmedhamidarchitecture" aria-label="Facebook" target="_blank" rel="noopener">FB</a>
+        <a href="https://vm.tiktok.com/ZS9MCb1KJoBdN-iZvTF/" aria-label="TikTok" target="_blank" rel="noopener">TT</a>
+      </div>
+    </div>
+    <form class="contact-form reveal" onsubmit="event.preventDefault(); this.querySelector('.form-status').textContent='Thanks — message noted. This demo form does not send yet.';">
+      <div>
+        <label class="mono" for="f-name">Name</label>
+        <input id="f-name" type="text" required placeholder="Your name">
+      </div>
+      <div>
+        <label class="mono" for="f-email">Email</label>
+        <input id="f-email" type="email" required placeholder="you@email.com">
+      </div>
+      <div>
+        <label class="mono" for="f-type">Project Type</label>
+        <select id="f-type">
+          <option>Residential</option>
+          <option>Commercial</option>
+          <option>Interior</option>
+          <option>Planning</option>
+        </select>
+      </div>
+      <div>
+        <label class="mono" for="f-msg">Project Details</label>
+        <textarea id="f-msg" required placeholder="Site, size, timeline..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" style="justify-self:start; background:var(--ink); color:var(--ivory);">Send Message</button>
+      <p class="form-status mono" style="color:var(--gold-dim);"></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <span class="brand-mark">AH</span>
+          <span class="brand-name">Ahmed Hamid Architecture</span>
+        </div>
+        <p style="max-width:34ch; font-size:14px;">Modern Architecture · Interior Design · Planning · Visualization — Khartoum, Sudan.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Projects</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Follow</h5>
+        <ul>
+          <li><a href="https://www.instagram.com/ahmed_hamid_architecture" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/in/ahmed-hamid-architecture-9b9372260/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://www.facebook.com/ahmedhamidarchitecture" target="_blank" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Ahmed Hamid Architecture. All rights reserved.</span>
+      <span>Site A‑01 — Khartoum, Sudan</span>
+    </div>
+  </div>
 </footer>
 
+<script>
+  // nav solid on scroll
+  const nav = document.getElementById('nav');
+  const navCta = document.getElementById('navCta');
+  window.addEventListener('scroll', () => {
+    const solid = window.scrollY > 60;
+    nav.classList.toggle('solid', solid);
+    navCta.style.display = solid ? 'inline-flex' : 'none';
+  });
 
+  // reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.15});
+  revealEls.forEach(el => io.observe(el));
 
-<button id="backToTop">
+  // burger (mobile) — simple toggle of nav-links as a stacked panel
+  const burger = document.getElementById('burger');
+  const navLinks = document.querySelector('.nav-links');
+  burger.addEventListener('click', () => {
+    const open = navLinks.style.display === 'flex';
+    if(open){
+      navLinks.style.display = 'none';
+    } else {
+      navLinks.style.cssText = 'display:flex; position:fixed; top:64px; left:0; right:0; background:#14140F; flex-direction:column; padding:24px 28px; gap:20px;';
+    }
+  });
 
-    <i class="fa-solid fa-arrow-up"></i>
-
-</button>
-
-<script src="script.js"></script>
+  // project data + blueprint placeholder cards
+  const projects = [
+    {name:'Villa Rania', cat:'residential', label:'Residential', year:'2025'},
+    {name:'Nile View Offices', cat:'commercial', label:'Commercial', year:'2025'},
+    {name:'Sandstone Residence', cat:'residential', label:'Residential', year:'2024'},
+    {name:'Studio Loft Interior', cat:'interior', label:'Interior', year:'2024'},
+    {name:'Riverside Masterplan', cat:'planning', label:'Planning', year:'2024'},
+    {name:'Courtyard Villa', cat:'residential', label:'Residential', year:'2023'},
+  ];
+  const grid = document.getElementById('projectGrid');
+  function planSvg(seed){
+    // simple varied blueprint line based on seed index
+    const variants = [
+      '<path d="M20 90 L20 20 L60 20 L60 60 L90 60 L90 90 Z"/><line x1="20" y1="60" x2="60" y2="60"/>',
+      '<rect x="20" y="20" width="70" height="70"/><line x1="55" y1="20" x2="55" y2="90"/><line x1="20" y1="55" x2="55" y2="55"/>',
+      '<path d="M15 85 L15 30 L50 15 L85 30 L85 85 Z"/><line x1="15" y1="55" x2="85" y2="55"/>',
+    ];
+    return variants[seed % variants.length];
+  }
+  function render(filter){
+    grid.innerHTML = '';
+    projects.filter(p => filter==='all' || p.cat===filter).forEach((p, i) => {
+      const card = document.createElement('div');
+      card.className = 'project-card';
+      card.innerHTML = `
+        <div class="plan"><svg viewBox="0 0 100 100">${planSvg(i)}</svg></div>
+        <div class="meta">
+          <span class="cat mono">${p.label}</span>
+          <h4>${p.name}</h4>
+          <span class="yr mono">${p.year}</span>
+        </div>`;
+      grid.appendChild(card);
+    });
+  }
+  render('all');
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      render(btn.dataset.filter);
+    });
+  });
+</script>
 
 </body>
-
-</html>
-<!-- ADMIN ACCESS BUTTON -->
-
-<a href="admin/login.html" 
-   class="admin-floating-btn"
-   title="Admin Dashboard">
-
-    <i class="fa-solid fa-user-shield"></i>
-
-</a>
-
-
-<script src="script.js"></script>
-
-</body>
-
 </html>
