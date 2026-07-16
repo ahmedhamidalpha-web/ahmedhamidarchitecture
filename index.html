@@ -19,24 +19,23 @@
 <nav class="nav" id="nav">
   <div class="wrap">
     <a href="#top" class="brand">
-      <!-- استخدام الشعار الفعلي من مجلد assets -->
-      <img src="assets/logo.png" alt="Ahmed Hamid Architecture Logo" class="brand-logo" style="height: 40px; width: auto; object-fit: contain;">
+      <span class="brand-mark">AH</span>
       <span class="brand-name">Ahmed Hamid<span>Architecture Studio</span></span>
     </a>
     <div class="nav-links">
-      <a href="about.html">About</a>
-      <a href="services.html">Services</a>
-      <a href="projects.html">Projects</a>
-      <a href="blog.html">Blog</a>
-      <a href="contact.html">Contact</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
     </div>
-    <a href="contact.html" class="nav-cta" style="display:none;" id="navCta">Start a Project</a>
+    <a href="#contact" class="nav-cta" style="display:none;" id="navCta">Start a Project</a>
     <button class="burger" id="burger" aria-label="Open menu">☰</button>
   </div>
 </nav>
 
 <header class="hero" id="top">
-  <!-- تم تغيير مسار الصورة ليعمل محلياً من مجلد الأصول الخاص بك -->
+  <!-- تم تعديل مسار الصورة ليقرأ محلياً من مجلد الأصول الخاص بك -->
   <div class="hero-img" style="background-image: linear-gradient(180deg, rgba(20,20,15,0.35) 0%, rgba(20,20,15,0.55) 55%, rgba(20,20,15,0.92) 100%), url('assets/hero-project.jpg');"></div>
   <div class="blueprint-layer" aria-hidden="true">
     <svg viewBox="0 0 1200 800" preserveAspectRatio="none">
@@ -55,8 +54,8 @@
       <h1>We design modern spaces <em>that inspire.</em></h1>
       <p class="hero-sub">An independent architecture studio shaping residential, commercial and interior projects — built on functional design, quiet detail and honest execution.</p>
       <div class="hero-actions">
-        <a href="projects.html" class="btn btn-primary">Explore Projects</a>
-        <a href="contact.html" class="btn btn-ghost">Start Your Project</a>
+        <a href="#projects" class="btn btn-primary">Explore Projects</a>
+        <a href="#contact" class="btn btn-ghost">Start Your Project</a>
       </div>
     </div>
   </div>
@@ -79,7 +78,7 @@
 <section class="about" id="about">
   <div class="wrap about-grid">
     <div class="about-media reveal">
-      <!-- مسار الصورة محلي من مجلد assets -->
+      <!-- تم تعديل مسار الصورة ليقرأ محلياً -->
       <img src="assets/about.jpg" alt="Ahmed Hamid Architecture studio work">
       <div class="about-badge">
         <div class="num">01</div>
@@ -117,37 +116,37 @@
         <span class="sheet-no mono">A‑01</span>
         <h3>Architectural Design</h3>
         <p>Modern residential and commercial architecture built around function, aesthetics and sustainability.</p>
-        <a href="services.html" class="more">Learn more →</a>
+        <a href="#contact" class="more">Learn more →</a>
       </div>
       <div class="service-card">
         <span class="sheet-no mono">A‑02</span>
         <h3>Interior Design</h3>
         <p>Interior environments that enhance comfort, productivity and a project's visual identity.</p>
-        <a href="services.html" class="more">Learn more →</a>
+        <a href="#contact" class="more">Learn more →</a>
       </div>
       <div class="service-card">
         <span class="sheet-no mono">A‑03</span>
         <h3>Urban Planning</h3>
         <p>Planning solutions for residential developments, communities and public spaces.</p>
-        <a href="services.html" class="more">Learn more →</a>
+        <a href="#contact" class="more">Learn more →</a>
       </div>
       <div class="service-card">
         <span class="sheet-no mono">A‑04</span>
         <h3>3D Visualization</h3>
         <p>High-quality architectural visualization and realistic rendering before construction begins.</p>
-        <a href="services.html" class="more">Learn more →</a>
+        <a href="#contact" class="more">Learn more →</a>
       </div>
       <div class="service-card">
         <span class="sheet-no mono">A‑05</span>
         <h3>Space Planning</h3>
         <p>Layouts that maximize usability, movement and architectural quality.</p>
-        <a href="services.html" class="more">Learn more →</a>
+        <a href="#contact" class="more">Learn more →</a>
       </div>
       <div class="service-card">
         <span class="sheet-no mono">A‑06</span>
         <h3>Construction Drawings</h3>
         <p>Complete technical documentation prepared to professional architectural standards.</p>
-        <a href="services.html" class="more">Learn more →</a>
+        <a href="#contact" class="more">Learn more →</a>
       </div>
     </div>
   </div>
@@ -170,7 +169,7 @@
       <button class="filter-btn" data-filter="planning">Planning</button>
     </div>
     <div class="project-grid reveal" id="projectGrid">
-      <!-- Project cards render dynamically via script.js -->
+      <!-- ستتم معالجة المشاريع ديناميكياً بواسطة ملف script.js -->
     </div>
     <p class="projects-note mono">Placeholder sheets shown above — swap each card's plan drawing for real project photography as work is completed and delivered.</p>
   </div>
@@ -253,8 +252,8 @@
     <h2>Ready to start your dream project?</h2>
     <p>Whether it's a villa, a commercial building or an interior fit-out — let's turn the idea into drawings, then into a place.</p>
     <div class="cta-actions">
-      <a href="contact.html" class="btn btn-primary">Contact Us</a>
-      <a href="projects.html" class="btn btn-ghost">View Portfolio</a>
+      <a href="#contact" class="btn btn-primary">Contact Us</a>
+      <a href="#projects" class="btn btn-ghost">View Portfolio</a>
     </div>
   </div>
 </section>
@@ -314,25 +313,24 @@
     <div class="foot-grid">
       <div>
         <div class="foot-brand">
-          <!-- استخدام الشعار في الفوتر أيضاً -->
-          <img src="assets/logo.png" alt="Ahmed Hamid Architecture Logo" style="height: 35px; width: auto; object-fit: contain; margin-bottom: 10px;">
-          <span class="brand-name" style="display:block; color:var(--ivory);">Ahmed Hamid Architecture</span>
+          <span class="brand-mark">AH</span>
+          <span class="brand-name">Ahmed Hamid Architecture</span>
         </div>
         <p style="max-width:34ch; font-size:14px;">Modern Architecture · Interior Design · Planning · Visualization — Khartoum, Sudan.</p>
       </div>
       <div class="foot-col">
         <h5>Company</h5>
         <ul>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">Services</a></li>
-          <li><a href="projects.html">Projects</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Projects</a></li>
         </ul>
       </div>
       <div class="foot-col">
         <h5>Resources</h5>
         <ul>
           <li><a href="#process">Process</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
       <div class="foot-col">
@@ -351,7 +349,7 @@
   </div>
 </footer>
 
-<!-- الربط مع ملف الجافا سكريبت الخارجي المتاح في مجلدك -->
+<!-- الربط مع ملف السكربت الخارجي -->
 <script src="script.js"></script>
 
 </body>
