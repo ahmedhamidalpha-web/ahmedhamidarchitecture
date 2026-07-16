@@ -1,6 +1,6 @@
 /*==================================================
     AHMED HAMID ARCHITECTURE - Main Stylesheet
-    Version: 1.1 (Optimized)
+    Version: 1.2 (Optimized & Logo Scaled)
 ==================================================*/
 
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap');
@@ -48,7 +48,7 @@ section { padding: 110px 0; }
 header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(255,255,255,.92); backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); transition: .3s; }
 .navbar { height: 82px; display: flex; align-items: center; justify-content: space-between; }
 .logo { display: flex; align-items: center; gap: 14px; }
-.logo img { width: 54px; }
+.logo img { width: 38px; height: auto; object-fit: contain; } /* تم تصغيره من 54px */
 .nav-links { display: flex; align-items: center; gap: 35px; }
 .menu-toggle { display: none; font-size: 24px; }
 
@@ -83,4 +83,5 @@ header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; backgroun
     .nav-links { position: fixed; top: 82px; left: -100%; width: 100%; height: 100vh; background: white; flex-direction: column; padding: 50px; transition: .4s; }
     .nav-links.active { left: 0; }
     .services-grid, .projects-grid, .blog-grid, .testimonials-grid, .stats .container { grid-template-columns: 1fr; }
+    .logo img { width: 30px; height: auto; } /* تصغير حجم اللوقو على الجوال للتناسق */
 }
