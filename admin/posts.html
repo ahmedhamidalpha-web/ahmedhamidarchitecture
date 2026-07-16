@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Manage Posts | Ahmed Hamid Architecture</title>
+
+
+<link rel="icon" href="../assets/logo.png">
+
+<link rel="stylesheet" href="../style.css">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+</head>
+
+
+
+<body class="admin-page">
+
+
+
+
+
+<header class="admin-header">
+
+
+<div class="admin-container">
+
+
+<div class="admin-brand">
+
+
+<img src="../assets/logo.png">
+
+
+<h2>
+
+Ahmed Hamid Architecture
+
+</h2>
+
+
+</div>
+
+
+
+
+<a href="dashboard.html"
+class="admin-back">
+
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Dashboard
+
+
+</a>
+
+
+
+</div>
+
+
+</header>
+
+
+
+
+
+
+
+
+
+<main class="admin-dashboard">
+
+
+<div class="admin-container">
+
+
+
+
+
+
+<div class="admin-form-box">
+
+
+
+<div class="form-title">
+
+
+<h1>
+
+Posts & Articles
+
+</h1>
+
+
+<p>
+
+Manage articles, announcements, news and career opportunities.
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ADD POST -->
+
+
+<form id="post-form">
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Post Title
+
+</label>
+
+
+<input
+
+type="text"
+
+id="post-title"
+
+placeholder="Post title"
+
+required>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Post Type
+
+</label>
+
+
+<select id="post-type">
+
+
+<option value="article">
+
+Architecture Article
+
+</option>
+
+
+<option value="news">
+
+Studio News
+
+</option>
+
+
+<option value="announcement">
+
+Announcement
+
+</option>
+
+
+<option value="career">
+
+Career Opportunity
+
+</option>
+
+
+<option value="training">
+
+Training Opportunity
+
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Post Content
+
+</label>
+
+
+<textarea
+
+id="post-content"
+
+rows="10"
+
+placeholder="Write your post..."
+required></textarea>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Post Image
+
+</label>
+
+
+<input
+
+type="file"
+
+id="post-image"
+
+accept="image/*">
+
+
+<p>
+
+Image will be uploaded to Google Drive.
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="image-preview"
+
+id="post-preview">
+
+
+</div>
+
+
+
+
+
+
+
+
+<button
+
+type="submit"
+
+class="btn btn-primary">
+
+
+<i class="fa-solid fa-paper-plane"></i>
+
+
+Publish Post
+
+
+</button>
+
+
+
+
+
+<p id="post-message"></p>
+
+
+
+
+</form>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- EXISTING POSTS -->
+
+
+<div class="admin-form-box">
+
+
+
+<h2>
+
+Existing Posts
+
+</h2>
+
+
+
+
+
+<div id="posts-list">
+
+
+<!--
+
+Posts loaded from Supabase
+
+-->
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+</main>
+
+
+
+
+
+
+
+
+
+<script>
+
+
+// Image preview
+
+
+const postImage =
+document.getElementById("post-image");
+
+
+const postPreview =
+document.getElementById("post-preview");
+
+
+
+postImage
+.addEventListener(
+"change",
+function(){
+
+
+postPreview.innerHTML="";
+
+
+
+let file=this.files[0];
+
+
+if(file){
+
+
+let reader=new FileReader();
+
+
+
+reader.onload=function(e){
+
+
+let img=document.createElement("img");
+
+
+img.src=e.target.result;
+
+
+postPreview.appendChild(img);
+
+
+};
+
+
+
+reader.readAsDataURL(file);
+
+
+}
+
+
+
+});
+
+
+
+
+
+
+
+// Temporary submit
+
+
+document
+.getElementById("post-form")
+.addEventListener(
+"submit",
+function(e){
+
+
+e.preventDefault();
+
+
+
+document
+.getElementById("post-message")
+.innerHTML =
+"Post system will connect with Supabase and Google Drive.";
+
+
+});
+
+
+
+
+</script>
+
+
+
+
+
+</body>
+
+</html>
