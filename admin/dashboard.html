@@ -8,7 +8,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<title>Admin Dashboard | Ahmed Hamid Architecture</title>
+<title>
+Admin Dashboard | Ahmed Hamid Architecture
+</title>
 
 
 <link rel="icon" href="../assets/logo.png">
@@ -17,18 +19,11 @@
 <link rel="stylesheet" href="../style.css">
 
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
-
-
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
+
+<!-- Chart Library -->
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -36,42 +31,45 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 </head>
 
 
-<body class="admin-page">
+
+<body class="admin-body">
 
 
 
-<!-- ADMIN HEADER -->
 
 
 <header class="admin-header">
 
 
-<div class="admin-container">
+<div class="container">
 
 
-<div class="admin-brand">
+<a href="../index.html"
+class="admin-logo">
 
 
 <img src="../assets/logo.png">
 
 
-<h2>
-
+<span>
 Ahmed Hamid Architecture
+</span>
 
-</h2>
 
-
-</div>
-
+</a>
 
 
 
-<button id="logoutBtn">
+
+
+<button id="logout-btn"
+class="admin-logout">
+
 
 Logout
 
 </button>
+
 
 
 </div>
@@ -85,14 +83,12 @@ Logout
 
 
 
-<!-- DASHBOARD -->
 
 
-<main class="admin-dashboard">
+<section class="admin-dashboard">
 
 
-
-<div class="admin-container">
+<div class="container">
 
 
 
@@ -107,321 +103,9 @@ Dashboard
 
 <p>
 
-Welcome back, Ahmed.
-
-Manage your projects, posts and website statistics.
+Manage your architecture studio website.
 
 </p>
-
-
-
-
-
-
-
-
-<!-- ANALYTICS -->
-
-
-<section class="analytics-section">
-
-
-<h2>
-
-Website Analytics
-
-</h2>
-
-
-
-
-<div class="analytics-cards">
-
-
-
-<div class="analytics-card">
-
-
-<i class="fa-solid fa-users"></i>
-
-
-<div>
-
-<h3 id="totalVisitors">
-
---
-
-</h3>
-
-
-<p>
-
-Total Visitors
-
-</p>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="analytics-card">
-
-
-<i class="fa-solid fa-calendar-day"></i>
-
-
-<div>
-
-<h3 id="todayVisitors">
-
---
-
-</h3>
-
-
-<p>
-
-Today
-
-</p>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<div class="analytics-card">
-
-
-<i class="fa-solid fa-chart-line"></i>
-
-
-<div>
-
-<h3 id="monthVisitors">
-
---
-
-</h3>
-
-
-<p>
-
-This Month
-
-</p>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="analytics-card">
-
-
-<i class="fa-solid fa-earth-africa"></i>
-
-
-<div>
-
-<h3 id="yearVisitors">
-
---
-
-</h3>
-
-
-<p>
-
-This Year
-
-</p>
-
-
-</div>
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-
-
-<div class="chart-box">
-
-
-<canvas id="visitorsChart"></canvas>
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- MANAGEMENT -->
-
-
-<section class="management-section">
-
-
-
-<h2>
-
-Website Management
-
-</h2>
-
-
-
-
-<div class="management-grid">
-
-
-
-<a href="add-project.html"
-class="management-card">
-
-
-<i class="fa-solid fa-plus"></i>
-
-
-<h3>
-
-Add Project
-
-</h3>
-
-
-<p>
-
-Upload new architectural projects.
-
-</p>
-
-
-</a>
-
-
-
-
-
-<a href="edit-project.html"
-class="management-card">
-
-
-<i class="fa-solid fa-pen"></i>
-
-
-<h3>
-
-Edit Projects
-
-</h3>
-
-
-<p>
-
-Modify or remove projects.
-
-</p>
-
-
-</a>
-
-
-
-
-
-<a href="posts.html"
-class="management-card">
-
-
-<i class="fa-solid fa-newspaper"></i>
-
-
-<h3>
-
-Posts & Articles
-
-</h3>
-
-
-<p>
-
-Manage blog posts and announcements.
-
-</p>
-
-
-</a>
-
-
-
-
-
-<a href="../projects.html"
-target="_blank"
-class="management-card">
-
-
-<i class="fa-solid fa-eye"></i>
-
-
-<h3>
-
-View Website
-
-</h3>
-
-
-<p>
-
-Open public website.
-
-</p>
-
-
-</a>
-
-
-
-</div>
-
-
-</section>
 
 
 
@@ -434,53 +118,168 @@ Open public website.
 <!-- QUICK STATS -->
 
 
-<section class="quick-section">
+<div class="dashboard-cards">
+
+
+
+
+
+<div class="dashboard-card">
+
+
+<i class="fa-solid fa-building"></i>
+
+
+<h3>
+
+Projects
+
+</h3>
+
+
+<span id="projects-count">
+
+0
+
+</span>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="dashboard-card">
+
+
+<i class="fa-solid fa-newspaper"></i>
+
+
+<h3>
+
+Posts
+
+</h3>
+
+
+<span id="posts-count">
+
+0
+
+</span>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="dashboard-card">
+
+
+<i class="fa-solid fa-comments"></i>
+
+
+<h3>
+
+Comments
+
+</h3>
+
+
+<span id="comments-count">
+
+0
+
+</span>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="dashboard-card">
+
+
+<i class="fa-solid fa-users"></i>
+
+
+<h3>
+
+Visitors
+
+</h3>
+
+
+<span id="visitors-count">
+
+--
+
+</span>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ANALYTICS -->
+
+
+<div class="admin-box analytics-box">
+
 
 
 <h2>
 
-Content Overview
+Website Analytics
 
 </h2>
 
 
 
-<div class="quick-grid">
+<p>
 
+Visitor statistics from Google Analytics
 
-
-<div>
-
-<h3 id="projectsCount">
-
---
-
-</h3>
-
-<span>
-
-Projects
-
-</span>
-
-</div>
+</p>
 
 
 
 
-<div>
 
-<h3 id="postsCount">
 
---
+<div class="chart-container">
 
-</h3>
 
-<span>
+<canvas id="visitorChart">
 
-Posts
+</canvas>
 
-</span>
 
 </div>
 
@@ -488,41 +287,106 @@ Posts
 
 
 
-<div>
-
-<h3 id="commentsCount">
-
---
-
-</h3>
-
-<span>
-
-Comments
-
-</span>
-
 </div>
 
 
 
 
 
-<div>
 
-<h3 id="requestsCount">
 
---
 
-</h3>
 
-<span>
+<!-- MANAGEMENT -->
 
-Client Requests
 
-</span>
+<div class="dashboard-actions">
+
+
+
+
+
+
+<a href="add-project.html"
+class="admin-action">
+
+
+<i class="fa-solid fa-plus"></i>
+
+
+Add Project
+
+
+</a>
+
+
+
+
+
+
+
+
+<a href="edit-project.html"
+class="admin-action">
+
+
+<i class="fa-solid fa-pen"></i>
+
+
+Edit Projects
+
+
+</a>
+
+
+
+
+
+
+
+
+<a href="posts.html"
+class="admin-action">
+
+
+<i class="fa-solid fa-file"></i>
+
+
+Manage Posts
+
+
+</a>
+
+
+
+
+
+
+
+
+<a href="../projects.html"
+class="admin-action"
+target="_blank">
+
+
+<i class="fa-solid fa-eye"></i>
+
+
+View Website
+
+
+</a>
+
+
+
+
+
 
 </div>
+
+
+
+
 
 
 
@@ -537,115 +401,12 @@ Client Requests
 
 
 
-</div>
-
-
-</main>
 
 
 
-
-
-
-
-
-<script>
-
-
-// LOGOUT
-
-
-document
-.getElementById("logoutBtn")
-.onclick = function(){
-
-
-localStorage.removeItem("adminLogged");
-
-
-window.location.href="login.html";
-
-
-};
-
-
-
-
-
-
-
-// TEMPORARY ANALYTICS CHART
-// Will connect to Google Analytics API later
-
-
-const ctx =
-document
-.getElementById('visitorsChart');
-
-
-
-new Chart(ctx, {
-
-
-type:'line',
-
-
-data:{
-
-
-labels:[
-'Jan',
-'Feb',
-'Mar',
-'Apr',
-'May',
-'Jun'
-],
-
-
-datasets:[{
-
-
-label:'Visitors',
-
-
-data:[
-0,
-0,
-0,
-0,
-0,
-0
-]
-
-
-}]
-
-
-},
-
-
-
-options:{
-
-
-responsive:true
-
-
-}
-
-
-
-});
-
-
-
-</script>
-
-
+<script src="../script.js"></script>
 
 
 </body>
-
 
 </html>
