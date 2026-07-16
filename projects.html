@@ -7,7 +7,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Projects | Ahmed Hamid Architecture</title>
+
+<title>
+Projects | Ahmed Hamid Architecture
+</title>
+
 
 <meta name="description"
 content="Explore architectural projects by Ahmed Hamid Architecture.">
@@ -15,12 +19,14 @@ content="Explore architectural projects by Ahmed Hamid Architecture.">
 
 <link rel="icon" href="assets/logo.png">
 
+
 <link rel="stylesheet" href="style.css">
 
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
 rel="stylesheet">
@@ -39,27 +45,41 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 
 
+
 <!-- HEADER -->
 
 <header class="header">
 
-<div class="container">
+
+<div class="container nav-container">
 
 
-<div class="logo">
+<a href="index.html"
+class="logo">
+
 
 <img src="assets/logo.png"
 alt="Ahmed Hamid Architecture">
 
 
 <span>
-
 Ahmed Hamid Architecture
-
 </span>
 
 
-</div>
+</a>
+
+
+
+
+
+<button class="menu-toggle">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+
 
 
 
@@ -81,23 +101,25 @@ Services
 </a>
 
 
-<a href="projects.html" class="active">
+<a href="projects.html"
+class="active">
+
 Projects
-</a>
 
-
-<a href="gallery.html">
-Gallery
 </a>
 
 
 <a href="blog.html">
+
 Blog
+
 </a>
 
 
 <a href="contact.html">
+
 Contact
+
 </a>
 
 
@@ -105,17 +127,12 @@ Contact
 
 
 
-
-<div class="menu-toggle">
-
-<i class="fa-solid fa-bars"></i>
-
 </div>
 
-
-</div>
 
 </header>
+
+
 
 
 
@@ -132,33 +149,18 @@ Contact
 <div class="container">
 
 
-<div class="page-hero-content">
-
-
-<span>
-
-OUR PROJECTS
-
-</span>
-
-
 <h1>
 
-Architectural Stories
-And Design Concepts
+Architectural Projects
 
 </h1>
 
 
 <p>
 
-Explore our projects, ideas and architectural solutions.
-Every project represents a unique design journey.
+Discover our residential, commercial and interior design projects.
 
 </p>
-
-
-</div>
 
 
 </div>
@@ -172,13 +174,18 @@ Every project represents a unique design journey.
 
 
 
-<!-- PROJECT POSTS -->
+
+
+<!-- PROJECTS -->
 
 
 <section class="projects">
 
 
 <div class="container">
+
+
+
 
 
 <div class="section-header">
@@ -191,17 +198,18 @@ PORTFOLIO
 </span>
 
 
+
 <h2>
 
-Latest Projects
+Selected Works
 
 </h2>
 
 
+
 <p>
 
-Discover residential, commercial and interior projects
-designed by Ahmed Hamid Architecture.
+Explore our architectural concepts and completed designs.
 
 </p>
 
@@ -214,7 +222,6 @@ designed by Ahmed Hamid Architecture.
 
 
 
-<!-- FILTER -->
 
 
 <div class="projects-filter">
@@ -228,12 +235,14 @@ All
 </button>
 
 
+
 <button class="filter-btn"
 data-filter="residential">
 
 Residential
 
 </button>
+
 
 
 <button class="filter-btn"
@@ -244,12 +253,14 @@ Commercial
 </button>
 
 
+
 <button class="filter-btn"
 data-filter="interior">
 
 Interior
 
 </button>
+
 
 
 <button class="filter-btn"
@@ -269,31 +280,14 @@ Planning
 
 
 
-<!-- POSTS WILL LOAD HERE -->
-
-
 
 <div id="projects-container"
 class="projects-grid">
 
 
 
-<!--
-
-JavaScript will create project cards here
-
-Each project contains:
-
-- Images from Google Drive
-- Text from Supabase
-- Comments from Supabase
-
-
--->
-
-
-
 </div>
+
 
 
 
@@ -310,38 +304,37 @@ Each project contains:
 
 
 
-<!-- COMMENT USER NAME -->
 
 
-<section class="comment-info">
+<!-- PROJECT DETAILS -->
+
+<section class="project-details">
 
 
 <div class="container">
 
 
-<div class="section-header">
+<div id="project-gallery"
+class="project-gallery">
+
+</div>
 
 
-<span class="section-subtitle">
-
-COMMUNITY
-
-</span>
 
 
-<h2>
 
-Share Your Opinion
+<div class="project-info">
+
+
+<h2 id="project-title">
 
 </h2>
 
 
-<p>
+<div id="project-description">
 
-Leave your thoughts about our projects.
-Your username will be remembered for future comments.
+</div>
 
-</p>
 
 
 </div>
@@ -360,62 +353,79 @@ Your username will be remembered for future comments.
 
 
 
-<!-- CTA -->
+
+<!-- COMMENTS -->
 
 
-<section class="cta">
+<section class="comments-section">
 
 
 <div class="container">
 
 
-<div class="cta-box">
-
-
-<span>
-
-HAVE A PROJECT IDEA?
-
-</span>
-
-
 <h2>
 
-Let's Create Your Dream Space
+Client Comments
 
 </h2>
 
 
-<p>
 
-Contact Ahmed Hamid Architecture and start
-your design journey.
+<div id="comments-container">
 
-</p>
+</div>
 
 
-<div class="cta-buttons">
 
 
-<a href="contact.html"
-class="btn btn-primary">
 
-Start Project
 
-</a>
+
+<div class="comment-form">
+
+
+<h3>
+
+Leave Your Comment
+
+</h3>
+
+
+
+<textarea
+id="comment-text"
+placeholder="Write your comment...">
+
+</textarea>
+
+
+
+
+<button
+class="btn btn-primary"
+onclick="addComment(
+new URLSearchParams(window.location.search).get('id')
+)">
+
+
+Send Comment
+
+</button>
+
 
 
 </div>
 
 
 
-</div>
 
 
 </div>
 
 
 </section>
+
+
 
 
 
@@ -425,142 +435,20 @@ Start Project
 
 <!-- FOOTER -->
 
-
 <footer class="footer">
 
 
-<div class="container footer-grid">
-
-
-
-<div>
-
-
-<img src="assets/logo.png"
-class="footer-logo"
-alt="Ahmed Hamid Architecture">
-
-
-<h3>
-
-Ahmed Hamid Architecture
-
-</h3>
+<div class="container">
 
 
 <p>
 
-Modern Architecture • Interior Design • Planning • Visualization
+© 2026 Ahmed Hamid Architecture
 
 </p>
 
 
 </div>
-
-
-
-
-
-<div>
-
-
-<h4>
-
-Company
-
-</h4>
-
-
-<ul>
-
-
-<li>
-<a href="about.html">
-About
-</a>
-</li>
-
-
-<li>
-<a href="services.html">
-Services
-</a>
-</li>
-
-
-<li>
-<a href="projects.html">
-Projects
-</a>
-</li>
-
-
-</ul>
-
-
-</div>
-
-
-
-
-
-<div>
-
-
-<h4>
-
-Resources
-
-</h4>
-
-
-<ul>
-
-
-<li>
-<a href="gallery.html">
-Gallery
-</a>
-</li>
-
-
-<li>
-<a href="blog.html">
-Blog
-</a>
-</li>
-
-
-<li>
-<a href="contact.html">
-Contact
-</a>
-</li>
-
-
-</ul>
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-<div class="footer-bottom">
-
-
-© 2026 Ahmed Hamid Architecture.
-All Rights Reserved.
-
-
-</div>
-
 
 
 </footer>
@@ -571,19 +459,12 @@ All Rights Reserved.
 
 
 
-<button id="backToTop">
-
-<i class="fa-solid fa-arrow-up"></i>
-
-</button>
-
-
-
 
 
 <script src="script.js"></script>
 
 
 </body>
+
 
 </html>
