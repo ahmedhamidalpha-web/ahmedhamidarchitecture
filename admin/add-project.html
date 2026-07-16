@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Add Project | Ahmed Hamid Architecture</title>
+
+
+<link rel="icon" href="../assets/logo.png">
+
+
+<link rel="stylesheet" href="../style.css">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+</head>
+
+
+<body class="admin-page">
+
+
+
+
+
+<header class="admin-header">
+
+<div class="admin-container">
+
+
+<div class="admin-brand">
+
+
+<img src="../assets/logo.png">
+
+
+<h2>
+
+Ahmed Hamid Architecture
+
+</h2>
+
+
+</div>
+
+
+
+
+<a href="dashboard.html"
+class="admin-back">
+
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Dashboard
+
+
+</a>
+
+
+</div>
+
+</header>
+
+
+
+
+
+
+
+
+<main class="admin-dashboard">
+
+
+<div class="admin-container">
+
+
+
+
+
+<div class="admin-form-box">
+
+
+
+<div class="form-title">
+
+
+<h1>
+
+Add New Project
+
+</h1>
+
+
+<p>
+
+Create a new architectural project.
+
+Text will be saved in Supabase and images will be uploaded to Google Drive.
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<form id="project-form">
+
+
+
+
+
+<div class="form-grid">
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Project Title
+
+</label>
+
+
+<input
+
+type="text"
+
+id="project-title"
+
+placeholder="Example: Modern Villa Design"
+
+required>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Category
+
+</label>
+
+
+<select id="project-category"
+required>
+
+
+<option value="">
+
+Select Category
+
+</option>
+
+
+<option value="residential">
+
+Residential
+
+</option>
+
+
+<option value="commercial">
+
+Commercial
+
+</option>
+
+
+<option value="interior">
+
+Interior
+
+</option>
+
+
+<option value="planning">
+
+Planning
+
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Location
+
+</label>
+
+
+<input
+
+type="text"
+
+id="project-location"
+
+placeholder="Example: Khartoum, Sudan">
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Project Date
+
+</label>
+
+
+<input
+
+type="date"
+
+id="project-date">
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Project Description
+
+</label>
+
+
+<textarea
+
+id="project-description"
+
+rows="8"
+
+placeholder="Write project description..."
+required></textarea>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+
+Project Images
+
+</label>
+
+
+
+<input
+
+type="file"
+
+id="project-images"
+
+accept="image/*"
+
+multiple>
+
+
+<p class="upload-note">
+
+Images will be uploaded to Google Drive.
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="image-preview"
+id="image-preview">
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<button
+
+type="submit"
+
+class="btn btn-primary">
+
+
+<i class="fa-solid fa-cloud-arrow-up"></i>
+
+
+Publish Project
+
+
+</button>
+
+
+
+
+
+
+<p id="project-message"></p>
+
+
+
+
+
+</form>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+</main>
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+// Image Preview
+
+
+const imageInput =
+document.getElementById("project-images");
+
+
+const preview =
+document.getElementById("image-preview");
+
+
+
+imageInput
+.addEventListener(
+"change",
+function(){
+
+
+preview.innerHTML="";
+
+
+Array.from(this.files)
+.forEach(file=>{
+
+
+let reader =
+new FileReader();
+
+
+
+reader.onload=function(e){
+
+
+let img =
+document.createElement("img");
+
+
+img.src=e.target.result;
+
+
+preview.appendChild(img);
+
+
+};
+
+
+
+reader.readAsDataURL(file);
+
+
+
+});
+
+
+});
+
+
+
+
+
+
+// Submit placeholder
+
+document
+.getElementById("project-form")
+.addEventListener(
+"submit",
+function(e){
+
+
+e.preventDefault();
+
+
+
+document
+.getElementById("project-message")
+.innerHTML =
+"Project system will be connected with Supabase and Google Drive.";
+
+
+});
+
+
+
+</script>
+
+
+
+
+
+</body>
+
+</html>
