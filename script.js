@@ -1,7 +1,8 @@
 /*==================================================
     AHMED HAMID ARCHITECTURE
-    MAIN JAVASCRIPT
+    MAIN SCRIPT
 ==================================================*/
+
 
 
 /*==================================================
@@ -10,11 +11,12 @@
 
 
 const SUPABASE_URL =
-"https://fzlpqsvcicuvldaxgvcz.supabase.co";
+"https://fzlpqsvcicuvldaxgvcz.supabase.co/rest/v1";
 
 
 const SUPABASE_KEY =
-"YOUR_ANON_KEY";
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6bHBx c3ZjaWN1dmxkYXhndmN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3OTM1NjksImV4cCI6MjA5OTM2OTU2OX0.4YTOUuAv9RP5yGz_OF0Sh6ocZLMJa86HrVgAor97Lq8"
+.replace(" ","");
 
 
 const GOOGLE_SCRIPT_URL =
@@ -22,72 +24,12 @@ const GOOGLE_SCRIPT_URL =
 
 
 
-/*==================================================
-    GOOGLE ANALYTICS
-==================================================*/
-
-
-(function(){
-
-const GA_ID = "G-S8XNQKS8F3";
-
-
-let script =
-document.createElement("script");
-
-
-script.async = true;
-
-
-script.src =
-"https://www.googletagmanager.com/gtag/js?id="+GA_ID;
-
-
-document.head.appendChild(script);
-
-
-
-window.dataLayer =
-window.dataLayer || [];
-
-
-
-function gtag(){
-
-dataLayer.push(arguments);
-
-}
-
-
-
-window.gtag = gtag;
-
-
-
-gtag(
-"js",
-new Date()
-);
-
-
-
-gtag(
-"config",
-GA_ID
-);
-
-
-
-})();
-
-
-
 
 
 
 
 /*==================================================
-    SUPABASE REQUEST HELPER
+    SUPABASE REQUEST SYSTEM
 ==================================================*/
 
 
@@ -99,26 +41,37 @@ query=""
 ){
 
 
+try{
+
+
 let options={
 
 method:method,
 
 headers:{
 
-"apikey":SUPABASE_KEY,
+
+"apikey":
+SUPABASE_KEY,
+
 
 "Authorization":
 "Bearer "+SUPABASE_KEY,
 
+
 "Content-Type":
 "application/json",
+
 
 "Prefer":
 "return=representation"
 
+
 }
 
+
 };
+
 
 
 
@@ -131,20 +84,24 @@ JSON.stringify(body);
 
 
 
+
+
 let response =
 await fetch(
-`${SUPABASE_URL}/rest/v1/${table}${query}`,
+`${SUPABASE_URL}/${table}${query}`,
 options
 );
+
+
 
 
 
 if(!response.ok){
 
 console.error(
-"Supabase Error:",
 await response.text()
 );
+
 
 return null;
 
@@ -152,11 +109,34 @@ return null;
 
 
 
-return await response.json();
+
+let data =
+await response.json();
+
+
+
+return data;
 
 
 
 }
+
+catch(error){
+
+
+console.error(error);
+
+
+return null;
+
+
+}
+
+
+
+}
+
+
 
 
 
@@ -165,21 +145,25 @@ return await response.json();
 
 
 /*==================================================
-    GOOGLE DRIVE IMAGE HANDLER
+    GOOGLE DRIVE IMAGE SYSTEM
 ==================================================*/
 
 
-function convertDriveImage(url){
+function convertDriveImage(
+url
+){
 
 
-if(!url) return "";
+if(!url)
+return "";
 
 
 
-// if already direct link
 
 if(
-url.includes("googleusercontent.com")
+url.includes(
+"googleusercontent.com"
+)
 ){
 
 return url;
@@ -189,15 +173,18 @@ return url;
 
 
 
-// if google drive normal link
 
 if(
-url.includes("drive.google.com")
+url.includes(
+"drive.google.com"
+)
 ){
 
 
 let id =
-url.match(/[-\w]{25,}/);
+url.match(
+/[-\w]{25,}/
+);
 
 
 
@@ -209,6 +196,7 @@ return
 }
 
 
+
 }
 
 
@@ -225,14 +213,18 @@ return url;
 
 
 
-function createImageElement(
+
+
+function createImage(
 src,
 alt=""
 ){
 
 
 let img =
-document.createElement("img");
+document.createElement(
+"img"
+);
 
 
 
@@ -263,8 +255,174 @@ return img;
 
 
 
+
+
+
+
 /*==================================================
-    MOBILE MENU
+    GOOGLE DRIVE UPLOAD
+==================================================*/
+
+
+function fileToBase64(
+file
+){
+
+
+return new Promise(
+(resolve,reject)=>{
+
+
+let reader =
+new FileReader();
+
+
+
+reader.onload =
+()=>{
+
+
+resolve(
+reader.result.split(",")[1]
+);
+
+
+};
+
+
+
+reader.onerror =
+reject;
+
+
+
+reader.readAsDataURL(file);
+
+
+
+});
+
+}
+
+
+
+
+
+
+
+
+
+async function uploadImageToDrive(
+file
+){
+
+
+
+let base64 =
+await fileToBase64(file);
+
+
+
+
+let response =
+await fetch(
+GOOGLE_SCRIPT_URL,
+{
+
+method:"POST",
+
+body:JSON.stringify({
+
+file:base64,
+
+name:file.name,
+
+type:file.type
+
+})
+
+}
+
+);
+
+
+
+
+let result =
+await response.json();
+
+
+
+
+if(
+result.status==="success"
+){
+
+
+return result.link;
+
+
+}
+
+
+
+return null;
+
+
+}
+
+
+
+
+
+
+
+
+
+async function uploadImages(
+files
+){
+
+
+let links=[];
+
+
+
+for(
+let file of files
+){
+
+
+let link =
+await uploadImageToDrive(file);
+
+
+
+if(link)
+links.push(link);
+
+
+
+}
+
+
+
+return links;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+    MOBILE NAVIGATION
 ==================================================*/
 
 
@@ -273,29 +431,36 @@ document.addEventListener(
 ()=>{
 
 
-const menuBtn =
-document.querySelector(".menu-toggle");
-
-
-const nav =
-document.querySelector(".nav-menu");
+let menu =
+document.querySelector(
+".menu-toggle"
+);
 
 
 
-if(menuBtn && nav){
+let nav =
+document.querySelector(
+".nav-menu"
+);
 
 
-menuBtn.onclick =
+
+
+if(menu && nav){
+
+
+menu.onclick =
 ()=>{
 
 
-nav.classList.toggle("active");
+nav.classList.toggle(
+"active"
+);
 
-
-menuBtn.classList.toggle("active");
 
 
 };
+
 
 
 }
@@ -304,77 +469,133 @@ menuBtn.classList.toggle("active");
 
 
 });
-
-
-
-
-
-
-
-
-
 /*==================================================
-    BACK TO TOP
+    ADMIN AUTH SYSTEM
 ==================================================*/
 
 
-const backBtn =
+async function adminLogin(){
+
+
+let email =
 document.getElementById(
-"backToTop"
+"admin-email"
+);
+
+
+let password =
+document.getElementById(
+"admin-password"
 );
 
 
 
-if(backBtn){
+if(!email || !password)
+return;
 
 
-window.addEventListener(
-"scroll",
-()=>{
 
-
-if(window.scrollY > 400){
-
-backBtn.classList.add(
-"show"
+let message =
+document.getElementById(
+"login-message"
 );
 
-}
-
-else{
-
-backBtn.classList.remove(
-"show"
-);
-
-}
 
 
+/*
+ملاحظة:
+Supabase Auth يحتاج مكتبة supabase-js
+وسيتم تحميلها في login.html
+*/
+
+
+const { data, error } =
+await window.supabaseClient.auth.signInWithPassword({
+
+email:
+email.value,
+
+password:
+password.value
 
 });
 
 
 
 
-
-backBtn.onclick =
-()=>{
+if(error){
 
 
-window.scrollTo({
-
-top:0,
-
-behavior:"smooth"
-
-});
+if(message)
+message.innerHTML =
+"Invalid email or password";
 
 
-};
+return;
+
+
+}
+
+
+
+localStorage.setItem(
+"adminLogged",
+"true"
+);
+
+
+
+window.location.href =
+"dashboard.html";
 
 
 
 }
+
+
+
+
+
+
+
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+let loginForm =
+document.getElementById(
+"login-form"
+);
+
+
+
+if(loginForm){
+
+
+loginForm.addEventListener(
+"submit",
+(e)=>{
+
+
+e.preventDefault();
+
+
+adminLogin();
+
+
+
+});
+
+
+}
+
+
+
+
+});
 
 
 
@@ -385,81 +606,22 @@ behavior:"smooth"
 
 
 /*==================================================
-    SCROLL ANIMATION
+    ADMIN PROTECTION
 ==================================================*/
 
 
-const observer =
-new IntersectionObserver(
-(entries)=>{
+function protectAdmin(){
 
 
-entries.forEach(
-(entry)=>{
-
-
-if(entry.isIntersecting){
-
-
-entry.target.classList.add(
-"visible"
-);
-
-
-}
-
-
-});
-
-
-},
-{
-
-threshold:.15
-
-}
-);
-
-
-
-document
-.querySelectorAll(
-".service-card,.project-card,.why-card,.testimonial-card"
-)
-.forEach(
-(el)=>{
-
-
-observer.observe(el);
-
-
-});
-
-
-
-
-
-
-
-
-
-/*==================================================
-    ADMIN SESSION CHECK
-==================================================*/
-
-
-function checkAdmin(){
-
-
-let page =
+let path =
 window.location.pathname;
 
 
 
 if(
-page.includes("/admin/")
+path.includes("/admin/")
 &&
-!page.includes("login.html")
+!path.includes("login.html")
 ){
 
 
@@ -490,41 +652,89 @@ window.location.href =
 
 
 
-checkAdmin();
+
+protectAdmin();
+
+
+
+
 
 
 
 
 
 /*==================================================
-    END PART 1
-==================================================*/
-/*==================================================
-    PROJECTS SYSTEM
+    LOGOUT
 ==================================================*/
 
 
+document.addEventListener(
+"click",
+(e)=>{
 
-async function loadProjects(
-containerId="projects-container"
+
+if(
+e.target.id==="logout-btn"
 ){
 
 
-const container =
-document.getElementById(containerId);
+localStorage.removeItem(
+"adminLogged"
+);
 
 
 
-if(!container) return;
+window.location.href =
+"login.html";
 
 
 
-container.innerHTML =
+}
+
+
+
+});
+
+
+
+
+
+
+
+
+
+/*==================================================
+    PROJECTS LOAD
+==================================================*/
+
+
+async function loadProjects(
+container="projects-container"
+){
+
+
+
+let box =
+document.getElementById(
+container
+);
+
+
+
+if(!box)
+return;
+
+
+
+
+box.innerHTML =
 `
 <div class="loading">
 Loading Projects...
 </div>
 `;
+
+
 
 
 
@@ -538,25 +748,18 @@ null,
 
 
 
-if(!projects || projects.length===0){
 
 
-container.innerHTML =
-`
-<p>
-No projects available.
-</p>
-`;
 
+if(!projects)
 return;
 
 
-}
 
 
+box.innerHTML="";
 
 
-container.innerHTML="";
 
 
 
@@ -564,30 +767,18 @@ projects.forEach(
 (project)=>{
 
 
-let card =
-document.createElement("article");
 
-
-
-card.className =
-"project-card";
-
-
-
-card.dataset.category =
-project.category || "residential";
-
-
-
-
-let image="assets/logo.png";
+let image =
+"assets/logo.png";
 
 
 
 if(
-project.device_image_ids &&
+project.device_image_ids
+&&
 project.device_image_ids.length
 ){
+
 
 image =
 convertDriveImage(
@@ -601,15 +792,22 @@ project.device_image_ids[0]
 
 
 
-card.innerHTML = `
+box.innerHTML += `
+
+
+<article class="project-card"
+data-category="${project.category || "all"}">
+
 
 <div class="project-image">
 
-<img 
-src="${image}"
+
+<img src="${image}"
 alt="${project.title}">
 
+
 </div>
+
 
 
 
@@ -618,9 +816,10 @@ alt="${project.title}">
 
 <span class="project-category">
 
-${project.location || "Architecture"}
+${project.category || "Architecture"}
 
 </span>
+
 
 
 
@@ -632,6 +831,7 @@ ${project.title}
 
 
 
+
 <p>
 
 ${project.design_concept || ""}
@@ -640,22 +840,29 @@ ${project.design_concept || ""}
 
 
 
+
 <a href="projects.html?id=${project.id}">
+
 
 View Project
 
+
 <i class="fa-solid fa-arrow-right"></i>
+
 
 </a>
 
 
+
 </div>
 
+
+
+</article>
+
+
+
 `;
-
-
-
-container.appendChild(card);
 
 
 
@@ -674,26 +881,26 @@ container.appendChild(card);
 
 
 /*==================================================
-    SINGLE PROJECT VIEW
+    PROJECT DETAILS
 ==================================================*/
 
 
-async function loadSingleProject(){
-
-
-let params =
-new URLSearchParams(
-window.location.search
-);
+async function loadProjectDetails(){
 
 
 
 let id =
-params.get("id");
+new URLSearchParams(
+window.location.search
+)
+.get("id");
 
 
 
-if(!id) return;
+if(!id)
+return;
+
+
 
 
 
@@ -707,13 +914,18 @@ null,
 
 
 
+
+
 if(!data || !data.length)
 return;
 
 
 
+
 let project =
 data[0];
+
+
 
 
 
@@ -724,12 +936,11 @@ document.getElementById(
 
 
 
-if(title){
-
+if(title)
 title.innerHTML =
 project.title;
 
-}
+
 
 
 
@@ -745,44 +956,55 @@ if(description){
 
 description.innerHTML = `
 
+
 <p>
 <strong>Location:</strong>
-${project.location}
+${project.location || ""}
 </p>
+
 
 
 <p>
 <strong>Plot Area:</strong>
-${project.plot_area}
+${project.plot_area || ""}
 </p>
+
 
 
 <p>
 <strong>Components:</strong>
-${project.components}
+${project.components || ""}
 </p>
+
 
 
 <p>
-<strong>Design Concept:</strong>
-${project.design_concept}
+<strong>Concept:</strong>
+${project.design_concept || ""}
 </p>
+
 
 
 <p>
 <strong>Challenges:</strong>
-${project.challenges}
+${project.challenges || ""}
 </p>
+
 
 
 <p>
 <strong>Result:</strong>
-${project.result}
+${project.result || ""}
 </p>
+
+
 
 `;
 
+
+
 }
+
 
 
 
@@ -794,27 +1016,33 @@ document.getElementById(
 
 
 
-if(gallery){
+
+if(
+gallery &&
+project.device_image_ids
+){
+
 
 
 gallery.innerHTML="";
 
 
 
-project.device_image_ids
-.forEach(
+project.device_image_ids.forEach(
 (img)=>{
 
 
 gallery.appendChild(
-createImageElement(
+createImage(
 img,
 project.title
 )
 );
 
 
+
 });
+
 
 
 }
@@ -834,267 +1062,6 @@ loadComments(id);
 
 
 
-
-/*==================================================
-    PROJECT FILTER
-==================================================*/
-
-
-document.addEventListener(
-"click",
-function(e){
-
-
-if(
-e.target.classList.contains(
-"filter-btn"
-)
-){
-
-
-let filter =
-e.target.dataset.filter;
-
-
-
-document
-.querySelectorAll(
-".filter-btn"
-)
-.forEach(btn=>{
-
-btn.classList.remove(
-"active"
-);
-
-});
-
-
-
-e.target.classList.add(
-"active"
-);
-
-
-
-document
-.querySelectorAll(
-".project-card"
-)
-.forEach(card=>{
-
-
-if(
-filter==="all"
-||
-card.dataset.category===filter
-){
-
-
-card.style.display =
-"block";
-
-
-}
-
-else{
-
-
-card.style.display =
-"none";
-
-
-}
-
-
-});
-
-
-}
-
-
-
-});
-
-
-
-
-
-
-
-
-
-/*==================================================
-    COMMENTS SYSTEM
-==================================================*/
-
-
-async function loadComments(
-projectId
-){
-
-
-let box =
-document.getElementById(
-"comments-container"
-);
-
-
-
-if(!box) return;
-
-
-
-let comments =
-await supabaseRequest(
-"comments",
-"GET",
-null,
-`?project=eq.${projectId}&order=created_at.desc`
-);
-
-
-
-box.innerHTML="";
-
-
-
-if(!comments || !comments.length){
-
-
-box.innerHTML =
-`
-<p>
-No comments yet.
-</p>
-`;
-
-return;
-
-}
-
-
-
-comments.forEach(
-(item)=>{
-
-
-box.innerHTML += `
-
-<div class="comment-card">
-
-
-<h4>
-
-${item.username}
-
-</h4>
-
-
-<p>
-
-${item.comment}
-
-</p>
-
-
-<small>
-
-${new Date(
-item.created_at
-).toLocaleDateString()}
-
-</small>
-
-
-</div>
-
-`;
-
-
-
-});
-
-
-
-}
-
-
-
-
-
-
-
-
-async function addComment(
-projectId
-){
-
-
-let input =
-document.getElementById(
-"comment-text"
-);
-
-
-
-if(!input)
-return;
-
-
-
-let text =
-input.value.trim();
-
-
-
-if(!text)
-return;
-
-
-
-let username =
-"Visitor";
-
-
-
-await supabaseRequest(
-"comments",
-"POST",
-{
-
-project:projectId,
-
-username:username,
-
-comment:text
-
-}
-
-);
-
-
-
-input.value="";
-
-
-
-loadComments(projectId);
-
-
-
-}
-
-
-
-
-
-
-/*==================================================
-    AUTO LOAD
-==================================================*/
-
-
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
@@ -1103,192 +1070,36 @@ document.addEventListener(
 loadProjects();
 
 
-loadSingleProject();
+loadProjectDetails();
 
 
 });
 /*==================================================
-    GOOGLE DRIVE UPLOAD
+    ADD PROJECT SYSTEM
 ==================================================*/
 
 
-function fileToBase64(file){
+async function addProject(){
 
 
-return new Promise(
-(resolve,reject)=>{
 
-
-let reader =
-new FileReader();
-
-
-
-reader.onload =
-()=>{
-
-
-let result =
-reader.result
-.split(",")[1];
-
-
-resolve(result);
-
-
-};
-
-
-
-reader.onerror =
-reject;
-
-
-
-reader.readAsDataURL(file);
-
-
-
-});
-
-}
-
-
-
-
-
-
-
-async function uploadImageToDrive(file){
-
-
-let base64 =
-await fileToBase64(file);
-
-
-
-let response =
-await fetch(
-GOOGLE_SCRIPT_URL,
-{
-
-method:"POST",
-
-body:JSON.stringify({
-
-file:base64,
-
-name:file.name,
-
-type:file.type
-
-})
-
-}
-
-);
-
-
-
-let result =
-await response.json();
-
-
-
-if(
-result.status==="success"
-){
-
-
-return result.link;
-
-
-}
-
-
-
-console.error(
-result.message
-);
-
-
-
-return null;
-
-
-
-}
-
-
-
-
-
-
-
-
-async function uploadMultipleImages(
-files
-){
-
-
-let links=[];
-
-
-
-for(
-let file of files
-){
-
-
-let link =
-await uploadImageToDrive(file);
-
-
-
-if(link){
-
-links.push(link);
-
-}
-
-
-
-}
-
-
-
-return links;
-
-
-}
-
-
-
-
-
-
-
-
-
-/*==================================================
-    ADD PROJECT ADMIN
-==================================================*/
-
-
-const projectForm =
+let form =
 document.getElementById(
 "project-form"
 );
 
 
 
-if(projectForm){
+if(!form)
+return;
 
 
 
-projectForm.addEventListener(
+
+
+form.addEventListener(
 "submit",
-async function(e){
+async(e)=>{
 
 
 e.preventDefault();
@@ -1297,20 +1108,40 @@ e.preventDefault();
 
 
 
+let message =
+document.getElementById(
+"project-message"
+);
+
+
+
+
+
+if(message)
+message.innerHTML =
+"Uploading images...";
+
+
+
+
+
+
+
 let files =
 document.getElementById(
 "project-images"
-)
-.files;
+).files;
 
 
 
 
 
-let imageLinks =
-await uploadMultipleImages(
+let images =
+await uploadImages(
 files
 );
+
+
 
 
 
@@ -1334,12 +1165,16 @@ document.getElementById(
 
 
 plot_area:
-"",
+document.getElementById(
+"project-area"
+).value,
 
 
 
 components:
-"",
+document.getElementById(
+"project-components"
+).value,
 
 
 
@@ -1351,17 +1186,22 @@ document.getElementById(
 
 
 challenges:
-"",
+document.getElementById(
+"project-challenges"
+).value,
 
 
 
 result:
-"",
+document.getElementById(
+"project-result"
+).value,
 
 
 
 device_image_ids:
-imageLinks
+images
+
 
 
 };
@@ -1371,7 +1211,9 @@ imageLinks
 
 
 
-let saved =
+
+
+let result =
 await supabaseRequest(
 "projects",
 "POST",
@@ -1382,132 +1224,30 @@ project
 
 
 
-let message =
-document.getElementById(
-"project-message"
-);
 
 
+if(result){
 
-if(saved){
 
 
 message.innerHTML =
 "Project published successfully";
 
 
-
-projectForm.reset();
-
+form.reset();
 
 
-}
 
-else{
+}else{
 
 
 message.innerHTML =
-"Error saving project";
+"Error uploading project";
 
 
 }
 
 
-
-});
-
-
-}
-
-
-
-
-
-
-
-
-
-/*==================================================
-    ADMIN PROJECT LIST
-==================================================*/
-
-
-async function loadAdminProjects(){
-
-
-let list =
-document.getElementById(
-"admin-projects-list"
-);
-
-
-
-if(!list)
-return;
-
-
-
-let projects =
-await supabaseRequest(
-"projects",
-"GET",
-null,
-"?select=*&order=created_at.desc"
-);
-
-
-
-list.innerHTML="";
-
-
-
-projects.forEach(
-(project)=>{
-
-
-list.innerHTML += `
-
-<div class="admin-project-card">
-
-
-<h3>
-
-${project.title}
-
-</h3>
-
-
-
-<p>
-
-${project.location || ""}
-
-</p>
-
-
-
-<button
-class="edit-project-btn"
-data-id="${project.id}">
-
-Edit
-
-</button>
-
-
-
-<button
-class="delete-project-btn"
-data-id="${project.id}">
-
-Delete
-
-</button>
-
-
-</div>
-
-`;
 
 
 
@@ -1516,6 +1256,8 @@ Delete
 
 
 }
+
+
 
 
 
@@ -1529,20 +1271,9 @@ Delete
 ==================================================*/
 
 
-document.addEventListener(
-"click",
-async function(e){
-
-
-if(
-e.target.classList.contains(
-"delete-project-btn"
-)
+async function deleteProject(
+id
 ){
-
-
-let id =
-e.target.dataset.id;
 
 
 
@@ -1553,8 +1284,12 @@ confirm(
 
 
 
+
+
 if(!confirmDelete)
 return;
+
+
 
 
 
@@ -1567,15 +1302,12 @@ null,
 
 
 
-loadAdminProjects();
+
+location.reload();
 
 
 
 }
-
-
-
-});
 
 
 
@@ -1590,20 +1322,24 @@ loadAdminProjects();
 ==================================================*/
 
 
-document.addEventListener(
-"click",
-async function(e){
+async function loadEditProject(){
 
-
-if(
-e.target.classList.contains(
-"edit-project-btn"
-)
-){
 
 
 let id =
-e.target.dataset.id;
+new URLSearchParams(
+window.location.search
+)
+.get("id");
+
+
+
+
+if(!id)
+return;
+
+
+
 
 
 
@@ -1617,8 +1353,11 @@ null,
 
 
 
-if(!data)
+
+
+if(!data || !data.length)
 return;
+
 
 
 
@@ -1627,42 +1366,116 @@ data[0];
 
 
 
-document.getElementById(
-"edit-project-box"
-)
-.style.display="block";
 
 
 
 document.getElementById(
 "edit-project-id"
-)
-.value =
+).value =
 project.id;
+
 
 
 
 document.getElementById(
 "edit-title"
-)
-.value =
-project.title;
+).value =
+project.title || "";
+
+
 
 
 
 document.getElementById(
 "edit-location"
-)
-.value =
-project.location;
+).value =
+project.location || "";
+
+
+
+
+
+document.getElementById(
+"edit-area"
+).value =
+project.plot_area || "";
+
+
+
+
+
+document.getElementById(
+"edit-components"
+).value =
+project.components || "";
+
+
 
 
 
 document.getElementById(
 "edit-description"
-)
-.value =
-project.design_concept;
+).value =
+project.design_concept || "";
+
+
+
+
+
+document.getElementById(
+"edit-challenges"
+).value =
+project.challenges || "";
+
+
+
+
+
+document.getElementById(
+"edit-result"
+).value =
+project.result || "";
+
+
+
+
+
+
+let gallery =
+document.getElementById(
+"current-images"
+);
+
+
+
+
+if(
+gallery &&
+project.device_image_ids
+){
+
+
+gallery.innerHTML="";
+
+
+
+project.device_image_ids.forEach(
+(img)=>{
+
+
+gallery.innerHTML += `
+
+<img src="${convertDriveImage(img)}">
+
+`;
+
+
+
+});
+
+
+}
+
 
 
 
@@ -1670,7 +1483,6 @@ project.design_concept;
 
 
 
-});
 
 
 
@@ -1685,22 +1497,34 @@ project.design_concept;
 ==================================================*/
 
 
-const editForm =
+async function updateProject(){
+
+
+
+let form =
 document.getElementById(
 "edit-project-form"
 );
 
 
 
-if(editForm){
+if(!form)
+return;
 
 
-editForm.addEventListener(
+
+
+
+
+form.addEventListener(
 "submit",
-async function(e){
+async(e)=>{
 
 
 e.preventDefault();
+
+
+
 
 
 
@@ -1711,10 +1535,74 @@ document.getElementById(
 
 
 
+
+
+
+
+let oldData =
 await supabaseRequest(
 "projects",
-"PATCH",
-{
+"GET",
+null,
+`?id=eq.${id}`
+);
+
+
+
+
+
+let images =
+oldData[0].device_image_ids || [];
+
+
+
+
+
+
+
+
+
+let newFiles =
+document.getElementById(
+"edit-images"
+).files;
+
+
+
+
+
+
+
+if(
+newFiles.length
+){
+
+
+let newImages =
+await uploadImages(
+newFiles
+);
+
+
+images =
+[
+...images,
+...newImages
+];
+
+
+}
+
+
+
+
+
+
+
+
+
+let updated = {
+
 
 
 title:
@@ -1731,29 +1619,76 @@ document.getElementById(
 
 
 
+plot_area:
+document.getElementById(
+"edit-area"
+).value,
+
+
+
+components:
+document.getElementById(
+"edit-components"
+).value,
+
+
+
 design_concept:
 document.getElementById(
 "edit-description"
-).value
+).value,
 
 
 
-},
+challenges:
+document.getElementById(
+"edit-challenges"
+).value,
 
+
+
+result:
+document.getElementById(
+"edit-result"
+).value,
+
+
+
+device_image_ids:
+images
+
+
+
+};
+
+
+
+
+
+
+
+
+await supabaseRequest(
+"projects",
+"PATCH",
+updated,
 `?id=eq.${id}`
-
 );
+
+
+
 
 
 
 
 alert(
-"Updated successfully"
+"Project updated successfully"
 );
 
 
 
-loadAdminProjects();
+window.location.href =
+"dashboard.html";
 
 
 
@@ -1762,6 +1697,8 @@ loadAdminProjects();
 
 
 }
+
+
 
 
 
@@ -1774,467 +1711,30 @@ document.addEventListener(
 ()=>{
 
 
-loadAdminProjects();
+addProject();
+
+
+loadEditProject();
+
+
+updateProject();
+
 
 
 });
 /*==================================================
-    BLOG / POSTS SYSTEM
+    COMMENTS SYSTEM
 ==================================================*/
 
 
-async function loadPosts(
-containerId="blog-container"
+async function loadComments(
+projectId
 ){
-
-
-const container =
-document.getElementById(
-containerId
-);
-
-
-
-if(!container)
-return;
-
-
-
-container.innerHTML =
-`
-<div class="loading">
-Loading Posts...
-</div>
-`;
-
-
-
-let posts =
-await supabaseRequest(
-"posts",
-"GET",
-null,
-"?select=*&order=created_at.desc"
-);
-
-
-
-if(!posts || posts.length===0){
-
-
-container.innerHTML =
-`
-<p>
-No posts available.
-</p>
-`;
-
-return;
-
-
-}
-
-
-
-container.innerHTML="";
-
-
-
-posts.forEach(
-(post)=>{
-
-
-let image =
-"assets/logo.png";
-
-
-
-if(
-post.image_ids &&
-post.image_ids.length
-){
-
-image =
-convertDriveImage(
-post.image_ids[0]
-);
-
-
-}
-
-
-
-container.innerHTML += `
-
-
-<article class="blog-card">
-
-
-<div class="blog-image">
-
-
-<img src="${image}"
-alt="${post.title}">
-
-
-</div>
-
-
-
-<div class="blog-content">
-
-
-<span class="blog-type">
-
-${post.type}
-
-</span>
-
-
-
-<h3>
-
-${post.title}
-
-</h3>
-
-
-
-<p>
-
-${post.content.substring(0,150)}...
-
-</p>
-
-
-
-<a href="blog.html?id=${post.id}">
-
-Read More
-
-</a>
-
-
-
-</div>
-
-
-</article>
-
-
-`;
-
-
-
-});
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/*==================================================
-    SINGLE POST
-==================================================*/
-
-
-async function loadSinglePost(){
-
-
-let params =
-new URLSearchParams(
-window.location.search
-);
-
-
-
-let id =
-params.get("id");
-
-
-
-if(!id)
-return;
-
-
-
-let post =
-await supabaseRequest(
-"posts",
-"GET",
-null,
-`?id=eq.${id}`
-);
-
-
-
-if(!post || !post.length)
-return;
-
-
-
-let data =
-post[0];
-
-
-
-let title =
-document.getElementById(
-"post-title"
-);
-
-
-
-if(title)
-title.innerHTML =
-data.title;
-
-
-
-
-let content =
-document.getElementById(
-"post-content"
-);
-
-
-
-if(content)
-content.innerHTML =
-data.content;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/*==================================================
-    ADD POST ADMIN
-==================================================*/
-
-
-const postForm =
-document.getElementById(
-"post-form"
-);
-
-
-
-if(postForm){
-
-
-
-postForm.addEventListener(
-"submit",
-async function(e){
-
-
-e.preventDefault();
-
-
-
-let image =
-document.getElementById(
-"post-image"
-)
-.files[0];
-
-
-
-let images=[];
-
-
-
-if(image){
-
-
-let link =
-await uploadImageToDrive(
-image
-);
-
-
-if(link)
-images.push(link);
-
-
-}
-
-
-
-
-let post = {
-
-
-title:
-document.getElementById(
-"post-title"
-).value,
-
-
-
-type:
-document.getElementById(
-"post-type"
-).value,
-
-
-
-content:
-document.getElementById(
-"post-content"
-).value,
-
-
-
-image_ids:
-images,
-
-
-
-status:
-"published"
-
-
-
-};
-
-
-
-
-let result =
-await supabaseRequest(
-"posts",
-"POST",
-post
-);
-
-
-
-
-if(result){
-
-
-document.getElementById(
-"post-message"
-).innerHTML =
-"Post published successfully";
-
-
-
-postForm.reset();
-
-
-
-}
-
-else{
-
-
-document.getElementById(
-"post-message"
-).innerHTML =
-"Error publishing post";
-
-
-}
-
-
-
-});
-
-
-}
-
-
-
-
-
-
-
-
-
-/*==================================================
-    DELETE POST
-==================================================*/
-
-
-document.addEventListener(
-"click",
-async function(e){
-
-
-if(
-e.target.classList.contains(
-"delete-post-btn"
-)
-){
-
-
-let id =
-e.target.dataset.id;
-
-
-
-if(
-confirm(
-"Delete this post?"
-)
-){
-
-
-await supabaseRequest(
-"posts",
-"DELETE",
-null,
-`?id=eq.${id}`
-);
-
-
-
-}
-
-
-
-}
-
-
-
-});
-
-
-
-
-
-
-
-
-
-/*==================================================
-    LOAD ADMIN POSTS
-==================================================*/
-
-
-async function loadAdminPosts(){
 
 
 let box =
 document.getElementById(
-"posts-list"
+"comments-container"
 );
 
 
@@ -2244,13 +1744,17 @@ return;
 
 
 
-let posts =
+
+
+let comments =
 await supabaseRequest(
-"posts",
+"comments",
 "GET",
 null,
-"?select=*&order=created_at.desc"
+`?project=eq.${projectId}&order=created_at.desc`
 );
+
+
 
 
 
@@ -2258,41 +1762,60 @@ box.innerHTML="";
 
 
 
-posts.forEach(
-(post)=>{
+
+
+if(!comments || !comments.length){
+
+
+box.innerHTML =
+"<p>No comments yet.</p>";
+
+
+return;
+
+
+}
+
+
+
+
+
+comments.forEach(
+(comment)=>{
 
 
 box.innerHTML += `
 
 
-<div class="admin-project-card">
+<div class="comment-card">
 
 
-<h3>
+<h4>
 
-${post.title}
+${comment.username || "Visitor"}
 
-</h3>
+</h4>
+
 
 
 <p>
 
-${post.type}
+${comment.comment}
 
 </p>
 
 
 
-<button
-class="delete-post-btn"
-data-id="${post.id}">
+<small>
 
-Delete
+${new Date(comment.created_at).toLocaleDateString()}
 
-</button>
+</small>
+
 
 
 </div>
+
 
 
 `;
@@ -2300,6 +1823,97 @@ Delete
 
 
 });
+
+
+
+}
+
+
+
+
+
+
+
+
+
+async function addComment(
+projectId
+){
+
+
+
+let form =
+document.getElementById(
+"comment-form"
+);
+
+
+
+if(!form)
+return;
+
+
+
+
+
+
+form.addEventListener(
+"submit",
+async(e)=>{
+
+
+e.preventDefault();
+
+
+
+
+
+let comment =
+document.getElementById(
+"comment-text"
+).value;
+
+
+
+
+
+
+await supabaseRequest(
+"comments",
+"POST",
+{
+
+
+project:
+projectId,
+
+
+username:
+"Visitor",
+
+
+comment:
+comment
+
+
+}
+
+);
+
+
+
+
+
+
+form.reset();
+
+
+loadComments(projectId);
+
+
+
+});
+
 
 
 }
@@ -2313,23 +1927,60 @@ Delete
 
 
 /*==================================================
-    ANALYTICS PLACEHOLDER
+    BLOG SYSTEM
 ==================================================*/
 
 
-async function loadAnalytics(){
+async function loadPosts(){
+
+
+
+let box =
+document.getElementById(
+"blog-container"
+);
+
+
+
+if(!box)
+return;
+
+
+
 
 
 /*
-Google Analytics Data API
-will be connected here later.
-
-Requires:
-- Google Cloud Project
-- Analytics Data API
-- Service Account
-
+المستقبل:
+إنشاء جدول posts في Supabase
 */
+
+
+box.innerHTML = `
+
+<div class="blog-card">
+
+
+<h3>
+
+Welcome To Ahmed Hamid Architecture
+
+</h3>
+
+
+
+<p>
+
+Architecture ideas, projects and updates will appear here.
+
+</p>
+
+
+
+</div>
+
+
+`;
+
 
 
 }
@@ -2338,21 +1989,376 @@ Requires:
 
 
 
+
+
+
+
+/*==================================================
+    DASHBOARD STATISTICS
+==================================================*/
+
+
+async function loadDashboardStats(){
+
+
+
+let projects =
+await supabaseRequest(
+"projects",
+"GET",
+null,
+"?select=id"
+);
+
+
+
+
+let comments =
+await supabaseRequest(
+"comments",
+"GET",
+null,
+"?select=id"
+);
+
+
+
+
+
+let p =
+document.getElementById(
+"projects-count"
+);
+
+
+
+let c =
+document.getElementById(
+"comments-count"
+);
+
+
+
+
+
+if(p)
+p.innerHTML =
+projects ?
+projects.length :
+0;
+
+
+
+
+if(c)
+c.innerHTML =
+comments ?
+comments.length :
+0;
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+    GOOGLE ANALYTICS CHART
+==================================================*/
+
+
+function loadAnalyticsChart(){
+
+
+
+let canvas =
+document.getElementById(
+"visitorChart"
+);
+
+
+
+if(!canvas)
+return;
+
+
+
+
+
+new Chart(
+canvas,
+{
+
+
+type:"line",
+
+
+data:{
+
+
+labels:[
+
+"Mon",
+"Tue",
+"Wed",
+"Thu",
+"Fri",
+"Sat",
+"Sun"
+
+],
+
+
+datasets:[{
+
+label:
+"Visitors",
+
+
+data:[0,0,0,0,0,0,0]
+
+}]
+
+
+},
+
+
+options:{
+
+
+responsive:true,
+
+
+plugins:{
+
+
+legend:{
+
+
+display:true
+
+
+}
+
+
+}
+
+
+}
+
+
+}
+
+);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/*==================================================
+    PROJECT FILTER
+==================================================*/
+
+
+document.addEventListener(
+"click",
+(e)=>{
+
+
+
+if(
+e.target.classList.contains(
+"filter-btn"
+)
+){
+
+
+
+let filter =
+e.target.dataset.filter;
+
+
+
+
+
+document
+.querySelectorAll(
+".filter-btn"
+)
+.forEach(
+(btn)=>
+btn.classList.remove(
+"active"
+)
+);
+
+
+
+
+
+e.target.classList.add(
+"active"
+);
+
+
+
+
+
+
+document
+.querySelectorAll(
+".project-card"
+)
+.forEach(
+(card)=>{
+
+
+
+if(
+filter==="all"
+||
+card.dataset.category===filter
+){
+
+
+card.style.display =
+"block";
+
+
+}else{
+
+
+card.style.display =
+"none";
+
+
+}
+
+
+
+});
+
+
+
+}
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+/*==================================================
+    BACK TO TOP
+==================================================*/
+
+
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
 
 
+
+let btn =
+document.getElementById(
+"backToTop"
+);
+
+
+
+if(btn){
+
+
+
+window.addEventListener(
+"scroll",
+()=>{
+
+
+if(
+window.scrollY>400
+){
+
+
+btn.classList.add(
+"show"
+);
+
+
+}else{
+
+
+btn.classList.remove(
+"show"
+);
+
+
+}
+
+
+
+});
+
+
+
+
+
+
+btn.onclick =
+()=>{
+
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+
+};
+
+
+
+}
+
+
+
+
+
+
+
 loadPosts();
 
 
-loadSinglePost();
+loadDashboardStats();
 
 
-loadAdminPosts();
-
-
-loadAnalytics();
+loadAnalyticsChart();
 
 
 
