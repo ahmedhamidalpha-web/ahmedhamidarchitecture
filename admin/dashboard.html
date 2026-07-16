@@ -3,79 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login | Ahmed Hamid Architecture</title>
+    <title>Admin Dashboard | Ahmed Hamid Architecture</title>
     <link rel="icon" href="../assets/logo.png">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body class="admin-login-body">
+<body class="admin-body">
 
-    <div class="admin-login-box">
-        <img src="../assets/logo.png" class="admin-login-logo" alt="Ahmed Hamid Architecture">
-        <h1>Admin Login</h1>
-        <p>Ahmed Hamid Architecture Dashboard</p>
-
-        <form id="login-form">
-            <div class="form-group">
-                <label for="admin-email">Email</label>
-                <input type="email" id="admin-email" placeholder="Enter admin email" required>
-            </div>
-
-            <div class="form-group password-group" style="position: relative;">
-                <label for="admin-password">Password</label>
-                <input type="password" id="admin-password" placeholder="Enter password" required style="width: 100%; padding-right: 40px;">
-                <i class="fa-regular fa-eye" id="toggle-password" style="position: absolute; right: 15px; top: 38px; cursor: pointer; color: #777;"></i>
-            </div>
-
-            <button type="submit" class="btn btn-primary">
-                <i class="fa-solid fa-right-to-bracket"></i> Login
+    <header class="admin-header">
+        <div class="container">
+            <a href="../index.html" class="admin-logo">
+                <img src="../assets/logo.png" alt="Logo">
+                <span>Ahmed Hamid Architecture</span>
+            </a>
+            <button id="logout-btn" class="admin-logout">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
             </button>
+        </div>
+    </header>
 
-            <p id="login-message"></p>
-        </form>
-    </div>
+    <section class="admin-dashboard">
+        <div class="container">
+            <h1>Dashboard</h1>
+            <p>Manage your architecture studio website.</p>
+
+            <div class="dashboard-cards">
+                <div class="dashboard-card">
+                    <i class="fa-solid fa-building"></i>
+                    <h3>Projects</h3>
+                    <span id="projects-count">0</span>
+                </div>
+                <div class="dashboard-card">
+                    <i class="fa-solid fa-newspaper"></i>
+                    <h3>Posts</h3>
+                    <span id="posts-count">0</span>
+                </div>
+                <div class="dashboard-card">
+                    <i class="fa-solid fa-comments"></i>
+                    <h3>Comments</h3>
+                    <span id="comments-count">0</span>
+                </div>
+                <div class="dashboard-card">
+                    <i class="fa-solid fa-users"></i>
+                    <h3>Visitors</h3>
+                    <span id="visitors-count">1,280</span>
+                </div>
+            </div>
+
+            <div class="admin-box analytics-box">
+                <h2>Website Analytics</h2>
+                <p>Visitor statistics for Ahmed Hamid Architecture website</p>
+                <div class="chart-container" style="position: relative; height:320px; width:100%; margin-top: 20px;">
+                    <canvas id="visitorChart"></canvas>
+                </div>
+            </div>
+
+            <div class="dashboard-actions">
+                <a href="add-project.html" class="admin-action">
+                    <i class="fa-solid fa-plus"></i> Add Project
+                </a>
+                <a href="edit-project.html" class="admin-action">
+                    <i class="fa-solid fa-pen"></i> Edit Projects
+                </a>
+                <a href="posts.html" class="admin-action">
+                    <i class="fa-solid fa-file"></i> Manage Posts
+                </a>
+                <a href="../index.html" class="admin-action" target="_blank">
+                    <i class="fa-solid fa-eye"></i> View Website
+                </a>
+            </div>
+        </div>
+    </section>
 
     <script>
-        // ميزة تبديل رؤية كلمة المرور
-        const togglePassword = document.getElementById('toggle-password');
-        const passwordInput = document.getElementById('admin-password');
-
-        togglePassword.addEventListener('click', function () {
-            // تبديل نوع الحقل بين password و text
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            
-            // تبديل شكل أيقونة العين
-            this.classList.toggle('fa-eye');
-            this.classList.toggle('fa-eye-slash');
-        });
-
-        // كود معالجة تسجيل الدخول والتحقق من البيانات
-        document.getElementById("login-form").addEventListener("submit", function(e) {
-            e.preventDefault();
-
-            const email = document.getElementById("admin-email").value.trim();
-            const password = document.getElementById("admin-password").value;
-            const messageElement = document.getElementById("login-message");
-
-            // تنظيف أي فئات تنسيق سابقة
-            messageElement.className = ""; 
-
-            // البيانات الافتراضية للتحقق
-            if (email === "admin@email.com" && password === "Password") {
-                localStorage.setItem("admin", "true");
-                
-                messageElement.textContent = "Login Successful!";
-                messageElement.classList.add("success"); // إضافة كلاس للنجاح
-
-                setTimeout(function() {
-                    window.location.href = "dashboard.html";
-                }, 700);
-            } else {
-                messageElement.textContent = "Wrong Email Or Password";
-                messageElement.classList.add("error"); // إضافة كلاس للخطأ
+        document.addEventListener("DOMContentLoaded", function () {
+            // 1. جدار الحماية: التحقق من تسجيل الدخول
+            if (localStorage.getItem("admin") !== "true") {
+                // لو لم يسجل دخول، يرجعه لصفحة تسجيل الدخول فوراً
+                window.location.href = "login.html";
+                return;
             }
+
+            // 2. تحديث عدادات الإحصائيات ديناميكياً من الـ localStorage
+            const localProjects = JSON.parse(localStorage.getItem("architect_projects")) || [];
+            const localPosts = JSON.parse(localStorage.getItem("architect_posts")) || [];
+            
+            // قراءة عدد المشاريع الحقيقي وتحديث الكرت الخاص به
+            document.getElementById("projects-count").textContent = localProjects.length || 6; // القيمة 6 كديمو لو مصفورة
+            document.getElementById("posts-count").textContent = localPosts.length || 3;
+
+            // 3. كود تشغيل زر تسجيل الخروج (Logout)
+            const logoutBtn = document.getElementById("logout-btn");
+            if (logoutBtn) {
+                logoutBtn.addEventListener("click", function () {
+                    localStorage.removeItem("admin");
+                    window.location.href = "login.html";
+                });
+            }
+
+            // 4. بناء وتشغيل الرسم البياني التفاعلي لزوار الموقع (Chart.js)
+            const ctx = document.getElementById('visitorChart').getContext('2d');
+            const visitorChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                    datasets: [{
+                        label: 'Monthly Website Visitors',
+                        data: [120, 290, 480, 610, 890, 1100, 1280],
+                        borderColor: '#B98F2C', // الذهبي المعماري الخاص بك
+                        backgroundColor: 'rgba(185, 143, 44, 0.1)', // خلفية شفافة تحت المنحنى
+                        borderWidth: 2,
+                        tension: 0.3, // انحناء سلس للمنحنى
+                        fill: true,
+                        pointBackgroundColor: '#14140F',
+                        pointBorderColor: '#B98F2C',
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#14140F', // لون الخط
+                                font: { family: 'Public Sans', size: 12 }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(33, 31, 26, 0.08)' },
+                            ticks: { color: '#14140F' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#14140F' }
+                        }
+                    }
+                }
+            });
         });
     </script>
 </body>
