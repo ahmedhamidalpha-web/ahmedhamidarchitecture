@@ -1436,12 +1436,14 @@ let imageLinks =
 
 
 
+
 for(
 let i=0;
 i<files.length;
 i++
 ){
 
+try{
 
 
 let link =
@@ -1450,11 +1452,30 @@ files[i]
 );
 
 
+imageLinks.push(link);
 
-imageLinks.push(
-link
+
+
+}catch(error){
+
+
+console.error(
+"Image upload error:",
+error
 );
 
+
+alert(
+"Failed uploading image: "
++
+files[i].name
+);
+
+
+return;
+
+
+}
 
 
 }
