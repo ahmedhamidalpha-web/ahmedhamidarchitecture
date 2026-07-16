@@ -1,590 +1,345 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-<title>
-Projects | Ahmed Hamid Architecture
-</title>
-
-
-<meta name="description"
-content="Explore architectural projects by Ahmed Hamid Architecture. Modern residential, commercial and interior design projects.">
-
-
-<link rel="icon" href="assets/logo.png">
-
-
-<link rel="stylesheet" href="style.css">
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
-
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Ahmed Hamid Architecture</title>
+    <meta name="description" content="Explore architectural projects by Ahmed Hamid Architecture. Modern residential, commercial and interior design projects.">
+    <link rel="icon" href="assets/logo.png">
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Public+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+    <style>
+        /* ستايلات سريعة لضمان ظهور الـ Modal والتعليقات بشكل فخم متناسق مع الهوية */
+        .project-modal {
+            display: none; position: fixed; inset: 0; z-index: 1000;
+            background: rgba(20, 20, 15, 0.85); backdrop-filter: blur(8px);
+            overflow-y: auto; padding: 40px 20px; align-items: center; justify-content: center;
+        }
+        .project-modal.open { display: flex; }
+        .project-modal-content {
+            background: #EBE7DA; color: #211F1A; max-width: 900px; width: 100%;
+            border-radius: 4px; padding: 40px; position: relative; border: 1px solid rgba(33, 31, 26, 0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3); animation: slideUp 0.4s ease;
+        }
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        #close-modal {
+            position: absolute; top: 20px; right: 20px; background: none; border: none;
+            font-size: 24px; color: #211F1A; cursor: pointer; transition: color 0.2s;
+        }
+        #close-modal:hover { color: #B98F2C; }
+        .modal-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .modal-gallery img { width: 100%; height: 200px; object-fit: cover; border-radius: 2px; border: 1px solid rgba(0,0,0,0.1); }
+        .project-meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; background: rgba(20, 20, 15, 0.04); padding: 15px; border-radius: 2px; margin: 20px 0; font-size: 14px; }
+        .comments-section { border-top: 1px solid rgba(33, 31, 26, 0.15); margin-top: 30px; padding-top: 20px; }
+        .comment-item { background: rgba(255, 255, 255, 0.4); padding: 12px 15px; border-radius: 2px; margin-bottom: 10px; font-size: 14px; border-left: 3px solid #B98F2C; }
+        #comment-form textarea { width: 100%; padding: 12px; background: #F5F2E9; border: 1px solid rgba(33, 31, 26, 0.15); border-radius: 2px; resize: vertical; min-height: 80px; margin-bottom: 15px; font-family: inherit; }
+    </style>
 </head>
-
-
 
 <body>
 
-
-
-
-
-<!-- HEADER -->
-
-<header class="header">
-
-
-<div class="container nav-container">
-
-
-<a href="index.html" class="logo">
-
-
-<img src="assets/logo.png"
-alt="Ahmed Hamid Architecture">
-
-
-<span>
-Ahmed Hamid Architecture
-</span>
-
-
-</a>
-
-
-
-
-
-<button class="menu-toggle">
-
-<i class="fa-solid fa-bars"></i>
-
-</button>
-
-
-
-
-
-
-
-<nav class="nav-menu">
-
-
-<a href="index.html">
-Home
-</a>
-
-
-<a href="about.html">
-About
-</a>
-
-
-<a href="services.html">
-Services
-</a>
-
-
-<a href="projects.html"
-class="active">
-Projects
-</a>
-
-
-<a href="blog.html">
-Blog
-</a>
-
-
-<a href="contact.html">
-Contact
-</a>
-
-
-
-</nav>
-
-
-
-</div>
-
-
-</header>
-
-
-
-
-
-
-
-
-
-<!-- PAGE HERO -->
-
-
-<section class="page-hero">
-
-
-<div class="container">
-
-
-<h1>
-Architectural Projects
-</h1>
-
-
-<p>
-Discover our architectural ideas, concepts and design solutions.
-</p>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- PROJECTS -->
-
-
-<section class="projects-page">
-
-
-<div class="container">
-
-
-
-<div class="section-header">
-
-
-<span class="section-subtitle">
-
-PORTFOLIO
-
-</span>
-
-
-<h2>
-
-Selected Projects
-
-</h2>
-
-
-<p>
-
-Explore our projects with complete architectural details,
-design concepts and visual experience.
-
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-<div id="projects-container"
-class="projects-grid">
-
-
-<!-- Projects loaded from Supabase -->
-
-
-<div class="loading">
-
-Loading Projects...
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- PROJECT DETAILS MODAL -->
-
-
-<div id="project-modal"
-class="project-modal">
-
-
-<div class="project-modal-content">
-
-
-
-<button id="close-modal">
-
-<i class="fa-solid fa-xmark"></i>
-
-</button>
-
-
-
-
-
-<div id="modal-gallery"
-class="modal-gallery">
-
-</div>
-
-
-
-
-
-
-<h2 id="modal-title">
-
-</h2>
-
-
-
-
-
-
-<div id="modal-info">
-
-</div>
-
-
-
-
-
-
-
-<!-- COMMENTS -->
-
-
-<div class="comments-section">
-
-
-<h3>
-
-Comments
-
-</h3>
-
-
-
-
-<div id="comments-container">
-
-
-</div>
-
-
-
-
-
-
-
-<form id="comment-form">
-
-
-
-<textarea
-id="comment-text"
-placeholder="Write your comment..."
-required></textarea>
-
-
-
-
-
-<button class="btn btn-primary"
-type="submit">
-
-
-Send Comment
-
-
-</button>
-
-
-
-
-</form>
-
-
-
-</div>
-
-
-
-
-
-
-</div>
-
-</div>
-
-
-
-
-
-<script src="script.js"></script>
-
-
+    <header class="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Ahmed Hamid Architecture">
+                <span>Ahmed Hamid Architecture</span>
+            </a>
+            <button class="menu-toggle" id="burger" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="projects.html" class="active">Projects</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1 style="font-family: 'Fraunces', serif;">Architectural Projects</h1>
+            <p>Discover our architectural ideas, concepts and design solutions.</p>
+        </div>
+    </section>
+
+    <section class="projects-page">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">PORTFOLIO</span>
+                <h2 style="font-family: 'Fraunces', serif;">Selected Projects</h2>
+                <p>Explore our projects with complete architectural details, design concepts and visual experience.</p>
+            </div>
+
+            <div id="projects-container" class="projects-grid">
+                <div class="loading" style="text-align: center; padding: 50px; color: #8C6C22;">
+                    <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 32px; margin-bottom: 10px;"></i>
+                    <p>Loading Projects...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="project-modal" class="project-modal">
+        <div class="project-modal-content">
+            <button id="close-modal" aria-label="Close modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div id="modal-gallery" class="modal-gallery"></div>
+
+            <h2 id="modal-title" style="font-family: 'Fraunces', serif; color: #14140F; margin-bottom: 15px;"></h2>
+
+            <div id="modal-info"></div>
+
+            <div class="comments-section">
+                <h3 style="font-family: 'Fraunces', serif; margin-bottom: 15px;">Comments</h3>
+                <div id="comments-container"></div>
+
+                <form id="comment-form">
+                    <textarea id="comment-text" placeholder="Write your comment..." required></textarea>
+                    <button class="btn btn-primary" type="submit" style="background: #B98F2C; color: #14140F; font-weight: 600; border: none; padding: 10px 20px; cursor: pointer; border-radius: 2px;">
+                        Send Comment
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div>
+                <img src="assets/logo.png" class="footer-logo" alt="Ahmed Hamid Architecture">
+                <h3>Ahmed Hamid Architecture</h3>
+                <p>Modern Architecture • Interior Design • Planning • Visualization</p>
+            </div>
+            <div>
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/ahmed-hamid-architecture-9b9372260/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/ahmed_hamid_architecture" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/ahmedhamidarchitecture" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://vm.tiktok.com/ZS9MCb1KJoBdN-iZvTF/" target="_blank"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 Ahmed Hamid Architecture. All Rights Reserved.
+        </div>
+    </footer>
+
+    <button id="backToTop" aria-label="Back to top" style="position: fixed; bottom: 30px; right: 30px; display: none; background: #B98F2C; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer;">
+        <i class="fa-solid fa-arrow-up" style="color: #14140F;"></i>
+    </button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 1. جلب البيانات من الـ LocalStorage المرفوعة عبر لوحة التحكم
+            let projects = JSON.parse(localStorage.getItem("architect_projects")) || [];
+            const container = document.getElementById("projects-container");
+            
+            const modal = document.getElementById("project-modal");
+            const closeModal = document.getElementById("close-modal");
+            const modalTitle = document.getElementById("modal-title");
+            const modalGallery = document.getElementById("modal-gallery");
+            const modalInfo = document.getElementById("modal-info");
+            
+            const commentForm = document.getElementById("comment-form");
+            const commentText = document.getElementById("comment-text");
+            const commentsContainer = document.getElementById("comments-container");
+            let activeProjectId = null;
+
+            // 2. دالة عرض المشاريع في المعرض العام
+            function renderProjectsPage() {
+                container.innerHTML = "";
+
+                if (projects.length === 0) {
+                    container.innerHTML = `
+                        <div style="grid-column: 1/-1; text-align: center; padding: 60px; border: 1px dashed rgba(33, 31, 26, 0.2);">
+                            <p style="font-size: 18px; font-weight: 500; color:#8C6C22;">No projects active in portfolio.</p>
+                            <p style="font-size: 14px; color:#5a5748;">Publish some projects from the Admin dashboard to showcase your work.</p>
+                        </div>`;
+                    return;
+                }
+
+                projects.forEach(project => {
+                    const card = document.createElement("div");
+                    card.className = "project-card";
+                    card.style.cssText = "background: #F5F2E9; border: 1px solid rgba(33,31,26,0.1); padding: 20px; border-radius: 4px; cursor: pointer; transition: transform 0.3s;";
+                    
+                    // استخدام أول صورة في كرت المشروع، لو مصفورة نضع صورة احتياطية
+                    const mainImg = (project.images && project.images.length > 0) ? project.images[0] : 'assets/about.jpg';
+
+                    card.innerHTML = `
+                        <div style="overflow:hidden; height:240px; border-radius:2px; margin-bottom:15px; background: #e0e0e0;">
+                            <img src="${mainImg}" style="width:100%; height:100%; object-fit:cover; transition: transform 0.5s;" class="project-card-img">
+                        </div>
+                        <span style="font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase; color:#B98F2C; letter-spacing:0.05em; display:block; margin-bottom:5px;">${project.category}</span>
+                        <h3 style="font-family:'Fraunces', serif; font-size:20px; color:#14140F; margin:0 0 10px 0;">${project.title}</h3>
+                        <div style="display:flex; align-items:center; justify-content:space-between; font-size:13px; color:#5a5748;">
+                            <span>📍 ${project.location || 'Sudan'}</span>
+                            <span style="font-weight:600; color:#14140F;">Explore Project →</span>
+                        </div>
+                    `;
+
+                    // تفعيل تأثير التمرير
+                    card.addEventListener("mouseenter", () => card.querySelector(".project-card-img").style.transform = "scale(1.05)");
+                    card.addEventListener("mouseleave", () => card.querySelector(".project-card-img").style.transform = "scale(1)");
+
+                    // تفعيل الضغط لفتح الـ Modal
+                    card.addEventListener("click", () => openProjectDetails(project.id));
+
+                    container.appendChild(card);
+                });
+            }
+
+            // 3. دالة فتح نافذة تفاصيل المشروع المنبثقة
+            function openProjectDetails(id) {
+                const project = projects.find(p => p.id === id);
+                if (!project) return;
+
+                activeProjectId = id;
+                modalTitle.textContent = project.title;
+                modalGallery.innerHTML = "";
+
+                // توليد معرض الصور
+                if (project.images && project.images.length > 0) {
+                    project.images.forEach(imgSrc => {
+                        const img = document.createElement("img");
+                        img.src = imgSrc;
+                        img.alt = project.title;
+                        modalGallery.appendChild(img);
+                    });
+                } else {
+                    modalGallery.innerHTML = `<img src="assets/about.jpg" style="grid-column: 1/-1; height:300px; object-fit:cover;">`;
+                }
+
+                // تعبئة البيانات الهندسية والمصطلحات الإنشائية
+                modalInfo.innerHTML = `
+                    <div class="project-meta-grid">
+                        <div><strong>📍 Location:</strong> ${project.location || 'N/A'}</div>
+                        <div><strong>📐 Plot Area:</strong> ${project.area || 'N/A'}</div>
+                        <div><strong>🧱 Components:</strong> ${project.components || 'N/A'}</div>
+                    </div>
+                    <div style="margin-top:20px;">
+                        <h4 style="font-family:'Fraunces', serif; margin-bottom:5px; color:#14140F;">💡 Design Concept</h4>
+                        <p style="font-size:15px; color:#4a473e; line-height:1.6; margin-bottom:20px;">${project.description}</p>
+                    </div>
+                    ${project.challenges ? `
+                    <div>
+                        <h4 style="font-family:'Fraunces', serif; margin-bottom:5px; color:#14140F;">⚠️ Challenges</h4>
+                        <p style="font-size:15px; color:#4a473e; line-height:1.6; margin-bottom:20px;">${project.challenges}</p>
+                    </div>` : ''}
+                    ${project.result ? `
+                    <div>
+                        <h4 style="font-family:'Fraunces', serif; margin-bottom:5px; color:#14140F;">🏆 Final Result</h4>
+                        <p style="font-size:15px; color:#4a473e; line-height:1.6;">${project.result}</p>
+                    </div>` : ''}
+                `;
+
+                // تحميل التعليقات الخاصة بهذا المشروع
+                renderComments();
+
+                modal.classList.add("open");
+                document.body.style.overflow = "hidden"; // منع سكرول الصفحة الخلفية
+            }
+
+            // إغلاق النافذة المنبثقة
+            closeModal.addEventListener("click", () => {
+                modal.classList.remove("open");
+                document.body.style.overflow = "auto";
+                activeProjectId = null;
+            });
+
+            // 4. نظام التعليقات التفاعلي
+            function renderComments() {
+                commentsContainer.innerHTML = "";
+                const comments = JSON.parse(localStorage.getItem(`comments_${activeProjectId}`)) || [];
+
+                if (comments.length === 0) {
+                    commentsContainer.innerHTML = `<p style="font-size:13px; color:#777; font-style:italic;">No comments yet on this design concept. Be the first to comment!</p>`;
+                    return;
+                }
+
+                comments.forEach(c => {
+                    const el = document.createElement("div");
+                    el.className = "comment-item";
+                    el.innerHTML = `
+                        <p style="margin: 0 0 5px 0; font-weight: 500;">${c.text}</p>
+                        <span style="font-size:11px; color:#888;">Posted on: ${new Date(c.date).toLocaleDateString()}</span>
+                    `;
+                    commentsContainer.appendChild(el);
+                });
+            }
+
+            // إرسال وحفظ تعليق جديد
+            commentForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const text = commentText.value.trim();
+                if (!text || !activeProjectId) return;
+
+                const comments = JSON.parse(localStorage.getItem(`comments_${activeProjectId}`)) || [];
+                const newComment = {
+                    id: Date.now(),
+                    text: text,
+                    date: new Date().toISOString()
+                };
+
+                comments.push(newComment);
+                localStorage.setItem(`comments_${activeProjectId}`, JSON.stringify(comments));
+
+                commentText.value = "";
+                renderComments();
+            });
+
+            // 5. زر القائمة المتجاوب للموبايل (Mobile Burger Menu)
+            const burger = document.getElementById("burger");
+            const navMenu = document.getElementById("navMenu");
+            if (burger && navMenu) {
+                burger.addEventListener("click", () => {
+                    navMenu.classList.toggle("active");
+                });
+            }
+
+            // 6. زر الصعود لأعلى (Back to top)
+            const backToTop = document.getElementById("backToTop");
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 300) {
+                    backToTop.style.display = "block";
+                } else {
+                    backToTop.style.display = "none";
+                }
+            });
+            backToTop.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+
+            // تشغيل الصفحة مبدئياً وتوليد المشاريع
+            renderProjectsPage();
+        });
+    </script>
 </body>
-
-</html>
-<!-- FOOTER -->
-
-<footer class="footer">
-
-
-<div class="container footer-grid">
-
-
-
-<div>
-
-<img src="assets/logo.png"
-class="footer-logo"
-alt="Ahmed Hamid Architecture">
-
-
-<h3>
-Ahmed Hamid Architecture
-</h3>
-
-
-<p>
-Modern Architecture • Interior Design • Planning • Visualization
-</p>
-
-
-</div>
-
-
-
-
-
-<div>
-
-<h4>
-Company
-</h4>
-
-
-<ul>
-
-<li>
-<a href="about.html">
-About
-</a>
-</li>
-
-
-<li>
-<a href="services.html">
-Services
-</a>
-</li>
-
-
-<li>
-<a href="projects.html">
-Projects
-</a>
-</li>
-
-
-<li>
-<a href="gallery.html">
-Gallery
-</a>
-</li>
-
-
-</ul>
-
-
-</div>
-
-
-
-
-
-
-
-<div>
-
-<h4>
-Resources
-</h4>
-
-
-<ul>
-
-
-<li>
-<a href="blog.html">
-Blog
-</a>
-</li>
-
-
-<li>
-<a href="contact.html">
-Contact
-</a>
-</li>
-
-
-</ul>
-
-
-</div>
-
-
-
-
-
-
-
-
-<div>
-
-<h4>
-Follow Us
-</h4>
-
-
-<div class="social-links">
-
-
-<a href="https://www.linkedin.com/in/ahmed-hamid-architecture-9b9372260/"
-target="_blank">
-
-<i class="fab fa-linkedin"></i>
-
-</a>
-
-
-
-<a href="https://www.instagram.com/ahmed_hamid_architecture"
-target="_blank">
-
-<i class="fab fa-instagram"></i>
-
-</a>
-
-
-
-<a href="https://www.facebook.com/ahmedhamidarchitecture"
-target="_blank">
-
-<i class="fab fa-facebook"></i>
-
-</a>
-
-
-
-<a href="https://vm.tiktok.com/ZS9MCb1KJoBdN-iZvTF/"
-target="_blank">
-
-<i class="fab fa-tiktok"></i>
-
-</a>
-
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-<div class="footer-bottom">
-
-
-© 2026 Ahmed Hamid Architecture.
-All Rights Reserved.
-
-
-</div>
-
-
-
-</footer>
-
-
-
-
-
-
-
-
-
-<!-- BACK TO TOP -->
-
-<button id="backToTop">
-
-<i class="fa-solid fa-arrow-up"></i>
-
-</button>
-
-
-
-
-
-
-
-
-<script src="script.js"></script>
-
-
-</body>
-
 </html>
