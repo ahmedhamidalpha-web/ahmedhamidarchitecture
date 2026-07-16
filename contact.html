@@ -1,31 +1,728 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تواصل معنا</title>
-    <link rel="stylesheet" href="./style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Contact | Ahmed Hamid Architecture</title>
+
+
+<meta name="description"
+content="Contact Ahmed Hamid Architecture for architectural design, interior design and visualization services.">
+
+
+<link rel="icon" href="assets/logo.png">
+
+
+<link rel="stylesheet" href="style.css">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
 </head>
+
+
+
 <body>
-    <header class="header-pro"><div class="container"><a href="index.html" class="logo-pro"><img src="assets/logo.png"><div class="logo-text"><span>Ahmed Hamid</span><span>Architecture</span></div></a><nav class="nav-pro"><a href="index.html">الرئيسية</a><a href="contact.html" class="active">تواصل</a></nav></div></header>
 
-    <section class="page-head"><div class="container"><h1>تواصل معنا</h1></div></section>
 
-    <section class="section"><div class="container contact-grid">
-        <div class="card"><h3>معلوماتنا</h3><p>📧 ahmedhamidarchitecture@gmail.com</p><p>📍 امدرمان, السودان</p></div>
-        <div class="card">
-            <h3>اطلب مشروع</h3>
-            <form id="clientRequestForm">
-                <input id="clientName" type="text" placeholder="الاسم *" required>
-                <input id="clientEmail" type="email" placeholder="الايميل *" required>
-                <input id="clientPhone" type="tel" placeholder="الهاتف *" required>
-                <textarea id="clientDetails" placeholder="تفاصيل المشروع *" rows="5" required></textarea>
-                <button type="submit" class="btn-primary" id="submitBtn">ارسال</button>
-                <p id="formStatus"></p>
-            </form>
-        </div>
-    </div></section>
-    <script src="./script.js"></script>
+
+<!-- HEADER -->
+
+<header class="header">
+
+<div class="container">
+
+
+<div class="logo">
+
+
+<img src="assets/logo.png"
+alt="Ahmed Hamid Architecture">
+
+
+<span>
+
+Ahmed Hamid Architecture
+
+</span>
+
+
+</div>
+
+
+
+
+<nav class="nav-menu">
+
+
+<a href="index.html">
+Home
+</a>
+
+
+<a href="about.html">
+About
+</a>
+
+
+<a href="services.html">
+Services
+</a>
+
+
+<a href="projects.html">
+Projects
+</a>
+
+
+<a href="gallery.html">
+Gallery
+</a>
+
+
+<a href="blog.html">
+Blog
+</a>
+
+
+<a href="contact.html" class="active">
+Contact
+</a>
+
+
+</nav>
+
+
+
+
+<div class="menu-toggle">
+
+<i class="fa-solid fa-bars"></i>
+
+</div>
+
+
+</div>
+
+</header>
+
+
+
+
+
+
+
+<!-- HERO -->
+
+
+<section class="page-hero">
+
+
+<div class="container">
+
+
+<div class="page-hero-content">
+
+
+<span>
+
+CONTACT US
+
+</span>
+
+
+<h1>
+
+Let's Build Your
+Dream Project
+
+</h1>
+
+
+<p>
+
+Tell us about your project and
+we will help transform your ideas
+into architectural solutions.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- CONTACT -->
+
+
+<section class="contact">
+
+
+<div class="container contact-wrapper">
+
+
+
+<div class="contact-info">
+
+
+<span class="section-subtitle">
+
+GET IN TOUCH
+
+</span>
+
+
+<h2>
+
+Start Your Architectural Journey
+
+</h2>
+
+
+<p>
+
+Whether you need a residential design,
+interior concept, 3D visualization or
+architectural consultation, we are ready
+to help.
+
+</p>
+
+
+
+
+
+<div class="contact-item">
+
+
+<i class="fa-solid fa-envelope"></i>
+
+
+<div>
+
+
+<h4>
+
+Email
+
+</h4>
+
+
+<p>
+
+ahmedhamidarchitecture@gmail.com
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="contact-item">
+
+
+<i class="fa-solid fa-phone"></i>
+
+
+<div>
+
+
+<h4>
+
+WhatsApp
+
+</h4>
+
+
+<p>
+
++249924372845
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="contact-item">
+
+
+<i class="fa-solid fa-location-dot"></i>
+
+
+<div>
+
+
+<h4>
+
+Location
+
+</h4>
+
+
+<p>
+
+Sudan
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="social-links">
+
+
+<a href="https://www.linkedin.com/in/ahmed-hamid-architecture-9b9372260/"
+target="_blank">
+
+<i class="fab fa-linkedin"></i>
+
+</a>
+
+
+
+<a href="https://www.instagram.com/ahmed_hamid_architecture"
+target="_blank">
+
+<i class="fab fa-instagram"></i>
+
+</a>
+
+
+
+
+<a href="https://www.facebook.com/ahmedhamidarchitecture"
+target="_blank">
+
+<i class="fab fa-facebook"></i>
+
+</a>
+
+
+
+<a href="https://vm.tiktok.com/ZS9MCb1KJoBdN-iZvTF/"
+target="_blank">
+
+<i class="fab fa-tiktok"></i>
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- FORM -->
+
+
+<div class="contact-form">
+
+
+
+<form action="https://formspree.io/f/mzdnpevq"
+method="POST">
+
+
+
+<div class="form-group">
+
+
+<input
+type="text"
+name="name"
+placeholder="Your Name"
+required>
+
+
+</div>
+
+
+
+
+<div class="form-group">
+
+
+<input
+type="email"
+name="email"
+placeholder="Your Email"
+required>
+
+
+</div>
+
+
+
+
+
+<div class="form-group">
+
+
+<input
+type="tel"
+name="phone"
+placeholder="Phone Number">
+
+
+</div>
+
+
+
+
+
+<div class="form-group">
+
+
+<select name="project_type">
+
+
+<option>
+
+Select Project Type
+
+</option>
+
+
+<option>
+
+Residential Design
+
+</option>
+
+
+<option>
+
+Interior Design
+
+</option>
+
+
+<option>
+
+3D Visualization
+
+</option>
+
+
+<option>
+
+Commercial Project
+
+</option>
+
+
+<option>
+
+Other
+
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+<div class="form-group">
+
+
+<textarea
+name="message"
+rows="6"
+placeholder="Tell us about your project..."
+required></textarea>
+
+
+</div>
+
+
+
+
+
+<button class="btn btn-primary"
+type="submit">
+
+
+Send Request
+
+
+</button>
+
+
+
+</form>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- CTA -->
+
+
+<section class="cta">
+
+
+<div class="container">
+
+
+<div class="cta-box">
+
+
+<span>
+
+AHMED HAMID ARCHITECTURE
+
+</span>
+
+
+<h2>
+
+Your Vision.
+Our Design.
+
+</h2>
+
+
+<p>
+
+Let's create spaces that inspire.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- FOOTER -->
+
+
+<footer class="footer">
+
+
+<div class="container footer-grid">
+
+
+<div>
+
+
+<img src="assets/logo.png"
+class="footer-logo">
+
+
+<h3>
+
+Ahmed Hamid Architecture
+
+</h3>
+
+
+<p>
+
+Modern Architecture • Interior Design • Planning • Visualization
+
+</p>
+
+
+</div>
+
+
+
+
+<div>
+
+
+<h4>
+
+Company
+
+</h4>
+
+
+<ul>
+
+
+<li>
+<a href="about.html">
+About
+</a>
+</li>
+
+
+<li>
+<a href="services.html">
+Services
+</a>
+</li>
+
+
+<li>
+<a href="projects.html">
+Projects
+</a>
+</li>
+
+
+</ul>
+
+
+</div>
+
+
+
+
+<div>
+
+
+<h4>
+
+Contact
+
+</h4>
+
+
+<ul>
+
+
+<li>
+
+<a href="contact.html">
+
+Contact Us
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="blog.html">
+
+Blog
+
+</a>
+
+</li>
+
+
+</ul>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<div class="footer-bottom">
+
+© 2026 Ahmed Hamid Architecture. All Rights Reserved.
+
+</div>
+
+
+
+</footer>
+
+
+
+
+
+<button id="backToTop">
+
+<i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+
+
+
+<script src="script.js"></script>
+
+
 </body>
+
 </html>
