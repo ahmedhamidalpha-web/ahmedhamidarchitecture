@@ -1,499 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-<title>
-Blog | Ahmed Hamid Architecture
-</title>
-
-
-<meta name="description"
-content="Architecture articles, news, announcements and updates from Ahmed Hamid Architecture.">
-
-
-<link rel="icon" href="assets/logo.png">
-
-
-<link rel="stylesheet" href="style.css">
-
-
+<title>Blog — Ahmed Hamid Architecture</title>
+<meta name="description" content="Articles and notes from Ahmed Hamid Architecture on design process, materials and projects.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
-
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
-
-
-
 <body>
 
-
-
-<!-- HEADER -->
-
-<header class="header">
-
-
-<div class="container nav-container">
-
-
-<a href="index.html" class="logo">
-
-
-<img src="assets/logo.png"
-alt="Ahmed Hamid Architecture">
-
-
-<span>
-Ahmed Hamid Architecture
-</span>
-
-
-</a>
-
-
-
-
-
-<button class="menu-toggle">
-
-<i class="fa-solid fa-bars"></i>
-
-</button>
-
-
-
-
-
-
-<nav class="nav-menu">
-
-
-<a href="index.html">
-Home
-</a>
-
-
-<a href="about.html">
-About
-</a>
-
-
-<a href="services.html">
-Services
-</a>
-
-
-<a href="projects.html">
-Projects
-</a>
-
-
-<a href="blog.html" class="active">
-Blog
-</a>
-
-
-<a href="contact.html">
-Contact
-</a>
-
-
-
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 40 40"><path d="M6 34 L6 14 L20 4 L34 14 L34 34" stroke="#0F2A4A" stroke-width="2" fill="none"/><line x1="20" y1="4" x2="20" y2="34" stroke="#0F2A4A" stroke-width="2"/></svg>
+      </span>
+      <span class="brand-text">AHMED HAMID<span>ARCHITECTURE</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="projects.html">Projects</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a href="contact.html" class="btn-talk">LET'S TALK</a>
+      <button class="burger" id="burger" aria-label="Menu">☰</button>
+    </div>
+  </div>
 </nav>
 
-
-</div>
-
-
+<header class="page-banner" id="top">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Blog</div>
+    <h1>Blog</h1>
+  </div>
 </header>
 
 
-
-
-
-
-
-<!-- HERO -->
-
-
-<section class="page-hero">
-
-
-<div class="container">
-
-
-<h1>
-Architecture Blog
-</h1>
-
-
-<p>
-Articles, news, announcements and opportunities.
-</p>
-
-
-</div>
-
-
+<section id="blog-list">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><span class="eyebrow" style="color:var(--muted);">Journal</span><h2>Latest Articles</h2></div>
+    </div>
+    <div class="blog-grid reveal">
+      <div class="blog-empty">
+        <h3>No articles published yet</h3>
+        <p>We're just getting started — check back soon for notes on process, materials and finished projects.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 
-
-
-
-
-
-
-
-<!-- BLOG POSTS -->
-
-
-<section class="blog">
-
-
-<div class="container">
-
-
-<div class="section-header">
-
-
-<span class="section-subtitle">
-
-INSIGHTS
-
-</span>
-
-
-
-<h2>
-
-Latest Posts
-
-</h2>
-
-
-
-<p>
-
-Explore architectural ideas, studio updates and professional content.
-
-</p>
-
-
-</div>
-
-
-
-
-
-
-<div id="blog-container"
-class="blog-grid">
-
-
-</div>
-
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- SINGLE POST DETAILS -->
-
-
-<section class="single-post">
-
-
-<div class="container">
-
-
-<div class="post-wrapper">
-
-
-
-<div id="post-image"
-class="post-image">
-
-
-</div>
-
-
-
-
-
-<div class="post-info">
-
-
-
-<span id="post-type"
-class="post-type">
-
-</span>
-
-
-
-
-
-<h1 id="post-title">
-
-</h1>
-
-
-
-
-
-
-<div id="post-content">
-
-</div>
-
-
-
-
-
-
-<div class="post-meta">
-
-
-<span>
-
-<i class="fa-regular fa-calendar"></i>
-
-
-<span id="post-date">
-
-</span>
-
-
-</span>
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- FOOTER -->
-
-
-<footer class="footer">
-
-
-<div class="container footer-grid">
-
-
-<div>
-
-
-<img src="assets/logo.png"
-class="footer-logo"
-alt="Ahmed Hamid Architecture">
-
-
-<h3>
-Ahmed Hamid Architecture
-</h3>
-
-
-<p>
-Modern Architecture • Interior Design • Planning
-</p>
-
-
-</div>
-
-
-
-
-
-
-<div>
-
-
-<h4>
-Pages
-</h4>
-
-
-<ul>
-
-
-<li>
-<a href="index.html">
-Home
-</a>
-</li>
-
-
-<li>
-<a href="projects.html">
-Projects
-</a>
-</li>
-
-
-<li>
-<a href="contact.html">
-Contact
-</a>
-</li>
-
-
-</ul>
-
-
-</div>
-
-
-
-
-
-
-<div>
-
-
-<h4>
-Follow Us
-</h4>
-
-
-
-<div class="social-links">
-
-
-<a href="https://www.linkedin.com/in/ahmed-hamid-architecture-9b9372260/"
-target="_blank">
-
-<i class="fab fa-linkedin"></i>
-
-</a>
-
-
-
-<a href="https://www.instagram.com/ahmed_hamid_architecture"
-target="_blank">
-
-<i class="fab fa-instagram"></i>
-
-</a>
-
-
-
-<a href="https://www.facebook.com/ahmedhamidarchitecture"
-target="_blank">
-
-<i class="fab fa-facebook"></i>
-
-</a>
-
-
-
-<a href="https://vm.tiktok.com/ZS9MCb1KJoBdN-iZvTF/"
-target="_blank">
-
-<i class="fab fa-tiktok"></i>
-
-</a>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-<div class="footer-bottom">
-
-
-© 2026 Ahmed Hamid Architecture.
-All Rights Reserved.
-
-
-</div>
-
-
-
+<footer>
+  <div class="wrap foot-row">
+    <div class="foot-brand">
+      <svg viewBox="0 0 40 40"><path d="M6 34 L6 14 L20 4 L34 14 L34 34" stroke="#fff" stroke-width="2" fill="none"/><line x1="20" y1="4" x2="20" y2="34" stroke="#fff" stroke-width="2"/></svg>
+      <span>Ahmed Hamid Architecture</span>
+    </div>
+    <span>© 2026 Ahmed Hamid Architecture. All Rights Reserved.</span>
+    <div style="display:flex; align-items:center; gap:20px;">
+      <div class="foot-social">
+        <a href="https://www.facebook.com/ahmedhamidarchitecture" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+        <a href="https://www.instagram.com/ahmed_hamid_architecture" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+        <a href="https://www.linkedin.com/in/ahmed-hamid-architecture-9b9372260/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+      </div>
+      <a href="#top" class="top-btn" aria-label="Back to top">↑</a>
+    </div>
+  </div>
 </footer>
-
-
-
-
-
-
-
-<button id="backToTop">
-
-<i class="fa-solid fa-arrow-up"></i>
-
-</button>
-
-
-
-
-
-
 
 <script src="script.js"></script>
 
-
 </body>
-
 </html>
