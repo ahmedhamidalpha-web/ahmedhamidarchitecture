@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ahmed Hamid Architecture | Modern Design, Innovative Space</title>
 <meta name="description" content="Ahmed Hamid Architecture — architectural design, quantity take-offs and facade renovation studio.">
+<meta property="og:title" content="Ahmed Hamid Architecture">
+<meta property="og:description" content="Modern Design | Innovative Space — architectural design, quantity take-offs and facade renovation.">
+<meta property="og:image" content="assets/logo.png">
+<meta property="og:type" content="website">
 <link rel="icon" href="assets/logo.png">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -14,7 +18,7 @@
 <section class="hero">
   <div class="hero-grid"></div>
   <div class="container">
-    <div>
+    <div class="reveal in">
       <div class="eyebrow">Architectural Design Studio</div>
       <h1>We design<br>modern spaces.</h1>
       <p class="lead">Ahmed Hamid Architecture delivers architectural design, precise quantity take-offs and facade renovation — built on a modern, innovative approach to space.</p>
@@ -23,13 +27,54 @@
         <a href="contact.html" class="btn btn-ghost">Request a Project</a>
       </div>
     </div>
-    <div class="hero-figure">
-      <img src="assets/logo-mark.jpg" alt="Ahmed Hamid Architecture mark" style="max-width:360px;margin:0 auto;">
+    <div class="hero-figure reveal in">
+      <svg viewBox="0 0 480 460" class="blueprint-draw" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Line drawing of a building elevation with dimension annotations">
+        <g stroke="#E2E5F0" stroke-width="1">
+          <line x1="0" y1="380" x2="480" y2="380"/>
+          <line x1="40" y1="0" x2="40" y2="460"/>
+        </g>
+        <line x1="20" y1="380" x2="460" y2="380" stroke="#1B1F6B" stroke-width="2"/>
+        <g stroke="#1B1F6B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="120,380 120,120 260,20 260,380"/>
+          <polyline points="180,380 180,190 260,255"/>
+          <polyline points="230,380 230,260 200,240"/>
+        </g>
+        <g stroke="#B7C3F2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="300,380 300,140 400,60 400,380"/>
+          <polyline points="340,380 340,210 400,255"/>
+        </g>
+        <g stroke="#2E3A9E" stroke-width="1">
+          <line x1="120" y1="400" x2="400" y2="400"/>
+          <line x1="120" y1="394" x2="120" y2="406"/>
+          <line x1="400" y1="394" x2="400" y2="406"/>
+        </g>
+      </svg>
+      <span class="hero-dim" style="top:2%;left:52%">H 18.40 m</span>
+      <span class="hero-dim" style="bottom:2%;left:44%">GFA 420 m²</span>
+      <span class="hero-dim" style="top:38%;left:2%">GL ±0.00</span>
     </div>
   </div>
 </section>
 
-<section>
+<section class="reveal">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Our Process</div>
+        <h2>From brief to build</h2>
+      </div>
+    </div>
+    <div class="process-row">
+      <div class="process-connector"></div>
+      <div class="process-step"><div class="step-index">01</div><h3>Brief & Site Study</h3><p>We start from your plot, program and budget — not a template.</p></div>
+      <div class="process-step"><div class="step-index">02</div><h3>Concept & Drawings</h3><p>Design concept, plans and 3D visualization for sign-off.</p></div>
+      <div class="process-step"><div class="step-index">03</div><h3>Quantity Take-off</h3><p>Detailed material and cost quantities before construction starts.</p></div>
+      <div class="process-step"><div class="step-index">04</div><h3>Execution Support</h3><p>Facade and interface adjustments through to handover.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--white);border-top:1px solid var(--line)">
   <div class="container">
     <div class="section-head">
       <div>
@@ -37,9 +82,7 @@
         <h2>Latest from the studio</h2>
       </div>
     </div>
-    <div id="announcements-list" class="grid grid-3">
-      <p style="color:var(--gray)">Loading updates…</p>
-    </div>
+    <div id="announcements-list" class="grid grid-3 reveal-stagger"></div>
   </div>
 </section>
 
@@ -52,13 +95,39 @@
       </div>
       <a href="projects.html" class="btn btn-ghost">All Projects →</a>
     </div>
-    <div id="featured-projects" class="grid grid-3">
-      <p style="color:var(--gray)">Loading projects…</p>
+    <div id="featured-projects" class="grid grid-3 reveal-stagger"></div>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Why Ahmed Hamid Architecture</div>
+        <h2>Built on precision</h2>
+      </div>
+    </div>
+    <div class="why-grid">
+      <div>
+        <div class="icon-badge"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" fill="none"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <h3 style="font-size:17px">Accurate Quantities</h3>
+        <p style="color:var(--gray);font-size:14px">Every take-off is measured against the working drawings, not estimated.</p>
+      </div>
+      <div>
+        <div class="icon-badge"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" fill="none"><path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-6h6v6"/></svg></div>
+        <h3 style="font-size:17px">Site-Grounded Design</h3>
+        <p style="color:var(--gray);font-size:14px">Concepts respond to the plot, climate and program — never a copy-paste plan.</p>
+      </div>
+      <div>
+        <div class="icon-badge"><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" fill="none"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3 style="font-size:17px">Responsive Timelines</h3>
+        <p style="color:var(--gray);font-size:14px">Clear milestones from concept to construction drawings.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section>
+<section class="reveal" style="background:var(--white);border-top:1px solid var(--line)">
   <div class="container">
     <div class="section-head">
       <div>
@@ -77,12 +146,13 @@
 <script>
 async function loadFeaturedProjects(){
   const mount = document.getElementById("featured-projects");
+  mount.innerHTML = skeletonCards(3);
   try{
     const rows = await SB.select("projects", "select=id,title,cover_image,location&order=id.desc&limit=3");
     if(!rows.length){ mount.innerHTML = `<p style="color:var(--gray)">Projects will appear here once added from the admin panel.</p>`; return; }
     mount.innerHTML = rows.map(p => `
       <a class="card" href="project.html?id=${p.id}">
-        <div class="thumb"><img src="${p.cover_image || 'assets/logo.png'}" alt="${p.title}"></div>
+        <div class="thumb"><img src="${p.cover_image || 'assets/logo.png'}" alt="${p.title}" loading="lazy"></div>
         <div class="body">
           <h3>${p.title}</h3>
           <div class="meta">${p.location || ''}</div>
@@ -91,6 +161,7 @@ async function loadFeaturedProjects(){
   }catch(e){
     mount.innerHTML = `<p style="color:var(--gray)">Projects will appear here once the database is connected.</p>`;
   }
+  mount.classList.add("in");
 }
 
 async function loadServices(){
@@ -110,6 +181,7 @@ async function loadServices(){
 
 async function loadAnnouncements(){
   const mount = document.getElementById("announcements-list");
+  mount.innerHTML = skeletonCards(3);
   try{
     const rows = await SB.select("site_content", "select=value&key=eq.announcements");
     const items = rows[0]?.value?.items || [];
@@ -123,11 +195,13 @@ async function loadAnnouncements(){
   }catch(e){
     mount.innerHTML = `<p style="color:var(--gray)">No announcements yet — check back soon.</p>`;
   }
+  mount.classList.add("in");
 }
 
 loadFeaturedProjects();
 loadServices();
 loadAnnouncements();
+initReveal();
 </script>
 </body>
 </html>

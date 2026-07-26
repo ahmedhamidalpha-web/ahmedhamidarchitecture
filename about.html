@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Us | Ahmed Hamid Architecture</title>
+<meta name="description" content="About Ahmed Hamid Architecture — architectural design studio, departments, vision and mission.">
+<meta property="og:title" content="About Ahmed Hamid Architecture">
+<meta property="og:image" content="assets/logo.png">
 <link rel="icon" href="assets/logo.png">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -13,7 +16,7 @@
 <section class="hero" style="padding-bottom:40px">
   <div class="hero-grid"></div>
   <div class="container" style="grid-template-columns:1fr">
-    <div>
+    <div class="reveal in">
       <div class="eyebrow">About the studio</div>
       <h1 id="about-intro-title">About Ahmed Hamid Architecture</h1>
       <p class="lead" id="about-intro-text" style="max-width:640px">Loading…</p>
@@ -21,24 +24,24 @@
   </div>
 </section>
 
-<section>
-  <div class="container grid grid-3" id="about-departments"></div>
+<section class="reveal">
+  <div class="container grid grid-3 reveal-stagger" id="about-departments"></div>
 </section>
 
-<section style="background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+<section class="reveal" style="background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
   <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
     <div>
       <div class="eyebrow">Vision</div>
-      <p id="about-vision" style="color:var(--gray)">Loading…</p>
+      <p id="about-vision" style="color:var(--gray)">—</p>
     </div>
     <div>
       <div class="eyebrow">Mission & Goals</div>
-      <p id="about-mission" style="color:var(--gray)">Loading…</p>
+      <p id="about-mission" style="color:var(--gray)">—</p>
     </div>
   </div>
 </section>
 
-<section id="experience-section" style="display:none">
+<section class="reveal" id="experience-section" style="display:none">
   <div class="container">
     <div class="eyebrow">Experience</div>
     <h2>Track Record</h2>
@@ -65,6 +68,7 @@ async function loadAbout(){
         <h3>${d.name}</h3>
         <p style="color:var(--gray);font-size:14px">${d.description || ''}</p>
       </div></div>`).join("") : "";
+    deptMount.classList.add("in");
 
     if(v.stats && v.stats.length){
       document.getElementById("experience-section").style.display = "block";
@@ -74,6 +78,7 @@ async function loadAbout(){
   }catch(e){
     document.getElementById("about-intro-text").textContent = "Content will appear here once added from the admin panel.";
   }
+  initReveal();
 }
 loadAbout();
 </script>

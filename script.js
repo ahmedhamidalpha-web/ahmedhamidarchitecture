@@ -71,12 +71,42 @@ function renderHeader(){
         </span>
       </a>
       <nav class="main-nav" id="main-nav">${links}</nav>
-      <button id="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      <div class="header-cta">
+        <a href="contact.html" class="btn btn-primary">Let's Talk</a>
+        <button id="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+      </div>
     </div>
   `;
   const toggle = document.getElementById("nav-toggle");
   const nav = document.getElementById("main-nav");
   toggle.addEventListener("click", () => nav.classList.toggle("open"));
+
+  window.addEventListener("scroll", () => {
+    mount.classList.toggle("scrolled", window.scrollY > 12);
+  }, { passive: true });
+}
+
+/* Fades/slides elements marked .reveal or .reveal-stagger into view as the
+   user scrolls to them. Skips entirely if the browser prefers less motion. */
+function initReveal(){
+  const targets = document.querySelectorAll(".reveal, .reveal-stagger");
+  if(!targets.length) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){ entry.target.classList.add("in"); io.unobserve(entry.target); }
+    });
+  }, { threshold: .12 });
+  targets.forEach(t => io.observe(t));
+}
+
+/* Renders `count` shimmering placeholder cards while data loads. */
+function skeletonCards(count = 3){
+  return Array.from({length: count}).map(() => `
+    <div class="card skel-card">
+      <div class="skel skel-thumb"></div>
+      <div class="skel skel-line"></div>
+      <div class="skel skel-line short"></div>
+    </div>`).join("");
 }
 
 function renderFooter(){
@@ -128,6 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderHeader();
   renderFooter();
   trackPageView();
+  initReveal();
 });
 
 /* Records a lightweight visit row so the admin overview chart has data,

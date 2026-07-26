@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blog | Ahmed Hamid Architecture</title>
+<meta name="description" content="Ideas, process notes and studio updates from Ahmed Hamid Architecture.">
+<meta property="og:title" content="Blog — Ahmed Hamid Architecture">
+<meta property="og:image" content="assets/logo.png">
 <link rel="icon" href="assets/logo.png">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -13,7 +16,7 @@
 <section class="hero" style="padding-bottom:30px">
   <div class="hero-grid"></div>
   <div class="container" style="grid-template-columns:1fr">
-    <div>
+    <div class="reveal in">
       <div class="eyebrow">Notes from the studio</div>
       <h1>Blog</h1>
       <p class="lead">Ideas, process notes and updates from Ahmed Hamid Architecture.</p>
@@ -21,9 +24,9 @@
   </div>
 </section>
 
-<section>
+<section class="reveal">
   <div class="container">
-    <div id="blog-list" class="grid grid-3"></div>
+    <div id="blog-list" class="grid grid-3 reveal-stagger"></div>
     <div id="post-view" style="display:none;max-width:720px;margin:0 auto"></div>
   </div>
 </section>
@@ -35,17 +38,19 @@ const listMount = document.getElementById("blog-list");
 const postMount = document.getElementById("post-view");
 
 async function loadList(){
+  listMount.innerHTML = skeletonCards(3);
   try{
     const rows = await SB.select("blog_posts", "select=id,title,cover_image,created_at&order=created_at.desc");
     if(!rows.length){ listMount.innerHTML = `<p style="color:var(--gray)">No posts yet — check back soon.</p>`; return; }
     listMount.innerHTML = rows.map(p => `
       <a class="card" href="#" onclick="openPost(${p.id});return false;">
-        <div class="thumb"><img src="${p.cover_image || 'assets/logo.png'}" alt="${p.title}"></div>
+        <div class="thumb"><img src="${p.cover_image || 'assets/logo.png'}" alt="${p.title}" loading="lazy"></div>
         <div class="body"><h3>${p.title}</h3><div class="meta">${new Date(p.created_at).toLocaleDateString()}</div></div>
       </a>`).join("");
   }catch(e){
     listMount.innerHTML = `<p style="color:var(--gray)">Posts will appear here once the database is connected.</p>`;
   }
+  listMount.classList.add("in");
 }
 
 async function openPost(id){
