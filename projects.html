@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ahmed Hamid Architecture | Projects</title>
+  <link rel="stylesheet" href="style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S8XNQKS8F3"></script>
+</head>
+<body>
+
+  <header>
+    <div class="header-brand">
+      <img src="assets/logo.png" alt="Ahmed Hamid Architecture Logo">
+      <div class="brand-titles">
+        <h1>Ahmed Hamid Architecture</h1>
+        <p>Modern Design | Innovative Space</p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="main-nav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="admin.html">Admin</a></li>
+    </ul>
+  </nav>
+
+  <main class="content">
+    <h2 style="color: var(--primary-blue); font-size: 2rem; margin-bottom: 25px;">سجل المشاريع المنجزة</h2>
+    
+    <div id="all-projects-grid" class="grid-cards">
+      <p style="color: var(--text-muted);">جاري استعراض المشاريع المعمارية...</p>
+    </div>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      document.getElementById('footer-container').innerHTML = generateGlobalFooter();
+      
+      const projects = await supabaseFetch('projects?select=*&order=created_at.desc');
+      const container = document.getElementById('all-projects-grid');
+      if (projects && projects.length > 0) {
+        container.innerHTML = projects.map(p => `
+          <div class="card">
+            <img src="${p.cover_url || 'assets/logo.png'}" alt="${p.title}">
+            <div class="card-body">
+              <h3>${p.title}</h3>
+              <p>${p.location ? 'الموقع: ' + p.location : 'مفهوم معماري حديث.'}</p>
+              <a href="project-detail.html?id=${p.id}" class="btn">عرض تفاصيل المشروع</a>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        container.innerHTML = `<p style="color: var(--text-secondary);">لا توجد مشاريع مسجلة حالياً.</p>`;
+      }
+    });
+  </script>
+</body>
+</html>
