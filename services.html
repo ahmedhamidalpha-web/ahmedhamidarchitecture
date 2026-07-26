@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services | Ahmed Hamid Architecture</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="site-header"></header>
+
+<section class="hero" style="padding-bottom:30px">
+  <div class="hero-grid"></div>
+  <div class="container" style="grid-template-columns:1fr">
+    <div>
+      <div class="eyebrow">What We Do</div>
+      <h1>Services</h1>
+      <p class="lead">From first sketch to final quantity take-off — the full architectural process, handled in-house.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div id="services-list">
+      <p style="color:var(--gray)">Loading services…</p>
+    </div>
+  </div>
+</section>
+
+<footer id="site-footer"></footer>
+<script src="script.js"></script>
+<script>
+async function loadServices(){
+  const mount = document.getElementById("services-list");
+  try{
+    const rows = await SB.select("services", "select=title,description&order=sort_order.asc");
+    if(!rows.length){ mount.innerHTML = `<p style="color:var(--gray)">Services will appear here once added from the admin panel.</p>`; return; }
+    mount.innerHTML = rows.map(s => `
+      <div class="service-item">
+        <h3>${s.title}</h3>
+        <p>${s.description || ''}</p>
+      </div>`).join("");
+  }catch(e){
+    mount.innerHTML = `<p style="color:var(--gray)">Services will appear here once the database is connected.</p>`;
+  }
+}
+loadServices();
+</script>
+</body>
+</html>

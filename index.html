@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmed Hamid Architecture | Modern Design, Innovative Space</title>
+<meta name="description" content="Ahmed Hamid Architecture — architectural design, quantity take-offs and facade renovation studio.">
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="site-header"></header>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div>
+      <div class="eyebrow">Architectural Design Studio</div>
+      <h1>We design<br>modern spaces.</h1>
+      <p class="lead">Ahmed Hamid Architecture delivers architectural design, precise quantity take-offs and facade renovation — built on a modern, innovative approach to space.</p>
+      <div class="hero-actions">
+        <a href="projects.html" class="btn btn-primary">View Projects →</a>
+        <a href="contact.html" class="btn btn-ghost">Request a Project</a>
+      </div>
+    </div>
+    <div class="hero-figure">
+      <img src="assets/logo-mark.jpg" alt="Ahmed Hamid Architecture mark" style="max-width:360px;margin:0 auto;">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Announcements</div>
+        <h2>Latest from the studio</h2>
+      </div>
+    </div>
+    <div id="announcements-list" class="grid grid-3">
+      <p style="color:var(--gray)">Loading updates…</p>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Selected Work</div>
+        <h2>Featured Projects</h2>
+      </div>
+      <a href="projects.html" class="btn btn-ghost">All Projects →</a>
+    </div>
+    <div id="featured-projects" class="grid grid-3">
+      <p style="color:var(--gray)">Loading projects…</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">What We Do</div>
+        <h2>Services</h2>
+      </div>
+      <a href="services.html" class="btn btn-ghost">All Services →</a>
+    </div>
+    <div id="home-services"></div>
+  </div>
+</section>
+
+<footer id="site-footer"></footer>
+
+<script src="script.js"></script>
+<script>
+async function loadFeaturedProjects(){
+  const mount = document.getElementById("featured-projects");
+  try{
+    const rows = await SB.select("projects", "select=id,title,cover_image,location&order=id.desc&limit=3");
+    if(!rows.length){ mount.innerHTML = `<p style="color:var(--gray)">Projects will appear here once added from the admin panel.</p>`; return; }
+    mount.innerHTML = rows.map(p => `
+      <a class="card" href="project.html?id=${p.id}">
+        <div class="thumb"><img src="${p.cover_image || 'assets/logo.png'}" alt="${p.title}"></div>
+        <div class="body">
+          <h3>${p.title}</h3>
+          <div class="meta">${p.location || ''}</div>
+        </div>
+      </a>`).join("");
+  }catch(e){
+    mount.innerHTML = `<p style="color:var(--gray)">Projects will appear here once the database is connected.</p>`;
+  }
+}
+
+async function loadServices(){
+  const mount = document.getElementById("home-services");
+  try{
+    const rows = await SB.select("services", "select=title,description&order=sort_order.asc&limit=4");
+    if(!rows.length){ mount.innerHTML = `<p style="color:var(--gray)">Services will appear here once added.</p>`; return; }
+    mount.innerHTML = rows.map(s => `
+      <div class="service-item">
+        <h3>${s.title}</h3>
+        <p>${s.description || ''}</p>
+      </div>`).join("");
+  }catch(e){
+    mount.innerHTML = `<p style="color:var(--gray)">Services will appear here once the database is connected.</p>`;
+  }
+}
+
+async function loadAnnouncements(){
+  const mount = document.getElementById("announcements-list");
+  try{
+    const rows = await SB.select("site_content", "select=value&key=eq.announcements");
+    const items = rows[0]?.value?.items || [];
+    if(!items.length){ mount.innerHTML = `<p style="color:var(--gray)">No announcements yet — check back soon.</p>`; return; }
+    mount.innerHTML = items.map(a => `
+      <div class="card"><div class="body">
+        <div class="meta">${a.date || ''}</div>
+        <h3>${a.title}</h3>
+        <p style="color:var(--gray);font-size:14px">${a.body || ''}</p>
+      </div></div>`).join("");
+  }catch(e){
+    mount.innerHTML = `<p style="color:var(--gray)">No announcements yet — check back soon.</p>`;
+  }
+}
+
+loadFeaturedProjects();
+loadServices();
+loadAnnouncements();
+</script>
+</body>
+</html>

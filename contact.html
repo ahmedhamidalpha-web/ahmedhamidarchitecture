@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Ahmed Hamid Architecture</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="site-header"></header>
+
+<section class="hero" style="padding-bottom:30px">
+  <div class="hero-grid"></div>
+  <div class="container" style="grid-template-columns:1fr">
+    <div>
+      <div class="eyebrow">Start a project</div>
+      <h1>Contact</h1>
+      <p class="lead">Tell us about your plot and your idea — we'll follow up by phone or email.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container" style="max-width:640px">
+
+    <div id="success-view" class="success-box" style="display:none">
+      <div class="eyebrow" style="justify-content:center">Request Sent</div>
+      <h2>Your request has been submitted successfully.</h2>
+      <p style="color:var(--gray)">We'll be in touch shortly.</p>
+      <a href="contact.html" class="btn btn-primary" style="margin-top:16px">← Back to Contact</a>
+    </div>
+
+    <form id="contact-form" enctype="multipart/form-data">
+      <div class="form-row-2">
+        <div class="field"><label>Full name</label><input name="name" required></div>
+        <div class="field"><label>Phone number</label><input name="phone" type="tel" required></div>
+      </div>
+      <div class="form-row-2">
+        <div class="field">
+          <label>Project type</label>
+          <select name="project_type" required>
+            <option value="">Select…</option>
+            <option>Residential Villa</option>
+            <option>Residential Complex</option>
+            <option>Commercial Building</option>
+            <option>Interior Design</option>
+            <option>Facade Renovation</option>
+            <option>Quantity Take-off</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field"><label>Number of floors</label><input name="floors" type="number" min="1" required></div>
+      </div>
+      <div class="field"><label>Design style preference</label><input name="design_style" placeholder="e.g. Modern, Classic, Islamic…"></div>
+      <div class="field"><label>Land sketch / plot drawing</label><input name="attachment" type="file" accept="image/*,.pdf"></div>
+      <div class="field"><label>Additional notes</label><textarea name="message" rows="4"></textarea></div>
+      <button class="btn btn-primary" type="submit">Submit Request</button>
+      <p class="error-text" id="contact-error">Something went wrong — please try again.</p>
+    </form>
+  </div>
+</section>
+
+<footer id="site-footer"></footer>
+<script src="script.js"></script>
+<script>
+document.getElementById("contact-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const errorEl = document.getElementById("contact-error");
+  errorEl.style.display = "none";
+  const submitBtn = form.querySelector("button[type=submit]");
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Submitting…";
+  try{
+    const res = await fetch(CONFIG.formspreeEndpoint, {
+      method: "POST",
+      headers: { "Accept": "application/json" },
+      body: new FormData(form)
+    });
+    if(!res.ok) throw new Error("submit failed");
+    form.style.display = "none";
+    document.getElementById("success-view").style.display = "block";
+  }catch(err){
+    errorEl.style.display = "block";
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit Request";
+  }
+});
+</script>
+</body>
+</html>
