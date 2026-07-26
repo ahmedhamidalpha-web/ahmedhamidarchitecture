@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ahmed Hamid Architecture | الرئيسية</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Analytics Tracking Header Integration -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S8XNQKS8F3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-S8XNQKS8F3');
+  </script>
+</head>
+<body>
+
+  <!-- Unified Header -->
+  <header>
+    <div class="header-brand">
+      <img src="assets/logo.png" alt="Ahmed Hamid Architecture Logo">
+      <div class="brand-titles">
+        <h1>Ahmed Hamid Architecture</h1>
+        <p>Modern Design | Innovative Space</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Unified Main Navigation -->
+  <nav class="main-nav">
+    <ul>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="admin.html">Admin</a></li>
+    </ul>
+  </nav>
+
+  <!-- Dynamic Content Core -->
+  <main class="content">
+    <section style="background: linear-gradient(135deg, var(--primary-blue), var(--dark-bg)); color: white; padding: 80px 40px; border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-lg);">
+      <h2 style="font-size: 2.8rem; margin-bottom: 20px; font-weight: 800;">نلهم الأفكار.. ونبتكر المساحات المعمارية</h2>
+      <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 30px; color: rgba(255,255,255,0.85);">شركة رائدة في التصميم المعماري العصرى، حساب الكميات بدقة، وتعديل الواجهات لمنح منشأتك الفخامة والاستدامة.</p>
+      <a href="contact.html" class="btn" style="padding: 15px 35px; font-size: 1.1rem;">ابدأ مشروعك معنا</a>
+    </section>
+
+    <!-- Dynamic Featured Projects Section -->
+    <section style="margin-top: 60px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2 style="color: var(--primary-blue); font-size: 1.8rem; font-weight: 700;">معرض المشاريع البارزة</h2>
+        <a href="projects.html" style="color: var(--accent-blue); font-weight: 600;">عرض كل المشاريع &rarr;</a>
+      </div>
+      <div id="home-featured-projects" class="grid-cards">
+        <p style="color: var(--text-muted);">جاري تحميل المعرض المعماري...</p>
+      </div>
+    </section>
+
+    <!-- Dynamic Announcements & Hiring Hub -->
+    <section style="margin-top: 60px; background: var(--surface-white); padding: 40px; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+      <h2 style="color: var(--primary-blue); font-size: 1.6rem; margin-bottom: 20px;">الإعلانات والتحديثات الرسمية</h2>
+      <div id="home-announcements-list">
+        <p style="color: var(--text-muted);">لا توجد إعلانات حديثة في الوقت الحالي.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      document.getElementById('footer-container').innerHTML = generateGlobalFooter();
+      
+      // Fetch Showcase Projects from Supabase
+      const projects = await supabaseFetch('projects?select=*&limit=3');
+      const projContainer = document.getElementById('home-featured-projects');
+      if (projects && projects.length > 0) {
+        projContainer.innerHTML = projects.map(p => `
+          <div class="card">
+            <img src="${p.cover_url || 'assets/logo.png'}" alt="${p.title}">
+            <div class="card-body">
+              <h3>${p.title}</h3>
+              <p>${p.location ? 'الموقع: ' + p.location : 'تصميم معماري حديث يتسم بالإبداع.'}</p>
+              <a href="project-detail.html?id=${p.id}" class="btn">عرض التفاصيل الكاملة</a>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        projContainer.innerHTML = `<p style="color: var(--text-secondary);">لم يتم إدراج مشاريع في المعرض بعد.</p>`;
+      }
+
+      // Fetch Announcements
+      const ann = await supabaseFetch('announcements?select=*&order=created_at.desc');
+      const annContainer = document.getElementById('home-announcements-list');
+      if (ann && ann.length > 0) {
+        annContainer.innerHTML = ann.map(a => `
+          <div style="border-right: 4px solid var(--accent-blue); padding-right: 15px; margin-bottom: 15px;">
+            <h4 style="color: var(--primary-blue);">${a.title}</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">${a.content}</p>
+          </div>
+        `).join('');
+      }
+    });
+  </script>
+</body>
+</html>
