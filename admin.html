@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ahmed Hamid Architecture | Admin Portal</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S8XNQKS8F3"></script>
+</head>
+<body>
+
+  <header>
+    <div class="header-brand">
+      <img src="assets/logo.png" alt="Ahmed Hamid Architecture Logo">
+      <div class="brand-titles">
+        <h1>Ahmed Hamid Architecture</h1>
+        <p>Modern Design | Innovative Space</p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="main-nav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="admin.html" class="active">Admin</a></li>
+    </ul>
+  </nav>
+
+  <main class="content">
+
+    <!-- Auth Module View -->
+    <div id="admin-login-card" style="max-width: 450px; margin: 40px auto; background: var(--surface-white); padding: 40px; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-md);">
+      <h2 style="color: var(--primary-blue); text-align: center; margin-bottom: 25px;">تسجيل دخول الأدمن</h2>
+      
+      <form id="admin-login-form">
+        <div class="form-group">
+          <label>البريد الإلكتروني</label>
+          <input type="email" id="login-email" class="form-control" required value="ahmedhamidarchitecture@gmail.com">
+        </div>
+        <div class="form-group">
+          <label>كلمة السر</label>
+          <input type="password" id="login-pwd" class="form-control" required placeholder="أدخل كلمة السر">
+        </div>
+        <p id="login-err-msg" style="color: #DC2626; font-size: 0.9rem; display: none; margin-bottom: 15px;"></p>
+        <button type="submit" class="btn" style="width: 100%; margin-bottom: 15px;">دخول اللوحة</button>
+      </form>
+      
+      <div style="text-align: center;">
+        <a href="#" onclick="toggleResetForm(true)" style="color: var(--accent-blue); font-size: 0.9rem;">هل نسيت كلمة السر؟</a>
+      </div>
+    </div>
+
+    <!-- Password Reset Flow Module -->
+    <div id="admin-reset-card" style="display: none; max-width: 450px; margin: 40px auto; background: var(--surface-white); padding: 40px; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-md);">
+      <h3 style="color: var(--primary-blue); text-align: center; margin-bottom: 20px;">استعادة كلمة السر</h3>
+      
+      <div id="reset-step-1">
+        <div class="form-group">
+          <label>أدخل البريد الإلكتروني المحفوظ</label>
+          <input type="email" id="reset-email-input" class="form-control" value="ahmedhamidarchitecture@gmail.com">
+        </div>
+        <button onclick="handleSendResetCode()" class="btn" style="width: 100%;">إرسال رمز التأكيد</button>
+      </div>
+
+      <div id="reset-step-2" style="display: none;">
+        <div class="form-group">
+          <label>رمز التأكيد المرسل</label>
+          <input type="text" id="reset-code-input" class="form-control" placeholder="أدخل الرمز المكون من 6 أرقام">
+        </div>
+        <div class="form-group">
+          <label>كلمة السر الجديدة</label>
+          <input type="password" id="reset-new-pwd" class="form-control" placeholder="أدخل كلمة السر الجديدة">
+        </div>
+        <button onclick="handleVerifyReset()" class="btn" style="width: 100%;">تحديث كلمة السر والدخول</button>
+      </div>
+      
+      <div style="text-align: center; margin-top: 15px;">
+        <a href="#" onclick="toggleResetForm(false)" style="color: var(--text-muted); font-size: 0.9rem;">الرجوع لصفحة الدخول</a>
+      </div>
+    </div>
+
+    <!-- Admin Panel Control Workspace -->
+    <div id="admin-dashboard-panel" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <h2 style="color: var(--primary-blue); font-size: 2rem;">لوحة إدارة الشركة والتحليلات</h2>
+        <button onclick="logoutAdmin()" class="btn btn-danger">تسجيل الخروج</button>
+      </div>
+
+      <!-- Google Analytics Traffic Charts -->
+      <section style="background: var(--surface-white); padding: 30px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 40px;">
+        <h3 style="color: var(--primary-blue); margin-bottom: 20px;">إحصائيات وزوار الموقع (Google Analytics: G-S8XNQKS8F3)</h3>
+        <div style="max-height: 380px;">
+          <canvas id="analyticsChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Manage Projects Module -->
+      <section style="background: var(--surface-white); padding: 30px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 40px;">
+        <h3 style="color: var(--primary-blue); margin-bottom: 20px;">إدارة المشاريع (Supabase & Google Drive)</h3>
+        
+        <form id="admin-project-form" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+          <input type="hidden" id="admin-proj-id">
+          <div class="form-group"><label>عنوان المشروع</label><input type="text" id="ap-title" class="form-control" required></div>
+          <div class="form-group"><label>موقع المشروع</label><input type="text" id="ap-location" class="form-control"></div>
+          <div class="form-group"><label>مساحة الأرض</label><input type="text" id="ap-land" class="form-control"></div>
+          <div class="form-group"><label>المساحة المبنية</label><input type="text" id="ap-built" class="form-control"></div>
+          <div class="form-group"><label>النظام الإنشائي</label><input type="text" id="ap-system" class="form-control"></div>
+          <div class="form-group"><label>صورة الغلاف (Google Drive Sync)</label><input type="file" id="ap-cover-file" class="form-control" accept="image/*"></div>
+          <div class="form-group" style="grid-column: 1 / -1;"><label>الفكرة التصميمية</label><textarea id="ap-concept" class="form-control" rows="2"></textarea></div>
+          <div class="form-group" style="grid-column: 1 / -1;"><label>التحديات والحلول</label><textarea id="ap-challenges" class="form-control" rows="2"></textarea></div>
+          <div class="form-group" style="grid-column: 1 / -1;"><label>رفع صور المشروع المتبقية إلى Drive</label><input type="file" id="ap-gallery-files" class="form-control" multiple accept="image/*"></div>
+          <button type="submit" class="btn" style="grid-column: 1 / -1;">حفظ / تحديث المشروع</button>
+        </form>
+
+        <div id="admin-projects-list" class="grid-cards" style="margin-top: 30px;"></div>
+      </section>
+
+      <!-- Manage About Us & Services Tabs -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-bottom: 40px;">
+        
+        <section style="background: var(--surface-white); padding: 30px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <h3 style="color: var(--primary-blue); margin-bottom: 20px;">تحديث صفحة (About Us)</h3>
+          <div class="form-group"><label>التعريف بالشركة</label><textarea id="adm-about-desc" class="form-control" rows="2"></textarea></div>
+          <div class="form-group"><label>أقسام الشركة</label><textarea id="adm-about-depts" class="form-control" rows="2"></textarea></div>
+          <div class="form-group"><label>الرؤية والأهداف</label><textarea id="adm-about-vision" class="form-control" rows="2"></textarea></div>
+          <div class="form-group"><label>خبرات الشركة</label><textarea id="adm-about-exp" class="form-control" rows="2"></textarea></div>
+          <button onclick="saveAboutSettings()" class="btn">حفظ التحديثات</button>
+        </section>
+
+        <section style="background: var(--surface-white); padding: 30px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <h3 style="color: var(--primary-blue); margin-bottom: 20px;">إدارة الخدمات (Services)</h3>
+          <div class="form-group"><label>اسم الخدمة</label><input type="text" id="adm-service-title" class="form-control"></div>
+          <div class="form-group"><label>وصف الخدمة</label><textarea id="adm-service-desc" class="form-control" rows="3"></textarea></div>
+          <button onclick="addServiceItem()" class="btn" style="margin-bottom: 20px;">إضافة الخدمة</button>
+          <div id="admin-services-list"></div>
+        </section>
+
+      </div>
+
+      <!-- Manage Blog & Announcements -->
+      <section style="background: var(--surface-white); padding: 30px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+        <h3 style="color: var(--primary-blue); margin-bottom: 20px;">نشر مقال في المدونة / إعلان للشركة</h3>
+        <div class="form-group"><label>العنوان</label><input type="text" id="adm-blog-title" class="form-control"></div>
+        <div class="form-group"><label>المحتوى</label><textarea id="adm-blog-content" class="form-control" rows="3"></textarea></div>
+        <div style="display: flex; gap: 15px;">
+          <button onclick="publishBlogPost()" class="btn">نشر بالمدونة</button>
+          <button onclick="publishAnnouncement()" class="btn" style="background: var(--primary-blue);">نشر كإعلان بـ Home</button>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById('footer-container').innerHTML = generateGlobalFooter();
+
+      if (checkAdminAuth()) {
+        showDashboard();
+      } else {
+        document.getElementById('admin-login-card').style.display = 'block';
+      }
+
+      document.getElementById('admin-login-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const pwd = document.getElementById('login-pwd').value;
+        const result = loginAdmin(email, pwd);
+        if (result.success) {
+          showDashboard();
+        } else {
+          const errP = document.getElementById('login-err-msg');
+          errP.innerText = result.message;
+          errP.style.display = 'block';
+        }
+      });
+    });
+
+    function toggleResetForm(showReset) {
+      document.getElementById('admin-login-card').style.display = showReset ? 'none' : 'block';
+      document.getElementById('admin-reset-card').style.display = showReset ? 'block' : 'none';
+    }
+
+    function handleSendResetCode() {
+      const email = document.getElementById('reset-email-input').value;
+      if (initiatePasswordReset(email)) {
+        document.getElementById('reset-step-1').style.display = 'none';
+        document.getElementById('reset-step-2').style.display = 'block';
+      } else {
+        alert('البريد الإلكتروني غير مسجل في النظام.');
+      }
+    }
+
+    function handleVerifyReset() {
+      const code = document.getElementById('reset-code-input').value;
+      const pwd = document.getElementById('reset-new-pwd').value;
+      if (finalizePasswordReset(code, pwd)) {
+        alert('تم تغيير كلمة السر بنجاح!');
+        toggleResetForm(false);
+      } else {
+        alert('رمز التأكيد غير صحيح.');
+      }
+    }
+
+    function showDashboard() {
+      document.getElementById('admin-login-card').style.display = 'none';
+      document.getElementById('admin-reset-card').style.display = 'none';
+      document.getElementById('admin-dashboard-panel').style.display = 'block';
+      
+      initAnalyticsChart();
+      loadAdminProjects();
+      loadAdminServices();
+    }
+
+    function initAnalyticsChart() {
+      const ctx = document.getElementById('analyticsChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['اليومي', 'الأسبوعي', 'الشهري'],
+          datasets: [{
+            label: 'عدد الزوار (Google Analytics)',
+            data: [142, 890, 3450],
+            borderColor: '#0066FF',
+            backgroundColor: 'rgba(0, 102, 255, 0.1)',
+            fill: true,
+            tension: 0.4
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+      });
+    }
+
+    // Projects Engine
+    async function loadAdminProjects() {
+      const projects = await supabaseFetch('projects?select=*');
+      const container = document.getElementById('admin-projects-list');
+      if (projects && projects.length > 0) {
+        container.innerHTML = projects.map(p => `
+          <div class="card">
+            <img src="${p.cover_url || 'assets/logo.png'}" alt="${p.title}">
+            <div class="card-body">
+              <h3>${p.title}</h3>
+              <p>${p.location || ''}</p>
+              <div style="display: flex; gap: 10px;">
+                <button onclick="editProject('${p.id}')" class="btn" style="flex:1;">تعديل</button>
+                <button onclick="deleteProject('${p.id}')" class="btn btn-danger">حذف</button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        container.innerHTML = '<p style="color:var(--text-muted);">لا توجد مشاريع مضافة.</p>';
+      }
+    }
+
+    document.getElementById('admin-project-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('admin-proj-id').value;
+      const title = document.getElementById('ap-title').value;
+      const location = document.getElementById('ap-location').value;
+      const land_area = document.getElementById('ap-land').value;
+      const built_area = document.getElementById('ap-built').value;
+      const structural_system = document.getElementById('ap-system').value;
+      const concept = document.getElementById('ap-concept').value;
+      const challenges = document.getElementById('ap-challenges').value;
+
+      let cover_url = '';
+      const coverFile = document.getElementById('ap-cover-file').files[0];
+      if (coverFile) {
+        cover_url = await uploadToGoogleDrive(coverFile);
+      }
+
+      const galleryFiles = document.getElementById('ap-gallery-files').files;
+      let images_json = [];
+      for (let file of galleryFiles) {
+        let url = await uploadToGoogleDrive(file);
+        images_json.push(url);
+      }
+
+      const payload = {
+        title, location, land_area, built_area, structural_system, concept, challenges
+      };
+      if (cover_url) payload.cover_url = cover_url;
+      if (images_json.length > 0) payload.images_json = JSON.stringify(images_json);
+
+      if (id) {
+        await supabaseFetch(`projects?id=eq.${id}`, 'PATCH', payload);
+      } else {
+        await supabaseFetch('projects', 'POST', payload);
+      }
+
+      e.target.reset();
+      document.getElementById('admin-proj-id').value = '';
+      loadAdminProjects();
+      alert('تم حفظ البيانات ومزامنة الملفات بنجاح!');
+    });
+
+    async function deleteProject(id) {
+      if (confirm('هل أنت تأكد من رغبتك في حذف هذا المشروع؟')) {
+        await supabaseFetch(`projects?id=eq.${id}`, 'DELETE');
+        loadAdminProjects();
+      }
+    }
+
+    // Save About Us
+    async function saveAboutSettings() {
+      const payload = {
+        description: document.getElementById('adm-about-desc').value,
+        departments: document.getElementById('adm-about-depts').value,
+        vision: document.getElementById('adm-about-vision').value,
+        experience: document.getElementById('adm-about-exp').value
+      };
+      await supabaseFetch('about_data', 'POST', payload);
+      alert('تم تحديث بيانات About Us بنجاح!');
+    }
+
+    // Manage Services
+    async function addServiceItem() {
+      const title = document.getElementById('adm-service-title').value;
+      const description = document.getElementById('adm-service-desc').value;
+      if (!title) return;
+      await supabaseFetch('services', 'POST', { title, description });
+      document.getElementById('adm-service-title').value = '';
+      document.getElementById('adm-service-desc').value = '';
+      loadAdminServices();
+    }
+
+    async function loadAdminServices() {
+      const services = await supabaseFetch('services?select=*');
+      const list = document.getElementById('admin-services-list');
+      if (services && services.length > 0) {
+        list.innerHTML = services.map(s => `
+          <div style="display: flex; justify-content: space-between; align-items: center; background: var(--light-bg); padding: 10px 15px; border-radius: 6px; margin-bottom: 8px;">
+            <span><strong>${s.title}</strong></span>
+            <button onclick="deleteService('${s.id}')" class="btn btn-danger" style="padding: 4px 8px; font-size: 0.8rem;">حذف</button>
+          </div>
+        `).join('');
+      }
+    }
+
+    async function deleteService(id) {
+      await supabaseFetch(`services?id=eq.${id}`, 'DELETE');
+      loadAdminServices();
+    }
+
+    // Blog & Announcements
+    async function publishBlogPost() {
+      const title = document.getElementById('adm-blog-title').value;
+      const content = document.getElementById('adm-blog-content').value;
+      if (!title || !content) return;
+      await supabaseFetch('blog_posts', 'POST', { title, content });
+      alert('تم نشر المقال بالمدونة!');
+    }
+
+    async function publishAnnouncement() {
+      const title = document.getElementById('adm-blog-title').value;
+      const content = document.getElementById('adm-blog-content').value;
+      if (!title || !content) return;
+      await supabaseFetch('announcements', 'POST', { title, content });
+      alert('تم نشر الإعلان بالصفحة الرئيسية!');
+    }
+  </script>
+</body>
+</html>
