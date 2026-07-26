@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmed Hamid Architecture | Modern Design & Innovative Space</title>
-    
+    <title>Ahmed Hamid Architecture</title>
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-S8XNQKS8F3"></script>
     <script>
@@ -13,1035 +12,214 @@
       gtag('js', new Date());
       gtag('config', 'G-S8XNQKS8F3');
     </script>
-
-    <!-- Tailwind CSS & FontAwesome Icons -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome & CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Chart.js for Admin Analytics -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              brand: {
-                blue: '#0F52BA',
-                darkBlue: '#0A3275',
-                lightBlue: '#1E90FF',
-                accent: '#00BFFF',
-                dark: '#0d1117',
-                card: '#161b22',
-                border: '#30363d'
-              }
-            }
-          }
-        }
-      }
-    </script>
-    
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap');
-      body {
-        font-family: 'Cairo', sans-serif;
-        background-color: #0b0f17;
-        color: #f0f6fc;
-      }
-      .page-view {
-        display: none;
-      }
-      .page-view.active {
-        display: block;
-      }
-      .glass-card {
-        background: rgba(22, 27, 34, 0.85);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="min-h-screen flex flex-col justify-between">
+<body>
 
-    <!-- ================= HEADER ================= -->
-    <header class="bg-gradient-to-r from-gray-950 via-brand-darkBlue to-gray-950 text-white border-b border-brand-border sticky top-0 z-50 shadow-xl">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-4 cursor-pointer" onclick="navigateTo('home')">
-                <img src="assets/logo.png" alt="Logo" class="h-16 w-auto object-contain bg-white/10 p-1 rounded-lg border border-white/20" onerror="this.src='https://via.placeholder.com/80?text=LOGO'">
-                <div>
-                    <h1 class="text-2xl font-extrabold tracking-wide text-brand-lightBlue">AHMED HAMID ARCHITECTURE</h1>
-                    <p class="text-xs text-gray-300 font-semibold tracking-wider">Modern Design | Innovative Space</p>
-                </div>
+    <!-- Header & Navigation -->
+    <header class="main-header">
+        <div class="logo-area">
+            <img src="assets/logo.png" alt="Logo" class="logo-img" onerror="this.style.display='none'">
+            <div>
+                <h1>AHMED HAMID ARCHITECTURE</h1>
+                <p>Modern Design | Innovative Space</p>
             </div>
         </div>
-
-        <!-- NAVBAR -->
-        <nav class="bg-brand-dark/90 border-t border-brand-border">
-            <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-center md:justify-start gap-2 md:gap-6 py-3 font-semibold text-sm">
-                <button onclick="navigateTo('home')" class="nav-btn hover:text-brand-lightBlue px-3 py-1 rounded-md transition" id="nav-home">الرئيسية (Home)</button>
-                <button onclick="navigateTo('about')" class="nav-btn hover:text-brand-lightBlue px-3 py-1 rounded-md transition" id="nav-about">من نحن (About Us)</button>
-                <button onclick="navigateTo('services')" class="nav-btn hover:text-brand-lightBlue px-3 py-1 rounded-md transition" id="nav-services">الخدمات (Services)</button>
-                <button onclick="navigateTo('projects')" class="nav-btn hover:text-brand-lightBlue px-3 py-1 rounded-md transition" id="nav-projects">المشاريع (Projects)</button>
-                <button onclick="navigateTo('blog')" class="nav-btn hover:text-brand-lightBlue px-3 py-1 rounded-md transition" id="nav-blog">المدونة (Blog)</button>
-                <button onclick="navigateTo('contact')" class="nav-btn hover:text-brand-lightBlue px-3 py-1 rounded-md transition" id="nav-contact">تواصل معنا (Contact)</button>
-                <button onclick="navigateTo('admin')" class="nav-btn bg-brand-blue/80 hover:bg-brand-blue text-white px-4 py-1 rounded-md transition mr-auto" id="nav-admin"><i class="fa-solid fa-user-gear ml-1"></i> الأدمن (Admin)</button>
-            </div>
+        <nav class="nav-links">
+            <button onclick="showPage('home')" class="nav-btn active">الرئيسية</button>
+            <button onclick="showPage('about')" class="nav-btn">من نحن</button>
+            <button onclick="showPage('services')" class="nav-btn">خدماتنا</button>
+            <button onclick="showPage('projects')" class="nav-btn">المشاريع</button>
+            <button onclick="showPage('contact')" class="nav-btn">تواصل معنا</button>
+            <button onclick="showPage('admin')" class="nav-btn admin-link"><i class="fa-solid fa-lock"></i> الأدمن</button>
         </nav>
     </header>
 
-    <!-- ================= MAIN CONTENT VIEWS ================= -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-8">
+    <main class="container">
 
-        <!-- 1. HOME VIEW -->
-        <section id="view-home" class="page-view active space-y-12">
-            <!-- Hero Banner -->
-            <div class="relative rounded-2xl overflow-hidden p-8 md:p-16 bg-gradient-to-r from-brand-darkBlue to-gray-900 border border-brand-border shadow-2xl flex flex-col items-start gap-6">
-                <span class="bg-brand-blue text-xs uppercase tracking-widest px-3 py-1 rounded-full font-bold">الرواد في التصميم والمعمار</span>
-                <h2 class="text-3xl md:text-5xl font-black leading-tight max-w-2xl">نبتكر المساحات.. لنشكل أسلوب الحياة العصري</h2>
-                <p class="text-gray-300 max-w-xl text-lg">خبرة متخصصة في التصميم المعماري الإبداعي، حساب الكميات الدقيق، وتطوير وتعديل الواجهات المودرن بأعلى معايير الجودة.</p>
-                <div class="flex flex-wrap gap-4">
-                    <button onclick="navigateTo('projects')" class="bg-brand-blue hover:bg-brand-lightBlue font-bold px-6 py-3 rounded-lg shadow-lg transition">استكشف معرض المشاريع</button>
-                    <button onclick="navigateTo('contact')" class="bg-white/10 hover:bg-white/20 border border-white/30 font-bold px-6 py-3 rounded-lg transition">اطلب مشروعك الآن</button>
+        <!-- 1. HOME PAGE -->
+        <section id="page-home" class="page active">
+            <div class="hero">
+                <h2>نبتكر المساحات.. لنشكل أسلوب الحياة العصري</h2>
+                <p>خبرة متخصصة في التصميم المعماري، حساب الكميات الدقيق، وتطوير الواجهات المودرن بأعلى معايير الجودة.</p>
+                <div class="hero-btns">
+                    <button onclick="showPage('projects')" class="btn-primary">عرض المشاريع</button>
+                    <button onclick="showPage('contact')" class="btn-secondary">طلب مشروع</button>
                 </div>
             </div>
 
-            <!-- Dynamic Announcements / Hiring -->
-            <div id="home-announcements" class="space-y-4">
-                <!-- Data populated dynamically -->
+            <h3 class="section-title">أحدث المشاريع</h3>
+            <div id="home-projects-list" class="grid-cards">
+                <!-- Projects will be rendered here -->
             </div>
+        </section>
 
-            <!-- Featured Showcase Projects -->
-            <div class="space-y-6">
-                <div class="flex justify-between items-center border-b border-brand-border pb-3">
-                    <h3 class="text-2xl font-bold text-brand-lightBlue">معرض المشاريع المميزة</h3>
-                    <button onclick="navigateTo('projects')" class="text-sm text-gray-400 hover:text-white">عرض الكل &larr;</button>
+        <!-- 2. ABOUT PAGE -->
+        <section id="page-about" class="page">
+            <h2 class="section-title">عن الشركة</h2>
+            <div class="about-grid">
+                <div class="card">
+                    <h3><i class="fa-solid fa-building"></i> التعريف بالشركة</h3>
+                    <p id="about-text-company">شركة Ahmed Hamid Architecture متخصصة في تقديم الحلول المعمارية والتصاميم الحديثة واستغلال المساحات بأفضل صورة.</p>
                 </div>
-                <div id="home-featured-projects" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <p class="text-gray-400 col-span-3 text-center py-8">جاري تحميل المشاريع المميزة...</p>
+                <div class="card">
+                    <h3><i class="fa-solid fa-bullseye"></i> الرؤية والأهداف</h3>
+                    <p id="about-text-vision">تقديم تصاميم مبتكرة تجمع بين الجمالية والوظيفة العملية لتلبية كافة تطلعات عملائنا.</p>
                 </div>
             </div>
         </section>
 
-        <!-- 2. ABOUT US VIEW -->
-        <section id="view-about" class="page-view space-y-8">
-            <div class="border-b border-brand-border pb-4">
-                <h2 class="text-3xl font-extrabold text-brand-lightBlue">عن الشركة (About Us)</h2>
-                <p class="text-gray-400">تعرف على Ahmed Hamid Architecture ورؤيتنا المعمارية</p>
-            </div>
-            <div id="about-content" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Content dynamically populated from Supabase -->
-                <p class="text-gray-400 col-span-2 text-center py-10">جاري تحميل البيانات...</p>
-            </div>
-        </section>
-
-        <!-- 3. SERVICES VIEW -->
-        <section id="view-services" class="page-view space-y-8">
-            <div class="border-b border-brand-border pb-4">
-                <h2 class="text-3xl font-extrabold text-brand-lightBlue">خدماتنا (Services)</h2>
-                <p class="text-gray-400">نقدم حلولاً معمارية وهندسية شاسعة ومخصصة لتلبية أرقى التطلعات</p>
-            </div>
-            <div id="services-list" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Dynamically Populated -->
-            </div>
-        </section>
-
-        <!-- 4. PROJECTS VIEW -->
-        <section id="view-projects" class="page-view space-y-8">
-            <div class="border-b border-brand-border pb-4">
-                <h2 class="text-3xl font-extrabold text-brand-lightBlue">معرض المشاريع (Projects)</h2>
-                <p class="text-gray-400">استعرض أحدث أعمالنا المعمارية والتصاميم الهندسية</p>
-            </div>
-            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Dynamically Populated -->
-            </div>
-        </section>
-
-        <!-- 4.1 SINGLE PROJECT DETAIL VIEW -->
-        <section id="view-project-detail" class="page-view space-y-8">
-            <button onclick="navigateTo('projects')" class="bg-gray-800 hover:bg-gray-700 text-sm px-4 py-2 rounded-lg border border-gray-600 transition mb-4">
-                &rarr; العودة لكافة المشاريع
-            </button>
-            <div id="project-detail-container" class="glass-card rounded-2xl p-6 md:p-10 space-y-8">
-                <!-- Dynamically Rendered -->
-            </div>
-        </section>
-
-        <!-- 5. BLOG VIEW -->
-        <section id="view-blog" class="page-view space-y-8">
-            <div class="border-b border-brand-border pb-4">
-                <h2 class="text-3xl font-extrabold text-brand-lightBlue">المدونة والتحديثات (Blog)</h2>
-                <p class="text-gray-400">تابع أحدث المقالات، النصائح المعمارية وإعلانات الشركة</p>
-            </div>
-            <div id="blog-posts-container" class="space-y-8 max-w-4xl mx-auto">
-                <!-- Dynamically Populated -->
-            </div>
-        </section>
-
-        <!-- 6. CONTACT VIEW -->
-        <section id="view-contact" class="page-view max-w-3xl mx-auto space-y-8">
-            <div class="text-center space-y-2">
-                <h2 class="text-3xl font-extrabold text-brand-lightBlue">طلب مشروع جديد / تواصل معنا</h2>
-                <p class="text-gray-400">قم بملء استمارة طلب المشروع وسنتواصل معك في أقرب وقت</p>
-            </div>
-
-            <form id="contactForm" action="https://formspree.io/f/mzdnpevq" method="POST" class="glass-card p-6 md:p-10 rounded-2xl space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-semibold mb-2">الاسم الكامل *</label>
-                        <input type="text" name="name" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-brand-blue outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold mb-2">رقم الهاتف / الواتساب *</label>
-                        <input type="tel" name="phone" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-brand-blue outline-none">
-                    </div>
+        <!-- 3. SERVICES PAGE -->
+        <section id="page-services" class="page">
+            <h2 class="section-title">خدماتنا</h2>
+            <div id="services-list" class="grid-cards">
+                <div class="card">
+                    <i class="fa-solid fa-compass-drafting icon-big"></i>
+                    <h3>التصميم المعماري السكني والتجاري</h3>
+                    <p>تصاميم عصرية ومبتكرة تستغل كافة المساحات بكفاءة عالية.</p>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div>
-                        <label class="block text-sm font-semibold mb-2">نوع المشروع</label>
-                        <select name="project_type" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-brand-blue outline-none">
-                            <option value="تصميم معماري السكني">تصميم معماري سكني</option>
-                            <option value="تصميم تجاري">تصميم تجاري</option>
-                            <option value="تعديل واجهات">تعديل واجهات</option>
-                            <option value="حساب كميات">حساب كميات</option>
-                            <option value="تصميم داخلي">تصميم داخلي</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold mb-2">عدد الطوابق</label>
-                        <input type="text" name="floors" placeholder="مثال: طابقين ورضي" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-brand-blue outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold mb-2">طراز التصميم</label>
-                        <select name="style_type" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-brand-blue outline-none">
-                            <option value="مودرن (Modern)">مودرن (Modern)</option>
-                            <option value="كلاسيك (Classic)">كلاسيك (Classic)</option>
-
-                            <option value="نيوكلاسيك">نيوكلاسيك</option>
-                        </select>
-                    </div>
+                <div class="card">
+                    <i class="fa-solid fa-calculator icon-big"></i>
+                    <h3>حساب الكميات وتكلفة المشاريع</h3>
+                    <p>جداول كميات دقيقة وشاملة تساعدك في إدارة ميزانية البناء.</p>
                 </div>
-
-                <div>
-                    <label class="block text-sm font-semibold mb-2">تفاصيل إضافية / ملاحظات</label>
-                    <textarea name="message" rows="4" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:border-brand-blue outline-none" placeholder="اكتب أي تفاصيل أخرى عن الأرض أو المتطلبات..."></textarea>
+                <div class="card">
+                    <i class="fa-solid fa-city icon-big"></i>
+                    <h3>تعديل وتطوير الواجهات</h3>
+                    <p>تحويل الواجهات التقليدية إلى طراز مودرن فريد جذاب.</p>
                 </div>
+            </div>
+        </section>
 
-                <button type="submit" class="w-full bg-brand-blue hover:bg-brand-lightBlue text-white font-bold py-4 rounded-xl shadow-lg transition">
-                    <i class="fa-solid fa-paper-plane ml-2"></i> إرسال الطلب الآن
-                </button>
+        <!-- 4. PROJECTS PAGE -->
+        <section id="page-projects" class="page">
+            <h2 class="section-title">معرض المشاريع</h2>
+            <div id="all-projects-list" class="grid-cards">
+                <!-- All projects will be loaded here -->
+            </div>
+        </section>
+
+        <!-- 5. CONTACT PAGE -->
+        <section id="page-contact" class="page">
+            <h2 class="section-title">طلب مشروع / تواصل معنا</h2>
+            <form id="contact-form" action="https://formspree.io/f/mzdnpevq" method="POST" class="form-card">
+                <div class="form-group">
+                    <label>الاسم الكامل *</label>
+                    <input type="text" name="name" required placeholder="أدخل اسمك">
+                </div>
+                <div class="form-group">
+                    <label>رقم الهاتف / الواتساب *</label>
+                    <input type="tel" name="phone" required placeholder="00249...">
+                </div>
+                <div class="form-group">
+                    <label>نوع الخدمة المطلوبة</label>
+                    <select name="service">
+                        <option value="تصميم معماري">تصميم معماري</option>
+                        <option value="تعديل واجهات">تعديل واجهات</option>
+                        <option value="حساب كميات">حساب كميات</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>التفاصيل والملاحظات</label>
+                    <textarea name="message" rows="4" placeholder="اكتب تفاصيل مشروعك هنا..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary block-btn">إرسال الطلب</button>
             </form>
-
-            <div id="contact-success" class="hidden glass-card p-10 rounded-2xl text-center space-y-6 border border-green-500/50">
-                <i class="fa-solid fa-circle-check text-6xl text-green-400"></i>
-                <h3 class="text-2xl font-bold">تم رفع طلبك بنجاح!</h3>
-                <p class="text-gray-300">شكراً لتواصلك معنا. قام نظامنا باستلام طلبك وسنقوم بمراجعته والرد عليك عبر الهاتف أو الإيميل بأسرع وقت ممكن.</p>
-                <button onclick="resetContactForm()" class="bg-brand-blue hover:bg-brand-lightBlue px-6 py-3 rounded-lg font-bold">
-                    العودة لصفحة التواصل
-                </button>
+            <div id="contact-success" class="card success-msg hidden">
+                <i class="fa-solid fa-circle-check"></i>
+                <h3>تم إرسال طلبك بنجاح!</h3>
+                <p>سنقوم بالتواصل معك في أقرب وقت ممكن.</p>
             </div>
         </section>
 
-        <!-- 7. ADMIN VIEW -->
-        <section id="view-admin" class="page-view max-w-5xl mx-auto space-y-8">
-            
-            <!-- Auth Box (Login & Password Reset) -->
-            <div id="admin-auth-box" class="max-w-md mx-auto glass-card p-8 rounded-2xl space-y-6">
-                <!-- Login State -->
-                <div id="auth-login-form" class="space-y-6">
-                    <div class="text-center">
-                        <h3 class="text-2xl font-bold text-brand-lightBlue">تسجيل دخول الأدمن</h3>
-                        <p class="text-xs text-gray-400 mt-1">لوحة التحكم وإدارة بيانات الشركة</p>
-                    </div>
-                    <div id="login-error" class="hidden bg-red-900/50 border border-red-500 text-red-200 text-sm p-3 rounded-lg text-center"></div>
-                    <div>
-                        <label class="block text-sm font-semibold mb-1">البريد الإلكتروني</label>
-                        <input type="email" id="admin-email-input" value="ahmedhamidarchitecture@gmail.com" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold mb-1">كلمة السر</label>
-                        <input type="password" id="admin-pass-input" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white outline-none">
-                    </div>
-                    <button onclick="handleAdminLogin()" class="w-full bg-brand-blue hover:bg-brand-lightBlue font-bold py-3 rounded-lg transition">دخول</button>
-                    <div class="text-center">
-                        <button onclick="toggleAuthReset(true)" class="text-xs text-brand-lightBlue hover:underline">هل نسيت كلمة السر؟</button>
-                    </div>
+        <!-- 6. ADMIN PAGE -->
+        <section id="page-admin" class="page">
+            <!-- Login Form -->
+            <div id="admin-login-box" class="form-card auth-box">
+                <h2>تسجيل دخول الأدمن</h2>
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" id="admin-email" value="ahmedhamidarchitecture@gmail.com">
                 </div>
-
-                <!-- Reset State -->
-                <div id="auth-reset-form" class="hidden space-y-6">
-                    <div class="text-center">
-                        <h3 class="text-xl font-bold text-brand-lightBlue">إعادة ضبط كلمة السر</h3>
-                        <p class="text-xs text-gray-400 mt-1">أدخل بريدك الإلكتروني لتلقي رمز التأكيد</p>
-                    </div>
-                    <div id="reset-msg" class="hidden text-sm p-3 rounded-lg text-center"></div>
-                    
-                    <div id="reset-step-1" class="space-y-4">
-                        <input type="email" id="reset-email-input" placeholder="ahmedhamidarchitecture@gmail.com" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white outline-none">
-                        <button onclick="sendResetCode()" class="w-full bg-brand-blue hover:bg-brand-lightBlue font-bold py-3 rounded-lg transition">إرسال رمز التأكيد</button>
-                    </div>
-
-                    <div id="reset-step-2" class="hidden space-y-4">
-                        <input type="text" id="reset-code-input" placeholder="أدخل رمز التأكيد" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white outline-none">
-                        <input type="password" id="reset-new-pass" placeholder="كلمة السر الجديدة" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white outline-none">
-                        <button onclick="verifyAndChangePass()" class="w-full bg-green-600 hover:bg-green-500 font-bold py-3 rounded-lg transition">تأكيد وتغيير كلمة السر</button>
-                    </div>
-
-                    <div class="text-center">
-                        <button onclick="toggleAuthReset(false)" class="text-xs text-gray-400 hover:underline">&larr; العودة لتسجيل الدخول</button>
-                    </div>
+                <div class="form-group">
+                    <label>كلمة السر</label>
+                    <input type="password" id="admin-pass" placeholder="أدخل كلمة السر">
                 </div>
+                <button onclick="loginAdmin()" class="btn-primary block-btn">دخول</button>
             </div>
 
-            <!-- Admin Panel Dashboard (Shown after Login) -->
-            <div id="admin-panel" class="hidden space-y-10">
-                <div class="flex flex-wrap justify-between items-center bg-gray-900 p-4 rounded-xl border border-gray-800">
-                    <div>
-                        <h2 class="text-2xl font-bold text-brand-lightBlue">لوحة تحكم الأدمن</h2>
-                        <p class="text-xs text-gray-400">مرحباً بك، Ahmed Hamid Architecture</p>
-                    </div>
-                    <button onclick="handleAdminLogout()" class="bg-red-800/80 hover:bg-red-700 text-xs px-4 py-2 rounded-lg font-bold">تسجيل الخروج</button>
+            <!-- Admin Dashboard -->
+            <div id="admin-dashboard" class="hidden">
+                <div class="admin-header">
+                    <h2>لوحة التحكم</h2>
+                    <button onclick="logoutAdmin()" class="btn-danger">تسجيل الخروج</button>
                 </div>
 
-                <!-- Google Analytics Section -->
-                <div class="glass-card p-6 rounded-2xl space-y-4">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-xl font-bold text-brand-lightBlue"><i class="fa-solid fa-chart-line ml-2"></i>إحصائيات زيارات الموقع (Google Analytics)</h3>
-                        <span class="text-xs bg-gray-800 border border-gray-700 px-3 py-1 rounded-full text-gray-300">ID: G-S8XNQKS8F3</span>
-                    </div>
-                    <div class="grid grid-cols-3 gap-4 text-center">
-                        <div class="bg-gray-900 p-4 rounded-xl border border-gray-800">
-                            <span class="text-xs text-gray-400">زيارات اليوم</span>
-                            <p class="text-2xl font-bold text-green-400">124</p>
+                <!-- Add Project Form -->
+                <div class="card">
+                    <h3>إضافة مشروع جديد</h3>
+                    <form id="add-project-form" onsubmit="saveProject(event)">
+                        <div class="form-group">
+                            <label>عنوان المشروع</label>
+                            <input type="text" id="p-title" required>
                         </div>
-                        <div class="bg-gray-900 p-4 rounded-xl border border-gray-800">
-                            <span class="text-xs text-gray-400">زيارات الأسبوع</span>
-                            <p class="text-2xl font-bold text-brand-lightBlue">890</p>
+                        <div class="form-group">
+                            <label>الموقع</label>
+                            <input type="text" id="p-location">
                         </div>
-                        <div class="bg-gray-900 p-4 rounded-xl border border-gray-800">
-                            <span class="text-xs text-gray-400">زيارات الشهر</span>
-                            <p class="text-2xl font-bold text-purple-400">3,450</p>
+                        <div class="form-group">
+                            <label>رابط الصورة (URL الصورة أو رابط المجلد على Google Drive)</label>
+                            <input type="text" id="p-image" placeholder="https://..." required>
                         </div>
-                    </div>
-                    <div class="h-64 mt-4">
-                        <canvas id="analyticsChart"></canvas>
-                    </div>
-                </div>
-
-                <!-- Manage Projects Section -->
-                <div class="glass-card p-6 rounded-2xl space-y-6">
-                    <h3 class="text-xl font-bold text-brand-lightBlue border-b border-gray-800 pb-2"><i class="fa-solid fa-folder-plus ml-2"></i>إضافة / تعديل مشروع جديد</h3>
-                    
-                    <form id="adminProjectForm" onsubmit="handleProjectSubmit(event)" class="space-y-4">
-                        <input type="hidden" id="proj-edit-id">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-bold mb-1">عنوان المشروع *</label>
-                                <input type="text" id="proj-title" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-sm text-white outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold mb-1">موقع المشروع</label>
-                                <input type="text" id="proj-location" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-sm text-white outline-none">
-                            </div>
+                        <div class="form-group">
+                            <label>الوصف / الفكرة التصميمية</label>
+                            <textarea id="p-desc" rows="3"></textarea>
                         </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div>
-                                <label class="block text-xs font-bold mb-1">مساحة الأرض</label>
-                                <input type="text" id="proj-land" placeholder="مثال: 400 م²" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-sm text-white outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold mb-1">المساحة المبنية</label>
-                                <input type="text" id="proj-built" placeholder="مثال: 250 م²" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-sm text-white outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold mb-1">النظام الإنشائي</label>
-                                <input type="text" id="proj-structural" placeholder="مثال: هيكلي خرساني" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-sm text-white outline-none">
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-bold mb-1">صورة الغلاف (Google Drive Sync File)</label>
-                            <input type="file" id="proj-cover-file" accept="image/*" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-xs text-white">
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-bold mb-1">رفع صور المشروع المتبقية إلى Drive (اختر أكثر من صورة)</label>
-                            <input type="file" id="proj-gallery-files" accept="image/*" multiple class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2 text-xs text-white">
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-bold mb-1">الفكرة التصميمية</label>
-                            <textarea id="proj-concept" rows="3" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-sm text-white outline-none"></textarea>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-bold mb-1">التحديات والحلول</label>
-                            <textarea id="proj-challenges" rows="3" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-sm text-white outline-none"></textarea>
-                        </div>
-
-                        <button type="submit" id="proj-submit-btn" class="bg-brand-blue hover:bg-brand-lightBlue font-bold px-6 py-3 rounded-lg transition text-sm">
-                            حفظ / تحديث المشروع
-                        </button>
-                    </form>
-
-                    <!-- Existing Projects List -->
-                    <div class="mt-8 space-y-4">
-                        <h4 class="font-bold text-sm text-gray-300">المشاريع الحالية:</h4>
-                        <div id="admin-projects-list" class="space-y-3">
-                            <!-- Dynamically loaded -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Manage About Us Section -->
-                <div class="glass-card p-6 rounded-2xl space-y-4">
-                    <h3 class="text-xl font-bold text-brand-lightBlue border-b border-gray-800 pb-2"><i class="fa-solid fa-address-card ml-2"></i>تحديث صفحة (About Us)</h3>
-                    <form onsubmit="handleAboutSubmit(event)" class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-bold mb-1">التعريف بالشركة</label>
-                            <textarea id="about-comp" rows="3" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-sm text-white outline-none"></textarea>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold mb-1">أقسام الشركة</label>
-                            <textarea id="about-depts" rows="2" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-sm text-white outline-none"></textarea>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold mb-1">الرؤية والأهداف</label>
-                            <textarea id="about-vision" rows="2" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-sm text-white outline-none"></textarea>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold mb-1">خبرات الشركة</label>
-                            <textarea id="about-exp" rows="2" class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-sm text-white outline-none"></textarea>
-                        </div>
-                        <button type="submit" class="bg-blue-600 hover:bg-blue-500 font-bold px-6 py-2 rounded-lg text-sm transition">حفظ التحديثات</button>
+                        <button type="submit" class="btn-primary">حفظ المشروع</button>
                     </form>
                 </div>
 
-                <!-- Manage Services Section -->
-                <div class="glass-card p-6 rounded-2xl space-y-4">
-                    <h3 class="text-xl font-bold text-brand-lightBlue border-b border-gray-800 pb-2"><i class="fa-solid fa-gears ml-2"></i>إدارة الخدمات (Services)</h3>
-                    <form onsubmit="handleServiceSubmit(event)" class="flex flex-col md:flex-row gap-3">
-                        <input type="text" id="service-title" placeholder="اسم الخدمة" required class="bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-sm text-white outline-none flex-1">
-                        <input type="text" id="service-desc" placeholder="وصف الخدمة" required class="bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-sm text-white outline-none flex-2">
-                        <button type="submit" class="bg-blue-600 hover:bg-blue-500 font-bold px-6 py-2 rounded-lg text-sm transition">إضافة الخدمة</button>
-                    </form>
-                    <div id="admin-services-list" class="space-y-2 mt-4">
-                        <!-- Dynamically populated -->
+                <!-- Manage Existing Projects -->
+                <div class="card mt-20">
+                    <h3>المشاريع المضافة</h3>
+                    <div id="admin-projects-list" class="admin-list">
+                        <!-- Listed dynamically -->
                     </div>
                 </div>
-
-                <!-- Manage Blog Section -->
-                <div class="glass-card p-6 rounded-2xl space-y-4">
-                    <h3 class="text-xl font-bold text-brand-lightBlue border-b border-gray-800 pb-2"><i class="fa-solid fa-newspaper ml-2"></i>نشر مقال في المدونة / إعلان للشركة</h3>
-                    <form onsubmit="handleBlogSubmit(event)" class="space-y-4">
-                        <input type="text" id="blog-title" placeholder="العنوان" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-sm text-white outline-none">
-                        <textarea id="blog-content" rows="4" placeholder="المحتوى" required class="w-full bg-gray-900 border border-gray-700 rounded-lg p-2.5 text-sm text-white outline-none"></textarea>
-                        <div class="flex items-center gap-2">
-                            <input type="checkbox" id="blog-is-announcement" class="w-4 h-4">
-                            <label for="blog-is-announcement" class="text-xs font-bold text-gray-300">نشر كإعلان بـ Home</label>
-                        </div>
-                        <button type="submit" class="bg-blue-600 hover:bg-blue-500 font-bold px-6 py-2 rounded-lg text-sm transition">نشر بالمدونة</button>
-                    </form>
-                    <div id="admin-blog-list" class="space-y-3 mt-4">
-                        <!-- Dynamically populated -->
-                    </div>
-                </div>
-
             </div>
         </section>
 
     </main>
 
-    <!-- ================= FOOTER ================= -->
-    <footer class="bg-gray-950 border-t border-brand-border text-gray-300 mt-16">
-        <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- About Info -->
-            <div class="space-y-3">
-                <h4 class="text-lg font-bold text-brand-lightBlue">AHMED HAMID ARCHITECTURE</h4>
-                <p class="text-xs text-gray-400 leading-relaxed">شركة رائدة متخصصة في الخدمات المعمارية الحديثة، الحلول الهندسية المبتكرة وتعديل الواجهات وحساب الكميات بكفاءة ودقة عالية.</p>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h4>AHMED HAMID ARCHITECTURE</h4>
+                <p>حلول معمارية حديثة وهندسية متكاملة.</p>
             </div>
-
-            <!-- Contact Info -->
-            <div class="space-y-3">
-                <h4 class="text-lg font-bold text-white">تواصل معنا (Contact)</h4>
-                <div class="text-xs space-y-2 text-gray-300">
-                    <p><i class="fa-brands fa-whatsapp text-green-400 ml-2"></i> +249924372845</p>
-                    <p><i class="fa-solid fa-envelope text-brand-lightBlue ml-2"></i> ahmedhamidarchitecture@gmail.com</p>
-                </div>
+            <div>
+                <h4>التواصل</h4>
+                <p><i class="fa-brands fa-whatsapp"></i> +249924372845</p>
+                <p><i class="fa-solid fa-envelope"></i> ahmedhamidarchitecture@gmail.com</p>
             </div>
-
-            <!-- Social Media Icons -->
-            <div class="space-y-3">
-                <h4 class="text-lg font-bold text-white">منصات التواصل الاجتماعي</h4>
-                <div class="flex gap-4">
-                    <a href="https://www.facebook.com/ahmedhamidarchitecture" target="_blank" class="w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 flex items-center justify-center text-white transition"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/ahmed_hamid_architecture?igsh=MXd1ZDlyaHlpdzB5NA==" target="_blank" class="w-10 h-10 rounded-full bg-pink-600 hover:bg-pink-500 flex items-center justify-center text-white transition"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://vm.tiktok.com/ZS9MCb1KJoBdN-iZvTF/" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 hover:bg-black flex items-center justify-center text-white transition"><i class="fa-brands fa-tiktok"></i></a>
-                    <a href="https://www.linkedin.com/in/ahmed-hamid-architecture-9b9372260?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="w-10 h-10 rounded-full bg-blue-800 hover:bg-blue-700 flex items-center justify-center text-white transition"><i class="fa-brands fa-linkedin-in"></i></a>
+            <div>
+                <h4>تابعنا</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/ahmedhamidarchitecture" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/ahmed_hamid_architecture?igsh=MXd1ZDlyaHlpdzB5NA==" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://vm.tiktok.com/ZS9MCb1KJoBdN-iZvTF/" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://www.linkedin.com/in/ahmed-hamid-architecture-9b9372260" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
                 </div>
             </div>
         </div>
-
-        <div class="border-t border-gray-900 bg-black py-4 text-center text-xs text-gray-500">
-            جميع الحقوق محفوظة &copy; <span id="current-year"></span> Ahmed Hamid Architecture
+        <div class="copyright">
+            جميع الحقوق محفوظة &copy; Ahmed Hamid Architecture
         </div>
     </footer>
 
-    <!-- ================= JAVASCRIPT LOGIC ================= -->
-    <script>
-        // Supabase REST Configurations
-        const SUPABASE_URL = "https://fzlpqsvcicuvldaxgvcz.supabase.co/rest/v1";
-        const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6bHBxc3ZjaWN1dmxkYXhndmN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM3OTM1NjksImV4cCI6MjA5OTM2OTU2OX0.4YTOUuAv9RP5yGz_OF0Sh6ocZLMJa86HrVgAor97Lq8";
-        
-        // Google Apps Script Deploy URL (For uploading Drive files and rendering them properly)
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFd_q0GcRNc4qEI1NBlHAJxE_cLlmNzdTRXKJkO1wiPt6TUj05aSUWL76uM1YeD3hJ/exec";
-
-        // Admin Pass Memory
-        let currentAdminPass = localStorage.getItem('admin_pass') || "123456";
-        let generatedResetCode = null;
-
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-
-        // Single Page Application Navigation Handler
-        function navigateTo(viewId) {
-            document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('text-brand-lightBlue', 'font-bold'));
-
-            const targetView = document.getElementById(`view-${viewId}`);
-            if (targetView) targetView.classList.add('active');
-
-            const navBtn = document.getElementById(`nav-${viewId}`);
-            if (navBtn) navBtn.classList.add('text-brand-lightBlue', 'font-bold');
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            // Fetch Data per View
-            if (viewId === 'home') loadHomeData();
-            if (viewId === 'about') loadAboutData();
-            if (viewId === 'services') loadServicesData();
-            if (viewId === 'projects') loadProjectsData();
-            if (viewId === 'blog') loadBlogData();
-        }
-
-        // Fetch API helper for Supabase REST
-        async function fetchSupabase(endpoint, options = {}) {
-            const defaultHeaders = {
-                "apikey": SUPABASE_KEY,
-                "Authorization": `Bearer ${SUPABASE_KEY}`,
-                "Content-Type": "application/json",
-                "Prefer": "return=representation"
-            };
-
-            options.headers = { ...defaultHeaders, ...options.headers };
-            const response = await fetch(`${SUPABASE_URL}/${endpoint}`, options);
-            if (!response.ok) {
-                const err = await response.text();
-                throw new Error(err);
-            }
-            return response.status !== 204 ? await response.json() : null;
-        }
-
-        // File Convertor to Base64
-        function fileToBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result.split(',')[1]);
-                reader.onerror = error => reject(error);
-            });
-        }
-
-        // Google Drive Uploader via Google Apps Script
-        async function uploadFileToDrive(file) {
-            try {
-                const base64 = await fileToBase64(file);
-                const payload = {
-                    filename: file.name,
-                    mimeType: file.type,
-                    base64: base64
-                };
-
-                const res = await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    body: JSON.stringify(payload)
-                });
-                const data = await res.json();
-                return data.url || data.fileUrl || "";
-            } catch (e) {
-                console.error("Drive upload error:", e);
-                return "";
-            }
-        }
-
-        // ------------ ADMIN AUTHENTICATION ------------
-        function handleAdminLogin() {
-            const email = document.getElementById('admin-email-input').value.trim();
-            const pass = document.getElementById('admin-pass-input').value.trim();
-            const errDiv = document.getElementById('login-error');
-
-            if (email === "ahmedhamidarchitecture@gmail.com" && pass === currentAdminPass) {
-                errDiv.classList.add('hidden');
-                document.getElementById('admin-auth-box').classList.add('hidden');
-                document.getElementById('admin-panel').classList.remove('hidden');
-                initAdminDashboard();
-            } else {
-                errDiv.classList.remove('hidden');
-                errDiv.textContent = "كلمة السر أو البريد الإلكتروني غير صحيح. حاول مجدداً.";
-            }
-        }
-
-        function handleAdminLogout() {
-            document.getElementById('admin-panel').classList.add('hidden');
-            document.getElementById('admin-auth-box').classList.remove('hidden');
-            document.getElementById('admin-pass-input').value = "";
-        }
-
-        function toggleAuthReset(showReset) {
-            document.getElementById('auth-login-form').classList.toggle('hidden', showReset);
-            document.getElementById('auth-reset-form').classList.toggle('hidden', !showReset);
-        }
-
-        function sendResetCode() {
-            const email = document.getElementById('reset-email-input').value.trim();
-            const msgDiv = document.getElementById('reset-msg');
-
-            if (email === "ahmedhamidarchitecture@gmail.com") {
-                generatedResetCode = Math.floor(100000 + Math.random() * 900000).toString();
-                msgDiv.className = "text-sm p-3 rounded-lg text-center bg-blue-900/50 border border-blue-500 text-blue-200";
-                msgDiv.textContent = `تم إرسال رمز التأكيد إلى بريدك. (الرمز التجريبي للمعاينة: ${generatedResetCode})`;
-                msgDiv.classList.remove('hidden');
-
-                document.getElementById('reset-step-1').classList.add('hidden');
-                document.getElementById('reset-step-2').classList.remove('hidden');
-            } else {
-                msgDiv.className = "text-sm p-3 rounded-lg text-center bg-red-900/50 border border-red-500 text-red-200";
-                msgDiv.textContent = "البريد الإلكتروني غير محفوض بالنظام!";
-                msgDiv.classList.remove('hidden');
-            }
-        }
-
-        function verifyAndChangePass() {
-            const code = document.getElementById('reset-code-input').value.trim();
-            const newPass = document.getElementById('reset-new-pass').value.trim();
-            const msgDiv = document.getElementById('reset-msg');
-
-            if (code === generatedResetCode && newPass.length >= 4) {
-                currentAdminPass = newPass;
-                localStorage.setItem('admin_pass', newPass);
-                alert("تم تغيير كلمة السر بنجاح! يمكنك الآن تسجيل الدخول.");
-                toggleAuthReset(false);
-            } else {
-                msgDiv.className = "text-sm p-3 rounded-lg text-center bg-red-900/50 border border-red-500 text-red-200";
-                msgDiv.textContent = "رمز التأكيد غير صحيح أو كلمة السر قصيرة للغاية!";
-                msgDiv.classList.remove('hidden');
-            }
-        }
-
-        function initAdminDashboard() {
-            // Render Analytics Chart
-            const ctx = document.getElementById('analyticsChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'],
-                    datasets: [{
-                        label: 'عدد الزيارات',
-                        data: [65, 89, 120, 140, 110, 80, 124],
-                        borderColor: '#1E90FF',
-                        backgroundColor: 'rgba(30, 144, 255, 0.1)',
-                        fill: true,
-                        tension: 0.3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { labels: { color: '#fff' } } },
-                    scales: {
-                        x: { ticks: { color: '#ccc' }, grid: { color: '#333' } },
-                        y: { ticks: { color: '#ccc' }, grid: { color: '#333' } }
-                    }
-                }
-            });
-
-            loadAdminProjects();
-            loadAdminServices();
-            loadAdminBlog();
-        }
-
-        // ------------ DATA FETCHERS & RENDERERS ------------
-
-        // 1. Home Data
-        async function loadHomeData() {
-            try {
-                const projects = await fetchSupabase("projects?select=*&order=created_at.desc&limit=3");
-                const featuredDiv = document.getElementById('home-featured-projects');
-                
-                if (projects && projects.length > 0) {
-                    featuredDiv.innerHTML = projects.map(p => `
-                        <div class="glass-card rounded-xl overflow-hidden hover:border-brand-blue transition cursor-pointer" onclick="viewProjectDetail('${p.id}')">
-                            <img src="${p.cover_image || 'https://via.placeholder.com/600x400?text=Architecture+Project'}" class="w-full h-48 object-cover">
-                            <div class="p-4 space-y-2">
-                                <h4 class="font-bold text-lg text-brand-lightBlue">${p.title}</h4>
-                                <p class="text-xs text-gray-400"><i class="fa-solid fa-location-dot ml-1"></i>${p.location || 'غير محدد'}</p>
-                            </div>
-                        </div>
-                    `).join('');
-                } else {
-                    featuredDiv.innerHTML = `<p class="text-gray-500 col-span-3 text-center py-6">لا توجد مشاريع مضافة حالياً.</p>`;
-                }
-
-                // Load Announcements
-                const announcements = await fetchSupabase("blog_posts?is_announcement=eq.true&select=*&order=created_at.desc");
-                const annDiv = document.getElementById('home-announcements');
-                if (announcements && announcements.length > 0) {
-                    annDiv.innerHTML = announcements.map(a => `
-                        <div class="bg-blue-950/40 border border-brand-blue/50 p-4 rounded-xl flex items-start gap-4">
-                            <i class="fa-solid fa-bullhorn text-brand-lightBlue text-xl mt-1"></i>
-                            <div>
-                                <h4 class="font-bold text-white">${a.title}</h4>
-                                <p class="text-sm text-gray-300 mt-1">${a.content}</p>
-                            </div>
-                        </div>
-                    `).join('');
-                }
-            } catch(e) { console.error(e); }
-        }
-
-        // 2. About Data
-        async function loadAboutData() {
-            try {
-                const data = await fetchSupabase("about_data?select=*&limit=1");
-                const container = document.getElementById('about-content');
-                if (data && data.length > 0) {
-                    const ab = data[0];
-                    container.innerHTML = `
-                        <div class="glass-card p-6 rounded-2xl space-y-3">
-                            <h3 class="text-xl font-bold text-brand-lightBlue"><i class="fa-solid fa-building ml-2"></i>التعريف بالشركة</h3>
-                            <p class="text-sm text-gray-300 leading-relaxed">${ab.about_company || 'لا توجد بيانات'}</p>
-                        </div>
-                        <div class="glass-card p-6 rounded-2xl space-y-3">
-                            <h3 class="text-xl font-bold text-brand-lightBlue"><i class="fa-solid fa-sitemap ml-2"></i>أقسام الشركة</h3>
-                            <p class="text-sm text-gray-300 leading-relaxed">${ab.company_departments || 'لا توجد بيانات'}</p>
-                        </div>
-                        <div class="glass-card p-6 rounded-2xl space-y-3">
-                            <h3 class="text-xl font-bold text-brand-lightBlue"><i class="fa-solid fa-bullseye ml-2"></i>الرؤية والأهداف</h3>
-                            <p class="text-sm text-gray-300 leading-relaxed">${ab.vision_goals || 'لا توجد بيانات'}</p>
-                        </div>
-                        <div class="glass-card p-6 rounded-2xl space-y-3">
-                            <h3 class="text-xl font-bold text-brand-lightBlue"><i class="fa-solid fa-award ml-2"></i>خبرات الشركة</h3>
-                            <p class="text-sm text-gray-300 leading-relaxed">${ab.company_experience || 'لا توجد بيانات'}</p>
-                        </div>
-                    `;
-                } else {
-                    container.innerHTML = `<p class="text-gray-400 col-span-2 text-center">قم بإضافة بيانات صفحة About Us من لوحة التحكم.</p>`;
-                }
-            } catch(e) { console.error(e); }
-        }
-
-        // 3. Services Data
-        async function loadServicesData() {
-            try {
-                const services = await fetchSupabase("services?select=*&order=created_at.desc");
-                const container = document.getElementById('services-list');
-                if (services && services.length > 0) {
-                    container.innerHTML = services.map(s => `
-                        <div class="glass-card p-6 rounded-xl space-y-3 border-t-2 border-brand-blue">
-                            <i class="fa-solid fa-cubes text-3xl text-brand-lightBlue"></i>
-                            <h3 class="text-xl font-bold text-white">${s.title}</h3>
-                            <p class="text-sm text-gray-400 leading-relaxed">${s.description}</p>
-                        </div>
-                    `).join('');
-                } else {
-                    container.innerHTML = `<p class="text-gray-400 col-span-3 text-center">لا توجد خدمات حالية.</p>`;
-                }
-            } catch(e) { console.error(e); }
-        }
-
-        // 4. Projects Data
-        async function loadProjectsData() {
-            try {
-                const projects = await fetchSupabase("projects?select=*&order=created_at.desc");
-                const container = document.getElementById('projects-grid');
-                if (projects && projects.length > 0) {
-                    container.innerHTML = projects.map(p => `
-                        <div class="glass-card rounded-xl overflow-hidden hover:border-brand-blue transition cursor-pointer space-y-3" onclick="viewProjectDetail('${p.id}')">
-                            <img src="${p.cover_image || 'https://via.placeholder.com/600x400?text=Project+Cover'}" class="w-full h-52 object-cover">
-                            <div class="p-4 space-y-2">
-                                <h3 class="font-bold text-xl text-brand-lightBlue">${p.title}</h3>
-                                <p class="text-xs text-gray-400"><i class="fa-solid fa-location-dot ml-1"></i>${p.location || 'الموقع غير محدد'}</p>
-                                <div class="flex justify-between text-xs text-gray-300 pt-2 border-t border-gray-800">
-                                    <span>مساحة الأرض: ${p.land_area || '-'}</span>
-                                    <span>المبنية: ${p.built_area || '-'}</span>
-                                </div>
-                            </div>
-                        </div>
-                    `).join('');
-                } else {
-                    container.innerHTML = `<p class="text-gray-400 col-span-3 text-center py-10">لا توجد مشاريع مرفوعة.</p>`;
-                }
-            } catch(e) { console.error(e); }
-        }
-
-        // Single Project Detail
-        async function viewProjectDetail(projId) {
-            try {
-                const data = await fetchSupabase(`projects?id=eq.${projId}&select=*`);
-                if (data && data.length > 0) {
-                    const p = data[0];
-                    let galleryHtml = "";
-                    if (p.gallery_images) {
-                        const imgs = p.gallery_images.split(',');
-                        galleryHtml = imgs.map(url => `
-                            <div class="relative group">
-                                <img src="${url.trim()}" class="w-full h-48 object-cover rounded-xl border border-gray-800">
-                                <a href="${url.trim()}" download target="_blank" class="absolute bottom-2 left-2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition">تحميل الصورة</a>
-                            </div>
-                        `).join('');
-                    }
-
-                    document.getElementById('project-detail-container').innerHTML = `
-                        <div class="space-y-4">
-                            <h2 class="text-3xl font-extrabold text-brand-lightBlue">${p.title}</h2>
-                            <p class="text-sm text-gray-400"><i class="fa-solid fa-location-dot ml-1"></i>الموقع: ${p.location || 'غير محدد'}</p>
-                        </div>
-                        
-                        <img src="${p.cover_image || 'https://via.placeholder.com/800x400'}" class="w-full h-96 object-cover rounded-2xl border border-gray-800">
-
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center bg-gray-900/80 p-4 rounded-xl border border-gray-800">
-                            <div><span class="text-xs text-gray-400">مساحة الأرض</span><p class="font-bold text-white">${p.land_area || '-'}</p></div>
-                            <div><span class="text-xs text-gray-400">المساحة المبنية</span><p class="font-bold text-white">${p.built_area || '-'}</p></div>
-                            <div><span class="text-xs text-gray-400">النظام الإنشائي</span><p class="font-bold text-white">${p.structural_system || '-'}</p></div>
-                        </div>
-
-                        <div class="space-y-3">
-                            <h3 class="text-xl font-bold text-brand-lightBlue">الفكرة التصميمية</h3>
-                            <p class="text-sm text-gray-300 leading-relaxed">${p.design_concept || 'لا يوجد'}</p>
-                        </div>
-
-                        <div class="space-y-3">
-                            <h3 class="text-xl font-bold text-brand-lightBlue">التحديات والحلول</h3>
-                            <p class="text-sm text-gray-300 leading-relaxed">${p.challenges_solutions || 'لا يوجد'}</p>
-                        </div>
-
-                        ${galleryHtml ? `
-                        <div class="space-y-4">
-                            <h3 class="text-xl font-bold text-brand-lightBlue">معرض صور المشروع</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">${galleryHtml}</div>
-                        </div>` : ''}
-                    `;
-                    navigateTo('project-detail');
-                }
-            } catch(e) { console.error(e); }
-        }
-
-        // 5. Blog Data
-        async function loadBlogData() {
-            try {
-                const posts = await fetchSupabase("blog_posts?select=*&order=created_at.desc");
-                const container = document.getElementById('blog-posts-container');
-                if (posts && posts.length > 0) {
-                    container.innerHTML = posts.map(b => `
-                        <article class="glass-card p-6 rounded-2xl space-y-4">
-                            <h3 class="text-2xl font-bold text-brand-lightBlue">${b.title}</h3>
-                            <p class="text-xs text-gray-500">${new Date(b.created_at).toLocaleDateString('ar-EG')}</p>
-                            <p class="text-sm text-gray-300 leading-relaxed">${b.content}</p>
-                        </article>
-                    `).join('');
-                } else {
-                    container.innerHTML = `<p class="text-gray-400 text-center">لا توجد منشورات حالياً.</p>`;
-                }
-            } catch(e) { console.error(e); }
-        }
-
-        // ------------ ADMIN MANAGEMENT ACTIONS ------------
-
-        async function handleProjectSubmit(e) {
-            e.preventDefault();
-            const btn = document.getElementById('proj-submit-btn');
-            btn.disabled = true;
-            btn.textContent = "جاري رفع الصور إلى Google Drive وحفظ البيانات...";
-
-            try {
-                const editId = document.getElementById('proj-edit-id').value;
-                const coverFile = document.getElementById('proj-cover-file').files[0];
-                const galleryFiles = document.getElementById('proj-gallery-files').files;
-
-                let coverUrl = "";
-                if (coverFile) coverUrl = await uploadFileToDrive(coverFile);
-
-                let galleryUrls = [];
-                for (let f of galleryFiles) {
-                    const url = await uploadFileToDrive(f);
-                    if (url) galleryUrls.push(url);
-                }
-
-                const payload = {
-                    title: document.getElementById('proj-title').value,
-                    location: document.getElementById('proj-location').value,
-                    land_area: document.getElementById('proj-land').value,
-                    built_area: document.getElementById('proj-built').value,
-                    structural_system: document.getElementById('proj-structural').value,
-                    design_concept: document.getElementById('proj-concept').value,
-                    challenges_solutions: document.getElementById('proj-challenges').value
-                };
-
-                if (coverUrl) payload.cover_image = coverUrl;
-                if (galleryUrls.length > 0) payload.gallery_images = galleryUrls.join(',');
-
-                if (editId) {
-                    await fetchSupabase(`projects?id=eq.${editId}`, { method: 'PATCH', body: JSON.stringify(payload) });
-                } else {
-                    await fetchSupabase("projects", { method: 'POST', body: JSON.stringify(payload) });
-                }
-
-                alert("تم حفظ المشروع بنجاح!");
-                document.getElementById('adminProjectForm').reset();
-                document.getElementById('proj-edit-id').value = "";
-                loadAdminProjects();
-            } catch(err) {
-                alert("حدث خطأ أثناء الحفظ: " + err.message);
-            } finally {
-                btn.disabled = false;
-                btn.textContent = "حفظ / تحديث المشروع";
-            }
-        }
-
-        async function loadAdminProjects() {
-            const projects = await fetchSupabase("projects?select=*&order=created_at.desc");
-            const container = document.getElementById('admin-projects-list');
-            if (projects && projects.length > 0) {
-                container.innerHTML = projects.map(p => `
-                    <div class="flex justify-between items-center bg-gray-900 p-3 rounded-lg border border-gray-800">
-                        <span class="font-bold text-sm">${p.title}</span>
-                        <div class="flex gap-2">
-                            <button onclick="editProject('${p.id}')" class="bg-blue-600 hover:bg-blue-500 text-xs px-3 py-1 rounded">تعديل</button>
-                            <button onclick="deleteProject('${p.id}')" class="bg-red-600 hover:bg-red-500 text-xs px-3 py-1 rounded">حذف</button>
-                        </div>
-                    </div>
-                `).join('');
-            }
-        }
-
-        async function deleteProject(id) {
-            if (confirm("هل أنت تأكد من حذف هذا المشروع؟")) {
-                await fetchSupabase(`projects?id=eq.${id}`, { method: 'DELETE' });
-                loadAdminProjects();
-            }
-        }
-
-        async function editProject(id) {
-            const data = await fetchSupabase(`projects?id=eq.${id}&select=*`);
-            if (data && data.length > 0) {
-                const p = data[0];
-                document.getElementById('proj-edit-id').value = p.id;
-                document.getElementById('proj-title').value = p.title;
-                document.getElementById('proj-location').value = p.location;
-                document.getElementById('proj-land').value = p.land_area;
-                document.getElementById('proj-built').value = p.built_area;
-                document.getElementById('proj-structural').value = p.structural_system;
-                document.getElementById('proj-concept').value = p.design_concept;
-                document.getElementById('proj-challenges').value = p.challenges_solutions;
-                window.scrollTo({ top: document.getElementById('adminProjectForm').offsetTop, behavior: 'smooth' });
-            }
-        }
-
-        // About Submit
-        async function handleAboutSubmit(e) {
-            e.preventDefault();
-            const payload = {
-                about_company: document.getElementById('about-comp').value,
-                company_departments: document.getElementById('about-depts').value,
-                vision_goals: document.getElementById('about-vision').value,
-                company_experience: document.getElementById('about-exp').value
-            };
-            await fetchSupabase("about_data", { method: 'POST', body: JSON.stringify(payload) });
-            alert("تم تحديث صفحة About Us بنجاح!");
-        }
-
-        // Service Submit
-        async function handleServiceSubmit(e) {
-            e.preventDefault();
-            const payload = {
-                title: document.getElementById('service-title').value,
-                description: document.getElementById('service-desc').value
-            };
-            await fetchSupabase("services", { method: 'POST', body: JSON.stringify(payload) });
-            document.getElementById('service-title').value = "";
-            document.getElementById('service-desc').value = "";
-            loadAdminServices();
-        }
-
-        async function loadAdminServices() {
-            const services = await fetchSupabase("services?select=*");
-            const container = document.getElementById('admin-services-list');
-            if (services && services.length > 0) {
-                container.innerHTML = services.map(s => `
-                    <div class="flex justify-between items-center bg-gray-900 p-2 rounded border border-gray-800 text-xs">
-                        <span><strong>${s.title}</strong> - ${s.description}</span>
-                        <button onclick="deleteService('${s.id}')" class="bg-red-600 text-white px-2 py-1 rounded">حذف</button>
-                    </div>
-                `).join('');
-            }
-        }
-
-        async function deleteService(id) {
-            await fetchSupabase(`services?id=eq.${id}`, { method: 'DELETE' });
-            loadAdminServices();
-        }
-
-        // Blog Submit
-        async function handleBlogSubmit(e) {
-            e.preventDefault();
-            const payload = {
-                title: document.getElementById('blog-title').value,
-                content: document.getElementById('blog-content').value,
-                is_announcement: document.getElementById('blog-is-announcement').checked
-            };
-            await fetchSupabase("blog_posts", { method: 'POST', body: JSON.stringify(payload) });
-            document.getElementById('blog-title').value = "";
-            document.getElementById('blog-content').value = "";
-            loadAdminBlog();
-        }
-
-        async function loadAdminBlog() {
-            const posts = await fetchSupabase("blog_posts?select=*");
-            const container = document.getElementById('admin-blog-list');
-            if (posts && posts.length > 0) {
-                container.innerHTML = posts.map(b => `
-                    <div class="flex justify-between items-center bg-gray-900 p-2 rounded border border-gray-800 text-xs">
-                        <span><strong>${b.title}</strong></span>
-                        <button onclick="deleteBlog('${b.id}')" class="bg-red-600 text-white px-2 py-1 rounded">حذف</button>
-                    </div>
-                `).join('');
-            }
-        }
-
-        async function deleteBlog(id) {
-            await fetchSupabase(`blog_posts?id=eq.${id}`, { method: 'DELETE' });
-            loadAdminBlog();
-        }
-
-        // Contact Form Interceptor for Formspree
-        document.getElementById('contactForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const form = e.target;
-            const data = new FormData(form);
-            const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
-            if (res.ok) {
-                form.classList.add('hidden');
-                document.getElementById('contact-success').classList.remove('hidden');
-            }
-        });
-
-        function resetContactForm() {
-            document.getElementById('contactForm').reset();
-            document.getElementById('contactForm').classList.remove('hidden');
-            document.getElementById('contact-success').classList.add('hidden');
-        }
-
-        // Init App
-        navigateTo('home');
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
