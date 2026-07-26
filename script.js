@@ -103,56 +103,9 @@ function finalizePasswordReset(code, newPassword) {
   return false;
 }
 
-// Real-time Analytics Chart Engine (Supabase Live Stats Integration)
-async function initAnalyticsChart() {
-  const chartCanvas = document.getElementById('analyticsChart');
-  if (!chartCanvas) return;
-
-  // جلب إحصائيات العناصر الفعلية المسجلة بقاعدة البيانات
-  const [projects, services, blogPosts] = await Promise.all([
-    supabaseFetch('projects?select=id'),
-    supabaseFetch('services?select=id'),
-    supabaseFetch('blog_posts?select=id')
-  ]);
-
-  const countProjects = projects && Array.isArray(projects) ? projects.length : 0;
-  const countServices = services && Array.isArray(services) ? services.length : 0;
-  const countBlog = blogPosts && Array.isArray(blogPosts) ? blogPosts.length : 0;
-
-  const ctx = chartCanvas.getContext('2d');
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['المشاريع النشطة', 'الخدمات المتاحة', 'مقالات المدونة'],
-      datasets: [{
-        label: 'إحصائيات النظام الحية (Supabase Data)',
-        data: [countProjects, countServices, countBlog],
-        backgroundColor: [
-          'rgba(0, 102, 255, 0.6)',
-          'rgba(16, 185, 129, 0.6)',
-          'rgba(245, 158, 11, 0.6)'
-        ],
-        borderColor: [
-          '#0066FF',
-          '#10B981',
-          '#F59E0B'
-        ],
-        borderWidth: 1.5
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: {
-            stepSize: 1
-          }
-        }
-      }
-    }
-  });
+// Empty Analytics Loader for Looker Studio Integration
+function initAnalyticsChart() {
+  console.log("Real Google Analytics loaded via Looker Studio iframe embed.");
 }
 
 // Global UI Rendering Helpers
