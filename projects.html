@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects | Ahmed Hamid Architecture</title>
+<meta name="description" content="Browse built and in-progress projects by Ahmed Hamid Architecture.">
+<meta property="og:title" content="Projects — Ahmed Hamid Architecture">
+<meta property="og:image" content="assets/logo.png">
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="site-header"></header>
+
+<section class="hero" style="padding-bottom:30px">
+  <div class="hero-grid"></div>
+  <div class="container" style="grid-template-columns:1fr">
+    <div class="reveal in">
+      <div class="eyebrow">Our Work</div>
+      <h1>Projects</h1>
+      <p class="lead">A record of built and in-progress work. Open any project for the full brief, drawings and photos.</p>
+    </div>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="container">
+    <div id="projects-grid" class="grid grid-3 reveal-stagger"></div>
+  </div>
+</section>
+
+<div id="cta-band"></div>
+<footer id="site-footer"></footer>
+<script src="script.js"></script>
+<script>
+renderCtaBand();
+async function loadProjects(){
+  const mount = document.getElementById("projects-grid");
+  mount.innerHTML = skeletonCards(6);
+  try{
+    const rows = await SB.select("projects", "select=id,title,cover_image,location&order=id.desc");
+    if(!rows.length){ mount.innerHTML = `<p style="color:var(--gray)">No projects published yet. Check back soon.</p>`; return; }
+    mount.innerHTML = rows.map(p => `
+      <a class="card" href="project.html?id=${p.id}">
+        <div class="thumb"><img src="${p.cover_image || 'assets/logo.png'}" alt="${p.title}" loading="lazy"></div>
+        <div class="body">
+          <h3>${p.title}</h3>
+          <div class="meta">${p.location || ''}</div>
+        </div>
+      </a>`).join("");
+  }catch(e){
+    mount.innerHTML = `<p style="color:var(--gray)">Could not load projects right now.</p>`;
+  }
+  mount.classList.add("in");
+}
+loadProjects();
+</script>
+</body>
+</html>

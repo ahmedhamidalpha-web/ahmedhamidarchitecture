@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog | Ahmed Hamid Architecture</title>
+<meta name="description" content="Ideas, process notes and studio updates from Ahmed Hamid Architecture.">
+<meta property="og:title" content="Blog — Ahmed Hamid Architecture">
+<meta property="og:image" content="assets/logo.png">
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="site-header"></header>
+
+<section class="hero" style="padding-bottom:30px">
+  <div class="hero-grid"></div>
+  <div class="container" style="grid-template-columns:1fr">
+    <div class="reveal in">
+      <div class="eyebrow">Notes from the studio</div>
+      <h1>Blog</h1>
+      <p class="lead">Ideas, process notes and updates from Ahmed Hamid Architecture.</p>
+    </div>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="container">
+    <div id="blog-list" class="grid grid-3 reveal-stagger"></div>
+    <div id="post-view" style="display:none;max-width:720px;margin:0 auto"></div>
+  </div>
+</section>
+
+<div id="cta-band"></div>
+<footer id="site-footer"></footer>
+<script src="script.js"></script>
+<script>
+renderCtaBand();
+const listMount = document.getElementById("blog-list");
+const postMount = document.getElementById("post-view");
+
+async function loadList(){
+  listMount.innerHTML = skeletonCards(3);
+  try{
+    const rows = await SB.select("blog_posts", "select=id,title,cover_image,created_at&order=created_at.desc");
+    if(!rows.length){ listMount.innerHTML = `<p style="color:var(--gray)">No posts yet — check back soon.</p>`; return; }
+    listMount.innerHTML = rows.map(p => `
+      <a class="card" href="#" onclick="openPost(${p.id});return false;">
+        <div class="thumb"><img src="${p.cover_image || 'assets/logo.png'}" alt="${p.title}" loading="lazy"></div>
+        <div class="body"><h3>${p.title}</h3><div class="meta">${new Date(p.created_at).toLocaleDateString()}</div></div>
+      </a>`).join("");
+  }catch(e){
+    listMount.innerHTML = `<p style="color:var(--gray)">Posts will appear here once the database is connected.</p>`;
+  }
+  listMount.classList.add("in");
+}
+
+async function openPost(id){
+  listMount.style.display = "none";
+  postMount.style.display = "block";
+  postMount.innerHTML = "<p style='color:var(--gray)'>Loading post…</p>";
+  const rows = await SB.select("blog_posts", `select=*&id=eq.${id}`);
+  const p = rows[0];
+  if(!p){ postMount.innerHTML = "<p>Post not found.</p>"; return; }
+  const comments = await SB.select("blog_comments", `select=*&post_id=eq.${id}&order=created_at.asc`);
+  postMount.innerHTML = `
+    <a href="#" onclick="closePost();return false;" class="btn btn-ghost" style="margin-bottom:20px">← All Posts</a>
+    <div class="eyebrow">${new Date(p.created_at).toLocaleDateString()}</div>
+    <h1>${p.title}</h1>
+    ${p.cover_image ? `<img src="${p.cover_image}" style="width:100%;border-radius:2px;margin-bottom:20px;border:1px solid var(--line)">` : ""}
+    <div style="color:var(--gray);white-space:pre-wrap;margin-bottom:36px">${p.body || ''}</div>
+    <hr class="hairline">
+    <h3 style="margin-top:24px">Comments (${comments.length})</h3>
+    <div id="comments-list">
+      ${comments.map(c => `<div class="post-comment"><div class="who">${c.username}</div><div>${c.body}</div></div>`).join("") || "<p style='color:var(--gray);font-size:14px'>Be the first to comment.</p>"}
+    </div>
+    <form id="comment-form" style="margin-top:24px">
+      <div class="form-row-2">
+        <div class="field"><label>Your name</label><input name="username" required></div>
+        <div class="field"><label>Comment</label><input name="body" required></div>
+      </div>
+      <button class="btn btn-primary" type="submit">Post Comment</button>
+    </form>
+  `;
+  document.getElementById("comment-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const username = fd.get("username").trim();
+    const body = fd.get("body").trim();
+    if(!username || !body) return;
+    await SB.insert("blog_comments", { post_id: id, username, body, created_at: new Date().toISOString() });
+    openPost(id);
+  });
+}
+
+function closePost(){
+  postMount.style.display = "none";
+  listMount.style.display = "grid";
+}
+
+loadList();
+</script>
+</body>
+</html>
