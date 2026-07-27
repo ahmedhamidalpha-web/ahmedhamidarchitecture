@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="theme-color" content="#1B1F6B">
+<title>Project | Ahmed Hamid Architecture</title>
+<meta property="og:title" content="Ahmed Hamid Architecture">
+<meta property="og:image" content="assets/logo.png">
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="site-header"></header>
+
+<section style="padding-top:40px" class="reveal in">
+  <div class="container">
+    <a href="projects.html" class="btn btn-ghost" style="margin-bottom:24px">← All Projects</a>
+    <div id="project-content">
+      <div class="skel skel-line" style="width:40%;height:14px;margin-bottom:14px"></div>
+      <div class="skel skel-line" style="width:70%;height:34px;margin-bottom:20px"></div>
+      <div class="skel" style="height:340px;margin-bottom:24px"></div>
+    </div>
+  </div>
+</section>
+
+<footer id="site-footer"></footer>
+<script src="script.js"></script>
+<script>
+async function loadProject(){
+  const mount = document.getElementById("project-content");
+  const id = new URLSearchParams(location.search).get("id");
+  if(!id){ mount.innerHTML = "<p>Project not found.</p>"; return; }
+  try{
+    const rows = await SB.select("projects", `select=*&id=eq.${id}`);
+    const p = rows[0];
+    if(!p){ mount.innerHTML = "<p>Project not found.</p>"; return; }
+    document.title = `${p.title} | Ahmed Hamid Architecture`;
+    const gallery = (p.gallery || []);
+    mount.innerHTML = `
+      <div class="eyebrow">${p.location || ''}</div>
+      <h1>${p.title}</h1>
+      <img src="${p.cover_image || 'assets/logo.png'}" alt="${p.title}" style="width:100%;border-radius:2px;margin:20px 0;border:1px solid var(--line)">
+      <div class="grid grid-4" style="margin-bottom:30px">
+        <div><div class="eyebrow">Land Area</div>${p.land_area || '—'}</div>
+        <div><div class="eyebrow">Built Area</div>${p.built_area || '—'}</div>
+        <div><div class="eyebrow">Structural System</div>${p.structure_system || '—'}</div>
+        <div><div class="eyebrow">Location</div>${p.location || '—'}</div>
+      </div>
+      <hr class="hairline" style="margin-bottom:24px">
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:30px;margin-bottom:24px">
+        <div><h3>Design Concept</h3><p style="color:var(--gray)">${p.concept || '—'}</p></div>
+        <div><h3>Challenges</h3><p style="color:var(--gray)">${p.challenges || '—'}</p></div>
+      </div>
+      <div style="margin-bottom:30px"><h3>Solutions</h3><p style="color:var(--gray)">${p.solutions || '—'}</p></div>
+      ${gallery.length ? `<h3>Gallery</h3><div class="grid grid-3">${gallery.map(g => `<a href="${g}" download class="card"><div class="thumb"><img src="${g}"></div></a>`).join("")}</div>` : ""}
+    `;
+  }catch(e){
+    mount.innerHTML = "<p>Could not load this project right now.</p>";
+  }
+}
+loadProject();
+</script>
+</body>
+</html>
